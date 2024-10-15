@@ -1,99 +1,93 @@
 .left-menu {
-  width: 18.54vw; /* Szerokość menu */
+  width: 18.54vw; /* Szerokość menu dostosowana do szerokości okna */
   background-color: #ffffff; /* Kolor tła */
   border: 0.1px inset #000000;
-  height: 100vh;
+  height: 100vh; /* Wysokość na całą wysokość ekranu */
   position: fixed;
   top: 0;
   left: 0;
+  /* display: flex; */
+  align-items: center;
 }
 
 .logo {
   width: 100%; /* Szerokość logo na 100% kontenera */
   height: auto; /* Wysokość automatyczna */
-  margin-bottom: 20px; /* Odstęp poniżej logo */
+  /* margin-bottom: 2vh; Odstęp poniżej logo z użyciem jednostek viewportowych */
 }
+
 .logo-conteiner {
-  height: 8.5vh;
+  height: 8.5vh; /* Logo zajmuje 8.5% wysokości */
 }
+
 .profile-statistics {
   height: 27.5vh; /* Statystyki zajmują 27.5% wysokości */
+  width: 100%; /* Opcjonalnie, aby zająć całą szerokość kontenera */  
 }
-.menu-content{
-  height: 44vh;
+
+.menu-content {
+  height: 44vh; /* Menu zajmuje 44% wysokości */
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Równomierne rozmieszczenie elementów */
 }
+.nav-container {
+  margin-top: 10.7%; /* Odstęp od góry */
+  margin-bottom: 10.7%; /* Odstęp od dołu */
+  flex-grow: 1;
+}
 
-.menu-content ul {
-  padding-top: 20%;
-  padding-bottom: 20%;
+nav {
+  height: 100%; /* Umożliwia zajmowanie całej wysokości kontenera */
+  display: flex;
+  align-items: center; /* Centruje elementy w pionie, jeżeli jest to potrzebne */
+}
+
+.menu-content ul, .menu-content-down ul {
+  /* padding: 2vh 0; Padding góra/dół z użyciem jednostek viewportowych */
   list-style: none;
   display: flex;
   flex-direction: column; /* Ułożenie elementów w kolumnie */
   justify-content: space-between; /* Równomierne rozmieszczenie elementów */
-  list-style: none; /* Usuń punkty listy */
-  height: 100%; /* Ustaw listę na pełną wysokość kontenera */
   margin: 0; /* Usuń marginesy listy */
-  margin-left: 15%;
- 
 }
 
 .menu-content ul li {
   margin: 0;
 }
 
-.menu-content ul li a {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  font-size: 18px;
-  display: flex; /* Flex, aby ikona i tekst były w jednej linii */
-  justify-content: space-between; /* Rozkłada elementy po obu stronach */
-  align-items: center; /* Wyrównanie tekstu i ikonki na środku pionowo */
-}
-
 .menu-link {
   text-decoration: none;
-  color: rgb(186, 62, 62); /* Domyślny kolor linków */
-  font-size: 18px;
+  color: rgb(0, 0, 0); /* Domyślny kolor linków */
+  font-size: 1.5vmin;
+  line-height:2.1vmin;
   display: flex;
-  justify-content: space-between; /* Rozkłada tekst i ikonkę po obu stronach */
+  justify-content: start; /* Wyrównaj tekst i ikonkę do początku */
   align-items: center;
-
 }
 
-.menu-link .icon {
-  margin-left: 0;
-  opacity: 1; /* Ustaw przezroczystość ikony dla nieaktywnych linków */
-  transition: opacity 0.3s; /* Animacja zmiany przezroczystości */
-}
-
-.menu-link.active {
-  color: black; /* Kolor aktywnego linku */
-}
 .menu-item {
-  display: flex; /* Flex, aby ustawić ikonę i tekst w kolumnie */
-  align-items: center; /* Wyrównanie ikony i tekstu w pionie */
-}
-
-.menu-item .icon {
-  margin-right: 20px; /* Odstęp od tekstu */
-  width: 24px; /* Ustalona szerokość ikony */
-  height: auto; /* Automatyczna wysokość */
+  display: flex; /* Flex dla ikony i tekstu */
+  align-items: center; /* Wyrównanie pionowe */
+  margin: 18%;
+  padding-left: 15% ;
+  height: 100%;
   
 }
 
-.menu-link.active .icon {
-  /* display: inline-block; Pokaż ikonkę przy aktywnym linku */
+.menu-item .text {
+  padding-left: 15.5%;
+  white-space: nowrap;
+}
+
+.menu-item .icon {
+  /* margin-right: 1vw; Odstęp od tekstu z użyciem jednostek viewportowych */
+  width: 1.85vw; /* Skalująca się szerokość ikony */
+  height: 1.85vh; /* Skalująca się wysokość ikony */
 }
 
 .menu-content-down {
   height: 20vh; /* Dolne menu zajmuje 20% wysokości */
 }
-.icon {
-  margin-left: 10px; /* Odstęp od tekstu do ikony */
-  width: 20px; /* Ustawienie szerokości ikony */
-  height: 20px; /* Ustawienie wysokości ikony */
-}
+
