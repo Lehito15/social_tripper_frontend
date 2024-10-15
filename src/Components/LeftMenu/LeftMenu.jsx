@@ -25,7 +25,7 @@ function LeftMenu() {
                   >
                     <div className="menu-item">
                       <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Home</span>
+                      <span className='text'>Home        </span>
                     </div>
                   </NavLink>
                 </li>
@@ -35,7 +35,7 @@ function LeftMenu() {
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
+                      <img src={`${process.env.PUBLIC_URL}/events_icon.png`} alt="Ikona" className="icon" />
                       <span className='text'>Trip events</span>
                     </div>
                   </NavLink>
@@ -47,7 +47,7 @@ function LeftMenu() {
                   >
                     <div className="menu-item">
                       <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Relations</span>
+                      <span className='text'>Relations   </span>
                     </div>
                   </NavLink>
                 </li>
@@ -57,7 +57,7 @@ function LeftMenu() {
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
+                      <img src={`${process.env.PUBLIC_URL}/groups_icon.png`} alt="Ikona" className="icon" />
                       <span className='text'>Groups</span>
                     </div>
                   </NavLink>
@@ -68,8 +68,8 @@ function LeftMenu() {
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Memories</span>
+                      <img src={`${process.env.PUBLIC_URL}/memories_icon.png`} alt="Ikona" className="icon" />
+                      <span className='text'>Memories    </span>
                     </div>
                   </NavLink>
                 </li>
@@ -79,8 +79,8 @@ function LeftMenu() {
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Explore</span>
+                      <img src={`${process.env.PUBLIC_URL}/explore_icon.png`} alt="Ikona" className="icon" />
+                      <span className='text'>Explore     </span>
                     </div>
                   </NavLink>
                 </li>
@@ -96,23 +96,23 @@ function LeftMenu() {
                 <li>
                   <NavLink 
                     exact="true" 
-                    to="/" 
+                    to="/elo" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Settings</span>
+                      <img src={`${process.env.PUBLIC_URL}/settings_icon.png`} alt="Ikona" className="icon" />
+                      <span className='text'>Settings    </span>
                     </div>
                   </NavLink>
                 </li>
                 <li>
                   <NavLink 
-                    to="/images" 
+                    to="/images2" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Logout</span>
+                      <img src={`${process.env.PUBLIC_URL}/logout_icon.png`} alt="Ikona" className="icon" />
+                      <span className='text'>Logout      </span>
                     </div>
                   </NavLink>
                 </li>

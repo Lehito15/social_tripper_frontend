@@ -3,16 +3,16 @@
   flex-direction: column; /* Ustawienie kierunku flex na kolumnę */
   align-items: center; /* Wyśrodkowanie elementów */
   margin: 0 auto; /* Centrowanie kontenera */
-  padding: 1vw; /* Dynamiczne wypełnienie w zależności od szerokości ekranu */
+  margin-bottom: 20px; /* Dynamiczne wypełnienie w zależności od szerokości ekranu */
 }
 
 .profile-picture {
-  width:  9.3vh;
-  height: 9.3vh; /* Dynamiczna wysokość zdjęcia */
+  width:  100px;
+  height: 100px; /* Dynamiczna wysokość zdjęcia */
   border-radius: 50%; /* Kształt koła */
   /* border: 2px solid #ccc; Mały border wokół zdjęcia */
   object-fit: cover; /* Wypełnienie dla lepszego dopasowania */
-  margin-bottom: 0vh; /* Odstęp między zdjęciem a imieniem */
+  
 }
 
 .user-info {
@@ -32,24 +32,33 @@
 
 .stat-item {
   text-align: center; /* Wyśrodkowanie tekstu */
+  margin-top: 20px;
 }
 
 .stat-value {
-  font-size: 1.85vmin;
-  line-height: 2.3vmin;
+  font-size: 20px;
+  line-height: 25.14px;
 
   font-weight: bold; /* Pogrubienie wartości */
 }
 
 .stat-title {
   display: block; /* Przeniesienie tytułu na nową linię */
-  font-size: 1.5vh;
+ 
   color: #555; /* Kolor tytułu */
-  font-size: 1.11vmin;
-  line-height: 1.39vmin;
+  font-size: 12px;
+  line-height: 15.08px;
 }
 h2 {
-  font-size: 2vmin;
-  line-height: 2.5vh;
+  font-size: 20px;
+  line-height: 27.65px;
+  margin-bottom: 5px;
+}
 
+.user-rang {
+  font-size: 14px;
+  line-height: 17.6px;
+  color: rgba(0, 0, 0, 55) ;
+  
+ 
 }

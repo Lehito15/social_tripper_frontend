@@ -21,6 +21,7 @@ function ProfileStatistcs(){
         let profile = await response.json();
         const userData = {
           name: profile.name,
+          rang: "New Tripper",
           trips: 5, 
           followers: 120,
           following: 21,
@@ -53,6 +54,7 @@ function ProfileStatistcs(){
     />
     <div className="user-info">
       <h2>{user.name}</h2>
+      <span className='user-rang'>{user.rang}</span>
       <div className="user-stats">
         <div className="stat-item">
           <span className="stat-value">{user.trips}</span>
