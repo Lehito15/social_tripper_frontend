@@ -1,24 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+// import ProfileStatistics from './Components/LeftMenu/ProfileStatistics.jsx'
+import LeftMenu from './Components/LeftMenu/LeftMenu.jsx';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <LeftMenu />
+        <Routes>
+          <Route path="/home"  />
+          <Route path="/option2"  />
+          {/* Dodaj kolejne Route dla innych opcji */}
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

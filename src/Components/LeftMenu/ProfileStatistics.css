@@ -1,0 +1,42 @@
+.user-profile {
+  display: flex;
+  flex-direction: column; /* Ustawienie kierunku flex na kolumnę */
+  align-items: center; /* Wyśrodkowanie elementów */
+  max-width: 300px; /* Maksymalna szerokość kontenera */
+  margin: 0 auto; /* Centrowanie kontenera */
+}
+
+.profile-picture {
+  width: 100px; /* Szerokość zdjęcia */
+  height: 100px; /* Wysokość zdjęcia */
+  border-radius: 50%; /* Kształt koła */
+  border: 2px solid #ccc; /* Mały border wokół zdjęcia */
+  object-fit: cover; /* Wypełnienie dla lepszego dopasowania */
+  margin-bottom: 10px; /* Odstęp między zdjęciem a imieniem */
+}
+
+.user-info {
+  flex: 1; /* Pozwala na elastyczne dopasowanie */
+}
+
+.user-stats {
+  display: flex; /* Ustawienie elementów w wierszu */
+  justify-content: space-around; /* Rozłożenie elementów w przestrzeni */
+  margin-top: 10px; /* Odstęp między imieniem a statystykami */
+  width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
+}
+
+.stat-item {
+  text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+.stat-value {
+  font-size: 1.2em; /* Rozmiar czcionki dla wartości */
+  font-weight: bold; /* Pogrubienie wartości */
+}
+
+.stat-title {
+  display: block; /* Przeniesienie tytułu na nową linię */
+  font-size: 0.9em; /* Rozmiar czcionki dla tytułu */
+  color: #555; /* Kolor tytułu */
+}
