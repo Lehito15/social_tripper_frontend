@@ -4,7 +4,7 @@
   border-right: 0.1px inset #000000;
   height: 100vh;
  
-  /* position: fixed; */
+  position: fixed;
   top: 0;
   left: 0;
   /* display: flex; */
@@ -38,13 +38,17 @@
   border-top: rgba(0, 0, 0, 55) 1px inset;
   border-bottom: rgba(0, 0, 0, 55) 1px solid;
 }
-.nav-container, .nav-container-down {
-  margin-top: 10px; /* Odstęp od góry */
-  flex-grow: 1;
-}
 .nav-container {
+  margin-top: 20px; /* Odstęp od góry */
+  flex-grow: 1;
   margin-bottom: 20px;
 }
+
+.menu-content-down{
+  padding-top: 70px; /* Odstęp od góry */
+  flex-grow: 1;
+}
+
 
 
 nav {
