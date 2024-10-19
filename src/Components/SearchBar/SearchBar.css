@@ -2,30 +2,52 @@
   display: flex;
   align-items: center; /* Wyśrodkowanie w pionie */
   justify-content: space-between; /* Rozmieszczenie elementów po obu stronach */
-  padding: 10px;
   background-color: #ffffff; /* Kolor tła kontenera */
-  width: 100%;
-  /* margin: 10px 250px;
-  margin-left: 270px; */
-  margin: clamp(5px, 5vw, 10px) clamp(10px, 20vw, 450px);
-  border: 0.1px inset #000000;
-  
+  /* width: 700px; */
+  width: clamp(500px, 50%, 900px);
+  height: 100%;
+  /* border: 0.1px inset #000000; */
 }
 
 .search-input {
-  width: 70%; /* Szerokość paska wyszukiwania */
-  padding: 10px;
+  /* margin-left :40px; */
+  width: 300px; /* Szerokość paska wyszukiwania */
+  height: 48px;
+  /* padding: 10px;   */
+  padding-left: 40px;
+  
   font-size: 16px;
   border: 1px solid #ccc; /* Ramka wokół pola */
-  border-radius: 5px; /* Zaokrąglone rogi */
+  border-radius: 10px; /* Zaokrąglone rogi */
+}
+.search-input-wrapper {
+  position: relative; /* Pozycjonowanie relatywne dla ikonki */
+  display: flex;
+  align-items: center;
 }
 
-.search-button {
-  padding: 10px 20px;
+.search-icon {
+  position: absolute; /* Pozycjonowanie absolutne względem kontenera */
+  left: 10px; /* Odległość od prawej krawędzi pola */
+  width: 20px; /* Szerokość ikony */
+  height: 20px; /* Wysokość ikony */
+  pointer-events: none; /* Wyłączenie interakcji z ikoną */
+}
+
+.trip-button {
+  
+  display: flex; /* Użycie flexbox do wyśrodkowania zawartości */
+  align-items: center; /* Wyśrodkowanie w pionie */
+  justify-content: center; 
+  margin-right :10px;
+  width: 166px;
+  height: 40px;
   background-color: #000000; /* Kolor przycisku */
-  color: white;
-  border: none;
-  border-radius: 5px; /* Zaokrąglone rogi przycisku */
+  color: #B0E26A;
+  position: relative;
+
+  
+  border-radius: 30px; /* Zaokrąglone rogi przycisku */
   cursor: pointer;
   font-size: 16px;
 }
@@ -34,6 +56,48 @@
   background-color: #0056b3; /* Zmiana koloru przycisku po najechaniu */
 }
 .icon {
-  width: 20px;
-  height: 20px;
+  margin-right: 20px;
+  width: 16.5px;
+  height: 16p.5x;
+}
+
+
+@media (max-width: 1200px) {
+  .search-bar-container {
+    padding: 0 15px; /* Zmniejszenie paddingu, gdy szerokość okna jest mniejsza */
+  }
+
+  .trip-button {
+    margin-right: 15px; /* Zmniejszenie odstępu między przyciskiem a polem wyszukiwania */
+  }
+}
+
+@media (max-width: 992px) {
+  .search-bar-container {
+    padding: 0 10px;
+  }
+
+  .trip-button {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-bar-container {
+    padding: 0 5px;
+  }
+
+  .trip-button {
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-bar-container {
+    padding: 0 2px;
+  }
+
+  .trip-button {
+    margin-right: 2px;
+  }
 }

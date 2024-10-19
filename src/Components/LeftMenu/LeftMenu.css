@@ -15,7 +15,7 @@
 
 .logo {
   width: 100%; /* Szerokość logo na 100% kontenera */
-  height: auto; /* Wysokość automatyczna */
+  height: 70px; /* Wysokość automatyczna */
   /* margin-bottom: 2vh; Odstęp poniżej logo z użyciem jednostek viewportowych */
 }
 

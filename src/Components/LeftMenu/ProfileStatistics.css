@@ -4,6 +4,7 @@
   align-items: center; /* Wyśrodkowanie elementów */
   margin: 0 auto; /* Centrowanie kontenera */
   margin-bottom: 20px; /* Dynamiczne wypełnienie w zależności od szerokości ekranu */
+  width: 100%;
 }
 
 .profile-picture {
@@ -18,8 +19,8 @@
 .user-info {
   flex: 1; /* Pozwala na elastyczne dopasowanie */
   text-align: center; /* Wyśrodkowanie tekstu wewnątrz kontenera */
-  padding-left: 13.5%; /* Odstęp od lewej */
-  padding-right: 13.5%;
+  padding-left: 13.5%; 
+   padding-right: 13.5%;  
   width: 100%;
 }
 

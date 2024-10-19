@@ -1,45 +1,54 @@
 .App {
   text-align: center;
   display: flex;
-}
-.searchbox{
-  margin-left: 250px ;
-  margin-right: 250px;
-  width: 100%;
-}
-.rightmenu{
-  width: 250px;
-  margin-right: 0;
-  top:0;
+  flex-direction: column; /* Zmiana układu na kolumnę */
+  background-color: gray;
+  height: 100vh; /* Zajmuje całą wysokość ekranu */
 }
 
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.left-menu {
+  width: 250px; /* Stała szerokość dla lewego menu */
+  background-color: #333; /* Kolor tła dla lewego menu */
+  height: 100vh; /* Zajmuje całą wysokość okna */
+  position: fixed; /* Przyklejone do lewej strony */
+  left: 0;
+  top: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.searchbar {
+  flex: 1;
+  margin-left: 250px; /* Minimalna wartość to 250px (lewe menu) */
+  margin-right: 250px; /* Minimalna wartość to 250px (prawe menu) */
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* Wyrównaj środek w poziomie */
+  align-items: center; /* Wyrównaj środek w pionie */
+  height: 70px;
+  background-color: #ffffff; /* Kolor tła paska wyszukiwania */
+  position: fixed; /* Ustawienie paska na stałe */
+  top: 0;
+  width: calc(100% - 500px); /* Ustawienie szerokości jako pozostała przestrzeń między lewym i prawym menu */
+  z-index: 10; /* Utrzymanie paska wyszukiwania nad innymi elementami */
+}
+
+.rightmenu {
+  width: 250px; /* Stała szerokość dla prawego menu */
+  background-color: #fff; /* Kolor tła dla prawego menu */
+  height: 100vh; /* Zajmuje całą wysokość okna */
+  position: fixed; /* Przyklejone do prawej strony */
+  right: 0;
+  top: 0;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main-content {
+  margin-top: 70px; /* Zaczyna się poniżej paska wyszukiwania */
+  margin-left: 250px; /* Zaczyna się za lewym menu */
+  margin-right: 250px; /* Kończy się przed prawym menu */
+  /* padding: 20px; Dodatkowy odstęp wewnętrzny */
+  background-color: #f0f0f0; /* Kolor tła dla głównej zawartości */
+  flex: 1; /* Rozciąga się, aby wypełnić dostępną przestrzeń */
+  min-height: calc(100vh - 70px); /* Wysokość odpowiadająca wysokości okna minus pasek wyszukiwania */
+ 
 }
