@@ -31,3 +31,8 @@
     line-height: 44.85px ;
     font-weight: bold;
 }
+.button-feed:active, 
+.button-feed.selected { 
+    background-color: #000000; 
+    color: #B0E26A; 
+}

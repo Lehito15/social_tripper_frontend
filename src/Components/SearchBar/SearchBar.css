@@ -4,7 +4,7 @@
   justify-content: space-between; /* Rozmieszczenie elementów po obu stronach */
   background-color: #ffffff; /* Kolor tła kontenera */
   /* width: 700px; */
-  width: clamp(500px, 50%, 900px);
+  width: clamp(500px, 80%, 900px);
   height: 100%;
   /* border: 0.1px inset #000000; */
 }

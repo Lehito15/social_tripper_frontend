@@ -1,5 +1,5 @@
 import React from 'react';
-import '../PostPage/Feeds.css';
+import '../PostPage/PostPage.css';
 import Feeds from './Feeds.jsx';
 function PostPage(){
   return (

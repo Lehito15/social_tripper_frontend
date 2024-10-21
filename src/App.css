@@ -13,12 +13,12 @@
   position: fixed; /* Przyklejone do lewej strony */
   left: 0;
   top: 0;
+  z-index: 20; /* Zapewnia, że lewe menu będzie zawsze nad innymi elementami */
 }
 
 .searchbar {
-  flex: 1;
   margin-left: 250px; /* Minimalna wartość to 250px (lewe menu) */
-  margin-right: 250px; /* Minimalna wartość to 250px (prawe menu) */
+  margin-right: 300px; /* Minimalna wartość to 300px (prawe menu) */
   display: flex;
   justify-content: center; /* Wyrównaj środek w poziomie */
   align-items: center; /* Wyrównaj środek w pionie */
@@ -26,12 +26,13 @@
   background-color: #ffffff; /* Kolor tła paska wyszukiwania */
   position: fixed; /* Ustawienie paska na stałe */
   top: 0;
-  width: calc(100% - 500px); /* Ustawienie szerokości jako pozostała przestrzeń między lewym i prawym menu */
+  width: calc(100% - 550px); /* Ustawienie szerokości jako pozostała przestrzeń między lewym i prawym menu */
+  max-width: calc(100vw - 550px); /* Maksymalna szerokość to dostępna szerokość okna minus szerokość menu */
   z-index: 10; /* Utrzymanie paska wyszukiwania nad innymi elementami */
 }
 
 .rightmenu {
-  width: 250px; /* Stała szerokość dla prawego menu */
+  width: 300px; /* Stała szerokość dla prawego menu */
   background-color: #fff; /* Kolor tła dla prawego menu */
   height: 100vh; /* Zajmuje całą wysokość okna */
   position: fixed; /* Przyklejone do prawej strony */
@@ -40,15 +41,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 20; /* Zapewnia, że prawe menu będzie zawsze nad innymi elementami */
 }
 
 .main-content {
   margin-top: 70px; /* Zaczyna się poniżej paska wyszukiwania */
   margin-left: 250px; /* Zaczyna się za lewym menu */
-  margin-right: 250px; /* Kończy się przed prawym menu */
-  /* padding: 20px; Dodatkowy odstęp wewnętrzny */
+  margin-right: 300px; /* Kończy się przed prawym menu */
   background-color: #f0f0f0; /* Kolor tła dla głównej zawartości */
-  flex: 1; /* Rozciąga się, aby wypełnić dostępną przestrzeń */
+  width: calc(100% - 550px);
+  max-width: calc(100vw - 550px); /* Maksymalna szerokość to dostępna szerokość okna minus szerokość menu */
   min-height: calc(100vh - 70px); /* Wysokość odpowiadająca wysokości okna minus pasek wyszukiwania */
- 
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Wyrównanie zawartości do środka */
+  overflow: auto; /* Umożliwia przewijanie zawartości, jeśli jest za duża */
 }

@@ -3,7 +3,8 @@
   width: 100%;
   height: 100%;
   justify-content: space-around; /* Równomierne rozmieszczenie przycisków */
-  align-items: center; 
+  align-items: center;
+  gap: 10px
 }
 .icon {
   width: 24px;
@@ -16,7 +17,8 @@
 .button-icon {
   /* padding: 10px 20px; */
   /* margin-top:15px; */
-  margin: 5px;
+  margin: 13px;
+  
   height: 48px;
   width: 48px;
   color: #ffffff;
