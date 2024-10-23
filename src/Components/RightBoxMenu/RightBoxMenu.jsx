@@ -1,7 +1,7 @@
 import React from 'react';
 import '../RightBoxMenu/RightMenu.css';
 
-function RightMenu(){
+function RightMenu({toggleAddPost}){
   return (
     <div className="right-menu-container">
       <button className='button-icon'>
@@ -13,7 +13,7 @@ function RightMenu(){
       <button className="button-icon">
       <img src={`${process.env.PUBLIC_URL}/incoming_icon.png`} alt="Ikona" className="icon" />
       </button>
-      <button className="button-icon">
+      <button className="button-icon" onClick={toggleAddPost}>
       <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
       </button>
     </div>

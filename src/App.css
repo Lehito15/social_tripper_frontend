@@ -2,7 +2,8 @@
   text-align: center;
   display: flex;
   flex-direction: column; /* Zmiana układu na kolumnę */
-  background-color: gray;
+  background-color: rgba(245, 247, 248, 1);
+
   height: 100vh; /* Zajmuje całą wysokość ekranu */
 }
 
@@ -48,7 +49,8 @@
   margin-top: 70px; /* Zaczyna się poniżej paska wyszukiwania */
   margin-left: 250px; /* Zaczyna się za lewym menu */
   margin-right: 300px; /* Kończy się przed prawym menu */
-  background-color: #f0f0f0; /* Kolor tła dla głównej zawartości */
+  background-color:  rgba(245, 247, 248, 1);
+  ; /* Kolor tła dla głównej zawartości */
   width: calc(100% - 550px);
   max-width: calc(100vw - 550px); /* Maksymalna szerokość to dostępna szerokość okna minus szerokość menu */
   min-height: calc(100vh - 70px); /* Wysokość odpowiadająca wysokości okna minus pasek wyszukiwania */
@@ -56,4 +58,24 @@
   align-items: center;
   justify-content: center; /* Wyrównanie zawartości do środka */
   overflow: auto; /* Umożliwia przewijanie zawartości, jeśli jest za duża */
+}
+
+.add-post-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  z-index: 1001; /* Wyższy z-index niż reszta strony */
+}
+
+.blur-background .main-content,
+.blur-background .left-menu,
+.blur-background .rightmenu,
+.blur-background .searchbar {
+  filter: brightness(50%);
+  pointer-events: none;
 }

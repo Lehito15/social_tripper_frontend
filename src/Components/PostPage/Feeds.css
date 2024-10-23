@@ -21,7 +21,8 @@
     border: 1px solid #ccc; /* Ramka wokół pola */
     border-radius: 24px; /* Zaokrąglone rogi */
     cursor: pointer; /* Wskaźnik kursora jako ręka */
-    font-size: 16px; /* Rozmiar czcionki */
+    font-size: 16px;
+    font-weight: 400;
     color: #333; /* Kolor tekstu */
     transition: background-color 0.3s ease; /* Płynna zmiana koloru tła przycisku */
 }
@@ -35,4 +36,10 @@
 .button-feed.selected { 
     background-color: #000000; 
     color: #B0E26A; 
+    font-weight: 600;
+    -webkit-box-shadow: 0px 0px 2px 2px #B0E26A;
+    -moz-box-shadow: 0px 0px 2px 2px #B0E26A;
+    box-shadow: 0px 0px 2px 2px #B0E26A;
+    
+  
 }

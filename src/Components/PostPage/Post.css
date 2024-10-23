@@ -1,0 +1,63 @@
+.post-container {
+  background-color: white;
+  border-radius: 10px;
+}
+
+.slider-container {
+  background-color: rgb(255, 255, 255);
+} 
+.post-owner-container {
+  height: 60px;
+  width: 100%;
+}
+
+.text-container {
+  width: 100%;
+  padding-left: 20px;
+  text-align: left;
+}
+.content-text {
+  /* align-items: flex-start; */
+  font-size: 16px;
+  align-items: flex-start;
+  margin: 0; /* Upewnij się, że nie ma dodatkowego marginesu */
+  overflow: hidden; /* Ukryj nadmiarowy tekst */
+  display: -webkit-box; /* Użyj flexboxa dla klamrowania */
+  -webkit-box-orient: vertical; /* Ustaw orientację na pionową */
+  -webkit-line-clamp: 3; /* Ogranicz do 3 linii */
+  line-clamp: 3; /* Ogranicz do 3 linii */
+  white-space: normal; /* Pozwól tekstowi zawijać się normalnie */
+}
+
+.content-text.expanded {
+  display: block; /* Umożliwia wyświetlenie całego tekstu */
+}
+
+.toggle-text {
+  font-weight: bold;
+  cursor: pointer; /* Zmiana kursora, aby wskazywał na klikalność */
+  margin-left: 5px; /* Dodaj mały odstęp z lewej */
+  display: inline; /* Ustawienie inline, aby był obok tekstu */
+}
+
+.reactions-conteiner {
+  width: 100%;
+  height: 50px;
+}
+
+.more-options{
+  width: 36px;
+  height: 36px;
+  
+}
+
+.more-options-button {
+  margin-left: auto; 
+  cursor: pointer; /* Zmienia kursor na wskaźnik, gdy najeżdżasz na przycisk */
+  margin-right: 20px; 
+}
+
+.more-options-button:hover .more-options {
+  background-color: #f0f0f0;
+  border-radius: 50px;
+}
