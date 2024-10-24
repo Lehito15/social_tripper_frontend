@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import '../CreatePost/CreatePost.css';
 import PostOwner from '../PostPage/PostOwner';
 import AddMedia from '../CreatePost/AddMedia.jsx';
+import Select from 'react-select';
 
 function CreatePost({ onClose, owner }) {
+  const options = [
+    { value: 'public', label: <><img src={`${process.env.PUBLIC_URL}/public-icon.png`} alt="Public" className="option-icon" /> Public</> },
+    { value: 'private', label: <><img src={`${process.env.PUBLIC_URL}/public-icon.png`} alt="Private" className="option-icon" /> Private</> }
+  ];
+  
 
   return (
     <div className='create-post-container'>
@@ -19,10 +25,8 @@ function CreatePost({ onClose, owner }) {
 
       <div className='post-owner'>
         <PostOwner owner={owner} />
-         <select className="options-list">
-            <option >Public</option>
-            <option >Private</option>
-         </select>
+        <Select  classNamePrefix="custom-select" options={options} defaultValue={options[0]} />
+      
 
       </div>
 
