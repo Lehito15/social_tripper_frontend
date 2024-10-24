@@ -1,0 +1,35 @@
+.message-input {
+    width: 100%; /* Szerokość paska wyszukiwania */
+    height: 42px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-size: 16px;
+    border: 0px solid;
+    outline: none;
+    /* border-radius: 10px; Zaokrąglone rogi */
+  }
+  .message-input-wrapper {
+    position: relative; /* Pozycjonowanie relatywne dla ikonki */
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    
+  }
+  
+  .media-icon, .send-icon {
+    position: absolute; /* Pozycjonowanie absolutne względem kontenera */
+    /* left: 10px; Odległość od prawej krawędzi pola */
+    width: 24px; /* Szerokość ikony */
+    height: 24px; /* Wysokość ikony */
+    pointer-events: none; /* Wyłączenie interakcji z ikoną */
+  }
+
+  .media-icon{
+    left: 10px; 
+  }
+  .send-icon {
+    right: 10px;
+    margin-left: auto;
+  }
+

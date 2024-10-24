@@ -3,6 +3,7 @@ import '../PostPage/Post.css';
 import Slider from '../PostPage/Slider.jsx'
 import PostOwner from './PostOwner.jsx';
 import PostReaction from './PostReactions.jsx';
+import WriteComment from './WriteComment.jsx'
 
 function Post({post}){
   const [postHeight, setPostHeight] = useState(null);
@@ -77,7 +78,9 @@ function Post({post}){
     </div>
     <div className='reactions-conteiner'>
       <PostReaction data={post.reactions} />
-
+    </div>
+    <div className='comment-container'>
+      <WriteComment owner={post.owner} />
     </div>
   </div>
 

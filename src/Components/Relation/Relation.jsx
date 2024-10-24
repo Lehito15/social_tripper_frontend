@@ -5,6 +5,7 @@ import Slider from '../PostPage/Slider.jsx'
 import PostOwner from '../PostPage/PostOwner.jsx';
 import PostReaction from '../PostPage/PostReactions.jsx';
 import MapRelation from './MapRelation.jsx';
+import WriteComment from '../PostPage/WriteComment.jsx';
 
 function Relation({post}){
   const [postHeight, setPostHeight] = useState(null);
@@ -83,7 +84,9 @@ function Relation({post}){
     </div>
     <div className='reactions-conteiner'>
       <PostReaction data={post.reactions} />
-
+    </div>
+    <div className='comment-container'>
+      <WriteComment owner={post.owner} />
     </div>
   </div>
 

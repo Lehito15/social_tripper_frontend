@@ -1,5 +1,6 @@
 .post-container {
-  background-color: white;
+  background-color: #ffffff;
+  margin-bottom: 10px;
   border-radius: 10px;
 }
 
@@ -45,10 +46,15 @@
   height: 50px;
 }
 
+.comment-container {
+  width: 100%;
+  width: 50px;
+  margin-bottom: 10px;
+}
+
 .more-options{
   width: 36px;
   height: 36px;
-  
 }
 
 .more-options-button {
