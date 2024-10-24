@@ -11,14 +11,24 @@ const customMarkerIcon = new L.Icon({
   popupAnchor: [0, -40], // Punkt, w którym wyświetla się dymek
 });
 
-function MapReaction({ locations }) {
+const highlightedMarkerIcon = new L.Icon({
+  iconUrl: `${process.env.PUBLIC_URL}/create-trip.png`,
+  iconSize: [35, 45], // Większy rozmiar dla podświetlonego markera
+  iconAnchor: [17, 45],
+  popupAnchor: [0, -45],
+});
+
+function MapReaction({ locations, selectedIndex, onMarkerClick }) {
   // Sprawdzanie, czy mamy lokalizacje
+  console.log(locations);
   if (!locations || locations.length === 0) {
     return <div>No locations available</div>;
   }
 
   // Wybieranie pierwszej lokalizacji jako domyślne wyśrodkowanie mapy
   const defaultCenter = locations[0].position;
+  console.log('mapa');
+  
 
   return (
     <MapContainer center={defaultCenter} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -27,14 +37,17 @@ function MapReaction({ locations }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {locations.map(location => (
-        <Marker 
-          key={location.id} 
-          position={location.position} 
-          icon={customMarkerIcon}
-        >
-          <Popup>{location.popup}</Popup>
-        </Marker>
+      {locations.map(location=> (
+         <Marker 
+         key={location.id} 
+         position={location.position}
+         icon={location.id=== selectedIndex ? highlightedMarkerIcon : customMarkerIcon} // Podświetl marker
+         eventHandlers={{
+          click: () => onMarkerClick(location.id),  
+        }}
+       >
+        
+       </Marker>
       ))}
     </MapContainer>
   );

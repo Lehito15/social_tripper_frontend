@@ -1,16 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
+import '../Relation/Relation.css';
 import '../PostPage/Post.css';
 import Slider from '../PostPage/Slider.jsx'
-import PostOwner from './PostOwner.jsx';
-import PostReaction from './PostReactions.jsx';
+import PostOwner from '../PostPage/PostOwner.jsx';
+import PostReaction from '../PostPage/PostReactions.jsx';
 import MapRelation from './MapRelation.jsx';
 
-function relation({post}){
+function Relation({post}){
   const [postHeight, setPostHeight] = useState(null);
-  const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
+  const handleSlideChange = (newIndex) => {
+    setSelectedIndex(newIndex);
+  };
 
+  const handleMarkerClick = (markerIndex) => {
+    console.log(markerIndex);
+    setSelectedIndex(markerIndex);  // Zmieniamy slajd na podstawie kliknięcia na pinezkę
+  };
+
+ 
 
   useEffect(() => {
     const calculateHeight = async () => {
@@ -59,16 +69,16 @@ function relation({post}){
       </div>
     </div>
    
-    <div>
+    <div className='relation'  >
         <div className= 'slider-container'  style={{height: postHeight}}>
         {postHeight !== null && post.media && post.media.length > 0 && (
-        <Slider multimedia={post.media} postHeight={postHeight} />
+        <Slider multimedia={post.media} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} />
         
 
         )}
         </div>
-        <div className='map-container'>
-            <MapRelation locations={post.locations} />
+        <div className='map-container' style={{height: postHeight}} >
+            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  />
         </div>
     </div>
     <div className='reactions-conteiner'>
@@ -80,4 +90,4 @@ function relation({post}){
   );
 
 }
-export default Post;
+export default Relation;

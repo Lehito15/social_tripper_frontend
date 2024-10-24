@@ -1,6 +1,7 @@
 import React from 'react';
 import '../PostPage/PostPage.css';
 import Feeds from './Feeds.jsx';
+import Relation from '../Relation/Relation.jsx';
 
 import Post from './Post.jsx'
 function PostPage(){
@@ -14,13 +15,18 @@ function PostPage(){
     description: 'Witam. Szczerze mówiąc, czuję się naprawdę wkurzony. To, co działo się w ostatnich spotkaniach, nie tylko mnie, ale i wielu innych zawodników, frustruje. Uważam, że nasza drużyna ma ogromny potencjał, ale nie potrafimy tego wykorzystać. ',
     owner: owner,
     date: '2024-10-22T15:30:00Z',
-    reactions: {reactions: 21, comments: 2}
+    reactions: {reactions: 21, comments: 2},
+    locations:  [
+      {id: 0, position: [53.366, 14.52]},
+      {id: 1, position: [53.386, 14.55]}
+    ]
 
   }
   return (
     <div className="Post-page">
         <div className='Feeds'> <Feeds user={owner} /></div>
         <Post post={post} />
+        <Relation post={post} />
         
        
     </div>

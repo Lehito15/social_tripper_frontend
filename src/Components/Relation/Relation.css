@@ -2,3 +2,26 @@
     background-color: white;
     border-radius: 10px;
   }
+
+  .relation {
+    display: flex; /* Ustawia flexbox */
+    flex-direction: row; /* Ustawia kierunek na poziomy */
+    height: 100%;
+  }
+  
+  .slider-container {
+    flex: 2; /* Zajmuje 2/3 dostępnej przestrzeni */
+    overflow: hidden; /* Ukrywa elementy, które wychodzą poza kontener */
+  }
+  
+  .map-container {
+    flex: 1; /* Zajmuje 1/3 dostępnej przestrzeni */
+    overflow: hidden;
+  }
+  
+  .relation-container {
+    display: flex;
+    flex-direction: column; /* Ustawia kierunek na pionowy */
+    width: 100%;
+  }
+  
