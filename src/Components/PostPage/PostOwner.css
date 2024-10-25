@@ -3,10 +3,16 @@
   align-items: center;
   width: 100%;
 }
+.avatar-container {
+  width: 48px;
+  height: 100%;
+}
 
 .post-owner-avatar {
-  height: 48px;
-  width: 48px;
+  /* height: 48px;
+  width: 48px; */
+  height: 80%;
+  width: 100%;
   border-radius: 50%;
   margin-right: 15px;
   margin-left: 15px;
@@ -16,8 +22,15 @@
   display: flex;
   flex-direction: column;
   padding-top: 12px;
+  margin-left: 25px;
   align-items: flex-start;
 }
+
+.post-owner-details.no-date {
+  justify-content: center; /* Wyśrodkowanie pionowe, gdy brak daty */
+  padding-bottom: 20px; /* Usuń padding, aby wyśrodkować tekst */
+}
+
 .post-owner-name {
   margin: 0;
   font-size: 18px;

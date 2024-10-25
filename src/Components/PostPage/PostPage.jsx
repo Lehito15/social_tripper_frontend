@@ -2,6 +2,7 @@ import React from 'react';
 import '../PostPage/PostPage.css';
 import Feeds from './Feeds.jsx';
 import Relation from '../Relation/Relation.jsx';
+import Event from '../Event/Event.jsx'
 
 import Post from './Post.jsx'
 function PostPage(){
@@ -22,11 +23,22 @@ function PostPage(){
     ]
 
   }
+
+  const event = {
+    target: 'Szczecin',
+    image: 'https://ocdn.eu/pulscms-transforms/1/sxOk9kpTURBXy9hMDhhZTIyYjIwNDRjOTdmZDNlNDQxMzdjNmE3ZGVjNC5qcGeTlQMAzH_NEEbNCSeVAs0EsADDw5MJpjI0MTBiYQbeAAGhMAE/szczecin.jpeg', // Ścieżka do obrazu
+    start_date: new Date('2024-10-24'),
+    end_date: new Date('2024-11-24'),
+    name: 'Wspólne zwiedzanie Szczecina z  Kamilem Grosickim',
+    description: 'Zapraszamy wszystkich  chętnych ',
+    owner: owner
+  };
   return (
     <div className="Post-page">
         <div className='Feeds'> <Feeds user={owner} /></div>
         <Post post={post} />
         <Relation post={post} />
+        <Event event={event} />
         
        
     </div>

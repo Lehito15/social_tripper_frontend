@@ -1,0 +1,64 @@
+.event-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  margin: 10px auto;
+}
+
+.event-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.event-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.event-content {
+  display: flex;
+}
+
+.event-image-container {
+  width: 30%;
+  display: flex; /* Dodanie flexbox */
+  justify-content: center; /* Poziome wyśrodkowanie */
+  align-items: center; /* Pionowe wyśrodkowanie */
+}
+
+.event-image {
+  width: 100%; /* Obrazek ma wypełnić szerokość kontenera */
+  height: 100%; /* Obrazek ma wypełnić wysokość kontenera */
+  /* object-fit: cover; Obrazek ma się dopasować, nie tracąc proporcji */
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.event-date {
+  display: flex; /* Ustawienie flexboxa */
+  gap: 20px; /* Dodanie odstępu między elementami, możesz dostosować wartość */
+  align-items: center; /* Wyrównanie elementów w pionie */
+}
+
+.event-name {
+  font-size: 18px;
+  margin: 0 0 6px 0;
+}
+
+.event-description {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}

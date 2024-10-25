@@ -3,21 +3,25 @@ import '../PostPage/PostOwner.css';
 import dayjs from 'dayjs';
 
 function PostOwner({ owner, date}) {
-  const formattedDate = dayjs(date).format('DD/MM/YY');
+  const formattedDate = date ? dayjs(date).format('DD/MM/YY') : null;
   return (
     <div className="post-owner-container">
-      <img 
-        src={owner.src} 
-        alt={owner.name} 
-        className="post-owner-avatar" 
-      />
-      <div className="post-owner-details">
+      <div className='avatar-container'>
+        <img 
+          src={owner.src} 
+          alt={owner.name} 
+          className="post-owner-avatar" 
+        />
+      </div>
+      <div className={`post-owner-details ${!formattedDate ? 'no-date' : ''}`}>
         <h4 className="post-owner-name">
           {owner.name} {owner.surname}
         </h4>
-        <p className="post-owner-date">
-          {formattedDate}
-        </p>
+        {formattedDate && ( // Renderowanie daty tylko, jeśli jest dostępna
+          <p className="post-owner-date">
+            {formattedDate}
+          </p>
+        )}
       </div>
     </div>
   );

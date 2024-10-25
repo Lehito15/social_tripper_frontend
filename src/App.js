@@ -7,6 +7,8 @@ import RightBoxMenu from './Components/RightBoxMenu/RightBoxMenu.jsx';
 import PostPage from './Components/PostPage/PostPage.jsx';
 import CreatePost from './Components/CreatePost/CreatePost.jsx';
 import MapComponent from './Components/Relation/MapRelation.jsx';
+import DateCard from './Components/Event/DateCard.jsx';
+import PostOwner from './Components/PostPage/PostOwner.jsx';
 
 function App() {
   const [isAddPostOpen, setIsAddPostOpen] = useState(false);
@@ -62,7 +64,7 @@ function App() {
         <div className="main-content">
             <Routes>
               <Route path="/" element={<PostPage />} />
-              <Route path="/rolki" element={<MapComponent locations={locations} />} />
+              <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', src: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               {/* Dodaj kolejne Route dla innych opcji */}
             </Routes>
           </div>

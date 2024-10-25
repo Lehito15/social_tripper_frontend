@@ -2,7 +2,8 @@
   text-align: center;
   display: flex;
   flex-direction: column; /* Zmiana układu na kolumnę */
-  background-color: rgba(245, 247, 248, 1);
+  background: rgba(240, 242, 245, 1);
+
 
   height: 100vh; /* Zajmuje całą wysokość ekranu */
 }
