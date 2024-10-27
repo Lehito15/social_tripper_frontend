@@ -17,7 +17,7 @@ function PostOwner({ owner, date}) {
         <h4 className="post-owner-name">
           {owner.name} {owner.surname}
         </h4>
-        {formattedDate && ( // Renderowanie daty tylko, jeśli jest dostępna
+        {formattedDate && ( 
           <p className="post-owner-date">
             {formattedDate}
           </p>

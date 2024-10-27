@@ -44,6 +44,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 70%;
+  margin-left: 10px;
 }
 
 .event-date {
@@ -55,10 +56,15 @@
 .event-name {
   font-size: 18px;
   margin: 0 0 6px 0;
+  align-items: flex-start;
 }
 
 .event-description {
   font-size: 14px;
   color: #666;
   margin: 0;
+}
+
+.event-owner {
+  height: 50px;
 }

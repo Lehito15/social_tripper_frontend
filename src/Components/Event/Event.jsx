@@ -1,6 +1,7 @@
 import React from 'react';
 import DateCard  from './DateCard.jsx';
 import './Event.css'; // Stylizacja komponentu.
+import PostOwner from '../PostPage/PostOwner.jsx';
 
 function EventCard({ event }) {
   return (
@@ -24,6 +25,10 @@ function EventCard({ event }) {
             <h3 className="event-name">{event.name}</h3>
           </div>
           <p className="event-description">{event.description}</p>
+          <div className='event-owner'>
+            <PostOwner owner={event.owner }  />
+          </div>
+
         </div>
       </div>
     </div>

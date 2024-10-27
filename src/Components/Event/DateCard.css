@@ -21,3 +21,22 @@
   font-weight: 600;
 }
 
+
+@media(max-width: 1300px) {
+  .date-card {
+    width: 52px;
+    height: 72px;
+  }
+
+  .date-card__month {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  
+  .date-card__day {
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+
