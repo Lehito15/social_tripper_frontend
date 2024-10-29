@@ -32,3 +32,10 @@
   align-items: center; 
 
 }
+
+@media (max-width: 1400px){
+  .info-container-tittle{
+    font-size: 12px;
+  }
+}
+
