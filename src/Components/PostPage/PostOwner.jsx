@@ -8,7 +8,7 @@ function PostOwner({ owner, date}) {
     <div className="post-owner-container">
       <div className='avatar-container'>
         <img 
-          src={owner.src} 
+          src={owner.profile_picture_url} 
           alt={owner.name} 
           className="post-owner-avatar" 
         />

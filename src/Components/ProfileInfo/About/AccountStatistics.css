@@ -1,0 +1,27 @@
+.user-stats {
+  display: flex; /* Ustawienie elementów w wierszu */
+  justify-content: space-around; /* Rozłożenie elementów w przestrzeni */
+  margin-top: 0vh; /* Dynamiczny odstęp między imieniem a statystykami */
+  width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
+
+}
+
+.stat-item {
+  text-align: center; /* Wyśrodkowanie tekstu */
+  margin-top: 0px;
+}
+
+.stat-value {
+  font-size: 20px;
+  line-height: 25.14px;
+
+  font-weight: bold; /* Pogrubienie wartości */
+}
+
+.stat-title {
+  display: block; /* Przeniesienie tytułu na nową linię */
+ 
+  color: #555; /* Kolor tytułu */
+  font-size: 12px;
+  line-height: 15.08px;
+}

@@ -1,0 +1,10 @@
+.text-decription {
+  font-size: 13px;      
+  /* -webkit-box-orient: vertical;               
+  overflow: hidden;                   
+  text-overflow: ellipsis;            */
+  line-height: 17.6px; 
+  margin: 10px;                 
+                 
+                  
+}

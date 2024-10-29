@@ -5,7 +5,7 @@ function WriteComment({owner}){
   return (
     <div className="comment-container">
       <img 
-        src={owner.src} 
+        src={owner.profile_picture_url} 
         alt={owner.name} 
         className="comment-owner-avatar" 
       />

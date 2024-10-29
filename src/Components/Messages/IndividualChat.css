@@ -1,0 +1,90 @@
+.individual-chat-container {
+  position: fixed;
+  height: 513px;
+  width: 416px;
+  bottom: 0;
+  right: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 1);
+
+  border-radius: 15px;
+  z-index: 1000; /* Ustaw wyższy z-index, aby wyświetlać nad innymi elementami */
+  overflow-y: auto; /* Opcjonalnie: Przewijanie w pionie dla dłuższych rozmów */
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-friend-upper {
+  height: 52px;
+  width: 100%;
+  display: flex; /* Enables flex layout for horizontal alignment */
+  align-items: center; 
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.messages-container {
+  flex-grow: 1;
+  display: flex; /* Ustawia kontener wiadomości jako flexbox */
+  flex-direction: column-reverse; /* Odwraca kolejność elementów, aby najnowsze wiadomości były na dole */
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.message-left {
+  justify-content: flex-start;
+  align-items:end;
+}
+
+.message-right {
+  justify-content: flex-end;
+  margin-right: 10px;
+  /* flex-direction: row-reverse; */
+}
+
+.friend-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+ 
+}
+
+.comment-section {
+  align-items: center;
+  padding: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin-right: 0;
+}
+
+.chat-button{
+  margin-left: auto; /* Pushes buttons to the right */
+  display: flex; /* Allows horizontal layout for the buttons */
+  gap: 10px; /* Adds spacing between the buttons */
+  cursor: pointer; /* Changes cursor to pointer */
+  margin-right: 20px;
+  
+
+}
+
+.chat-options {
+  height: 18px;
+  width: 18px;
+
+}
+
+.chat-options:hover  {
+  background-color: #f0f0f0;
+  border-radius: 50px;
+  height: 100%;
+}
+
+
+

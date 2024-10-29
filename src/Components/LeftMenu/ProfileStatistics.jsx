@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../LeftMenu/ProfileStatistics.css'
+import '../LeftMenu/ProfileStatistics.css';
+import { NavLink } from 'react-router-dom';
+import AccountStatistics from '../ProfileInfo/About/AccountStatistics';
 
 function ProfileStatistcs(){
   const [user, setUser] = useState(null);
@@ -53,22 +55,16 @@ function ProfileStatistcs(){
       className="profile-picture"
     />
     <div className="user-info">
-      <h2>{user.name}</h2>
+       <NavLink to={`/profileinfo/posts`} className='user-name'>
+          {user.name}
+        </NavLink>
+        <br></br>
       <span className='user-rang'>{user.rang}</span>
-      <div className="user-stats">
-        <div className="stat-item">
-          <span className="stat-value">{user.trips}</span>
-          <span className="stat-title">Trips Done</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-value">{user.followers}</span>
-          <span className="stat-title">Followers</span>
-        </div>
-        <div className="stat-item">
-          <span className="stat-value">{user.following}</span>
-          <span className="stat-title">Following</span>
-        </div>
-      </div>
+
+      <AccountStatistics stats={{trips: 5, 
+          followers: 121,
+          following: 21,}} />
+
     </div>
   </div>
 

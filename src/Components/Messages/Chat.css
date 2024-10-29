@@ -1,0 +1,102 @@
+.chat-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding-top: 0px;
+}
+
+.chat-container:hover {
+  background: rgba(240, 242, 245, 1);
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.friend-avatar-conatiner{
+  width: 54px;
+  height: 54px;
+
+}
+
+.chat-friend-avatar {
+  /* height: 48px;
+  width: 48px; */
+  height: 100%;
+  width: 100%;
+
+  border-radius: 50%;
+
+  object-fit: fill;
+}
+
+.chat-friend-details {
+  display: flex;
+  flex-direction: column;
+  padding-top: 12px;
+  margin-left: 10px;
+  align-items: flex-start;
+
+}
+
+
+.chat-friend-name {
+  margin: 0;
+  font-size: 16px;
+  
+}
+
+.last-message {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 1);
+  padding-right: 10px;
+
+  white-space: nowrap;         /* Zapobiega łamaniu wierszy */
+  overflow: hidden;            /* Ukrywa nadmiar tekstu */
+  text-overflow: ellipsis;     /* Dodaje wielokropek na końcu */
+  max-width: 190px; 
+
+}
+
+.last-message.no-read {
+  font-weight: 600;
+}
+
+.last-message-time {
+  font-size: 12px; /* Mniejszy rozmiar czcionki dla daty */
+  color: rgba(0, 0, 0, 0.6); /* Delikatniejszy kolor */
+  padding-left: 120px;
+  padding-top: 0;
+
+    
+}
+
+.unread-badge {
+  margin-left: 220px; /* Odstęp od tekstu */
+  padding-top: 0;
+  position: absolute; /* Pozycjonowanie absolutne */
+ 
+  
+
+  font-size: 10px;
+  background-color: black;
+  color:  rgba(189, 242, 113, 1);
+  border-radius: 50px;
+  width: 20px;
+  height:20px;
+  display:inline-flex;
+  justify-content: center; /* Wyśrodkowanie tekstu */
+  align-items: center; /* Wyśrodkowanie tekstu */
+
+}
+
+.last-message-container {
+  display: flex;
+  align-items: center; /* Wyrównuje elementy w pionie */
+}
+
+
+
+
+
+

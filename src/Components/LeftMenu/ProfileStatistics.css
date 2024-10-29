@@ -19,9 +19,20 @@
 .user-info {
   flex: 1; /* Pozwala na elastyczne dopasowanie */
   text-align: center; /* Wyśrodkowanie tekstu wewnątrz kontenera */
-  padding-left: 13.5%; 
-   padding-right: 13.5%;  
+  /* padding-left: 13.5%; 
+   padding-right: 13.5%;   */
+   align-items: center;
   width: 100%;
+}
+
+.user-name {
+  font-size: 22px;
+  cursor: pointer; /* Wskazuje, że element jest klikalny */
+  text-decoration: none; 
+  color: black;
+  display: inline;
+  margin-bottom: 5px;
+  font-weight: 700
 }
 
 .user-stats {
@@ -50,11 +61,7 @@
   font-size: 12px;
   line-height: 15.08px;
 }
-h2 {
-  font-size: 20px;
-  line-height: 27.65px;
-  margin-bottom: 5px;
-}
+
 
 .user-rang {
   font-size: 14px;

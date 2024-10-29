@@ -1,12 +1,12 @@
 import React from 'react';
 import '../SearchBar/SearchBar.css';
+import SearchBox from './SearchBox.jsx'
 
 function SearchBar(){
   return (
     <div className="search-bar-container">
-       <div className="search-input-wrapper">
-        <input type="text" className="search-input" placeholder="Search..." />
-        <img src={`${process.env.PUBLIC_URL}/lupa.png`} alt="Search Icon" className="search-icon" />
+       <div className="search-box">
+          <SearchBox />
       </div>
       <button className="trip-button">
       <img src={`${process.env.PUBLIC_URL}/create-trip.png`} alt="Ikona" className="icon" />

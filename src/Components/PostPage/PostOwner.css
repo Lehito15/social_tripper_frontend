@@ -3,27 +3,33 @@
   align-items: center;
   width: 100%;
   /* height: 100%; */
+  margin-top: 3px;
+  margin-left: 5px;
 }
 .avatar-container {
-  width: 48px;
-  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* width: 25%; Ustaw procent szerokości w zależności od potrzeb */
+  max-width: 48px; /* Maksymalna szerokość, jeśli potrzebna */
+  max-height: 48px;
+  min-width: 20px;
+
 }
 
 .post-owner-avatar {
-  /* height: 48px;
-  width: 48px; */
-  height: 80%;
-  width: 100%;
+  height: 48px;
+  width: 48px;
+  /* height: 100%; */
+
   border-radius: 50%;
-  margin-right: 15px;
-  margin-left: 15px;
+
 }
 
 .post-owner-details {
   display: flex;
   flex-direction: column;
   padding-top: 12px;
-  margin-left: 25px;
+  margin-left: 15px;
   align-items: flex-start;
 }
 

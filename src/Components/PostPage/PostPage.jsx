@@ -3,6 +3,7 @@ import '../PostPage/PostPage.css';
 import Feeds from './Feeds.jsx';
 import Relation from '../Relation/Relation.jsx';
 import Event from '../Event/Event.jsx'
+import SelectInfoMenu from '../ProfileInfo/SelectInfoMenu.jsx';
 
 import Post from './Post.jsx'
 function PostPage(){
@@ -10,7 +11,7 @@ function PostPage(){
    {type: 'image', src: 'https://ocdn.eu/sport-images-transforms/1/Wi-k9lBaHR0cHM6Ly9vY2RuLmV1L3B1bHNjbXMvTURBXy9jMmRmZWRiODA3YjAwNzc3NjljOTM0Mzk3YWMyNzM2Mi5qcGeTlQMAzG_NDdfNB8iVAs0EsADCw5MJpmNjZDQ5NgbeAAKhMAGhMQE/kamil-grosicki.jpg'},
    {type: 'image', src:'https://daf17zziboaju.cloudfront.net/wp-content/uploads/2024/06/24131401/20180327PF_MP0241.jpg'}
   ];
-  const owner = {name:'Kamil', surname: 'Grosicki', src: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'};
+  const owner = {name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'};
   const post = {
     media: mediaLinks,
     description: 'Witam. Szczerze mówiąc, czuję się naprawdę wkurzony. To, co działo się w ostatnich spotkaniach, nie tylko mnie, ale i wielu innych zawodników, frustruje. Uważam, że nasza drużyna ma ogromny potencjał, ale nie potrafimy tego wykorzystać. ',
@@ -39,6 +40,7 @@ function PostPage(){
         <Post post={post} />
         <Relation post={post} />
         <Event event={event} />
+        <SelectInfoMenu />
         
        
     </div>

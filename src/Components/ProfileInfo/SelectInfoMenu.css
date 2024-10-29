@@ -1,0 +1,51 @@
+.profile-info-select {
+  height: 80px;
+  position: relative;
+  /* text-align: left; */
+
+
+}
+
+.profile-img {
+  position: absolute;
+  height: 100%;
+  width: 80px;
+
+  border-radius: 50%;         /* Zaokrąglenie zdjęcia */
+  position: absolute;         /* Ustawia pozycję absolutną */
+  top: 0;                 /* Przesuwa obraz w górę */
+                  /* Centruje obraz */
+  /* transform: translateX(-50%); Centruje względem środka */
+  z-index: 2;   
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.profile-name {
+  font-weight: 700;
+  align-items: flex-start;
+  font-size: 24px;
+  margin-bottom: 0;
+
+  margin-left: 85px; 
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.line-menu {
+  margin-top: 10px;
+  margin-left: 10px;           /* Daje przestrzeń między menu a resztą */
+  z-index: 1;
+  position: relative;
+}
+
+.public-icon {
+  height: 22px;
+  width: 22px;
+  opacity: 70%;
+  margin-left: 10px;
+ 
+}

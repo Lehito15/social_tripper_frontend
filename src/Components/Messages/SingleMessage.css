@@ -1,0 +1,27 @@
+.singlemessage-box {
+  /* display: flex; */
+  justify-content: center;
+  align-items: flex-start;
+  /* margin: 5px 0;  */
+ 
+  background: rgba(240, 242, 245, 1);
+
+  border-radius: 15px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  word-wrap: break-word; /* Zapewnia łamanie długich słów */
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  max-width: 250px;
+}
+
+.singlemessage-content {
+  font-size: 16px;
+  text-align: left;
+  margin-bottom: 0;
+  
+  overflow-wrap: break-word; /* This allows words to break at the end of the line */
+  word-wrap: break-word; /* Ensures compatibility with older browsers */
+}

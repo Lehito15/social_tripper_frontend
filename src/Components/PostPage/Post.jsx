@@ -52,9 +52,7 @@ function Post({post}){
   return(
   <div className='post-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <div className='owner-awatar'>
       <PostOwner owner={post.owner} date={post.date} status={"option"}   />
-      </div>
       <div className="more-options-button">
         <img 
           className="more-options"

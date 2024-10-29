@@ -2,7 +2,9 @@
   text-align: center;
   display: flex;
   flex-direction: column; /* Zmiana układu na kolumnę */
-  background: rgba(240, 242, 245, 1);
+  font-family: 'Kanit', sans-serif;
+  /* background: rgba(240, 242, 245, 1); */
+  
 
 
   height: 100vh; /* Zajmuje całą wysokość ekranu */
@@ -33,24 +35,36 @@
   z-index: 10; /* Utrzymanie paska wyszukiwania nad innymi elementami */
 }
 
-.rightmenu {
+.right-menu {
   width: 300px; /* Stała szerokość dla prawego menu */
-  background-color: #fff; /* Kolor tła dla prawego menu */
-  height: 100vh; /* Zajmuje całą wysokość okna */
+  /* background-color: #fff; Kolor tła dla prawego menu */
+  height: 70px; /* Zajmuje całą wysokość okna */
   position: fixed; /* Przyklejone do prawej strony */
   right: 0;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20; /* Zapewnia, że prawe menu będzie zawsze nad innymi elementami */
+  /* z-index: 20; Zapewnia, że prawe menu będzie zawsze nad innymi elementami */
 }
+
+.rightpanel{
+  width: 300px;
+  right: 0;
+  top: 70px;
+  height: 100vh;
+
+  position: fixed;
+
+}
+
 
 .main-content {
   margin-top: 70px; /* Zaczyna się poniżej paska wyszukiwania */
   margin-left: 250px; /* Zaczyna się za lewym menu */
   margin-right: 300px; /* Kończy się przed prawym menu */
   background-color:  rgba(245, 247, 248, 1);
+  height: 100%
   ; /* Kolor tła dla głównej zawartości */
   width: calc(100% - 550px);
   max-width: calc(100vw - 550px); /* Maksymalna szerokość to dostępna szerokość okna minus szerokość menu */
@@ -58,7 +72,8 @@
   display: flex;
   align-items: center;
   justify-content: center; /* Wyrównanie zawartości do środka */
-  overflow: auto; /* Umożliwia przewijanie zawartości, jeśli jest za duża */
+  /* overflow: auto; Umożliwia przewijanie zawartości, jeśli jest za duża */
+  
 }
 
 .add-post-modal {
@@ -71,6 +86,10 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   z-index: 1001; /* Wyższy z-index niż reszta strony */
+}
+
+.chat{
+  
 }
 
 .blur-background .main-content,
