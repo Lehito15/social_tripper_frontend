@@ -1,5 +1,8 @@
 .text-decription {
-  font-size: 13px;      
+  font-size: 14px; 
+  font-family: "Source Sans 3", serif;
+  list-style: 17.6px;
+  font-weight: 400;    
   /* -webkit-box-orient: vertical;               
   overflow: hidden;                   
   text-overflow: ellipsis;            */

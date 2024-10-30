@@ -4,7 +4,7 @@ import './SingleMessage.css';
 function SingleMessage({content}){
   return(
     <div className='singlemessage-box'>
-      <p className='singlemessage-content'>{content}</p>
+      <span className='singlemessage-content'>{content}</span>
     </div>
   );
 }

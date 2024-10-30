@@ -1,14 +1,28 @@
-.about-container {
-  display: grid;
-  
-  grid-auto-rows: auto;                   
-  gap: 15px;                               /* Odstęp między elementami */
-  align-items: start;
-  justify-items: start;
-}
-.stats-container{
-  width: 30%;
-  aspect-ratio: 100 / 47; 
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .about-container {
+    display: flex; 
+    
+    grid-auto-rows: auto;                   
+    gap: 15px;                               /* Odstęp między elementami */
+    align-items: start;
+    justify-items: start;
+  }
+  .left-about{
+    width: 30%;
+    height: 100vh;
+  }
+
+  .right-about {
+    width: 68%;
+    height: 100vh;                 /* Prawa kolumna zajmuje 67% szerokości */
+  }
+  .stats-container{
+    width: 100%;
+    aspect-ratio: 100 / 47; 
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .info-container{
+    width: 100%;
+    aspect-ratio: 100 / 45;
+  }
