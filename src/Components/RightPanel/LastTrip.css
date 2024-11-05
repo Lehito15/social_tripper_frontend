@@ -19,6 +19,8 @@
 
 .trip-image-container {
   width: 42%;
+  margin-left: 7px;
+  margin-right: 7px;
 }
 
 .trip-image {
@@ -40,9 +42,11 @@
   display: flex;
   align-items: center;
   margin: 0;
-  margin-bottom: 5px; /* Dodanie przestrzeni pod nazwą */
+  margin-top: 7px;
+  /* margin-bottom: 5px; Dodanie przestrzeni pod nazwą */
   align-items: flex-start;
   overflow: hidden;
+  height: 50%;
 }
 .last-trip-container p{
   margin-bottom: 0;
@@ -50,7 +54,7 @@
 }
 
 .trip-date {
-  width: 44px;
+  width: 46px;
   height: 63px;
   margin-right: 5px;
   margin-left: 5px;
@@ -111,6 +115,10 @@ p{
 
 }
 
+.last-trip-bottom{
+  height: 50%;
+}
+
 .trip-owner .post-owner-avatar{
   height: 20px;
   width: 20px;
@@ -119,4 +127,13 @@ p{
   margin: 0;
   font-size: 11px;
   display: inline-flex;
+}
+
+.trip-owner .post-owner-details.no-date{
+  padding: 0;
+  margin-left: 5px;
+}
+
+.trip-owner .post-owner-container {
+  height: 100%;
 }

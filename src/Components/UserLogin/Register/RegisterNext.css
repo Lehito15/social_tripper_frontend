@@ -1,0 +1,26 @@
+.register-next {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 49px;
+}
+
+.next-button{
+    color: #BDF271;
+    background: #000000;
+    border-radius: 44px;
+    width: 121px;
+    height: 42px;
+}
+
+.next-button:hover {
+    box-shadow: 0px 0px 2px 2px #BDF271;
+}
+
+.sign-in {
+    padding-top: 23px;
+    width: 100%;
+    display: inline;
+    text-align: center;
+}

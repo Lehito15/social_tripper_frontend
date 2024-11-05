@@ -12,6 +12,8 @@ import Chats from './Components/Messages/Chats.jsx';
 import IndividualChat from './Components/Messages/IndividualChat.jsx';
 import MinimalizeChatContainer from './Components/Messages/MinimalizeChatContainer.jsx';
 import ProfileInfo from './Components/ProfileInfo/ProfileInfo.jsx';
+import LoginForm from './Components/UserLogin/LoginForm.jsx';
+import Register from './Components/UserLogin/Register/Register.jsx';
 
 
 function App() {
@@ -116,6 +118,9 @@ function App() {
               <Route path="/" element={<PostPage />} />
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', src: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               <Route path="/profileinfo/*" element={<ProfileInfo />} />
+              <Route path="/login" element={<LoginForm />} />
+              <Route path="/register/*" element={<Register />} />
+
               {/* Dodaj kolejne Route dla innych opcji */}
             </Routes>
           </div>

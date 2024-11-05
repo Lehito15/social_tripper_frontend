@@ -19,18 +19,20 @@ function LastTrip(){
            </div>
               <h3 className="trip-name">{event.name}</h3>
           </div>
+          <div className='last-trip-bottom'>
 
-         {event.target && ( 
-          <h4 className="trip-target">
-            📍 {event.target}
-          </h4>
-        )}
-        <div className='trip-people'>
-          <div className='trip-owner'>
-            <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
-          </div>
-          <div className='member-numbers'> 
-            <EventMembers number_of_participants={222} />
+          {event.target && ( 
+            <h4 className="trip-target">
+              📍 {event.target}
+            </h4>
+          )}
+          <div className='trip-people'>
+            <div className='trip-owner'>
+              <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+            </div>
+            <div className='member-numbers'> 
+              <EventMembers number_of_participants={222} />
+            </div>
           </div>
         </div>
      </div>

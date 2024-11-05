@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileStatistics from './ProfileStatistics.jsx';
-import { NavLink } from 'react-router-dom';  // Import NavLink z react-router-dom
+import { NavLink } from 'react-router-dom'; 
 import '../LeftMenu/LeftMenu.css';
 
 
@@ -96,7 +96,7 @@ function LeftMenu() {
                 <li>
                   <NavLink 
                     exact="true" 
-                    to="/elo" 
+                    to="/register" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
@@ -107,7 +107,7 @@ function LeftMenu() {
                 </li>
                 <li>
                   <NavLink 
-                    to="/images2" 
+                    to="/login" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">

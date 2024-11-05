@@ -1,0 +1,43 @@
+.skill-selector-container {
+
+
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+  
+  .selectors {
+    display: flex;
+    gap: 10px;
+    /* justify-content: space-between; */
+    margin-bottom: 20px;
+    
+  }
+
+  .selector{
+    display: flex;
+    flex-direction: column;
+    width: 370px;
+  }
+  
+  .select-group {
+    flex: 1;
+  }
+  
+  .select-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  
+
+  
