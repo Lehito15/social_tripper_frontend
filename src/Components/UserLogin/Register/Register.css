@@ -1,6 +1,7 @@
 .register-container{
     position: fixed;
     width: 848px;
+    min-height: 670px;
     top: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #00000040;
@@ -55,6 +56,6 @@
 
 .line {
     width: 155px;
-    border: 2px solid #00000080;
+    border-bottom: 2px solid #00000080;
     height: 0;
 }

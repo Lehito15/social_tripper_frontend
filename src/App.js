@@ -116,7 +116,7 @@ function App() {
         <div className="main-content">
             <Routes>
               <Route path="/" element={<PostPage />} />
-              <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', src: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
+              <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               <Route path="/profileinfo/*" element={<ProfileInfo />} />
               <Route path="/login" element={<LoginForm />} />
               <Route path="/register/*" element={<Register />} />
@@ -128,7 +128,7 @@ function App() {
 
         {isAddPostOpen && (
           <div className="add-post-modal" ref={addPostRef}>
-            <CreatePost onClose={toggleAddPost} owner={{name:'Kamil', surname: 'Grosicki', src: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+            <CreatePost onClose={toggleAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
           </div>
         )}
 

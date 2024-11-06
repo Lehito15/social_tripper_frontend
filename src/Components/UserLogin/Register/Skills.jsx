@@ -4,39 +4,48 @@ import RateActivity from './RateActivity.jsx';
 import './Skills.css';
 
 function Skills() {
-  const [activity, setActivity] = useState(null);
-  const [language, setLanguage] = useState(null);
-
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
-  const addActivity = () => {
-    if (activity && !selectedActivities.some(a => a.value === activity.value)) {
-      setSelectedActivities([...selectedActivities, activity]);
-      setActivity(null); // resetuj pole wyboru
+  const addActivity = (newActivity) => {
+    const isActivityExist = selectedActivities.some(activity => activity.label === newActivity.label);
+    console.log('elo');
+    if (!isActivityExist){
+      setSelectedActivities((prevActivity) => [...prevActivity, newActivity]);
     }
+    // setSelectedActivities((prevActivity) => [...prevActivity, newActivity]);
   };
 
-  // Dodawanie języka
-  const addLanguage = () => {
-    if (language && !selectedLanguages.some(l => l.value === language.value)) {
-      setSelectedLanguages([...selectedLanguages, language]);
-      setLanguage(null); // resetuj pole wyboru
+  const addLanguage = (newLanguage)  => {
+    console.log("elo");
+    const isLanguageExist = selectedLanguages.some(language => language.label === newLanguage.label);
+    if (!isLanguageExist){
+      setSelectedLanguages((prevLanguage) => [...prevLanguage, newLanguage])
     }
-  };
+  }
 
-  // Opcje dla selectów
+  const removeActivity = (activity) => {
+    setSelectedActivities((prev) => prev.filter((elem) => elem.value !== activity.name));
+  }
+
+  const removeLanguage = (language) => {
+    setSelectedLanguages((prev) => prev.filter((elem) => elem.label !== language.name));
+  }
+
+  
   const activitiesList = [
-    { value: "Programming", label: "Programming" },
-    { value: "Data Science", label: "Data Science" },
-    { value: "Design", label: "Design" },
-    { value: "Marketing", label: "Marketing" }
+    { value: "Walking", label: "Walking" },
+    { value: "Biking", label: "Biking" },
+    { value: "Climbing", label: "Climbing" },
+    { value: "Running", label: "Running" }
   ];
   const languagesList = [
-    { value: "English", label: "English" },
-    { value: "Spanish", label: "Spanish" },
-    { value: "German", label: "German" },
-    { value: "French", label: "French" }
+    { flag: "gb", label: "English" },
+    { flag: "es", label: "Spanish" },
+    { flag: "de", label: "German" },
+    { flag: "fr", label: "French" },  
+    { flag: "pl", label: "Polish" }
+
   ];
 
   return (
@@ -44,58 +53,63 @@ function Skills() {
       <div className="selectors">
 
         <div className='selector'>
-        <div className="select-group">
-          <label htmlFor="activity">Activity:</label>
-          <Select
-            id="activity"
-            options={activitiesList}
-            value={activity}
-            onChange={(selectedOption) => setActivity(selectedOption)}
-            placeholder="Select a discipline"
-          />
-        </div>
+          <div className="select-group">
+            <label htmlFor="activity">Activity:</label>
+            <Select
+              id="activity"
+              options={activitiesList}
+              onChange = {addActivity}
+              placeholder="Select a discipline"
+              value={null}
+              isSearchable={false}
+            />
+          </div>
 
-        {/* Renderowanie RateActivity dla wybranej aktywności */}
-        <div className="rate-activities-list">
-        {selectedActivities.map((activityItem, index) => (
-          <RateActivity
-            key={`activity-${index}`}
-            activity={{
-              name: activityItem.label,
-              url: `${process.env.PUBLIC_URL}/activity-icon.png`
-            }}
-          />
-        ))}
-        <div/>
+          <div className="rate-activities-list">
+            {selectedActivities.map((activityItem, index) => (
+              <RateActivity
+                key={`activity-${index}`}
+                activity={{
+                  name: activityItem.label,
+                  url: `${process.env.PUBLIC_URL}/walking-icon.png`
+                }}
+                removeActivity={removeActivity}
+              />
+            ))}
+          <div/>
         </div>
+      </div>
 
         {/* Pole wyboru dla języka */}
         <div className='selector'>
-        <div className="select-group">
-          <label htmlFor="language">Language:</label>
-          <Select
-            id="language"
-            options={languagesList}
-            value={language}
-            onChange={(selectedOption) => setLanguage(selectedOption)}
-            placeholder="Select a language"
-          />
-        </div>
+          <div className="select-group">
+            <label htmlFor="language">Language:</label>
+            <Select
+              id="language"
+              options={languagesList}
+              onChange = {addLanguage}
+              placeholder="Select a language"
+              isSearchable={false}
+              value={null}
+            />
+          </div>
 
-        {/* Renderowanie RateActivity dla wybranego języka */}
-        <div className="rate-activities-list"></div>
-        {selectedLanguages.map((languageItem, index) => (
-          <RateActivity
-            key={`language-${index}`}
-            activity={{
-              name: languageItem.label,
-              url: `${process.env.PUBLIC_URL}/language-icon.png`
-            }}
-          />
-        ))}
-      </div>
+          <div className="rate-activities-list">
+            {selectedLanguages.map((languageItem, index) => (
+              <RateActivity
+                key={`activity-${index}`}
+                language={{
+                  name: languageItem.label,
+                  flag: languageItem.flag
+                }}
+                removeActivity={removeLanguage}
+              />
+            ))}
+          <div/>
+
         </div>
       </div>
+    </div>
     </div>
   );
 }

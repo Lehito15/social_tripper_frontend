@@ -1,6 +1,8 @@
 .login-form {
     position: fixed;
-    width: 526px;
+    width: 35vw;
+    min-width: 35%;
+    max-width: 35%;
     padding-left: 63px;
     padding-right: 63px;
 

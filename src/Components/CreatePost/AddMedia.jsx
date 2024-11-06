@@ -3,13 +3,20 @@ import '../CreatePost/AddMedia.css';
 
 
 
-function AddMedia() {
+function AddMedia({ addMedia, uploadPost }) {
   const fileInputRef = useRef(null); // Referencja do inputa plików
 
   // Funkcja do otwierania okna dialogowego plików
   const handleIconClick = () => {
     fileInputRef.current.click(); // Symulacja kliknięcia na input
   };
+
+  const handleFileChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      addMedia(event.target.files[0]);  
+    }
+  };
+
   return (
     <div className="add-media-container">
       <div className='media-buttons'  onClick={handleIconClick}>
@@ -23,8 +30,9 @@ function AddMedia() {
        <input 
         type="file" 
         ref={fileInputRef} 
-        style={{ display: 'none' }} // Ukryj input
-        onChange={(e) => console.log(e.target.files)} // Możesz tutaj obsłużyć wybrane pliki
+        style={{ display: 'none' }}
+        accept='image/*, video/*'
+        onChange={handleFileChange}
       />
       <div className='media-buttons'>
         <img 
@@ -35,7 +43,7 @@ function AddMedia() {
         />
       </div>
 
-      <button className='create-button'>Create</button>
+      <button className='create-button' onClick={uploadPost}>Create</button>
     </div>
   );
 }

@@ -7,7 +7,6 @@
   left: 50%; /* Ustawienie na środek poziomo */
   transform: translate(-50%, -50%); /* Przesunięcie o 50%, aby idealnie wyśrodkować */
   width: 700px;
-  height: 462px;
   background-color: white; /* Tło modala */
   border-radius: 8px;
   z-index: 1010; /* Wyżej niż overlay */
@@ -17,7 +16,7 @@
   box-shadow: 0px 2px 4px 0px  rgba(0, 0, 0, 0.25);
 }
 
-.close-icon {
+.close-icon-post {
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -60,8 +59,6 @@
   width: 100%;
 }
 
-
-
 .post-owner {
   display: flex;
   align-items: center; /* Wyśrodkowanie elementów w pionie */
@@ -71,8 +68,68 @@
   width: 100%;
 }
 
+.media-prewview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.media-item{
+  position: relative;
+  
+}
 
 
+.uploaded-media {
+  width: 214px;
+  height: 171px;
+  /* border-radius: 8px; */
+  position: relative;
+}
+ .index0{
+  border-top-left-radius: 15px;
+}
+.index2{
+  border-top-right-radius: 15px ;
+}
+
+.index3{
+  border-bottom-left-radius: 15px;
+}
+
+.index5{
+  border-bottom-right-radius: 15px;
+}
+
+.blurred{
+  filter: brightness(50%);
+
+}
+
+
+
+.more-count {
+  position: absolute;
+  bottom: 120px;
+  right: 120px;
+  color: rgb(255, 255, 255); 
+  font-size: 48px; 
+}
+
+.delete-image {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  width: 20px; 
+  height: 20px;
+}
+
+
+.custom-select{
+  width: 100px;
+}
 /* Stylizacja dla całego kontenera select */
 .custom-select__control {
   background-color: white;
@@ -94,7 +151,7 @@
   font-size: 13px; /* Rozmiar tekstu dla wybranej opcji */
   justify-content: flex-start;
   
-  padding-left: 8px;
+  padding-left: 0px;
 }
 
 /* Stylizacja opcji */
@@ -107,14 +164,12 @@
   justify-content: flex-start;
 }
 
-/* Stylizacja ikony w opcji */
 .custom-select__option img {
   margin-right: 8px;
   width: 16px;
   height: 16px;
 }
 
-/* Stylizacja strzałki ▼ */
 .custom-select__indicator {
   color: #333;
 

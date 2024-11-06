@@ -20,7 +20,16 @@ function GeneralDetails() {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="birthDate">Gender</label>
-          <input type="date" id="birthDate" name="birthDate" placeholder='Date of birth' />
+          <div className='form-gender'>
+            <div className="gender-option">
+              <input type="radio" id="male" name="gender" value="Male" />
+              <label htmlFor="male">Male</label>
+            </div>
+            <div className="gender-option">
+                <input type="radio" id="female" name="gender" value="Female" />
+                <label htmlFor="male">Female</label>
+            </div>
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="email">Date of Birth</label>

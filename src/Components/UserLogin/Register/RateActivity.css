@@ -9,13 +9,10 @@
 
 }
 
-.close-icon {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+.rateactivity-container .close-icon{
+  display: flex;
+  top: 0px;
+  background-color: white;
 }
 
 .activity-logo {
@@ -46,6 +43,8 @@
 .activity-title {
     font-size: 12px;
     margin: 0;
+    padding-right: 10px ;
+    width: 60px;
 }
 
 .rating-bar{
@@ -90,8 +89,17 @@ input[type=range]::-ms-track {
     color: transparent;
   }
   input[type=range]::-ms-fill-lower {
-    background: #2a6495;
+    background: green;
     border: 0.2px solid #010101;
     border-radius: 2.6px;
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  }
+
+  .fi{
+    font-size: 18px;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .title-flag{
+    display: flex;
   }
