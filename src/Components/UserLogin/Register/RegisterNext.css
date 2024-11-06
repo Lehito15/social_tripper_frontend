@@ -3,7 +3,16 @@
     flex-direction: column;
     width: 100%;
     align-items: center;
-    padding-top: 49px;
+    padding-top: 9px;
+}
+.form-buttons{
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    
 }
 
 .next-button{
@@ -12,6 +21,17 @@
     border-radius: 44px;
     width: 121px;
     height: 42px;
+    font-weight: 600;
+    
+}
+
+.back-button{
+    background: #F0F2F5;
+    border-radius: 44px;
+    width: 121px;
+    height: 42px;
+    border: none;
+    font-weight: 600;
 }
 
 .next-button:hover {

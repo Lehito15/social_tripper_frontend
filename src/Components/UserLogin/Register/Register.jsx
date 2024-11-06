@@ -43,7 +43,7 @@ function Register(){
                 <Route path="/skillss" element={<Skills />} />
             </Routes>
        </div>
-       <RegisterNext />
+       <RegisterNext step={1} />
 
         </div>
 
