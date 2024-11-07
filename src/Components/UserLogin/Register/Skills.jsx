@@ -3,7 +3,7 @@ import Select from 'react-select';
 import RateActivity from './RateActivity.jsx';
 import './Skills.css';
 
-function Skills() {
+function Skills(data, updateData) {
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
 
@@ -12,9 +12,11 @@ function Skills() {
     console.log('elo');
     if (!isActivityExist){
       setSelectedActivities((prevActivity) => [...prevActivity, newActivity]);
+      // updateData({ ...data, activities: (prevActivity) => [...prevActivity, newActivity]})
+    } 
     }
     // setSelectedActivities((prevActivity) => [...prevActivity, newActivity]);
-  };
+
 
   const addLanguage = (newLanguage)  => {
     console.log("elo");
@@ -26,6 +28,7 @@ function Skills() {
 
   const removeActivity = (activity) => {
     setSelectedActivities((prev) => prev.filter((elem) => elem.value !== activity.name));
+    // updateData(data, activieties: (prev) => prev.filter((elem) => elem.value !== activity.name ))
   }
 
   const removeLanguage = (language) => {

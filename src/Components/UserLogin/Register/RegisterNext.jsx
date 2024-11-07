@@ -7,9 +7,9 @@ function RegisterNext({step}){
             <div className='form-buttons'>
                   {step >0 && (
                     <button className='back-button' >Back</button>
-                )}:
+                )}
                 {
-                    <button className='back-button'style={{display:none}} >Back</button>
+                    <button className='back-button'  style={{ display: 'none' }}  >Back</button>
                 }
                 <button className='next-button'>Next</button>
                
