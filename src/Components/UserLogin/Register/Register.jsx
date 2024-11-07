@@ -23,10 +23,9 @@ function Register() {
         profileDescription: ''
 
     });
-    const [skills, setSkills] = useState({
-        activities: [],
-        languages:  [],
-    });
+    const [activities, setActivities] = useState([]);
+    const [languages, setLanguages] = useState([]);
+    console.log(activities);
 
     const renderStepComponent = () => {
         switch (currentStep) {
@@ -47,8 +46,10 @@ function Register() {
             case 3:
                 return (
                     <Skills 
-                        // data={skills} 
-                        // updateData={setSkills} 
+                        activieties={activities} 
+                        updateActivieties={setActivities}
+                        languages={languages}
+                        updateLanguages={setLanguages} 
                     />
                 );
             default:
