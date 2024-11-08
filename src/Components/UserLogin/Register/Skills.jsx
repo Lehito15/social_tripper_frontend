@@ -24,17 +24,18 @@ function Skills({activieties, languages, updateActivieties, updateLanguages}) {
     const isLanguageExist = selectedLanguages.some(language => language.label === newLanguage.label);
     if (!isLanguageExist){
       setSelectedLanguages((prevLanguage) => [...prevLanguage, newLanguage])
-      updateLanguages()
+      updateLanguages((prevLanguage) => [...prevLanguage, newLanguage])
     }
   }
 
   const removeActivity = (activity) => {
     setSelectedActivities((prev) => prev.filter((elem) => elem.value !== activity.name));
-    // updateData(data, activieties: (prev) => prev.filter((elem) => elem.value !== activity.name ))
+    updateActivieties((prev) => prev.filter((elem) => elem.value !== activity.name));
   }
 
   const removeLanguage = (language) => {
     setSelectedLanguages((prev) => prev.filter((elem) => elem.label !== language.name));
+    updateLanguages((prev) => prev.filter((elem) => elem.label !== language.name) );
   }
 
   
@@ -45,7 +46,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages}) {
     { value: "Running", label: "Running" }
   ];
   const languagesList = [
-    { flag: "gb", label: "English" },
+    { flag: "gb", label: "English"},
     { flag: "es", label: "Spanish" },
     { flag: "de", label: "German" },
     { flag: "fr", label: "French" },  

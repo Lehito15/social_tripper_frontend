@@ -9,6 +9,8 @@ function Post({post}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
+  console.log('graphql')
+ console.log(post)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -17,9 +19,9 @@ function Post({post}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
-      if (post.media && post.media.length > 0) {
+      if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
         const mediaHeights = await Promise.all(
-          post.media.map((mediaItem) => {
+          post.postMultimediaDTO.map((mediaItem) => {
             if (mediaItem.type === 'image') {
               return new Promise((resolve) => {
                 const img = new Image();
@@ -39,20 +41,20 @@ function Post({post}){
         setPostHeight(minHeight);
       } else {
         
-        setPostHeight(0); // Jeśli brak mediów, wysokość to 0
+        setPostHeight(0); 
       }
     };
 
     calculateHeight();
   }, [post]);
   console.log('post');
-  console.log(post.media)
+  console.log(post.postMultimediaDTO)
   const maxChars = 205;
 
   return(
   <div className='post-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <PostOwner owner={post.owner} date={post.date} status={"option"}   />
+      <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.dateOfPost} status={"option"}   />
       <div className="more-options-button">
         <img 
           className="more-options"
@@ -62,8 +64,8 @@ function Post({post}){
     </div>
     <div className='text-container'>
         <p className={`content-text ${isExpanded ? 'expanded' : ''}`}>
-          {isExpanded ? post.description : (post.description.length > maxChars ? post.description.slice(0, maxChars) + '...' : post.description)}
-          {post.description.length > maxChars && (
+          {isExpanded ? post.content : (post.content.length > maxChars ? post.content.slice(0, maxChars) + '...' : post.content)}
+          {post.content.length > maxChars && (
             <span className="toggle-text" onClick={toggleExpand}>
               {isExpanded ? 'Show less' : 'Show more'}
             </span>
@@ -72,15 +74,15 @@ function Post({post}){
       </div>
     
     <div className= 'slider-container'  style={{height: postHeight}}>
-    {postHeight !== null && post.media && post.media.length > 0 && (
-       <Slider multimedia={post.media} postHeight={postHeight} />
+    {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
+       <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} />
     )}
     </div>
     <div className='reactions-conteiner'>
-      <PostReaction data={post.reactions} />
+      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
     </div>
     <div className='comment-container'>
-      <WriteComment owner={post.owner} />
+      <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
     </div>
   </div>
 

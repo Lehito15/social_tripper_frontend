@@ -6,9 +6,13 @@
     font-size: 16px;
     border: 0px solid;
     outline: none;
+    box-shadow: none;
     /* border-radius: 10px; Zaokrąglone rogi */
     background: rgba(240, 242, 245, 0.6);
-    
+  }
+
+  .message-input:focus {
+    box-shadow: none;     /* Usunięcie obramowania */
   }
   .message-input-wrapper {
     position: relative; /* Pozycjonowanie relatywne dla ikonki */

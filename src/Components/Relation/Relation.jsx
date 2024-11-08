@@ -26,9 +26,9 @@ function Relation({post}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth * (2/3) : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
-      if (post.media && post.media.length > 0) {
+      if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
         const mediaHeights = await Promise.all(
-          post.media.map((mediaItem) => {
+          post.postMultimediaDTO.map((mediaItem) => {
             if (mediaItem.type === 'image') {
               return new Promise((resolve) => {
                 const img = new Image();
@@ -55,13 +55,13 @@ function Relation({post}){
     calculateHeight();
   }, [post]);
   console.log('post');
-  console.log(post.media)
+  console.log(post.postMultimediaDTO)
   const maxChars = 205;
 
   return(
   <div className='relation-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <PostOwner owner={post.owner} date={post.date} status={"option"}  />
+      <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.dateOfPost} status={"option"}  />
       <div className="more-options-button">
         <img 
           className="more-options"
@@ -72,8 +72,8 @@ function Relation({post}){
    
     <div className='relation'  >
         <div className= 'slider-container'  style={{height: postHeight}}>
-        {postHeight !== null && post.media && post.media.length > 0 && (
-        <Slider multimedia={post.media} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} />
+        {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
+        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} />
         
 
         )}
@@ -83,10 +83,10 @@ function Relation({post}){
         </div>
     </div>
     <div className='reactions-conteiner'>
-      <PostReaction data={post.reactions} />
+      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
     </div>
     <div className='comment-container'>
-      <WriteComment owner={post.owner} />
+      <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.date} status={"option"} />
     </div>
   </div>
 

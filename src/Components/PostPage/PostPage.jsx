@@ -4,6 +4,8 @@ import Feeds from './Feeds.jsx';
 import Relation from '../Relation/Relation.jsx';
 import Event from '../Event/Event.jsx'
 import SelectInfoMenu from '../ProfileInfo/SelectInfoMenu.jsx';
+import { gql, useQuery } from '@apollo/client';
+
 
 import Post from './Post.jsx'
 function PostPage(){
@@ -13,11 +15,12 @@ function PostPage(){
   ];
   const owner = {name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'};
   const post = {
-    media: mediaLinks,
-    description: 'Witam. Szczerze mówiąc, czuję się naprawdę wkurzony. To, co działo się w ostatnich spotkaniach, nie tylko mnie, ale i wielu innych zawodników, frustruje. Uważam, że nasza drużyna ma ogromny potencjał, ale nie potrafimy tego wykorzystać. ',
-    owner: owner,
-    date: '2024-10-22T15:30:00Z',
-    reactions: {reactions: 21, comments: 2},
+    postMultimediaDTO: mediaLinks,
+    content: 'Witam. Szczerze mówiąc, czuję się naprawdę wkurzony. To, co działo się w ostatnich spotkaniach, nie tylko mnie, ale i wielu innych zawodników, frustruje. Uważam, że nasza drużyna ma ogromny potencjał, ale nie potrafimy tego wykorzystać. ',
+    // owner: owner,
+    dateOfPost: '2024-10-22T15:30:00Z',
+    commentsNumber: 20,
+    reactionsNumber:3,
     locations:  [
       {id: 0, position: [53.366, 14.52]},
       {id: 1, position: [53.386, 14.55]}
@@ -34,13 +37,37 @@ function PostPage(){
     description: 'Zapraszamy wszystkich  chętnych ',
     owner: owner
   };
+
+  const GET_POSTS = gql`
+  query GetPosts {
+    posts @rest(type: "Post", path: "posts") {
+      content
+      uuid
+      dateOfPost
+      commentsNumber
+      reactionsNumber
+      postMultimediaDTO
+    }
+  }
+`;
+
+const { loading, error, data } = useQuery(GET_POSTS);
+
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
   return (
     <div className="Post-page">
         <div className='Feeds'> <Feeds user={owner} /></div>
-        <Post post={post} />
+
+        {data?.posts.slice().reverse().map((post) => (
+          <Post post={post} />
+        ))}
+
+        <Post post={post} /> 
         <Relation post={post} />
-        <Event event={event} />
-        <SelectInfoMenu />
+        {/* <Event event={event} /> */}
+        {/* <SelectInfoMenu /> */}
         
        
     </div>

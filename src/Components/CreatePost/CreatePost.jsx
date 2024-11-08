@@ -3,6 +3,7 @@ import '../CreatePost/CreatePost.css';
 import PostOwner from '../PostPage/PostOwner';
 import AddMedia from '../CreatePost/AddMedia.jsx';
 import Select from 'react-select';
+import { v4 as uuidv4 } from 'uuid';
 
 function CreatePost({ onClose, owner }) {
 
@@ -31,8 +32,40 @@ function CreatePost({ onClose, owner }) {
     setDescription(e.target.value);
   };
 
-  const uploadPost = () =>{
+  const uploadPost = async() =>{
     if(media.length !=0 || description !== ''){
+      const postDTO  = {  
+        uuid: uuidv4(),
+        content: description,
+        dateOfPost:  new Date().toISOString(),
+        isExpired: false,
+        isLocked:false,
+        commentNumber: 0,
+        reactionsNumber: 0,
+        accountUUID: "550e8400-e29b-41d4-a716-446655440005",
+        postMultimediaDTO: []
+        }
+        const uuid = "550e8400-e29b-41d4-a716-446655440005";
+
+      try {
+        const response = await fetch(`http://localhost:8080/users/${uuid}/posts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postDTO),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to create post');
+        }
+  
+        const data = await response.json();
+        console.log('Post created:', data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      window.location.href = '/';
 
     }
     else{
@@ -75,7 +108,7 @@ function CreatePost({ onClose, owner }) {
             
             {mediaItem.type === 'image' ? (
               <img
-                className={"uploaded-media index " + index + (index === 5 &&  remainingCount > 0  ? " blurred" : "")}
+                className={"uploaded-media index" + index + (index === 5 &&  remainingCount > 0  ? " blurred" : "")}
                 src={mediaItem.src}
                 alt={`Post ${index + 1} Image`}
               />
