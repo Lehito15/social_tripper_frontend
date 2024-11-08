@@ -35,7 +35,9 @@ function CreatePost({ onClose, owner }) {
   const uploadPost = async() =>{
     if(media.length !=0 || description !== ''){
       const postDTO  = {  
-        uuid: uuidv4(),
+        // uuid: uuidv4(),
+       uuid: "550e8400-e29b-41d4-a716-541655440005",
+
         content: description,
         dateOfPost:  new Date().toISOString(),
         isExpired: false,
@@ -46,10 +48,12 @@ function CreatePost({ onClose, owner }) {
         postMultimediaDTO: []
         }
         const uuid = "550e8400-e29b-41d4-a716-446655440005";
+        console.log()
 
       try {
         const response = await fetch(`http://localhost:8080/users/${uuid}/posts`, {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -65,7 +69,7 @@ function CreatePost({ onClose, owner }) {
       } catch (error) {
         console.error('Error:', error);
       }
-      window.location.href = '/';
+      // window.location.href = '/';
 
     }
     else{

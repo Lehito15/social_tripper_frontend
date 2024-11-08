@@ -55,7 +55,7 @@ function ProfileStatistcs(){
       className="profile-picture"
     />
     <div className="user-info">
-       <NavLink to={`/profileinfo/posts`} className='user-name'>
+       <NavLink to={`profileinfo/posts`} className='user-name'>
           {user.name}
         </NavLink>
         <br></br>

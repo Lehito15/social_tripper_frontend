@@ -118,8 +118,6 @@ function MainPage() {
               <Route path="/" element={<PostPage />} />
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               <Route path="/profileinfo/*" element={<ProfileInfo />} />
-
-              {/* Dodaj kolejne Route dla innych opcji */}
             </Routes>
           </div>
       </div>  
