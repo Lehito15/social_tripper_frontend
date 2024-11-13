@@ -1,0 +1,50 @@
+.pick-event-image{
+  width: 366px;
+  height: 44px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+  position: relative;
+}
+
+.media-prewview-event{
+  margin-top: 36px;
+  
+}
+
+.event-image{
+  object-fit: fill;
+  border-radius: 0px;
+  max-width: 768px;
+  max-height: 432px;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.file-name {
+  margin-right: 8px;
+  font-size: 14px;
+  color: #333;
+  font-family: "Source Sans 3", serif;
+
+}
+
+.remove-file-icon {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: 12px ; 
+}
+
+.pick-event-image .media-buttons {
+  margin-right: 12px;
+
+}

@@ -33,7 +33,8 @@
 
 .message-wrapper {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-start;
   margin: 8px 0;
 }
 
@@ -53,6 +54,8 @@
   height: 30px;
   border-radius: 50%;
   margin-right: 8px;
+  flex-shrink: 0;
+  object-fit: contain;
  
 }
 

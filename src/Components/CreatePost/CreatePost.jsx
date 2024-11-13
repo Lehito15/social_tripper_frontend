@@ -5,7 +5,8 @@ import AddMedia from '../CreatePost/AddMedia.jsx';
 import Select from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
 
-function CreatePost({ onClose, owner }) {
+function CreatePost({ onClose, owner, eventUuid }) {
+  console.log(eventUuid)
 
   const [media, setMedia] = useState([]);
   const [description, setDescription] = useState('');
@@ -20,7 +21,6 @@ function CreatePost({ onClose, owner }) {
       type: file.type.includes('image') ? 'image' : 'video',
       src: URL.createObjectURL(file),
     };
-
     setMedia((prevMedia) => [...prevMedia, newMediaItem]);
   };
 
@@ -32,54 +32,52 @@ function CreatePost({ onClose, owner }) {
     setDescription(e.target.value);
   };
 
-  const uploadPost = async() =>{
-    if(media.length !=0 || description !== ''){
-      const postDTO  = {  
-        // uuid: uuidv4(),
-       uuid: "550e8400-e29b-41d4-a716-541655440005",
-
+  const uploadPost = async () => {
+    if (media.length !== 0 || description !== '') {
+      const postDTO = {
+        uuid: uuidv4(),
         content: description,
-        dateOfPost:  new Date().toISOString(),
+        dateOfPost: new Date().toISOString(),
         isExpired: false,
-        isLocked:false,
+        isLocked: false,
         commentNumber: 0,
         reactionsNumber: 0,
         accountUUID: "550e8400-e29b-41d4-a716-446655440005",
-        postMultimediaDTO: []
-        }
-        const uuid = "550e8400-e29b-41d4-a716-446655440005";
-        console.log()
+        postMultimediaDTO: [],
+      };
+
+      // Endpoint changes based on eventUuid
+      const pathBack = eventUuid? `event/${eventUuid}` : '/'
+      const uuid = "550e8400-e29b-41d4-a716-446655440005";
+      const endpoint = eventUuid
+        ? `http://localhost:8080/users/${uuid}/events/${eventUuid}/posts`
+        : `http://localhost:8080/users/${uuid}/posts`;
 
       try {
-        const response = await fetch(`http://localhost:8080/users/${uuid}/posts`, {
+        const response = await fetch(endpoint, {
           method: 'POST',
-          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(postDTO),
         });
-  
+
         if (!response.ok) {
           throw new Error('Failed to create post');
         }
-  
+
         const data = await response.json();
         console.log('Post created:', data);
       } catch (error) {
         console.error('Error:', error);
       }
-      // window.location.href = '/';
-
+      window.location.href = pathBack;
+    } else {
+      alert('Nie ma nic');
     }
-    else{
-      alert('Nie ma nic')
-    }
+  };
 
-  }
-
-
-  const displayedMedia = media.slice(0, 6); 
+  const displayedMedia = media.slice(0, 6);
   const remainingCount = media.length - 6;
 
   return (
@@ -106,19 +104,18 @@ function CreatePost({ onClose, owner }) {
         onChange={handleContentChange}
       />
 
-<div className='media-prewview'>
+      <div className='media-preview'>
         {displayedMedia.map((mediaItem, index) => (
           <div key={index} className="media-item">
-            
             {mediaItem.type === 'image' ? (
               <img
-                className={"uploaded-media index" + index + (index === 5 &&  remainingCount > 0  ? " blurred" : "")}
+                className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? ' blurred' : ''}`}
                 src={mediaItem.src}
                 alt={`Post ${index + 1} Image`}
               />
             ) : (
               <video
-                className={"uploaded-media index " + index + (index === 5 &&  remainingCount > 0  ? " blurred" : "")}
+                className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? ' blurred' : ''}`}
                 controls
               >
                 <source src={mediaItem.src} type={mediaItem.src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'} />
@@ -136,10 +133,11 @@ function CreatePost({ onClose, owner }) {
 
         {remainingCount > 0 && (
           <div className="more-count">
-            +{remainingCount} 
+            +{remainingCount}
           </div>
         )}
       </div>
+      
       <div className='media'>
         <AddMedia addMedia={handleAddMedia} uploadPost={uploadPost} />
       </div>

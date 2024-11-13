@@ -21,9 +21,10 @@
   width: 24px;
   height: 24px;
   position: absolute; /* Ustawienie absolutne w nagłówku */
-  /* top: 20px; Odległość od góry */
+  top: 0;
   right: 20px; /* Odległość od prawej */
   align-items: center;
+
 }
 
 .create-post-header {
@@ -31,6 +32,7 @@
   justify-content: center; /* Wyśrodkowanie tytułu */
   align-items: center;
   position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
 }
 
 .create-post-title {

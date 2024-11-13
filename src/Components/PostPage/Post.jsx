@@ -5,7 +5,7 @@ import PostOwner from './PostOwner.jsx';
 import PostReaction from './PostReactions.jsx';
 import WriteComment from './WriteComment.jsx'
 
-function Post({post}){
+function Post({post, openPost, closePost}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
@@ -15,6 +15,8 @@ function Post({post}){
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+
 
   useEffect(() => {
     const calculateHeight = async () => {
@@ -32,9 +34,9 @@ function Post({post}){
                 };
               });
             } else if (mediaItem.type === 'video') {
-              return Promise.resolve(600); // Wysokość dla wideo
+              return Promise.resolve(600);
             }
-            return Promise.resolve(450); // Domyślna wysokość
+            return Promise.resolve(450);
           })
         );
         const minHeight = Math.min(...mediaHeights); // Minimalna wysokość dla mediów
@@ -73,9 +75,9 @@ function Post({post}){
         </p>
       </div>
     
-    <div className= 'slider-container'  style={{height: postHeight}}>
+    <div className= 'slider-container'   style={{height: postHeight}}>
     {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
-       <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} />
+       <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
     )}
     </div>
     <div className='reactions-conteiner'>

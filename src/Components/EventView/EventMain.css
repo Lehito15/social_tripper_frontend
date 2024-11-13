@@ -1,0 +1,16 @@
+.event-main-image-container {
+  width: 100%;
+  max-height: 530px ;
+  margin-bottom: 18px;
+}
+.event-main-container {
+  width: 70%;
+  max-width: 900px; /* Maksymalna szerokość, jeśli chcesz ograniczyć na większych ekranach */
+  margin: 0 auto; /* Wyśrodkuj kontener */
+  gap: 18px;
+  background: rgba(240, 242, 245, 1);
+}
+.event-more-details{
+  margin-top: 18px;
+}
+

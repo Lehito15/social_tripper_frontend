@@ -1,0 +1,5 @@
+.trip-maps {
+  display: flex;
+  width: 100%;
+  gap: 18px;
+}

@@ -1,0 +1,15 @@
+.event{
+  width: 840px;
+  overflow-y: auto;
+  top: 20px;
+  left: auto;
+  transform: none;
+}
+
+.line{
+  width: 39px;
+}
+
+ .event  .create-post-title{
+  font-size: 24px;
+}

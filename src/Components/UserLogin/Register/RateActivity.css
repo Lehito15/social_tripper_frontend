@@ -44,6 +44,9 @@
     font-size: 12px;
     margin: 0;
     padding-right: 10px ;
+    width: 120px;
+}
+.activityname-left{
     width: 60px;
 }
 

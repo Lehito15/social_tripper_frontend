@@ -1,0 +1,17 @@
+.rule-item {
+  margin-bottom: 18px; 
+  width: 100%;
+  font-family: "Source Sans 3", serif;
+}
+
+.rule-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+
+.rule-item .text-decription{
+  white-space: normal; /* Pozwala na zawijanie wierszy */
+  word-wrap: break-word; /* Zawija słowa, gdy przekroczą szerokość kontenera */
+  overflow-wrap: break-word;
+}

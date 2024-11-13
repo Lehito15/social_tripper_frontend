@@ -1,0 +1,9 @@
+.trip-info{
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.trip-info .public-icon,
+.trip-info .text-decription{
+  margin-left: 18px ;
+}

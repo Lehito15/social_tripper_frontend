@@ -14,6 +14,10 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  font-family: "Source Sans 3", serif;
+  font-size: 14px;
+  font-weight: 600;
+  
 }
 
 .event-icon {
@@ -36,6 +40,7 @@
 .event-image {
   width: 100%; /* Obrazek ma wypełnić szerokość kontenera */
   height: 100%; /* Obrazek ma wypełnić wysokość kontenera */
+  border-radius: 10px;
   /* object-fit: cover; Obrazek ma się dopasować, nie tracąc proporcji */
 }
 
@@ -45,12 +50,20 @@
   justify-content: space-between;
   width: 70%;
   margin-left: 10px;
+  text-align: left;
 }
 
 .event-date {
   display: flex; /* Ustawienie flexboxa */
   gap: 20px; /* Dodanie odstępu między elementami, możesz dostosować wartość */
   align-items: center; /* Wyrównanie elementów w pionie */
+  border-bottom: 1px solid  rgba(217, 217, 217, 1);
+  padding-bottom: 15px ;
+}
+
+.event-date .date-card{
+  width: auto;
+  height: auto;
 }
 
 .event-name {
@@ -59,12 +72,88 @@
   align-items: flex-start;
 }
 
+.event-about {
+  border-bottom: 1px solid  rgba(217, 217, 217, 1);
+  padding-bottom: 15px ;
+}
+.event-description-container{
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+ 
+}
+
 .event-description {
   font-size: 14px;
   color: #666;
-  margin: 0;
+  margin: 0;    
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space:inherit;
 }
 
 .event-owner {
   height: 50px;
+}
+
+.activities-languages{
+  display: flex;
+
+  
+}
+.event-section{
+  width: 50%;
+  text-align: left;
+}
+.languages{
+  display: flex;
+  flex-direction: column;
+}
+
+.languages .fi{
+  font-size: 36px;
+}
+
+.event-section-tittle{
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.event-card  .post-owner-avatar{
+  height: 24px;
+  width: 24px;
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+}
+
+.event-card  .post-owner-name{
+  font-size: 13px;
+
+}
+
+.event-card .trip-owner{
+  width: 100%;
+}
+
+.event-card  .member-numbers{
+  width: auto;
+  bottom: auto;
+}
+.event-card  .participants-number{
+  margin-bottom: 0;
+  padding-left: 0;
+  font-size: 13px;
+  font-family: "Source Sans 3", serif;
+  color: #000;
+}
+.event-card .icon-members{
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
 }

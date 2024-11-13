@@ -1,34 +1,46 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState } from 'react';
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Niestandardowy marker (ikona)
+// Niestandardowe ikony markerów
 const customMarkerIcon = new L.Icon({
-  iconUrl: `${process.env.PUBLIC_URL}/like.png`, // Upewnij się, że ścieżka do pliku jest poprawna
-  iconSize: [30, 40], // Rozmiar ikony
-  iconAnchor: [15, 40], // Punkt kotwicy (środek dolnej krawędzi ikony)
-  popupAnchor: [0, -40], // Punkt, w którym wyświetla się dymek
+  iconUrl: `${process.env.PUBLIC_URL}/like.png`,
+  iconSize: [30, 40],
+  iconAnchor: [15, 40],
+  popupAnchor: [0, -40],
 });
 
 const highlightedMarkerIcon = new L.Icon({
   iconUrl: `${process.env.PUBLIC_URL}/create-trip.png`,
-  iconSize: [35, 45], // Większy rozmiar dla podświetlonego markera
+  iconSize: [35, 45],
   iconAnchor: [17, 45],
   popupAnchor: [0, -45],
 });
 
-function MapReaction({ locations, selectedIndex, onMarkerClick }) {
-  // Sprawdzanie, czy mamy lokalizacje
-  console.log(locations);
-  if (!locations || locations.length === 0) {
-    return <div>No locations available</div>;
-  }
+function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded }) {
+  const [newMarkerPosition, setNewMarkerPosition] = useState(null);
 
-  // Wybieranie pierwszej lokalizacji jako domyślne wyśrodkowanie mapy
-  const defaultCenter = locations[0].position;
-  console.log('mapa');
-  
+  const defaultCenter = locations?.[0]?.position || [53.366, 14.52];
+  console.log(locations);
+
+  // Funkcja obsługująca kliknięcia na mapie, dodająca nowy marker
+  function MapClickHandler() {
+    useMapEvents({
+      click(e) {
+        const { lat, lng } = e.latlng;
+
+        // setNewMarkerPosition([lat, lng]);
+
+        // Wywołaj onLocationAdded, jeśli został przekazany
+        if (onLocationAdded) {
+          setNewMarkerPosition([lat, lng]);
+          onLocationAdded([lat, lng]);
+        }
+      },
+    });
+    return null;
+  }
 
   return (
     <MapContainer center={defaultCenter} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -37,20 +49,28 @@ function MapReaction({ locations, selectedIndex, onMarkerClick }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
 
-      {locations.map(location=> (
-         <Marker 
-         key={location.id} 
-         position={location.position}
-         icon={location.id=== selectedIndex ? highlightedMarkerIcon : customMarkerIcon} // Podświetl marker
-         eventHandlers={{
-          click: () => onMarkerClick(location.id),  
-        }}
-       >
-        
-       </Marker>
-      ))}
+      {/* Komponent obsługujący kliknięcia */}
+      <MapClickHandler />
+
+      {/* Istniejące lokalizacje */}
+      {locations &&
+        locations.map(location => (
+          <Marker
+            key={location.id}
+            position={location.position}
+            icon={location.id === selectedIndex ? highlightedMarkerIcon : customMarkerIcon}
+            eventHandlers={{
+              click: () => onMarkerClick(location.id),
+            }}
+          />
+        ))}
+
+      {/* Nowa pinezka na podstawie kliknięcia */}
+      {newMarkerPosition && (
+        <Marker position={newMarkerPosition} icon={customMarkerIcon} />
+      )}
     </MapContainer>
   );
-};
+}
 
 export default MapReaction;

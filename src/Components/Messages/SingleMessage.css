@@ -1,28 +1,30 @@
 .singlemessage-box {
-  /* display: flex; */
+  display: flex;
+  flex-direction: column; /* Ustawienie elementów w kolumnie */
   justify-content: center;
-  align-items: flex-start;
-  /* margin: 5px 0;  */
- 
+  align-items: flex-start; /* Wyrównanie do lewej */
+  line-height: 20px;
   background: rgba(240, 242, 245, 1);
-
   border-radius: 15px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  min-height: 30px;
   word-wrap: break-word; /* Zapewnia łamanie długich słów */
-  padding: 0;
-  padding-left: 5px;
-  padding-right: 5px;
-  max-width: 250px;
+  overflow-wrap: break-word; /* Łamanie długich słów */
+  padding: 5px; /* Zmienione padding, aby tekst miał margines wewnątrz */
+  max-width: 250px; /* Ustawienie maksymalnej szerokości */
   text-align: left;
+  overflow: hidden; /* Zapobiega wyjściu tekstu poza kontener */
+  word-break: break-word; /* Złamie słowa, jeśli są za długie */
 }
 
 .singlemessage-content {
   font-size: 16px;
   text-align: left;
   margin-bottom: 0;
-  
-  overflow-wrap: break-word; /* This allows words to break at the end of the line */
-  word-wrap: break-word; /* Ensures compatibility with older browsers */
+  word-wrap: break-word; /* Gwarantuje, że tekst będzie łamany w odpowiednich miejscach */
+  overflow-wrap: break-word; /* Używane dla kompatybilności z różnymi przeglądarkami */
+}
+
+.comment-author {
+  font-weight: 700;
 }

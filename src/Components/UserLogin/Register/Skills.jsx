@@ -3,10 +3,13 @@ import Select from 'react-select';
 import RateActivity from './RateActivity.jsx';
 import './Skills.css';
 
-function Skills({activieties, languages, updateActivieties, updateLanguages}) {
-  console.log(activieties);
+function Skills({activieties, languages, updateActivieties, updateLanguages, event}) {
+  // console.log(activieties);
   const [selectedActivities, setSelectedActivities] = useState(activieties || []);
-  const [selectedLanguages, setSelectedLanguages] = useState(languages || []); 
+  const [selectedLanguages, setSelectedLanguages] = useState(languages || []);
+  console.log('langyuahes') 
+  console.log(languages)
+  console.log(activieties)
 
   const addActivity = (newActivity) => {
     const isActivityExist = selectedActivities.some(activity => activity.label === newActivity.label);
@@ -79,6 +82,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages}) {
                   name: activityItem.label,
                   url: `${process.env.PUBLIC_URL}/walking-icon.png`
                 }}
+                event={event}
                 removeActivity={removeActivity}
               />
             ))}
@@ -108,6 +112,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages}) {
                   name: languageItem.label,
                   flag: languageItem.flag
                 }}
+                event={event}
                 removeActivity={removeLanguage}
               />
             ))}

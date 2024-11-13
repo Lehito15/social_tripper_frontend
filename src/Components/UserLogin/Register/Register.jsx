@@ -4,8 +4,10 @@ import RegisterNext from './RegisterNext.jsx';
 import GeneralDetails from './GeneralDetails.jsx';
 import AccountDetails from './AccountDetails.jsx';
 import Skills from './Skills.jsx';
+import RegisterSteps from './RegisterSteps.jsx';
 
 function Register() {
+    const steps = ['General Details', 'Account Details', 'Skills'];
 
     const [currentStep, setCurrentStep] = useState(1);
     const [generalDetails, setGeneralDetails] = useState({
@@ -62,41 +64,16 @@ function Register() {
             <div className="login-logo">
                 <img src={`${process.env.PUBLIC_URL}/LeftBarTopComponent.svg`} alt="Logo" className="logo-image" />
             </div>
-            <div className="register-steps">
-                <div 
-                    className={`menu-option ${currentStep === 1 ? 'active' : ''}`} 
-                    onClick={() => setCurrentStep(1)}
-                >
-                    <div className="step-content">
-                        <div className="step-number">1</div>
-                        <span className="step-text">General Details</span>
-                    </div>
-                </div>
-                <div className="line"></div>
-                <div 
-                    className={`menu-option ${currentStep === 2 ? 'active' : ''}`} 
-                    onClick={() => setCurrentStep(2)}
-                >
-                    <div className="step-content">
-                        <div className="step-number">2</div>
-                        <span className="step-text">Account Details</span>
-                    </div>
-                </div>
-                <div className="line"></div>
-                <div 
-                    className={`menu-option ${currentStep === 3 ? 'active' : ''}`} 
-                    onClick={() => setCurrentStep(3)}
-                >
-                    <div className="step-content">
-                        <div className="step-number">3</div>
-                        <span className="step-text">Skills</span>
-                    </div>
-                </div>
-            </div>
+            <RegisterSteps 
+                steps={steps} 
+                currentStep={currentStep} 
+                setCurrentStep={setCurrentStep} 
+            />
+          
             <div className="different-profile-info">
                 {renderStepComponent()}
             </div>
-            <RegisterNext step={currentStep} />
+            <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} />
         </div>
     );
 }

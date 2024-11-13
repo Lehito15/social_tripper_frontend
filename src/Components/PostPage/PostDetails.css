@@ -1,0 +1,42 @@
+.post-details-container {
+  display: flex ;
+  background-color: white;
+  position: fixed;
+  width: calc(79%);
+  height: calc(91%);
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* align-items: center; */
+}
+
+.post-details-photo{
+  width: 70%;
+  
+  /* object-fit: fill; */
+}
+.post-left-details{
+  width: 30%;
+  height: 100vh;
+
+}
+
+.write-comment-container{
+  bottom: 0;
+}
+
+.post-details-container .chat-button{
+  height: 10px;
+  width: 10px;
+}
+
+.post-details-container .message-left{
+  align-items: start;
+}
+
+.post-details-container .singlemessage-box{
+  display: block
+}
+
+

@@ -1,0 +1,29 @@
+.event-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.trip-dates {
+  display: flex;
+  align-items: center;  /* Wyrównanie w pionie */
+  justify-content: flex-start;  /* Wyrównanie w poziomie */
+  margin-bottom: 18px;
+  padding-left: 18px;
+}
+
+.public-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px; /* Odstęp między ikoną a tekstem */
+}
+
+.trip-dates-text {
+  margin-bottom: 0;
+}
+
+.event-stat-box{
+  margin-top: 0;
+}

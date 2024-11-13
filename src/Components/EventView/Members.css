@@ -1,0 +1,12 @@
+.event-members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Odstęp między członkami */
+}
+
+.members-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dwie kolumny o równej szerokości */
+  width: 100%;
+
+}

@@ -14,48 +14,4 @@
     overflow-x: hidden;
 }
 
-.register-steps {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 18px;
-    align-items: center;
-}
-.step-content {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Adjust spacing between number and text */
-}
 
-.register-steps .menu-option {
-    font-size: 18px;
-    display: inline;
-}
-
-.step-number {
-    border-radius: 50px;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #0000008C;
-    justify-content: center;
-}
-
-
-.register-steps .menu-option.active{
-    text-decoration: none;
-}
-
-.register-steps .menu-option.active .step-number{
-    color: #BDF271;
-    background-color: black;
-    box-shadow: 0px 0px 2px 2px #BDF271;
-
-}
-
-.line {
-    width: 155px;
-    border-bottom: 2px solid #00000080;
-    height: 0;
-}

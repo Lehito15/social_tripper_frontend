@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './RateActivity.css';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-function RateActivity({ activity, removeActivity, language }) {
+function RateActivity({ activity, removeActivity, language, event }) {
     const [skillLevel, setSkillLevel] = useState(5.0);
+    console.log(event)
     let activityName = '';
     let flag = '';
     console.log('co jest')
@@ -26,15 +27,17 @@ function RateActivity({ activity, removeActivity, language }) {
             <div className="rating-details">
                 <div className='upper-bar'>
                    {activity && (
-                    <h3 className="activity-title">{activityName}</h3>
+                    <h3 className="activity-title activityname-left">{activityName}</h3>
                    )} 
                     { language &&  (
                         <div className='title-flag'>
-                             <h3 className="activity-title">{activityName}</h3>
+                             <h3 className="activity-title activityname-left">{activityName}</h3>
                              <span className={flag}></span>
                         </div>
                         )}
-                    <h3 className='activity-title'>{skillLevel} / 10</h3>
+                     <h3 className='activity-title'>
+                        {event ? `Required skill: ${skillLevel}` : `${skillLevel} / 10`}
+                    </h3>
                 </div>
                 <div className="rating-bar">
                     {/* <label htmlFor="skill-level">Skill Level: {skillLevel}</label> */}

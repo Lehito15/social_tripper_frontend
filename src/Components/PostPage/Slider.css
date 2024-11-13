@@ -1,5 +1,6 @@
 .carousel-item img  {
   object-fit: contain;
+  cursor: pointer;
   
 }
 

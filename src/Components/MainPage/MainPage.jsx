@@ -2,7 +2,7 @@ import './MainPage.css';
 import React ,  {useState, useRef, useEffect } from  'react';
 import LeftMenu from '../LeftMenu/LeftMenu.jsx';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom';
 import RightMenu from '../RightPanel/RightBoxMenu/RightBoxMenu.jsx';
 import RightPanel from '../RightPanel/RightPanel.jsx';
 import PostPage from '../PostPage/PostPage.jsx';
@@ -12,6 +12,10 @@ import Chats from '../Messages/Chats.jsx';
 import IndividualChat from '../Messages/IndividualChat.jsx';
 import MinimalizeChatContainer from '../Messages/MinimalizeChatContainer.jsx';
 import ProfileInfo from '../ProfileInfo/ProfileInfo.jsx';
+import PostDetail from '../PostPage/PostDetails.jsx';
+import  CreateEvent from '../CreateEvent/CreateEvent.jsx'
+import EventMain from '../EventView/EventMain.jsx';
+
 
 
 
@@ -26,6 +30,17 @@ function MainPage() {
 
   const [selectedChat, setSelectedChat] = useState(false);
   const [minimizedChats, setMinimizedChats] = useState([]);
+
+  const [isPostOpen, setPostOpen]  = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const [isCreateTripOpen, setIsCreateTripOpen] = useState(false);
+
+  const [selectedEvent, setSelectedEvent] = useState(null);
+
+  const [eventUuid, setEventUuid] = useState(null)
+
+  const navigate = useNavigate()
 
   
 
@@ -50,18 +65,48 @@ function MainPage() {
     setMinimizedChats((prev) => prev.filter((minChat) => minChat.author.id !== chat.author.id));
   };
 
-
-
-
-  const toggleAddPost = () => {
-    console.log('createpod');
-    setIsAddPostOpen(!isAddPostOpen);
+  const openPost = (post) =>  {
+    setPostOpen(true);
+    setSelectedPost(post);
   };
+
+  const closePost = ()  => {
+    console.log('zamykam');
+    setPostOpen(false);
+    setSelectedPost(null);
+  };
+
+  const toggleCreateTrip = () => {
+    console.log("otwórz się")
+    setIsCreateTripOpen(!isCreateTripOpen);
+  }
+
+  const addPost = () => {
+    console.log('createpod');
+    setIsAddPostOpen(true);
+  };
+
+  const closeAddPost = () =>{
+    setIsAddPostOpen(false);
+    setEventUuid(null);
+  }
 
   const toggleChat = () => {
     console.log('createpod');
     setChatOpen(!isChatOpen);
   };
+
+  const openEvent = (event) =>{
+    setSelectedEvent(event);
+    console.log(selectedEvent)
+    navigate(`/event/${event.uuid}`);
+  }
+
+  const addEventPost = (uuid) =>{
+    console.log('dodaje event');
+    setEventUuid(uuid);
+    setIsAddPostOpen(!isAddPostOpen);
+  }
 
 
 
@@ -94,19 +139,19 @@ function MainPage() {
 
   return (
     <div className="App">
-      <div className={`main-content-wrapper ${isAddPostOpen ? 'blur-background' : ''}`}>
+      <div className={`main-content-wrapper ${(isAddPostOpen || isPostOpen || isCreateTripOpen) ? 'blur-background' : ''}`}>
         <div className="left-menu">
           <LeftMenu />
         </div>
     
         <div className="searchbar">
-          <SearchBar />
+          <SearchBar openTrip={toggleCreateTrip} />
         </div>
     
         <div className="right-menu">
-        <RightMenu toggleAddPost={toggleAddPost} toggleChat={toggleChat} />
+        <RightMenu toggleAddPost={addPost} toggleChat={toggleChat} />
         </div>
-        <div className='rightpanel'>
+        <div className='rightpanell'>
           <RightPanel />
         </div>
         
@@ -115,16 +160,17 @@ function MainPage() {
     
         <div className="main-content">
             <Routes>
-              <Route path="/" element={<PostPage />} />
+              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} />} />
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               <Route path="/profileinfo/*" element={<ProfileInfo />} />
+              <Route path="/event/*" element={<EventMain event={selectedEvent} openCreatePost={addEventPost} />} />
             </Routes>
           </div>
       </div>  
 
         {isAddPostOpen && (
           <div className="add-post-modal" ref={addPostRef}>
-            <CreatePost onClose={toggleAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+            <CreatePost onClose={closeAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'} } eventUuid={eventUuid}  />
           </div>
         )}
 
@@ -148,8 +194,15 @@ function MainPage() {
           removeChat={removeChat}
         />
 
-    </div>
-  
+      {isPostOpen  && (
+        <PostDetail post={selectedPost} closePost={closePost} />
+      )}
+
+      {isCreateTripOpen  && (
+        <CreateEvent closeCreateEvent={toggleCreateTrip}  />
+      )}
+    </div>   
+
   );
 }
 
