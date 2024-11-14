@@ -81,7 +81,7 @@ function Post({post, openPost, closePost}){
     )}
     </div>
     <div className='reactions-conteiner'>
-      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
+      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} isReacted={false} />
     </div>
     <div className='comment-container'>
       <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />

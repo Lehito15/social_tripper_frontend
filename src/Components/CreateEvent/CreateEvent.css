@@ -1,6 +1,8 @@
 .event{
   width: 840px;
-  overflow-y: auto;
+  /* overflow-y: auto;
+  min-height: 30px;
+  max-height: 600px; */
   top: 20px;
   left: auto;
   transform: none;
@@ -12,4 +14,11 @@
 
  .event  .create-post-title{
   font-size: 24px;
+}
+
+.different-profile-info{
+  min-height: 30px;
+  overflow-y: auto;
+  max-height: 350px;
+
 }

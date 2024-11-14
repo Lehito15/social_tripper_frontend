@@ -56,6 +56,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
       try {
         const response = await fetch(endpoint, {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -71,7 +72,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
       } catch (error) {
         console.error('Error:', error);
       }
-      window.location.href = pathBack;
+      // window.location.href = pathBack;
     } else {
       alert('Nie ma nic');
     }
