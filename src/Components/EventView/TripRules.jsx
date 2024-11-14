@@ -10,7 +10,7 @@ function TripRules({ rules }) {
         {rules.map((rule, index) => (
           <div key={index} className='rule-item'>
             <p className='rule-name'>{index + 1}. {rule.name}</p>
-            <span className='text-decription'>{rule.description}</span>
+            <span className='text-decription text-decription-event'>{rule.description}</span>
           </div>
         ))}
       </div>

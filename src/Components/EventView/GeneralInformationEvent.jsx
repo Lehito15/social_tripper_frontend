@@ -43,7 +43,7 @@ function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated
             style={{resize: 'none'}}
           />
         ) : (
-          <span className='text-decription'>{updatedDescription}</span>
+          <span className='text-decription text-decription-event'>{updatedDescription}</span>
         )}
         
         <div className="event-public">
