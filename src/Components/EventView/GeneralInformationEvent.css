@@ -7,3 +7,19 @@
 .trip-info .text-decription{
   margin-left: 18px ;
 }
+
+.edit-text{
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.51);
+
+}
+
+.edit-text:hover{
+  cursor: pointer;
+}
+
+.event-public{
+  display: flex;
+  align-items: center;
+}

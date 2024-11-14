@@ -6,7 +6,7 @@ function TripDetails({event}){
   return(
     <div>
       <div className="trip-dates-container">
-        <TripDates startDate={event.start_date} endDate={event.end_date} />
+        <TripDates startDate={event.start_date} endDate={event.end_date}  isOwner={true} />
       </div>
       <div className="trip-maps">
         <TripMap location={event.start_location} title={'Start location'} />

@@ -10,6 +10,14 @@
   margin: 10px;                            
 }
 
+.tittle-container{
+  display: flex;
+  justify-content: space-between;
+  padding-left: 18px;
+  padding-right: 18px;
+  height: 40px;
+}
+
 @media (max-width: 1400px) {
   .text-decription{
     font-size: 8px ;

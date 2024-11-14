@@ -17,10 +17,12 @@
   text-align: left;
   padding-left: 9px;
   padding-right: 9px;
+  padding-top: 18px;
 }
 
 .event-main-info-details{
   width: 75%;
+  
 }
 
 .event-main-dates{

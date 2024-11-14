@@ -50,11 +50,13 @@ function EventMain({eventy, openCreatePost}){
             return (
                 <TripInformation
                     event={event}
+                    isOwner={true}
                 />)
        case 2:
             return (
                 <TripDetails
                     event={event}
+                    isOwner={true}
                 />) 
         
         case 3:
