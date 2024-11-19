@@ -6,10 +6,6 @@ function LanguageFlag({ language, onRemove }) {
 
   return (
     <div className="language-item">
-      {/* Flag and Language Name */}
-      <span className="language-info">
-        <span className={`fi fi-${flag}`}></span>
-      </span>
       {/* Close Button */}
       <button className="remove-button" onClick={() => onRemove(language)}>
         <img
@@ -18,6 +14,8 @@ function LanguageFlag({ language, onRemove }) {
           className="close-icon-language"
         />
       </button>
+      {/* Flag */}
+      <span className={`fi fi-${flag}`}></span>
     </div>
   );
 }
