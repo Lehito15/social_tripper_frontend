@@ -16,7 +16,7 @@
 }
 
 .event-image{
-  object-fit: fill;
+  object-fit: contain;
   border-radius: 0px;
   max-width: 768px;
   max-height: 432px;

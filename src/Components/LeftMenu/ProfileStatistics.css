@@ -3,8 +3,10 @@
   flex-direction: column; /* Ustawienie kierunku flex na kolumnę */
   align-items: center; /* Wyśrodkowanie elementów */
   margin: 0 auto; /* Centrowanie kontenera */
-  margin-bottom: 20px; /* Dynamiczne wypełnienie w zależności od szerokości ekranu */
+  margin-bottom: 25px; /* Dynamiczne wypełnienie w zależności od szerokości ekranu */
   width: 100%;
+  padding-left: 36px;
+  padding-right: 36px;
 }
 
 .profile-picture {
@@ -13,6 +15,10 @@
   border-radius: 50%; /* Kształt koła */
   /* border: 2px solid #ccc; Mały border wokół zdjęcia */
   object-fit: cover; /* Wypełnienie dla lepszego dopasowania */
+  margin-top: 25px;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
   
 }
 
@@ -23,28 +29,26 @@
    padding-right: 13.5%;   */
    align-items: center;
   width: 100%;
+  margin-top: 14px;
 }
 
 .user-name {
   font-size: 22px;
+  
   cursor: pointer; /* Wskazuje, że element jest klikalny */
   text-decoration: none; 
   color: black;
   display: inline;
   margin-bottom: 5px;
-  font-weight: 700
+  font-weight: 700;
+  font-family: "Source Sans 3", serif;
 }
 
-.user-stats {
-  display: flex; /* Ustawienie elementów w wierszu */
-  justify-content: space-around; /* Rozłożenie elementów w przestrzeni */
-  margin-top: 0vh; /* Dynamiczny odstęp między imieniem a statystykami */
-  width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
-}
+
 
 .stat-item {
   text-align: center; /* Wyśrodkowanie tekstu */
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .stat-value {
@@ -66,7 +70,10 @@
 .user-rang {
   font-size: 14px;
   line-height: 17.6px;
-  color: rgba(0, 0, 0, 55) ;
+  color: rgba(0, 0, 0, 0.55);
+  margin: 0;
+
+  font-family: "Source Sans 3", serif;
 }
 
 /* Dla ekranów o szerokości większej niż 1920px */

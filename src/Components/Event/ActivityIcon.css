@@ -1,4 +1,4 @@
-.activity-box{
+/* .activity-box{
   height: 48px;
   width: 48px;
   background: rgba(240, 242, 245, 1);
@@ -7,10 +7,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+} */
+.activity-box {
+  position: relative; /* To position the close button */
+  display: flex;
+  width: 48px; /* Adjust size as needed */
+  height: 48px; /* Adjust size as needed */
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: rgba(240, 242, 245, 1);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 12px
 }
-
 .activity-icon{
   height: 36px;
   width: 36px;
   object-fit: contain;
+}
+
+remove-button {
+  position: absolute;
+  top: -8px; /* Position above the activity icon */
+  right: -8px; /* Align to the right */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-icon-activity {
+  width: 16px; /* Adjust close icon size */
+  height: 16px;
+  opacity: 0.8; /* Slightly transparent for better aesthetics */
+}
+
+.remove-button:hover .close-icon-activity {
+  opacity: 1; /* Fully opaque on hover */
 }

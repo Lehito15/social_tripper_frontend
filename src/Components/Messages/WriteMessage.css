@@ -9,6 +9,7 @@
     box-shadow: none;
     /* border-radius: 10px; Zaokrąglone rogi */
     background: rgba(240, 242, 245, 0.6);
+    padding: 0;
   }
 
   .message-input:focus {
@@ -18,8 +19,7 @@
     position: relative; /* Pozycjonowanie relatywne dla ikonki */
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    border-radius: 50px;
     background: rgba(240, 242, 245, 0.6);
 
     
@@ -28,8 +28,8 @@
   .media-icon, .send-icon {
     position: absolute; /* Pozycjonowanie absolutne względem kontenera */
     /* left: 10px; Odległość od prawej krawędzi pola */
-    width: 24px; /* Szerokość ikony */
-    height: 24px; /* Wysokość ikony */
+    width: 18px; /* Szerokość ikony */
+    height: 18px; /* Wysokość ikony */
     pointer-events: none; /* Wyłączenie interakcji z ikoną */
     opacity: 70%;
   }

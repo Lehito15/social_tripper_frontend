@@ -2,11 +2,19 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px; /* Odstęp między członkami */
+  padding-left: 18px;
+  padding-right: 18px;
+
 }
 
 .members-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Dwie kolumny o równej szerokości */
   width: 100%;
+  margin-top: 18px;
 
+}
+
+.members-list .post-owner-container{
+  margin-bottom: 18px;
 }

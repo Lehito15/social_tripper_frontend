@@ -19,3 +19,51 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
+.account-details-form .profile-picture-input{
+    width: 260px;
+}
+
+.image-preview-profile{
+    width: 74px;
+    height: 74px;
+}
+
+.profile-picture-group {
+    position: relative;
+    display: flex;
+    align-items:flex-start;
+ 
+  }
+  .profile-picture-container {
+    position: relative;
+    flex-grow: 1; /* Dostosowanie szerokości kontenera */
+  }
+
+  .image-preview-profile {
+    position: absolute;
+    right: -120px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 74px;
+    height: 74px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .selected-image-profile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .pick-event-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+

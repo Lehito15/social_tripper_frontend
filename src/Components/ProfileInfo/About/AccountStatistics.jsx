@@ -5,7 +5,7 @@ function AccountStatistics({stats}) {
   <div className="user-stats">
     <div className="stat-item">
       <span className="stat-value">{stats.trips}</span>
-      <span className="stat-title">Trips Done</span>
+      <span className="stat-title">Trips</span>
     </div>
     <div className="stat-item">
       <span className="stat-value">{stats.followers}</span>

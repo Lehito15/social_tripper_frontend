@@ -14,3 +14,8 @@
   margin-top: 18px;
 }
 
+.event-main-image-container .event-image{
+  max-width: none;
+  object-fit: contain;
+  
+}

@@ -8,6 +8,8 @@ function ProfileStatistcs(){
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const uuid = "550e8400-e29b-41d4-a716-446655440005";
+
 
   useEffect(() => {
     console.log('essa');
@@ -55,11 +57,11 @@ function ProfileStatistcs(){
       className="profile-picture"
     />
     <div className="user-info">
-       <NavLink to={`profileinfo/posts`} className='user-name'>
+       <NavLink to={`profileinfo/${uuid}`} className='user-name'>
           {user.name}
         </NavLink>
         <br></br>
-      <span className='user-rang'>{user.rang}</span>
+      <p className='user-rang'>{user.rang}</p>
 
       <AccountStatistics stats={{trips: 5, 
           followers: 121,

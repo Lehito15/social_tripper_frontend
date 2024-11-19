@@ -15,6 +15,12 @@ import ProfileInfo from '../ProfileInfo/ProfileInfo.jsx';
 import PostDetail from '../PostPage/PostDetails.jsx';
 import  CreateEvent from '../CreateEvent/CreateEvent.jsx'
 import EventMain from '../EventView/EventMain.jsx';
+import TripEvents from '../TripEvents/TripEvents.jsx';
+import RelationDetails from '../Relation/RelationDetails.jsx';
+import RelationsPage from '../RelationsPage/RelationsPage.jsx';
+import GroupPage from '../GroupPage/GroupPage.jsx';
+import GroupMain from '../GroupView/GroupMain.jsx';
+import CreateGroup from '../CreateGroup/CreateGroup.jsx';
 
 
 
@@ -34,7 +40,12 @@ function MainPage() {
   const [isPostOpen, setPostOpen]  = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
 
+  const [isRelationOpen, setRelationOpen]  = useState(false);
+  const [selectedRelation, setSelectedRelation] = useState(null);
+
   const [isCreateTripOpen, setIsCreateTripOpen] = useState(false);
+
+  const [isCreateGroupOpen, setIsCreateGroupOpen] = useState(false);
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
@@ -66,6 +77,7 @@ function MainPage() {
   };
 
   const openPost = (post) =>  {
+    console.log('otwieram posta XXDFWEF')
     setPostOpen(true);
     setSelectedPost(post);
   };
@@ -76,15 +88,36 @@ function MainPage() {
     setSelectedPost(null);
   };
 
+  const openRelation = (relation) =>  {
+    console.log('otwieram relacje ok')
+    setRelationOpen(true);
+    setSelectedRelation(relation);
+  };
+
+  const closeRelation = ()  => {
+    console.log('zamykam');
+    setRelationOpen(false);
+    setSelectedRelation(null);
+  };
+
   const toggleCreateTrip = () => {
     console.log("otwórz się")
     setIsCreateTripOpen(!isCreateTripOpen);
+  }
+
+  const closeCreateGroup = () => {
+    setIsCreateGroupOpen(false);
   }
 
   const addPost = () => {
     console.log('createpod');
     setIsAddPostOpen(true);
   };
+
+  const createGroup = () =>{
+    console.log('otwieran grupę')
+    setIsCreateGroupOpen(true);
+  }
 
   const closeAddPost = () =>{
     setIsAddPostOpen(false);
@@ -96,10 +129,12 @@ function MainPage() {
     setChatOpen(!isChatOpen);
   };
 
-  const openEvent = (event) =>{
-    setSelectedEvent(event);
+  const openEvent = (uuid) =>{
+    console.log('openPost')
+    console.log(uuid)
+    setSelectedEvent(uuid);
     console.log(selectedEvent)
-    navigate(`/event/${event.uuid}`);
+    navigate(`/events/${ uuid}`);
   }
 
   const addEventPost = (uuid) =>{
@@ -139,7 +174,7 @@ function MainPage() {
 
   return (
     <div className="App">
-      <div className={`main-content-wrapper ${(isAddPostOpen || isPostOpen || isCreateTripOpen) ? 'blur-background' : ''}`}>
+      <div className={`main-content-wrapper ${(isAddPostOpen || isPostOpen || isCreateTripOpen || isRelationOpen) ? 'blur-background' : ''}`}>
         <div className="left-menu">
           <LeftMenu />
         </div>
@@ -160,25 +195,35 @@ function MainPage() {
     
         <div className="main-content">
             <Routes>
-              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} />} />
+              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} openRelation={openRelation} closeRelation={closeRelation} />} />
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
-              <Route path="/profileinfo/*" element={<ProfileInfo />} />
-              <Route path="/event/*" element={<EventMain event={selectedEvent} openCreatePost={addEventPost} />} />
+              <Route path="/profileinfo/:uuid/*" element={<ProfileInfo />} />
+              <Route path="/events" element={<TripEvents openEvent={openEvent}/>} />
+              <Route path="/groups" element={<GroupPage createGroup={createGroup}  />} />
+              <Route path="/relations" element={<RelationsPage  openRelation={openRelation}/>} />
+              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} />} />
+              <Route path="/groups/*" element={<GroupMain />} />
             </Routes>
           </div>
       </div>  
 
-        {isAddPostOpen && (
-          <div className="add-post-modal" ref={addPostRef}>
-            <CreatePost onClose={closeAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'} } eventUuid={eventUuid}  />
-          </div>
-        )}
+      {isAddPostOpen && (
+        <div className="add-post-modal" ref={addPostRef}>
+          <CreatePost onClose={closeAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'} } eventUuid={eventUuid}  />
+        </div>
+      )}
 
-        {isChatOpen && (
-          <div className="chat" ref={chatRef}>
-            <Chats openIndividualChat={openIndividualChat}  />
-          </div>
-        )}
+      {isCreateGroupOpen&& (
+        <div className="add-post-modal" ref={addPostRef}>
+          <CreateGroup closeCreateGroup ={closeCreateGroup}  />
+        </div>
+      )}
+
+      {isChatOpen && (
+        <div className="chat" ref={chatRef}>
+          <Chats openIndividualChat={openIndividualChat}  />
+        </div>
+      )}
 
       {selectedChat && (
         <IndividualChat
@@ -196,6 +241,10 @@ function MainPage() {
 
       {isPostOpen  && (
         <PostDetail post={selectedPost} closePost={closePost} />
+      )}
+
+      {isRelationOpen  && (
+        <RelationDetails relation={selectedRelation} closeRelation={closeRelation} />
       )}
 
       {isCreateTripOpen  && (

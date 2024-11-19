@@ -2,10 +2,11 @@ import React from 'react';
 import LineMenu from './LineMenu.jsx';
 import './SelectInfoMenu.css';
 
-function SelectInfoMenu(){
+function SelectInfoMenu({userUuid}){
   const profile_picture_url = "https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg";
   const name = "Kamil Grosicki";
   let public_icon = `${process.env.PUBLIC_URL}/public-icon.png`;
+  console.log(userUuid)
   
   return (
     <div className='profile-info-select'>
@@ -24,7 +25,7 @@ function SelectInfoMenu(){
 
     </div>
     <div className='menu-line'>
-      <LineMenu />
+      <LineMenu userUuid={userUuid}/>
     </div>
   </div>
 

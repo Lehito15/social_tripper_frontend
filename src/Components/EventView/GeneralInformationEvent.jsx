@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './GeneralInformationEvent.css';
 import Select from 'react-select';
 
-function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated, maxMembers, isOwner }) {
+function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated, maxMembers, isOwner, group }) {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedDescription, setUpdatedDescription] = useState(description);
   const [updatedPublicText, setUpdatedPublicText] = useState(publicText);
   const [updatedMaxMembers, setUpdatedMaxMembers] = useState(maxMembers);
+  console.log(maxMembers)
 
   const options = [
     { value: 'public', label: <><img src={`${process.env.PUBLIC_URL}/public-icon.png`} alt="Public" className="option-icon" /> Public</> },
@@ -46,7 +47,7 @@ function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated
           <span className='text-decription text-decription-event'>{updatedDescription}</span>
         )}
         
-        <div className="event-public">
+        <div className="event-public ssp">
           <img src={`${process.env.PUBLIC_URL}/${publicIcon}`} alt="public icon" className="public-icon" />
           {isEditing ? (
           <Select  classNamePrefix="custom-select" options={options} defaultValue={options[0]} isSearchable={false}  />
@@ -56,12 +57,12 @@ function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated
           )}
         </div>
 
-        <div className="event-public">
+        <div className="event-public ssp">
           <img src={`${process.env.PUBLIC_URL}/creation-date.png`} alt="creation date icon" className="public-icon" />
-          <p className="event-public-text">Trip created at {eventCreated ? new Date(eventCreated).toLocaleDateString() : 'N/A'}</p>
+          <p className="event-public-text ssp">Trip created at {eventCreated ? new Date(eventCreated).toLocaleDateString() : 'N/A'}</p>
         </div>
 
-        <div className="event-public">
+        <div className="event-public ssp">
           <img src={`${process.env.PUBLIC_URL}/group.png`} alt="group icon" className="public-icon" />
           {isEditing ? (
             <input

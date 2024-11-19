@@ -21,6 +21,8 @@ function Post({post, openPost, closePost}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
+      console.log('maxwidth');
+      console.log(maxWidth);
       if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
         const mediaHeights = await Promise.all(
           post.postMultimediaDTO.map((mediaItem) => {
@@ -65,7 +67,7 @@ function Post({post, openPost, closePost}){
       </div>
     </div>
     <div className='text-container'>
-        <p className={`content-text ${isExpanded ? 'expanded' : ''}`}>
+        <p className={`content-text ssp ${isExpanded ? 'expanded' : ''}`}>
           {isExpanded ? post.content : (post.content.length > maxChars ? post.content.slice(0, maxChars) + '...' : post.content)}
           {post.content.length > maxChars && (
             <span className="toggle-text" onClick={toggleExpand}>
@@ -74,16 +76,19 @@ function Post({post, openPost, closePost}){
           )}
         </p>
       </div>
-    
-    <div className= 'slider-container'   style={{height: postHeight}}>
-    {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
-       <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
-    )}
+      {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
+    <div className='slider-container-padding'>
+      <div className= 'slider-container'   style={{height: postHeight}}>
+      {/* {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && ( */}
+        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
+      {/* // )} */}
+      </div>
     </div>
+     )}
     <div className='reactions-conteiner'>
       <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} isReacted={false} />
     </div>
-    <div className='comment-container'>
+    <div className='comment-container-post'>
       <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
     </div>
   </div>

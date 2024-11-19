@@ -2,6 +2,7 @@
 
 import React from 'react';
 // import './GeneralDetails.css';
+import './EventSettings.css';
 import MapReaction from '../Relation/MapRelation.jsx';
 
 function EventSettings({data, updateData}) {
@@ -37,30 +38,56 @@ function EventSettings({data, updateData}) {
                 name="tripDescriptor" 
                 placeholder='Trip destination descriptor' 
                 value={data.tripDescriptor}
-                onChange={(e) => updateData({ ...data, tripDescriptor: e.target.value })} />
+                onChange={(e) => updateData({ ...data, tripDescriptor: e.target.value })} 
+                />
         </div>
       </div>
 
       <div className="form-row">
-        <div className="form-group">
-        <label htmlFor="tripStartDate">Start date</label>
-          <input 
-                type="date" 
-                id="tripStartDate" 
-                name="tripStartDate" 
-                value={data.tripStartDate}
-                onChange={(e) => updateData({ ...data, tripStartDate: e.target.value })} />
-        </div>
-        <div className="form-group">
-        <label htmlFor="tripEndDate">End date</label>
-          <input 
-                type="date" 
-                id="tripEndDate" 
-                name="tripEndDate" 
-                value={data.tripEndDate}
-                onChange={(e) => updateData({ ...data, tripEndDate: e.target.value })} />
-        </div>
-      </div>
+  {/* Start Date and Time */}
+  <div className="form-group">
+    <label htmlFor="tripStartDate">Start Date & Time</label>
+    <div className="date-time-input">
+      <input 
+        type="date" 
+        id="tripStartDate" 
+        name="tripStartDate" 
+        value={data.tripStartDate}
+        onChange={(e) => updateData({ ...data, tripStartDate: e.target.value })} 
+      />
+      <input 
+        type="time" 
+        id="tripStartTime" 
+        name="tripStartTime" 
+        value={data.tripStartTime}
+        onChange={(e) => updateData({ ...data, tripStartTime: e.target.value })} 
+      />
+    </div>
+  </div>
+
+  {/* End Date and Time */}
+  <div className="form-group">
+    <label htmlFor="tripEndDate">End Date & Time</label>
+    <div className="date-time-input">
+      <input 
+        type="date" 
+        id="tripEndDate" 
+        name="tripEndDate" 
+        value={data.tripEndDate}
+        onChange={(e) => updateData({ ...data, tripEndDate: e.target.value })} 
+      />
+      <input 
+        type="time" 
+        id="tripEndTime" 
+        name="tripEndTime" 
+        value={data.tripEndTime}
+        onChange={(e) => updateData({ ...data, tripEndTime: e.target.value })} 
+      />
+    </div>
+  </div>
+</div>
+
+
 
       <div className="form-row">
         <div className="form-group">

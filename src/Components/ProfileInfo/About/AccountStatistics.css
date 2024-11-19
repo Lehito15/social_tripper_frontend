@@ -1,8 +1,9 @@
 .user-stats {
   display: flex; /* Ustawienie elementów w wierszu */
   justify-content: space-around; /* Rozłożenie elementów w przestrzeni */
-  margin-top: 0vh; /* Dynamiczny odstęp między imieniem a statystykami */
+  margin-top: 25px; /* Dynamiczny odstęp między imieniem a statystykami */
   width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
+  text-transform: uppercase;
 
 }
 

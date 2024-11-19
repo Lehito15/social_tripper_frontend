@@ -5,6 +5,7 @@
   gap:  82px;
   align-items: center;
   background-color: white;
+  padding-left: 9px;
 }
 
 .step-text:hover {

@@ -10,6 +10,7 @@ import Comment from './Comment.jsx';
 function  PostDetail({post, closePost}){
   const author1 = {name: "Kurt", surname: "Kotarski", profile_picture_url: "https://graw.pl/wp-content/uploads/2022/11/Zbigniew-Kotarski-GRAW.jpg", id: 5, isActive: true};
   const author2 = { name: "Anna", surname: "Nowak", profile_picture_url: "https://ocdn.eu/pulscms-transforms/1/vKOk9kpTURBXy9kNmVhNTZkMzlmYTc5NzU2NzJlMGIxMjM2MzczMjUyYi5qcGeTlQPMxy7NBiHNA3KVAs0EsADDw5MJpjcxZjlmZgbeAAGhMAE/anna-maria-wesolowska-w-2011-r.jpeg", id: 6, isActive: false };
+  console.log('eloo post')
 
   const messages = [
     {
@@ -38,6 +39,7 @@ function  PostDetail({post, closePost}){
   console.log(post.postMultimediaDTO)
   const windowHeight = window.innerHeight;
   const postDetailHeight = 0.91* windowHeight;
+  console.log(windowHeight)
 
   return (
     <div className='post-details-container'>
@@ -62,22 +64,6 @@ function  PostDetail({post, closePost}){
         <div  className='comment-section'> 
         {messages.map((comment, index) => (
           <Comment comment={comment} />
-          
-          // <div
-          //   key={index}
-          //   className={`message-wrapper ${
-          //     message.author ? 'message-left' : 'message-right'
-          //   }`}
-          // >
-          //   {message.author && (
-          //     <img
-          //       src={message.author.profile_picture_url}
-          //       alt={message.author.name}
-          //       className='friend-avatar'
-          //     />
-          //   )}
-          //   <SingleMessage content={message.content} author={message.author} />
-          // </div>
         ))}
 
 

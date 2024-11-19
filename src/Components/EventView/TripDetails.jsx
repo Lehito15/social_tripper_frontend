@@ -9,8 +9,8 @@ function TripDetails({event}){
         <TripDates startDate={event.start_date} endDate={event.end_date}  isOwner={true} />
       </div>
       <div className="trip-maps">
-        <TripMap location={event.start_location} title={'Start location'} />
-        <TripMap location={event.end_location} title={'End location'} />
+        <TripMap location={event.start_location} title={'Start location'} isOwner={true} />
+        <TripMap location={event.end_location} title={'End location'} isOwner={true} />
 
       </div>
     </div>

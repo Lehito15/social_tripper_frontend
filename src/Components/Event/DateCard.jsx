@@ -2,8 +2,15 @@ import React from 'react';
 import './DateCard.css'; // Stylizacja dla komponentu
 
 function DateCard({ date }) {
-  const month = date.toLocaleString('en-US', { month: 'short' }); 
-  const day = date.getDate();
+  const parsedDate = new Date(date);
+
+  if (isNaN(parsedDate.getTime())) {
+    console.error("Invalid date format:", date);
+    return <div className="date-card">Invalid Date</div>;
+  }
+
+  const month = parsedDate.toLocaleString('en-US', { month: 'short' }); // Skrócona nazwa miesiąca
+  const day = parsedDate.getDate();
 
   return (
     <div className="date-card">
@@ -12,5 +19,6 @@ function DateCard({ date }) {
     </div>
   );
 }
+
 
 export default DateCard;

@@ -32,31 +32,55 @@ function CreatePost({ onClose, owner, eventUuid }) {
     setDescription(e.target.value);
   };
 
+
   const uploadPost = async () => {
     if (media.length !== 0 || description !== '') {
-      const postDTO = {
-        uuid: uuidv4(),
-        content: description,
-        dateOfPost: new Date().toISOString(),
-        isExpired: false,
-        isLocked: false,
-        commentNumber: 0,
-        reactionsNumber: 0,
-        accountUUID: "550e8400-e29b-41d4-a716-446655440005",
-        postMultimediaDTO: [],
-      };
+      let postDTO = {};
+      if(eventUuid){
+         postDTO  = {
+          post: {
+            uuid: uuidv4(),
+            content: description,
+            dateOfPost: new Date().toISOString(),
+            isExpired: false,
+            isLocked: false,
+            commentNumber: 0,
+            reactionsNumber: 0,
+            account: {uuid:"550e8400-e29b-41d4-a716-446655440005"},
+            postMultimediaDTO: [],
+          },
+          event: {uuid:eventUuid},
+        }
+
+      }
+      else{
+        postDTO = {
+          uuid: uuidv4(),
+          content: description,
+          dateOfPost: new Date().toISOString(),
+          isExpired: false,
+          isLocked: false,
+          commentNumber: 0,
+          reactionsNumber: 0,
+          account: {uuid:"550e8400-e29b-41d4-a716-446655440005"},
+          postMultimediaDTO: [],
+          // EventThumbnailDTO: eventUuid
+        };
+
+      }
+      
 
       // Endpoint changes based on eventUuid
       const pathBack = eventUuid? `event/${eventUuid}` : '/'
       const uuid = "550e8400-e29b-41d4-a716-446655440005";
       const endpoint = eventUuid
-        ? `http://localhost:8080/users/${uuid}/events/${eventUuid}/posts`
-        : `http://localhost:8080/users/${uuid}/posts`;
+        ? `http://localhost:8080/posts/event-post`
+        : `http://localhost:8080/posts`;
 
       try {
         const response = await fetch(endpoint, {
           method: 'POST',
-          mode: 'cors',
+          // mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -72,7 +96,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
       } catch (error) {
         console.error('Error:', error);
       }
-      // window.location.href = pathBack;
+      window.location.href = pathBack;
     } else {
       alert('Nie ma nic');
     }
@@ -105,7 +129,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
         onChange={handleContentChange}
       />
 
-      <div className='media-preview'>
+      <div className='media-prewview'>
         {displayedMedia.map((mediaItem, index) => (
           <div key={index} className="media-item">
             {mediaItem.type === 'image' ? (

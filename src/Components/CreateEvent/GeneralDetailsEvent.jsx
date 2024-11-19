@@ -18,7 +18,6 @@ function GeneralDetailsEvent({data, updateData}) {
       const file = event.target.files[0];
       setImagePreview(null);
       updateData({ ...data, eventImage: URL.createObjectURL(file), imageName: file.name});
-      // updateData({ ...data, imageName: file.name });
       setImagePreview(URL.createObjectURL(file));
       setFileName(file.name);
       console.log(file)

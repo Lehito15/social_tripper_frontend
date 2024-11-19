@@ -8,7 +8,7 @@ import { gql, useQuery } from '@apollo/client';
 
 
 import Post from './Post.jsx'
-function PostPage({openPost, closePost, openEvent}){
+function PostPage({openPost, closePost, openEvent, openRelation, closeRelation}){
   const mediaLinks = [
    {type: 'image', src: 'https://ocdn.eu/sport-images-transforms/1/Wi-k9lBaHR0cHM6Ly9vY2RuLmV1L3B1bHNjbXMvTURBXy9jMmRmZWRiODA3YjAwNzc3NjljOTM0Mzk3YWMyNzM2Mi5qcGeTlQMAzG_NDdfNB8iVAs0EsADCw5MJpmNjZDQ5NgbeAAKhMAGhMQE/kamil-grosicki.jpg'},
    {type: 'image', src:'https://daf17zziboaju.cloudfront.net/wp-content/uploads/2024/06/24131401/20180327PF_MP0241.jpg'}
@@ -63,6 +63,7 @@ function PostPage({openPost, closePost, openEvent}){
 `;
 
 const { loading, error, data } = useQuery(GET_POSTS);
+console.log(data);
 
 
   if (loading) return <p>Loading...</p>;
@@ -76,8 +77,10 @@ const { loading, error, data } = useQuery(GET_POSTS);
         ))}
 
         <Post post={post}  openPost={openPost} closePost={closePost} /> 
-        <Relation post={post} />
-        <Event event={event} openEvent={openEvent} />
+        {/* <Relation post={post} openRelation={openRelation}  closeRelation={closeRelation} />
+      
+        <Relation post={post} openRelation={openRelation}  closeRelation={closeRelation} /> */}
+        {/* <Event event={event} openEvent={openEvent} /> */}
         {/* <SelectInfoMenu /> */}
         
        

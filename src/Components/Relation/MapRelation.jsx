@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -19,6 +19,7 @@ const highlightedMarkerIcon = new L.Icon({
 });
 
 function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded }) {
+  // const [newMarkerPosition, setNewMarkerPosition] = useState(locations?.[0]?.position || null);
   const [newMarkerPosition, setNewMarkerPosition] = useState(null);
 
   const defaultCenter = locations?.[0]?.position || [53.366, 14.52];
@@ -34,13 +35,22 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
 
         // Wywołaj onLocationAdded, jeśli został przekazany
         if (onLocationAdded) {
+          locations = null;
           setNewMarkerPosition([lat, lng]);
           onLocationAdded([lat, lng]);
         }
       },
     });
-    return null;
+    // return null;
   }
+
+  useEffect(() => {
+    // Sprawdzamy, czy istnieje onLocationAdded i czy locations ma odpowiednią długość
+    if (onLocationAdded && locations?.length > 0) {
+      // Jeśli onLocationAdded jest dostępne, ustawiamy nową pozycję markera z pierwszej lokalizacji
+      setNewMarkerPosition(locations[0].position);
+    }
+  }, [locations, onLocationAdded]);
 
   return (
     <MapContainer center={defaultCenter} zoom={13} style={{ height: "400px", width: "100%" }}>
@@ -53,7 +63,7 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
       <MapClickHandler />
 
       {/* Istniejące lokalizacje */}
-      {locations &&
+      {locations && onMarkerClick&&
         locations.map(location => (
           <Marker
             key={location.id}

@@ -1,0 +1,12 @@
+.group-container{
+  background-color: white;
+  margin-bottom: 20px;
+}
+
+.group-container .event-image{
+  max-height: none;
+}
+.group-container .event-main-image-container{
+  max-height: none;
+  margin-bottom: 0;
+}

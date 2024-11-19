@@ -46,6 +46,33 @@
   }
 
 
+  .language-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 25px
+  }
+  
+  .language-flags span {
+    width: 24px; /* szerokość flagi */
+    height: 24px; /* wysokość flagi */
+    background-size: cover;
+  }
+  
+  .activity-icons {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+  }
+  
+  .activity-icons .activity-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+
+
   
   
 

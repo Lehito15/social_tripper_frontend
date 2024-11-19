@@ -1,0 +1,46 @@
+.language-item {
+  position: relative; /* To position the close button relative to the flag */
+  display: inline-block;
+  margin: 10px;
+  width: 50px; /* Adjust the size as needed */
+  height: 50px; /* Adjust the size as needed */
+  text-align: center;
+}
+
+.remove-button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.language-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.remove-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.close-icon-language {
+  height: 15px;
+  width: 15px;
+
+}
+
+.remove-button:hover .close-icon {
+  opacity: 1;
+}
+
+.language-flags span{
+  width: 48px;
+  height: 30px;
+}

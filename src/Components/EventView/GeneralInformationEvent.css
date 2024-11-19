@@ -22,6 +22,8 @@
 .event-public{
   display: flex;
   align-items: center;
+  margin-bottom: 18px;
+
 }
 
 .text-decription-event{

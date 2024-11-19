@@ -31,7 +31,7 @@ function LeftMenu() {
                 </li>
                 <li>
                   <NavLink 
-                    to="/images" 
+                    to="/events" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">
@@ -42,7 +42,7 @@ function LeftMenu() {
                 </li>
                 <li>
                   <NavLink 
-                    to="/settings" 
+                    to="/relations" 
                     className={({ isActive }) => isActive ? "menu-link active" : "  menu-link"}
                   >
                     <div className="menu-item">
@@ -53,7 +53,7 @@ function LeftMenu() {
                 </li>
                 <li>
                   <NavLink 
-                    to="/rolki" 
+                    to="/groups" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
                     <div className="menu-item">

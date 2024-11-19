@@ -1,13 +1,13 @@
 import './RegisterNext.css';
 import { Link } from 'react-router-dom'; 
 
-function RegisterNext({ step, signIn, maxStep, setCurrentStep }) {
+function RegisterNext({ step, signIn, maxStep, setCurrentStep, createEvent }) {
   
   const handleNext = () => {
     if (step < maxStep) {
       setCurrentStep(step + 1);
     } else {
-      console.log("Create account action");
+      createEvent(); // Wywołanie funkcji createEvent na ostatnim kroku
     }
   };
 
@@ -31,7 +31,7 @@ function RegisterNext({ step, signIn, maxStep, setCurrentStep }) {
       
       {signIn && (
         <div className='sign-in'> 
-          <span>Already have an Account?</span>
+          <span>Already have an Account?&nbsp;&nbsp;</span>
           <Link to="/sign-in">Sign in</Link>
         </div>
       )}

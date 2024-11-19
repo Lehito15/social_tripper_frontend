@@ -1,0 +1,58 @@
+.trip-map-change {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  padding-top: 0 ;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1100;
+  width: 700px;
+
+  border-radius: 15px;
+}
+.info-container-tittle-edit{
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 35.88px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+
+}
+
+.change-map-upper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  height: 54px;
+  position: relative; /* Dodane, aby pozycjonować ikonę zamykania */
+}
+
+
+.change-map-upper .chat-options {
+  position: absolute;
+  right: 0; /* Ustawienie ikony zamknięcia po prawej */
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.map-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.button-map-change {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.trip-map-change .finish-button{
+  margin-top: 0;
+}
+
+

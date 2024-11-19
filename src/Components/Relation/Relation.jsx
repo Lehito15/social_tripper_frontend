@@ -7,7 +7,7 @@ import PostReaction from '../PostPage/PostReactions.jsx';
 import MapRelation from './MapRelation.jsx';
 import WriteComment from '../PostPage/WriteComment.jsx';
 
-function Relation({post}){
+function Relation({post, openRelation}){
   const [postHeight, setPostHeight] = useState(null);
   const containerRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -18,7 +18,7 @@ function Relation({post}){
 
   const handleMarkerClick = (markerIndex) => {
     console.log(markerIndex);
-    setSelectedIndex(markerIndex);  // Zmieniamy slajd na podstawie kliknięcia na pinezkę
+    setSelectedIndex(markerIndex);  
   };
 
  
@@ -73,7 +73,7 @@ function Relation({post}){
     <div className='relation'  >
         <div className= 'slider-container'  style={{height: postHeight}}>
         {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
-        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} />
+        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
         
 
         )}

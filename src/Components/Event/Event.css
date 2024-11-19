@@ -49,7 +49,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 70%;
-  margin-left: 10px;
+  margin-left: 20px;
   text-align: left;
 }
 
@@ -70,6 +70,10 @@
   font-size: 18px;
   margin: 0 0 6px 0;
   align-items: flex-start;
+}
+
+.event-name:hover{
+  cursor: pointer;
 }
 
 .event-about {

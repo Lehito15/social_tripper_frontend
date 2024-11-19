@@ -48,6 +48,13 @@
 }
 .activityname-left{
     width: 60px;
+    text-align: left;
+}
+
+.activityname-right{
+    text-align: right;
+    padding-right: 0;
+
 }
 
 .rating-bar{

@@ -22,7 +22,9 @@ function Register() {
         nickname: '',
         password: '',
         repeatPassword: '',
-        profileDescription: ''
+        profileDescription: '',
+        imageName: null,
+        profileImage: null
 
     });
     const [activities, setActivities] = useState([]);

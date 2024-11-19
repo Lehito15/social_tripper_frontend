@@ -18,7 +18,7 @@ import MainPage from './Components/MainPage/MainPage.jsx';
 
 
 function App() {
-  
+
   return (
     <Router>
     <div className="App">

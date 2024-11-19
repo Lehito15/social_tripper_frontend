@@ -13,12 +13,18 @@
 
 .post-details-photo{
   width: 70%;
-  
-  /* object-fit: fill; */
+  object-fit: contain;
+}
+
+.post-details-photo .img{
+  object-fit: contain;
+  width: 100%;
+
 }
 .post-left-details{
   width: 30%;
   height: 100vh;
+  padding: 18px;
 
 }
 

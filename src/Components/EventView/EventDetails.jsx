@@ -6,7 +6,22 @@ import './EventDetails.css';
 
 function EventDetails({event}){
   const eventPublicText = event.isPublic ? 'Public trip' : 'Private trip';
-  const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'private-icon.png';
+  const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'public-icon.png';
+
+  const languageToFlagCode = {
+    English: "gb",
+    French: "fr",
+    German: "de",
+    Polish: "pl",
+    Spanish: "es",
+  };
+
+  const activitiesToIcon = {
+    running: 'walking-icon-dark.png',
+    hiking: 'walking-icon-dark.png',
+    walking: 'walking-icon-dark.png',
+    cycling: 'walking-icon-dark.png'
+  };
   return(
     <div className="event-main-details">
     <div className="event-main-info">
@@ -19,25 +34,27 @@ function EventDetails({event}){
         <p>{event.number_of_participants}</p>
       </div>
       <div className="event-main-dates">
-        <DateCard date={event.start_date} />
-        <DateCard date={event.end_date} />
+        {event.eventStartTime && (<DateCard date={event.eventStartTime} />)}
+        {event.eventEndTime && (<DateCard date={event.eventEndTime} />)}
       </div>
 
     </div>
     <div className='activities-languages'>
           <div className='event-section activities'>
             <p className='event-section-tittle'>Activities</p>
-            {event.activities.map((activity) =>(
-              <ActivityIcon icon={activity} />
-            ))
-            }
+            {event.activities.map((activity) => {
+                  console.log('aktywnośc tej')
+                  console.log(activity)
+                  const icon = activitiesToIcon[activity.activity.name] || 'default-icon.png'; 
+                  return <ActivityIcon icon={icon} />;
+                })}
           </div>
           <div className='event-section languages'>
             <p className='event-section-tittle'>Languages</p>
-            {event.languages.map((language) =>(
-              <span className={`fi fi-${language}`}></span>
-            ))
-            }
+            {event.languages.map((language) => {
+                  const flagCode = languageToFlagCode[language.language.name] || "unknown"; // Fallback to "unknown" if the language is not in the dictionary
+                  return <span className={`fi fi-${flagCode}`}></span>;
+                 })}
 
           </div>
           <div className='member-numbers-event'> 

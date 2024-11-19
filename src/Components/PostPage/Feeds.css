@@ -5,18 +5,27 @@
     flex-direction: column; /* Ustawia elementy w kolumnie (nagłówek i przyciski) */
     align-items: flex-start;
     justify-content: center; /* Wyśrodkowuje zawartość w pionie */
+    margin-top: 10px;
+    padding: 0;
 }
 
-.Feeds-buttons {
+.feeds-right-button {
     display: flex; /* Ustawia Flexbox, aby przyciski były w jednym rzędzie */
     gap: 10px; /* Odstęp między przyciskami */
     /* margin-top: 10px; Dodatkowy odstęp od nagłówka */
     /* margin-left: 0px; */
+    margin-top: 10px;
+}
+
+.Feeds-buttons{
+    display: flex;
+    justify-content: space-between; /* Rozmieszczenie przycisków na całą szerokość */
+    width: 100%;
 }
 
 .button-feed {
     width: 125px; /* Stała szerokość przycisków */
-    height: 38px; /* Wysokość przycisków */
+    height: 34px; /* Wysokość przycisków */
     background-color: #f0f0f0; /* Kolor tła przycisku */
     border: 1px solid #ccc; /* Ramka wokół pola */
     border-radius: 24px; /* Zaokrąglone rogi */
@@ -40,6 +49,11 @@
     -webkit-box-shadow: 0px 0px 2px 2px #B0E26A;
     -moz-box-shadow: 0px 0px 2px 2px #B0E26A;
     box-shadow: 0px 0px 2px 2px #B0E26A;
-    
-  
+}
+
+.create-group-button{
+    width: 169px;
+    height: 34px;
+    margin-top: 10px;
+    margin-right: 0;
 }

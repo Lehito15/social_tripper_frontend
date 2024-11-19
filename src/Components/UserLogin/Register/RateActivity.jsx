@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import './RateActivity.css';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-function RateActivity({ activity, removeActivity, language, event }) {
-    const [skillLevel, setSkillLevel] = useState(5.0);
+function RateActivity({ activity, removeActivity, language, updateActivity, event }) {
+    const initialRating = activity?.rating ?? language?.rating ?? 5.0;
+    const [skillLevel, setSkillLevel] = useState(initialRating);
     console.log(event)
     let activityName = '';
     let flag = '';
@@ -35,7 +36,7 @@ function RateActivity({ activity, removeActivity, language, event }) {
                              <span className={flag}></span>
                         </div>
                         )}
-                     <h3 className='activity-title'>
+                     <h3 className='activity-title activityname-right'>
                         {event ? `Required skill: ${skillLevel}` : `${skillLevel} / 10`}
                     </h3>
                 </div>
@@ -48,7 +49,11 @@ function RateActivity({ activity, removeActivity, language, event }) {
                         step={0.1}
                         max="10"
                         value={skillLevel}
-                        onChange={(e) => setSkillLevel(e.target.value)}
+                        onChange={(e) => {
+                            const newRating = parseFloat(e.target.value);
+                            setSkillLevel(newRating);
+                            updateActivity(newRating); // Aktualizacja ratingu w głównym stanie
+                          }}
                     />
                 </div>
             </div>

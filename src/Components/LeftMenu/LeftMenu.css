@@ -1,8 +1,9 @@
 .left-menu {
-  width: 250px; /* Szerokość menu dostosowana do szerokości okna */
   background-color: #ffffff; /* Kolor tła */
   border-right: 0.1px inset #000000;
   height: 100vh;
+  width: 250px;
+
  
   position: fixed;
   top: 0;
@@ -80,6 +81,7 @@ nav {
   align-items: center;
   width: 100%;
   height: 100%;
+  font-weight: 300;
 }
 
 .menu-item {
@@ -100,7 +102,7 @@ nav {
 }
 
 .menu-link.active .text {
-  font-weight: bold; /* Ustawia pogrubienie tekstu aktywnego elementu */
+  font-weight: 500; /* Ustawia pogrubienie tekstu aktywnego elementu */
 }
 .menu-item .icon {
   /* margin-right: 1vw; Odstęp od tekstu z użyciem jednostek viewportowych */

@@ -3,11 +3,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
 import '../PostPage/Slider.css';
 
-function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, post }) {
+function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, post, openRelation, relation }) {
   const [index, setIndex] = useState(0); // Zarządzanie aktywnym indeksem
   const carouselRef = useRef(null); // Używamy ref do całego kontenera Carousel
   console.log('mulimedia xdd')
   console.log(multimedia.length)
+  console.log(relation)
 
   const handleSelect = (selectedIndex) => {
     const lastIndex = multimedia.length - 1; // Zakładamy, że mamy kilka slajdów (0, 1, 2, ..., n)
@@ -31,6 +32,7 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
 
   useEffect(() => {
     if (openPost) {
+      console.log('to jest post');
       const images = document.querySelectorAll('.img');
 
       const handleOpenPost = () => openPost(post);
@@ -47,6 +49,26 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
       };
     }
   }, [post, openPost]);
+
+
+  useEffect(() => {
+    if (openRelation) {
+      console.log('to jest relacja');
+      const images = document.querySelectorAll('.img');
+
+      const handleOpenRelation = () => openRelation(relation);
+
+      images.forEach((img) => {
+        img.addEventListener('click', handleOpenRelation);
+      });
+
+      return () => {
+        images.forEach((img) => {
+          img.removeEventListener('click', handleOpenRelation);
+        });
+      };
+    }
+  }, [relation, openRelation]);
 
   console.log(document.querySelector(".img"));
   // if( document.querySelector(".img")){
