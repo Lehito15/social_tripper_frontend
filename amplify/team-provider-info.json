@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-socialtripperfronten-dev-ecdf6-authRole",
+      "UnauthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-ecdf6-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-ecdf6-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-socialtripperfronten-dev-ecdf6-deployment",
+      "UnauthRoleName": "amplify-socialtripperfronten-dev-ecdf6-unauthRole",
+      "StackName": "amplify-socialtripperfronten-dev-ecdf6",
+      "StackId": "arn:aws:cloudformation:us-east-1:761018860208:stack/amplify-socialtripperfronten-dev-ecdf6/4c25cc00-a698-11ef-8345-0affead87575",
+      "AmplifyAppId": "dj9ppilc98abx"
+    },
+    "categories": {
+      "auth": {
+        "socialtripperfronten41d0de92": {}
+      }
+    }
+  }
+}

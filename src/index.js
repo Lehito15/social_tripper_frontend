@@ -6,6 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import 'leaflet/dist/leaflet.css';
 import { ApolloClient, InMemoryCache, ApolloProvider  } from '@apollo/client';
 import { RestLink } from 'apollo-link-rest';
+import { Authenticator } from '@aws-amplify/ui-react';
+// import '@aws-amplify/ui-react/styles.css';
+import awsconfig from './aws-exports';
+import { Amplify } from 'aws-amplify';
+import {components, formFields} from './Login'
 
 const restLink = new RestLink({ uri: 'http://localhost:8080/' });
 
@@ -13,12 +18,18 @@ const client = new ApolloClient({
   link: restLink,
   cache: new InMemoryCache()
 });
+Amplify.configure(awsconfig);
+
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
+    <Authenticator  components={components}>
       <App />
+      </Authenticator>
     </ApolloProvider>
   </React.StrictMode>
 );

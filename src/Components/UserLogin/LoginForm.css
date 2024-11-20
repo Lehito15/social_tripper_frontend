@@ -14,14 +14,27 @@
     align-items: center;
     background-color: #fff;
   }
-  
+  .amplify-button.amplify-button--primary {
+    background-color: black; 
+    color: rgb(189, 242, 113);
+    border-radius: 12px;
+  }
+ 
   .login-logo {
-    height: 105px ;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .elevation-login{
+    width: 414px;
+    border: 1px solid #0000001A;
+    margin-top: 18px;
+
   }
   
   .logo-image {
     width: 100%;
-    height:70px;
+    margin-bottom: 10px;
   }
   
   .form {
@@ -83,4 +96,35 @@
     padding-top: 18px;
     
   }
+
+ 
+
+  .amplify-input.amplify-field-group__control .amplify-button.amplify-field-group__control.amplify-field__show-password{
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(240, 242, 245, 0.6);
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Kanit', sans-serif;
+  }
+
+ .amplify-input.amplify-field-group__control:focus {
+  border: none;
+  outline: none;
+
+ }
+
+ .amplify-tabs__item.amplify-tabs__item--active{
+  color: black
+
+ }
+
+.amplify-tabs__item.amplify-tabs__item:hover{
+  color: black
+
+ }
+
+ .google-button{
+  width: 414px;
+
+ }
   

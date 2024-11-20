@@ -2,9 +2,11 @@ import React from 'react';
 import ProfileStatistics from './ProfileStatistics.jsx';
 import { NavLink } from 'react-router-dom'; 
 import '../LeftMenu/LeftMenu.css';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 
 function LeftMenu() {
+  const { signOut } = useAuthenticator();
   return (
     <div className="left-menu">
       <div className='logo-container'>
@@ -107,10 +109,10 @@ function LeftMenu() {
                 </li>
                 <li>
                   <NavLink 
-                    to="/login" 
+                    to="/" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   >
-                    <div className="menu-item">
+                    <div className="menu-item" onClick={signOut}>
                       <img src={`${process.env.PUBLIC_URL}/logout_icon.png`} alt="Ikona" className="icon" />
                       <span className='text'>Logout      </span>
                     </div>

@@ -9,8 +9,8 @@ function Post({post, openPost, closePost}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
-  console.log('graphql')
- console.log(post)
+//   console.log('graphql')
+//  console.log(post)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -21,8 +21,8 @@ function Post({post, openPost, closePost}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
-      console.log('maxwidth');
-      console.log(maxWidth);
+      // console.log('maxwidth');
+      // console.log(maxWidth);
       if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
         const mediaHeights = await Promise.all(
           post.postMultimediaDTO.map((mediaItem) => {
@@ -51,8 +51,8 @@ function Post({post, openPost, closePost}){
 
     calculateHeight();
   }, [post]);
-  console.log('post');
-  console.log(post.postMultimediaDTO)
+  // console.log('post');
+  // console.log(post.postMultimediaDTO)
   const maxChars = 205;
 
   return(
