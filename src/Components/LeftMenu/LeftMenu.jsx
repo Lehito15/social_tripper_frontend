@@ -5,7 +5,7 @@ import '../LeftMenu/LeftMenu.css';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 
-function LeftMenu() {
+function LeftMenu(user) {
   const { signOut } = useAuthenticator();
   return (
     <div className="left-menu">
@@ -13,7 +13,7 @@ function LeftMenu() {
         <img src={`${process.env.PUBLIC_URL}/LeftBarTopComponent.svg`} alt="Logo" className="logo" />
       </div>
       <div className='profile-statistics'>
-        <ProfileStatistics />
+        <ProfileStatistics user={user}/>
       </div> 
       <div className="menu-content">
         <div className='nav-container'>

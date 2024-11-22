@@ -17,7 +17,7 @@ function GeneralDetailsEvent({data, updateData}) {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       setImagePreview(null);
-      updateData({ ...data, eventImage: URL.createObjectURL(file), imageName: file.name});
+      updateData({ ...data, eventImage: URL.createObjectURL(file), imageName: file.name, eventImageFile: file});
       setImagePreview(URL.createObjectURL(file));
       setFileName(file.name);
       console.log(file)
@@ -25,7 +25,7 @@ function GeneralDetailsEvent({data, updateData}) {
   };
 
   const deleteImage = () => {
-    updateData({ ...data, eventImage: null, imageName: '' })
+    updateData({ ...data, eventImage: null, imageName: '', eventImageFile: null })
 
     setImagePreview(null);
     setFileName(null);

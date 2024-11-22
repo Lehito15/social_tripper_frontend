@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: column; /* Zmiana układu na kolumnę */
   font-family: 'Kanit', sans-serif;
-  /* background: rgba(240, 242, 245, 1); */
+  background: rgba(240, 242, 245, 1);
+
   overflow-y: auto;
   
 

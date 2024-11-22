@@ -12,6 +12,12 @@ function CreateGroup({closeCreateGroup}){
   const [currentStep, setCurrentStep] = useState(1);
 
   const createGroup = async () => {
+
+    if(generalDetailsEvent.groupName === '' || generalDetailsEvent === ''){
+      alert('fill inputs')
+      return;
+    }
+    const formData = new FormData();
     console.log(languages)
       const isPublic = generalDetailsEvent.visibility !== 'Private';
       const formattedActivities = activities.map((activity) => ({
@@ -38,19 +44,24 @@ function CreateGroup({closeCreateGroup}){
               status: 'Planned'
             },
             owner:{
-              uuid:"550e8400-e29b-41d4-a716-446655440005"
+              uuid:"f36adeef-6d03-48f1-a28b-139808a775d6"
             },
-            icon: null,
+            // icon: null,
             activities: formattedActivities,
             languages:formattedLanguages
         }
 
         console.log(GroupDTO)
+        formData.append('groupDTO', new Blob([JSON.stringify(GroupDTO)], { type: 'application/json' }));
+
+        if (generalDetailsEvent.eventImageFile) {
+          formData.append('icon', generalDetailsEvent.eventImageFile);
+      }
 
       
       
       // Endpoint changes based on eventUuid
-      const pathBack =  '/groups'
+      const pathBack =  '/groups' 
       const uuid = "550e8400-e29b-41d4-a716-446655440005";
       // const endpoint = eventUuid
       //   ? `http://localhost:8080/posts/event-post`
@@ -61,10 +72,7 @@ function CreateGroup({closeCreateGroup}){
         const response = await fetch(endpoint, {
           method: 'POST',
           // mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(GroupDTO),
+          body: formData,
         });
 
         if (!response.ok) {
@@ -76,7 +84,7 @@ function CreateGroup({closeCreateGroup}){
       } catch (error) {
         console.error('Error:', error);
       }
-      // window.location.href = pathBack;
+      window.location.href = pathBack;
    
   };
 
@@ -85,7 +93,8 @@ function CreateGroup({closeCreateGroup}){
     visibility: '',
     eventImage: null,
     imageName: null,
-    eventImagev2  : null
+    eventImagev2  : null,
+    eventImageFile: null
   });
 
   const [descriptionAndRules, setDescriptionAndRules] = useState({

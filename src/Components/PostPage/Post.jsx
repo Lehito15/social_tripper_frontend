@@ -10,7 +10,7 @@ function Post({post, openPost, closePost}){
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
 //   console.log('graphql')
-//  console.log(post)
+ console.log(post)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -21,44 +21,46 @@ function Post({post, openPost, closePost}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
-      // console.log('maxwidth');
-      // console.log(maxWidth);
-      if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
+    
+      if (post.postMultimediaUrls && post.postMultimediaUrls.length > 0) {
         const mediaHeights = await Promise.all(
-          post.postMultimediaDTO.map((mediaItem) => {
-            if (mediaItem.type === 'image') {
+          post.postMultimediaUrls.map((mediaUrl) => {
+            if (mediaUrl.endsWith('.jpg') || mediaUrl.endsWith('.jpeg') || mediaUrl.endsWith('.png') || mediaUrl.endsWith('.gif')) {
+              // Obsługa obrazów
               return new Promise((resolve) => {
                 const img = new Image();
-                img.src = mediaItem.src;
+                img.src = mediaUrl;
                 img.onload = () => {
                   const scaledHeight = (img.naturalHeight / img.naturalWidth) * maxWidth;
                   resolve(Math.min(scaledHeight, 600)); // Ograniczamy do maksymalnej wysokości 600
                 };
+                img.onerror = () => resolve(450); // Domyślna wysokość w przypadku błędu ładowania obrazu
               });
-            } else if (mediaItem.type === 'video') {
-              return Promise.resolve(600);
+            } else if (mediaUrl.endsWith('.mp4') || mediaUrl.endsWith('.webm') || mediaUrl.endsWith('.ogg')) {
+              // Obsługa wideo
+              return Promise.resolve(600); // Domyślna wysokość dla wideo
             }
+    
+            // Domyślna wysokość dla innych typów mediów
             return Promise.resolve(450);
           })
         );
-        const minHeight = Math.min(...mediaHeights); // Minimalna wysokość dla mediów
+    
+        const minHeight = Math.min(...mediaHeights); // Minimalna wysokość dla wszystkich mediów
         setPostHeight(minHeight);
       } else {
-        
-        setPostHeight(0); 
+        setPostHeight(0); // Brak multimediów - wysokość 0
       }
     };
 
     calculateHeight();
   }, [post]);
-  // console.log('post');
-  // console.log(post.postMultimediaDTO)
   const maxChars = 205;
 
   return(
   <div className='post-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.dateOfPost} status={"option"}   />
+      <PostOwner owner={post.account} date={post.dateOfPost} status={"option"}   />
       <div className="more-options-button">
         <img 
           className="more-options"
@@ -76,11 +78,11 @@ function Post({post, openPost, closePost}){
           )}
         </p>
       </div>
-      {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
+      {postHeight !== null && post.postMultimediaUrls && post.postMultimediaUrls.length > 0 && (
     <div className='slider-container-padding'>
       <div className= 'slider-container'   style={{height: postHeight}}>
       {/* {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && ( */}
-        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
+        <Slider multimedia={post.postMultimediaUrls} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
       {/* // )} */}
       </div>
     </div>

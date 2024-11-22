@@ -63,7 +63,7 @@ function TripEvents({ openEvent}){
         nickname
         profilePicture
       }
-      icon
+      iconUrl
       activities
       languages
     

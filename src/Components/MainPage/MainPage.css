@@ -52,7 +52,8 @@
   top: 70px; /* Poniżej paska wyszukiwania */
   left: 250px; /* Przesunięcie o szerokość lewego menu */
   right: 300px; /* Przesunięcie o szerokość prawego menu */
-  background-color: rgba(245, 247, 248, 1);
+  background: rgba(240, 242, 245, 1);
+
   /* min-height: calc(100vh - 70px); Wypełnia wysokość okna minus pasek wyszukiwania */
   display: flex;
   align-items: center;

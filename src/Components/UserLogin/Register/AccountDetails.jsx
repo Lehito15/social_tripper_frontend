@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import './AccountDetails.css';
+import RateActivity from './RateActivity';
 
 function AccountDetails({data, updateData}) {
   console.log(data)
@@ -20,7 +21,7 @@ function AccountDetails({data, updateData}) {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       setImagePreview(null);
-      updateData({ ...data, profileImage: URL.createObjectURL(file), imageName: file.name});
+      updateData({ ...data, profileImage: URL.createObjectURL(file), imageName: file.name, imageFile: file});
       setImagePreview(URL.createObjectURL(file));
       setFileName(file.name);
       console.log(file)
@@ -28,7 +29,7 @@ function AccountDetails({data, updateData}) {
   };
 
   const deleteImage = () => {
-    updateData({ ...data, profileImage: null, imageName: '' })
+    updateData({ ...data, profileImage: null, imageName: '', imageFile: null })
 
     setImagePreview(null);
     setFileName(null);
@@ -101,42 +102,49 @@ function AccountDetails({data, updateData}) {
     </div>
   
     <div className="form-row">
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <div className="password">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={data.password}
-            onChange={(e) => updateData({ ...data, password: e.target.value })}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/show-password.png`}
-            alt="Show password"
-            className="show-icon"
-            onClick={() => showPassword("password")}
-          />
-        </div>
+    <div className="form-group">
+      <div className='form-weight-height'>
+      <div className="form-weight">
+        <label htmlFor="weight">Weight (kg)</label>
+        <input
+          type="number"
+          id="weight"
+          name="weight"
+          step={0.1}
+          value={data.weight || ''}
+          onChange={(e) => updateData({ ...data, weight: e.target.value })}
+          placeholder="Enter your weight"
+        />
       </div>
+      <div className="form-weight">
+        <label htmlFor="height">Height (cm)</label>
+        <input
+          type="number"
+          id="height"
+          name="height"
+          
+          value={data.height || ''}
+          onChange={(e) => updateData({ ...data, height: e.target.value })}
+          placeholder="Enter your height"
+        />
+      </div>
+      </div>
+    </div>
+
   
       <div className="form-group">
-        <label htmlFor="repeat-password">Repeat Password</label>
-        <div className="password">
-          <input
-            type="password"
-            id="repeat-password"
-            name="repeat-password"
-            value={data.repeatPassword}
-            onChange={(e) => updateData({ ...data, repeatPassword: e.target.value })}
-          />
-          <img
-            src={`${process.env.PUBLIC_URL}/show-password.png`}
-            alt="Show password"
-            className="show-icon"
-            onClick={() => showPassword("repeat-password")}
-          />
-        </div>
+        <label htmlFor="repeat-password">Overall physicality score</label>
+        <RateActivity 
+          activity={{
+            name: '',
+            url: `${process.env.PUBLIC_URL}/full-biceps.png`, 
+            rating: data.physicality || 5.0,
+          }}
+          updateActivity={ (newRating) => updateData({ ...data, physicality: newRating })}
+          register = {true}
+        />
+
+   
       </div>
     </div>
   

@@ -67,3 +67,12 @@
     gap: 10px;
   }
 
+  .form-weight-height{
+    display: flex;
+    gap: 20px
+  }
+
+  .form-weight input{
+    width: 175px;
+  }
+

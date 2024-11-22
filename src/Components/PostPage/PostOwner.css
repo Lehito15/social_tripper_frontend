@@ -24,6 +24,7 @@
   border-radius: 50%;
   border: 1px solid rgba(0, 0, 0, 1);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: fill;
 
 
 }
@@ -37,7 +38,7 @@
 
 .post-owner-details.no-date {
   justify-content: center; /* Wyśrodkowanie pionowe, gdy brak daty */
-  padding-bottom: 20px; /* Usuń padding, aby wyśrodkować tekst */
+
 }
 
 .post-owner-name {

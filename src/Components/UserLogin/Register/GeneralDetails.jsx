@@ -2,8 +2,12 @@
 
 import React from 'react';
 import './GeneralDetails.css';
+import Select from 'react-select';
+import {countriesList} from '../../../Utils/helper.js';
 
 function GeneralDetails({data, updateData}) {
+  const countries =  countriesList();
+
   return (
     <form className="general-details-form">
       <div className="form-row">
@@ -38,8 +42,8 @@ function GeneralDetails({data, updateData}) {
                     type="radio" 
                     id="male" 
                     name="gender"
-                    value="Male" 
-                    checked={data.gender === 'Male'} 
+                    value="M" 
+                    checked={data.gender === 'M'} 
                     onChange={(e) => updateData({ ...data, gender: e.target.value })}/>
               <label htmlFor="male">Male</label>
             </div>
@@ -48,8 +52,8 @@ function GeneralDetails({data, updateData}) {
                 type="radio" 
                 id="female" 
                 name="gender" 
-                value="Female" 
-                checked={data.gender === 'Female'}
+                value="F" 
+                checked={data.gender === 'F'}
                 onChange={(e) => updateData({ ...data, gender: e.target.value })} />
                 <label htmlFor="male">Female</label>
             </div>
@@ -75,17 +79,18 @@ function GeneralDetails({data, updateData}) {
                 name="phone" 
                 placeholder='5412234' 
                 value={data.telephone}
-                onChange={(e) => updateData({ ...data, name: e.target.value })} />
+                onChange={(e) => updateData({ ...data, telephone: e.target.value })} />
         </div>
         <div className="form-group">
-          <label htmlFor="address">Email Address</label>
-          <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                placeholder='examples@gmail.com' 
-                value={data.email}
-                onChange={(e) => updateData({ ...data, email: e.target.value })} />
+          <label htmlFor="address">Countryy</label>
+          <Select
+              id="language"
+              options={countries}
+              onChange={(selectedOption) => updateData({ ...data, country: selectedOption?.value })}
+              placeholder="Select a country"
+              isSearchable={true}
+              value={countries.find(option => option.value === data.country)}
+            />
         </div>
       </div>
     </form>

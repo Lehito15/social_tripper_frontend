@@ -6,25 +6,28 @@ import AccountDetails from './AccountDetails.jsx';
 import Skills from './Skills.jsx';
 import RegisterSteps from './RegisterSteps.jsx';
 
-function Register() {
+function Register({userEmail}) {
+    console.log(userEmail)
     const steps = ['General Details', 'Account Details', 'Skills'];
 
     const [currentStep, setCurrentStep] = useState(1);
     const [generalDetails, setGeneralDetails] = useState({
         name: '',
         surname: '',
-        gender: '',
-        dateOfBirth: '',
+        gender: null,
+        dateOfBirth: null,
         telephone: '',
-        email: ''
+        country: ''
     });
     const [accountDetails, setAccountDetails] = useState({
         nickname: '',
-        password: '',
-        repeatPassword: '',
         profileDescription: '',
         imageName: null,
-        profileImage: null
+        profileImage: null,
+        imageFile: null,
+        weight: '',
+        height: '',
+        physicality: ''
 
     });
     const [activities, setActivities] = useState([]);
@@ -61,6 +64,77 @@ function Register() {
         }
     };
 
+    const createUser = async () =>{
+        if (generalDetails.name ==='' || !generalDetails.surname ==='' || !generalDetails.dateOfBirth || !generalDetails.gender) {
+            console.error('General details are incomplete!');
+            return;
+        }
+        const height =  accountDetails.height /100;
+        console.log(height);
+        const formattedActivities = activities.map((activity) => ({
+            experience: activity.rating,
+            activity: {
+                name: activity.label,
+            },
+        }));
+    
+        const formattedLanguages = languages.map((language) => ({
+            level: language.rating,
+            language: {
+                name: language.label,
+            },
+        }));
+        const userDTO =  {
+            name: generalDetails.name,
+            surname: generalDetails.surname,
+            dateOfBirth: generalDetails.dateOfBirth,
+            gender: generalDetails.gender,
+            weight: accountDetails.weight,
+            height: height,
+            physicality: accountDetails.physicality,
+            country:{
+                name:generalDetails.country
+            },
+            account: {
+                uuid:'',
+                nickname: accountDetails.nickname,
+                email:userEmail ,
+                isPublic: true,
+                phone: generalDetails.telephone,
+                createdAt: new Date().toISOString(),
+                homePageUrl: '',
+                description: accountDetails.description,
+            },
+            activities: formattedActivities,
+            languages: formattedLanguages
+
+        }
+        const formData = new FormData();
+        formData.append('userDTO', new Blob([JSON.stringify(userDTO)], { type: 'application/json' }));
+        if (accountDetails.imageFile) {
+            formData.append('profilePicture', accountDetails.imageFile);
+        }
+        const endpoint = 'http://localhost:8080/users'
+
+        try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
+            });
+      
+            if (!response.ok) {
+              throw new Error('Failed to create post');
+            }
+      
+            const data = await response.json();
+            console.log('Post created:', data);
+          } catch (error) {
+            console.error('Error:', error);
+          }
+    }
+
+
+
     return (
         <div className="register-container">
             <div className="login-logo">
@@ -75,7 +149,7 @@ function Register() {
             <div className="different-profile-info">
                 {renderStepComponent()}
             </div>
-            <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} />
+            <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createUser}  />
         </div>
     );
 }

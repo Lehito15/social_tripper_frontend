@@ -10,12 +10,13 @@
   .form-row {
     display: flex;
     justify-content: space-between;
+    gap: 36px
   }
   
   .form-group {
     display: flex;
     flex-direction: column;
-    width: 48%; /* Dwie kolumny */
+    width: 370px; /* Dwie kolumny */
   }
   .gender{
     display: flex;
@@ -80,5 +81,13 @@
     background-color: beige;
   }
   
+  .form-group .activity-logo{
+    background-color: white;
+  }
+
+.form-group .activity-image{
+  height: 38px;
+  width: 38px;
+}
 
   

@@ -21,6 +21,7 @@ import RelationsPage from '../RelationsPage/RelationsPage.jsx';
 import GroupPage from '../GroupPage/GroupPage.jsx';
 import GroupMain from '../GroupView/GroupMain.jsx';
 import CreateGroup from '../CreateGroup/CreateGroup.jsx';
+import { gql, useQuery } from '@apollo/client';
 
 
 
@@ -51,8 +52,36 @@ function MainPage() {
 
   const [eventUuid, setEventUuid] = useState(null)
 
+  const [userData,setUserData] = useState(null);
+
   const navigate = useNavigate()
 
+ 
+  
+  const userUuid = "f36adeef-6d03-48f1-a28b-139808a775d6";
+
+
+  const GET_User = gql
+`query GetEvent($usertUuid: String!) {
+    user @rest(type: "Post", path: "accounts/${userUuid}") {
+      nickname
+      uuid
+      homePageUrl
+      followersNumber
+      followingNumber
+      numberOfTrips
+      isPublic
+      postMultimediaUrls
+      profilePictureUrl
+    }
+  }`
+;
+
+const { loading, error, data } = useQuery(GET_User, {
+  variables: { userUuid },
+   fetchPolicy: 'network-only'
+});
+console.log(data);
   
 
   const openIndividualChat = (friend) => {
@@ -162,6 +191,11 @@ function MainPage() {
       setChatOpen(false);
     }
   };
+  useEffect(() => {
+    if (data) {
+      setUserData(data.user);
+    }
+  }, [data]);
 
   useEffect(() => {
     // Dodanie nasłuchiwacza kliknięć
@@ -172,11 +206,26 @@ function MainPage() {
     };
   }, [isAddPostOpen, isChatOpen]);
 
+ 
+  if (!data) {
+    return <p>Loading...</p>; 
+  }
+
+  if (!userData) {
+    return <p>Loading user data...</p>;
+  }
+
   return (
     <div className="App">
-      <div className={`main-content-wrapper ${(isAddPostOpen || isPostOpen || isCreateTripOpen || isRelationOpen) ? 'blur-background' : ''}`}>
+       <div
+        className={`main-content-wrapper ${
+          isAddPostOpen || isPostOpen || isCreateTripOpen || isRelationOpen
+            ? 'blur-background'
+            : ''
+        }`}
+      >
         <div className="left-menu">
-          <LeftMenu />
+          <LeftMenu user = {userData}/>
         </div>
     
         <div className="searchbar">
@@ -209,7 +258,7 @@ function MainPage() {
 
       {isAddPostOpen && (
         <div className="add-post-modal" ref={addPostRef}>
-          <CreatePost onClose={closeAddPost} owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'} } eventUuid={eventUuid}  />
+          <CreatePost onClose={closeAddPost} owner={userData } eventUuid={eventUuid}  />
         </div>
       )}
 

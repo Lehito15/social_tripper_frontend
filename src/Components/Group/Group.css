@@ -4,7 +4,7 @@
 }
 
 .group-container .event-image{
-  max-height: none;
+  /* max-height: none; */
 }
 .group-container .event-main-image-container{
   max-height: none;

@@ -62,7 +62,7 @@ function EventMain({openCreatePost}){
         homePageUrl
         profilePicture
       }
-      icon
+      iconUrl
       activities
       languages
     }
@@ -118,7 +118,7 @@ const event = data.event;
   return(
     <div className="event-main-container">
       <div className="event-main-image-container">
-        <img src={event.icon || `${process.env.PUBLIC_URL}/create-trip.png`} alt={event.description} className="event-image" />
+        <img src={event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`} alt={event.description} className="event-image" />
       </div>
        <EventDetails event={event} />
        <EventOption steps={options} currentStep={currentStep} setCurrentStep={setCurrentStep} />

@@ -13,6 +13,13 @@ function CreateEvent({closeCreateEvent}){
   const [currentStep, setCurrentStep] = useState(1);
 
   const createEvent = async () => {
+    console.log(`${eventSettings.tripEndDate}T${eventSettings.tripEndTime || '00:00'}:00`)
+    if(generalDetailsEvent.eventName === '' || !eventSettings.tripStartDate || !eventSettings.eventStartLocation){
+      alert('Fill  all inputs');
+      return;
+    }
+
+    const formData = new FormData();
     console.log(languages)
       const isPublic = generalDetailsEvent.visibility !== 'Private';
       const formattedActivities = activities.map((activity) => ({
@@ -30,28 +37,37 @@ function CreateEvent({closeCreateEvent}){
     }));
     const eventUuid = uuidv4();
          const EventDTO  = {
-            uuid: eventUuid,
+            // uuid: eventUuid,
+            name: generalDetailsEvent.eventName,
             description: descriptionAndRules.description,
+            destination: eventSettings.tripDescriptor,
             isPublic: isPublic,
             eventStartTime: `${eventSettings.tripStartDate}T${eventSettings.tripStartTime || '00:00'}:00`,
-            eventEndTime: `${eventSettings.tripEnddate}T${eventSettings.tripEndTime || '00:00'}:00`,
+            eventEndTime: `${eventSettings.tripEndDate}T${eventSettings.tripEndTime || '00:00'}:00`,
             maxNumberOfParticipants: eventSettings.maxParticipants,
-            actualNumberOfParticipants: 0,
-            numberOfParticipants: 0,
+            // actualNumberOfParticipants: 0,
+            // numberOfParticipants: 0,
             startLongitude: eventSettings.eventStartLocation[0].position[0],
             startLatitude: eventSettings.eventStartLocation[0].position[0],
-            homePageUrl: `http://localhost:3000/events/${eventUuid}`,
-            eventStatus:{
-              status: 'elo'
-            },
-            relation: null,
-            owner:{
-              uuid:"550e8400-e29b-41d4-a716-446655440005"
-            },
-            icon: null,
+            // homePageUrl: `http://localhost:3000/events/${eventUuid}`,
+            // eventStatus:{
+            //   status: 'Planned'
+            // },
+            // relation: null,
+            owner: { uuid: "f36adeef-6d03-48f1-a28b-139808a775d6" },
+            // icon: null,
             activities: formattedActivities,
             languages:formattedLanguages
         }
+        formData.append('event', new Blob([JSON.stringify(EventDTO)], { type: 'application/json' }));
+        console.log(generalDetailsEvent.eventImageFile)
+
+        if (generalDetailsEvent.eventImageFile) {
+          
+          formData.append('icon', generalDetailsEvent.eventImageFile);
+      }
+
+      
 
       
       
@@ -67,10 +83,8 @@ function CreateEvent({closeCreateEvent}){
         const response = await fetch(endpoint, {
           method: 'POST',
           // mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(EventDTO),
+         
+          body: formData,
         });
 
         if (!response.ok) {
@@ -82,15 +96,16 @@ function CreateEvent({closeCreateEvent}){
       } catch (error) {
         console.error('Error:', error);
       }
-      // window.location.href = pathBack;
+      window.location.href = pathBack;
    
   };
 
   const [generalDetailsEvent, setGeneralDetailsEvent] = useState({
-    groupName: '',
+    eventName: '',
     visibility: '',
     eventImage: null,
     imageName: null,
+    eventImageFile: null,
     eventImagev2  : null
   });
 
@@ -103,7 +118,7 @@ function CreateEvent({closeCreateEvent}){
     maxParticipants:  '',
     tripDescriptor: '',
     tripStartDate: '',
-    tripEnddate: '',
+    tripEndDate: '',
     tripStartTime: '',
     tripEndTime: '',
     eventStartLocation: null,

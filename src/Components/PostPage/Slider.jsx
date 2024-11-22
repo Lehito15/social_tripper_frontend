@@ -7,7 +7,7 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
   const [index, setIndex] = useState(0); // Zarządzanie aktywnym indeksem
   const carouselRef = useRef(null); // Używamy ref do całego kontenera Carousel
   console.log('mulimedia xdd')
-  console.log(multimedia.length)
+  console.log(multimedia)
   console.log(relation)
 
   const handleSelect = (selectedIndex) => {
@@ -96,23 +96,30 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
         ref={carouselRef} // Używamy ref do całego kontenera Carousel
         style={{ height: postHeight }}
       >
-        {multimedia.map((media, idx) => (
-          <Carousel.Item key={idx}>
-            {media.type === 'video' ? (
-              <video className="d-block w-100" controls style={{ height: postHeight }}>
-                <source src={media.src} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            ) : (
-              <img 
-                src={media.src} 
-                alt={`Slide ${idx + 1}`}  
-                className="img" 
-                style={{ height: postHeight }} 
-              />
-            )}
-          </Carousel.Item>
-        ))}
+       {multimedia.map((url, idx) => (
+  <Carousel.Item key={idx}>
+    {url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.ogg') ? (
+      // Wideo
+      <video
+        className="d-block w-100"
+        controls
+        style={{ height: postHeight }}
+      >
+        <source src={url} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    ) : (
+      // Obraz
+      <img
+        src={url}
+        alt={`Slide ${idx + 1}`}
+        className="img"
+        style={{ height: postHeight }}
+      />
+    )}
+  </Carousel.Item>
+))}
+
       </Carousel>
     </div>
   );

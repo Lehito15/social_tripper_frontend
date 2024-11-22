@@ -2,70 +2,59 @@ import React, { useState, useEffect } from 'react';
 import '../LeftMenu/ProfileStatistics.css';
 import { NavLink } from 'react-router-dom';
 import AccountStatistics from '../ProfileInfo/About/AccountStatistics';
+import { gql, useQuery } from '@apollo/client';
 
-function ProfileStatistcs(){
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+function ProfileStatistcs({user}){
+  console.log(user);
+  const owner = user.user;
 
-  const uuid = "550e8400-e29b-41d4-a716-446655440005";
+  const userUuid = "dad32e2a-404a-4834-8920-c660cc5f59e5";
 
 
-  useEffect(() => {
-    console.log('essa');
-    const fetchDataForPosts = async () => {
-      try {
-        console.log('loading');
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/1`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error: Status ${response.status}`);
-        }
-        let profile = await response.json();
-        const userData = {
-          name: profile.name,
-          rang: "New Tripper",
-          trips: 5, 
-          followers: 120,
-          following: 21,
-          profilePicture: "https://uploads.dailydot.com/2024/06/kurt-angel-meme.jpg?auto=compress&fm=pjpg" 
-      };
-        setUser(userData);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    };
+//   const GET_User = gql`
+//   query GetEvent($usertUuid: String!) {
+//     user @rest(type: "Post", path: "accounts/${userUuid}") {
+//       nickname
+//       uuid
+//       homePageUrl
+//       followersNumber
+//       followingNumber
+//       numberOfTrips
+//       isPublic
+//       postMultimediaUrls
+//       profilePictureUrl
+//     }
+//   }
+// `;
 
-    fetchDataForPosts();
-
-    
-  }, []);
-  if (loading) {
-    return <p>Loading...</p>; // Wyświetl loading, gdy dane są pobierane
-  }
+// const { loading, error, data } = useQuery(GET_User, {
+//   variables: { userUuid },
+//   //  fetchPolicy: 'network-only'
+// });
+// console.log(data);
+//   if (!data) {
+//     return <p>Loading...</p>; // Wyświetl loading, gdy dane są pobierane
+//   }
+//   const user = data.user;
 
   return(
     <div className="user-profile">
     <img
-      src={user.profilePicture}
-      alt={`${user.name}'s profile`}
+      // src={user.profilePicture}
+      src={owner.profilePictureUrl || `${process.env.PUBLIC_URL}/defoult-picture.png`}
+      alt={`${owner.nickname}'s profile`}
       className="profile-picture"
     />
     <div className="user-info">
-       <NavLink to={`profileinfo/${uuid}`} className='user-name'>
-          {user.name}
+       <NavLink to={`profileinfo/${owner.uuid}`} className='user-name'>
+          {owner.nickname}
         </NavLink>
         <br></br>
-      <p className='user-rang'>{user.rang}</p>
+      <p className='user-rang'>New Tripper</p>
 
-      <AccountStatistics stats={{trips: 5, 
-          followers: 121,
-          following: 21,}} />
+      <AccountStatistics stats={{trips:owner.numberOfTrips , 
+          followers: owner.followersNumber,
+          following: owner.followingNumber,}} />
 
     </div>
   </div>

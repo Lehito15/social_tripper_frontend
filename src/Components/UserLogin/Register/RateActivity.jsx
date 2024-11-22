@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RateActivity.css';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-function RateActivity({ activity, removeActivity, language, updateActivity, event }) {
+function RateActivity({ activity, removeActivity, language, updateActivity, event, register }) {
     const initialRating = activity?.rating ?? language?.rating ?? 5.0;
     const [skillLevel, setSkillLevel] = useState(initialRating);
     console.log(event)
@@ -57,7 +57,7 @@ function RateActivity({ activity, removeActivity, language, updateActivity, even
                     />
                 </div>
             </div>
-            <img src={`${process.env.PUBLIC_URL}/close.png`} alt="Logo" className="close-icon" onClick={() => removeActivity(activity ||  language)} />
+            {removeActivity  &&(<img src={`${process.env.PUBLIC_URL}/close.png`} alt="Logo" className="close-icon" onClick={() => removeActivity(activity ||  language)} />)}
         </div>
     );
 }

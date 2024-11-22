@@ -42,7 +42,7 @@ function GroupMain() {
           profilePicture
           homePageUrl
         }
-        icon
+        iconUrl
         activities
         languages
       }

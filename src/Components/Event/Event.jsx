@@ -32,7 +32,7 @@ function EventCard({ event, openEvent }) {
 
       <div className="event-content">
         <div className="event-image-container">
-          <img  src={event.icon || `${process.env.PUBLIC_URL}/create-trip.png`}  alt={event.name} className="event-image" />
+          <img  src={event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`}  alt={event.name} className="event-image" />
         </div>
 
         {/* Prawa strona: Data, Name, Description */}

@@ -84,6 +84,7 @@ function GroupPage({ createGroup}){
       homePageUrl
       locationScope
       numberOfMembers
+      iconUrl
       owner {
         uuid
         nickname

@@ -20,6 +20,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
     const newMediaItem = {
       type: file.type.includes('image') ? 'image' : 'video',
       src: URL.createObjectURL(file),
+      file: file
     };
     setMedia((prevMedia) => [...prevMedia, newMediaItem]);
   };
@@ -35,9 +36,11 @@ function CreatePost({ onClose, owner, eventUuid }) {
 
   const uploadPost = async () => {
     if (media.length !== 0 || description !== '') {
+      const formData = new FormData();
       let postDTO = {};
-      if(eventUuid){
-         postDTO  = {
+      
+      if (eventUuid) {
+        postDTO = {
           post: {
             uuid: uuidv4(),
             content: description,
@@ -46,14 +49,12 @@ function CreatePost({ onClose, owner, eventUuid }) {
             isLocked: false,
             commentNumber: 0,
             reactionsNumber: 0,
-            account: {uuid:"550e8400-e29b-41d4-a716-446655440005"},
-            postMultimediaDTO: [],
+            account: { uuid: "550e8400-e29b-41d4-a716-446655440005" },
+            // postMultimediaDTO: [],
           },
-          event: {uuid:eventUuid},
-        }
-
-      }
-      else{
+          event: { uuid: eventUuid },
+        };
+      } else {
         postDTO = {
           uuid: uuidv4(),
           content: description,
@@ -62,45 +63,67 @@ function CreatePost({ onClose, owner, eventUuid }) {
           isLocked: false,
           commentNumber: 0,
           reactionsNumber: 0,
-          account: {uuid:"550e8400-e29b-41d4-a716-446655440005"},
+          account: { uuid: "f36adeef-6d03-48f1-a28b-139808a775d6" },
           postMultimediaDTO: [],
-          // EventThumbnailDTO: eventUuid
         };
-
+      }
+  
+      formData.append('postDTO', new Blob([JSON.stringify(postDTO)], { type: 'application/json' }));
+  
+      // Dodaj pliki multimedialne
+      // media.forEach((file) => {
+      //   formData.append('multimedia', file); // Możesz użyć innej nazwy jeśli serwer tego wymaga
+      // });
+      if (media.length > 0) {
+        console.log('dodaje pliki')
+        // media.forEach((file) => {
+        //   formData.append('multimedia', file); // Każdy plik dodawany osobno
+        // });
+        // formData.append('multimedia', media[0].file);
+        media.forEach((item, index) => {
+          if (item.file) {
+              console.log(`Dodawanie pliku ${index}:`, item.file);
+              formData.append('multimedia', item.file); // Dodawanie każdego pliku
+          } else {
+              console.error(`Element ${index} nie ma właściwości 'file':`, item);
+          }
+      });
+        for (let pair of formData.entries()) {
+          console.log(pair[0], pair[1]); // Powinno pokazać multimedia i odpowiednie pliki
       }
       
-
+        // formData.append('multimedia', multimedia);
+         
+    }
+    console.log(formData.get('multimedia'))
+  
       // Endpoint changes based on eventUuid
-      const pathBack = eventUuid? `event/${eventUuid}` : '/'
-      const uuid = "550e8400-e29b-41d4-a716-446655440005";
-      const endpoint = eventUuid
-        ? `http://localhost:8080/posts/event-post`
-        : `http://localhost:8080/posts`;
-
+      const pathBack = eventUuid ? `event/${eventUuid}` : '/';
+      const endpoint = eventUuid ? `http://localhost:8080/posts/event-post` : `http://localhost:8080/posts`;
+  
       try {
         const response = await fetch(endpoint, {
+          mode: 'no-cors',
           method: 'POST',
-          // mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postDTO),
+          body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
         });
-
+  
         if (!response.ok) {
           throw new Error('Failed to create post');
         }
-
+  
         const data = await response.json();
         console.log('Post created:', data);
       } catch (error) {
         console.error('Error:', error);
       }
-      window.location.href = pathBack;
+      // window.location.href = pathBack;
     } else {
       alert('Nie ma nic');
     }
+    
   };
+  
 
   const displayedMedia = media.slice(0, 6);
   const remainingCount = media.length - 6;

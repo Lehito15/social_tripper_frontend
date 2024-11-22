@@ -22,19 +22,30 @@ function App() {
   const [isLoading, setIsLoading] = useState(true); // To manage the loading state
 
   const [user, setUser] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [error, setError] = useState(null);
   const [customState, setCustomState] = useState(null);
   async function getUserTest(){
-    const { username, userId, signInDetails } = await getCurrentUser();
+    const { username, userId, signInDetails,EmailAddress } = await getCurrentUser();
+    console.log(getCurrentUser())
 
     console.log("username", username);
     console.log("user id", userId);
     console.log("sign-in details", signInDetails)
+    // const email = signInDetails?.email;
+    console.log("User email:", EmailAddress);
 
-    const session = await fetchAuthSession();
+    const session = await fetchAuthSession();  // Załóżmy, że masz już sesję użytkownika
+    const idToken = session.tokens?.idToken;   // Dostęp do idToken
 
-  console.log("id token", session.tokens)
-  // console.log("access token", session.tokens.accessToken.toString)
+    if (idToken) {
+        const email = idToken.payload?.email;
+        setUserEmail(email);  // Odczytanie e-maila z payloadu idToken
+        console.log("User email:", email);     // Wypisanie e-maila w konsoli
+    } else {
+        console.log("No idToken available");
+    }
+
 
   }
   getUserTest()
@@ -42,25 +53,7 @@ function App() {
 
   console.log('start')
 
-  useEffect(() => {
-    const unsubscribe = Hub.listen("auth", ({ payload }) => {
-      switch (payload.event) {
-        case "signInWithRedirect":
-          getUser();
-          break;
-        case "signInWithRedirect_failure":
-          setError("An error has occurred during the OAuth flow.");
-          break;
-        case "customOAuthState":
-          setCustomState(payload.data); // this is the customState provided on signInWithRedirect function
-          break;
-      }
-    });
-
-    getUser();
-
-    return unsubscribe;
-  }, []);
+ 
 
   const getUser = async () => {
     try {
@@ -71,6 +64,9 @@ function App() {
       console.log("Not signed in");
     }
   };
+  if (userEmail === null) {
+    return <div>Loading...</div>;  // Możesz pokazać loader lub inny komponent
+}
 
 
   
@@ -91,7 +87,7 @@ function App() {
           />
           <Route
             path="/register/*"
-            element={ <Register /> }
+            element={ <Register userEmail={userEmail} /> }
           />
         </Routes>
       </div>
