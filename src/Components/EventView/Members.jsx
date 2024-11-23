@@ -5,9 +5,9 @@ import './Members.css';
 function Members({ title, owner, isOwner }) {
   // Lista członków
   const members = [
-    { name: 'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' },
-    { name: 'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' },
-    { name: 'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' }
+    { nickname: 'Kamil grosicki', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' },
+    { nickname: 'Kamil grosicki', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' },
+    { nickname: 'Kamil grosicki', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg' }
   ];
 
   return (

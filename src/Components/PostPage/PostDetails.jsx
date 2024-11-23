@@ -10,7 +10,7 @@ import Comment from './Comment.jsx';
 function  PostDetail({post, closePost}){
   const author1 = {name: "Kurt", surname: "Kotarski", profile_picture_url: "https://graw.pl/wp-content/uploads/2022/11/Zbigniew-Kotarski-GRAW.jpg", id: 5, isActive: true};
   const author2 = { name: "Anna", surname: "Nowak", profile_picture_url: "https://ocdn.eu/pulscms-transforms/1/vKOk9kpTURBXy9kNmVhNTZkMzlmYTc5NzU2NzJlMGIxMjM2MzczMjUyYi5qcGeTlQPMxy7NBiHNA3KVAs0EsADDw5MJpjcxZjlmZgbeAAGhMAE/anna-maria-wesolowska-w-2011-r.jpeg", id: 6, isActive: false };
-  console.log('eloo post')
+  console.log(post)
 
   const messages = [
     {
@@ -44,11 +44,11 @@ function  PostDetail({post, closePost}){
   return (
     <div className='post-details-container'>
       <div className='post-details-photo'>
-        <Slider multimedia={post.postMultimediaDTO} postHeight={postDetailHeight}  />
+        <Slider multimedia={post.postMultimediaUrls} postHeight={postDetailHeight}  />
       </div>
       <div  className='post-left-details'>
         <div  className='post-owner'>
-          <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.dateOfPost} status={"option"} />
+          <PostOwner owner={post.account} date={post.dateOfPost} status={"option"} />
         </div>
         <p className={`content-text ${isExpanded ? 'expanded' : ''}`}>
           {isExpanded ? post.content : (post.content.length > maxChars ? post.content.slice(0, maxChars) + '...' : post.content)}

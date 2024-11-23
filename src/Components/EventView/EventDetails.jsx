@@ -2,11 +2,13 @@ import ActivityIcon from "../Event/ActivityIcon.jsx";
 import DateCard from "../Event/DateCard.jsx";
 import PostOwner from "../PostPage/PostOwner.jsx";
 import EventMembers from "../Event/EventMembers.jsx";
+import DateCardTime from "../Event/DateCardTime.jsx";
 import './EventDetails.css';
 
 function EventDetails({event}){
   const eventPublicText = event.isPublic ? 'Public trip' : 'Private trip';
   const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'public-icon.png';
+  console.log(event)
 
   const languageToFlagCode = {
     English: "gb",
@@ -26,7 +28,7 @@ function EventDetails({event}){
     <div className="event-main-details">
     <div className="event-main-info">
       <div className="event-main-info-details">
-        <h3 className="event-name">{event.name}</h3>
+        <h3 className="event-name">{event.description}</h3>
         <div className="event-public">
           <img src={`${process.env.PUBLIC_URL}/${eventPublicIcon}`} alt={event.name} className="public-icon" />
           <p className="event-public-text">{eventPublicText}</p>
@@ -34,8 +36,8 @@ function EventDetails({event}){
         <p>{event.number_of_participants}</p>
       </div>
       <div className="event-main-dates">
-        {event.eventStartTime && (<DateCard date={event.eventStartTime} />)}
-        {event.eventEndTime && (<DateCard date={event.eventEndTime} />)}
+        {event.eventStartTime && (<DateCardTime date={event.eventStartTime} />)}
+        {event.eventEndTime && (<DateCardTime date={event.eventEndTime} />)}
       </div>
 
     </div>
@@ -58,7 +60,7 @@ function EventDetails({event}){
 
           </div>
           <div className='member-numbers-event'> 
-            <EventMembers number_of_participants={event.number_of_participants} max_number_ofParticpants={event.max_number_ofParticpants} />
+            <EventMembers number_of_participants={event.numberOfParticipants} max_number_ofParticpants={event.maxNumberOfParticipants} />
           </div>
 
         </div>
@@ -66,7 +68,7 @@ function EventDetails({event}){
       <div className="event-main-owner">
         <p className="owned-by">Owned by</p>
         <div className='trip-owner'>
-          <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+          <PostOwner owner={{nickname: 'Kamil Grosicki', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
         </div>
       </div>
       <div className="event-buttons">

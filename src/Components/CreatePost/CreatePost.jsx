@@ -42,14 +42,14 @@ function CreatePost({ onClose, owner, eventUuid }) {
       if (eventUuid) {
         postDTO = {
           post: {
-            uuid: uuidv4(),
+            // uuid: uuidv4(),
             content: description,
             dateOfPost: new Date().toISOString(),
             isExpired: false,
             isLocked: false,
             commentNumber: 0,
             reactionsNumber: 0,
-            account: { uuid: "550e8400-e29b-41d4-a716-446655440005" },
+            account: { uuid: "fe5d7852-8bbb-411a-ac4b-405cda47ffbc" },
             // postMultimediaDTO: [],
           },
           event: { uuid: eventUuid },
@@ -63,8 +63,8 @@ function CreatePost({ onClose, owner, eventUuid }) {
           isLocked: false,
           commentNumber: 0,
           reactionsNumber: 0,
-          account: { uuid: "f36adeef-6d03-48f1-a28b-139808a775d6" },
-          postMultimediaDTO: [],
+          account: { uuid: "fe5d7852-8bbb-411a-ac4b-405cda47ffbc" },
+          // postMultimediaDTO: [],
         };
       }
   
@@ -98,12 +98,12 @@ function CreatePost({ onClose, owner, eventUuid }) {
     console.log(formData.get('multimedia'))
   
       // Endpoint changes based on eventUuid
-      const pathBack = eventUuid ? `event/${eventUuid}` : '/';
+      const pathBack = eventUuid ? `events/${eventUuid}` : '/';
       const endpoint = eventUuid ? `http://localhost:8080/posts/event-post` : `http://localhost:8080/posts`;
   
       try {
         const response = await fetch(endpoint, {
-          mode: 'no-cors',
+          // mode: 'no-cors',
           method: 'POST',
           body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
         });
@@ -117,9 +117,9 @@ function CreatePost({ onClose, owner, eventUuid }) {
       } catch (error) {
         console.error('Error:', error);
       }
-      // window.location.href = pathBack;
+      window.location.href = pathBack;
     } else {
-      alert('Nie ma nic');
+      // alert('Nie ma nic');
     }
     
   };

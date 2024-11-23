@@ -44,6 +44,7 @@ function EventMain({openCreatePost}){
     event @rest(type: "Post", path: "events/${eventUuid}") {
       uuid
       description
+      name
       isPublic
       dateOfCreation
       eventStartTime

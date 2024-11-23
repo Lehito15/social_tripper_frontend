@@ -8,7 +8,7 @@ function SuggestionsForYou(){
     <div className="suuggestions-container">
       <span className='component-title'>Suggestions for you</span>
       <div className="list-of-suggestions">
-        <PostOwner  owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} bottomText={'New Tripper'}/>
+        <PostOwner  owner={{nickname: 'Kamil Grosicki', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} bottomText={'New Tripper'}/>
       </div>
      
     </div>      

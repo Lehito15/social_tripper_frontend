@@ -58,7 +58,7 @@ function MainPage() {
 
  
   
-  const userUuid = "f36adeef-6d03-48f1-a28b-139808a775d6";
+  const userUuid = "fe5d7852-8bbb-411a-ac4b-405cda47ffbc";
 
 
   const GET_User = gql

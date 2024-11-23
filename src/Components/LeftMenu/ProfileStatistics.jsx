@@ -8,7 +8,7 @@ function ProfileStatistcs({user}){
   console.log(user);
   const owner = user.user;
 
-  const userUuid = "dad32e2a-404a-4834-8920-c660cc5f59e5";
+  const userUuid = "fe5d7852-8bbb-411a-ac4b-405cda47ffbc";
 
 
 //   const GET_User = gql`
