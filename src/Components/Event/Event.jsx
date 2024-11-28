@@ -40,29 +40,39 @@ function EventCard({ event, openEvent }) {
           <div className="event-date">
             {event.eventStartTime && (<DateCardTime date={event.eventStartTime} />)}
             {event.eventEndTime && (<DateCardTime date={event.eventEndTime} />)}
-            <h3 className="event-name" onClick={() => openEvent(event.uuid)}>{event.description}</h3>
+            <div className='event-name-container'>
+              <span className="event-name" onClick={() => openEvent(event.uuid)}>{event.name}</span>
+            </div>
+            {/* <h3 className="event-name" onClick={() => openEvent(event.uuid)}>{event.description}</h3> */}
           </div>
           <div className='event-about'>
             <div className='event-description-container'>
               <p className='event-section-tittle'>Description</p>
-              <p className="event-description">{event.description}</p>
+              <span className="event-description">{event.description}</span>
             </div>
             <div className='activities-languages'>
               <div className='event-section activities'>
                 <p className='event-section-tittle'>Activities</p>
-                {event.activities.map((activity) => {
-                  console.log('aktywnośc tej')
-                  console.log(activity)
-                  const icon = activitiesToIcon[activity.activity.name] || 'default-icon.png'; 
-                  return <ActivityIcon icon={icon} />;
-                })}
+                <div className='activities-section'>
+                  {event.activities.map((activity) => {
+                    console.log('aktywnośc tej')
+                    console.log(activity)
+                    const icon = activitiesToIcon[activity.activity.name] || 'default-icon.png'; 
+                    return <ActivityIcon icon={icon} />;
+                  })}
+
+                </div>
+             
               </div>
               <div className='event-section languages'>
                 <p className='event-section-tittle'>Languages</p>
-                {event.languages.map((language) => {
-                  const flagCode = languageToFlagCode[language.language.name] || "unknown"; // Fallback to "unknown" if the language is not in the dictionary
-                  return <span className={`fi fi-${flagCode}`}></span>;
-                 })}
+                <div className='activities-section'>
+                  {event.languages.map((language) => {
+                    const flagCode = languageToFlagCode[language.language.name] || "unknown"; // Fallback to "unknown" if the language is not in the dictionary
+                    return <span className={`fi fi-${flagCode}`}></span>;
+                  })}
+                </div>
+                
 
               </div>
 
@@ -70,7 +80,7 @@ function EventCard({ event, openEvent }) {
           </div>
           <div className='trip-people'>
             <div className='trip-owner'>
-              <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+              <PostOwner owner={event.owner} />
             </div>
             <div className='member-numbers'> 
               <EventMembers number_of_participants={event.numberOfParticipants} max_number_ofParticpants={event.maxNumberOfParticipants} />

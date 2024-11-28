@@ -3,10 +3,14 @@ import '../CreatePost/CreatePost.css';
 import PostOwner from '../PostPage/PostOwner';
 import AddMedia from '../CreatePost/AddMedia.jsx';
 import Select from 'react-select';
-import { v4 as uuidv4 } from 'uuid';
+import {  sendToBackend } from '../../Utils/helper.js';
+import { useNavigate } from "react-router-dom";
 
-function CreatePost({ onClose, owner, eventUuid }) {
+function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
+  console.log('EVENTY')
   console.log(eventUuid)
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [media, setMedia] = useState([]);
   const [description, setDescription] = useState('');
@@ -35,100 +39,83 @@ function CreatePost({ onClose, owner, eventUuid }) {
 
 
   const uploadPost = async () => {
+    if (isSubmitting) return;
     if (media.length !== 0 || description !== '') {
+      setIsSubmitting(true);
       const formData = new FormData();
-      let postDTO = {};
-      
-      if (eventUuid) {
-        postDTO = {
-          post: {
-            // uuid: uuidv4(),
+      let postDTO = eventUuid
+        ? {
+            post: {
+              content: description,
+              account: { uuid: userUuid },
+            },
+            event: { uuid: eventUuid },
+          }
+        : groupUuid
+        ? {
+            post: {
+              content: description,
+              account: { uuid: userUuid },
+            },
+            group: { uuid: groupUuid },
+          }
+        : {
             content: description,
-            dateOfPost: new Date().toISOString(),
-            isExpired: false,
-            isLocked: false,
-            commentNumber: 0,
-            reactionsNumber: 0,
-            account: { uuid: "fe5d7852-8bbb-411a-ac4b-405cda47ffbc" },
-            // postMultimediaDTO: [],
-          },
-          event: { uuid: eventUuid },
-        };
-      } else {
-        postDTO = {
-          uuid: uuidv4(),
-          content: description,
-          dateOfPost: new Date().toISOString(),
-          isExpired: false,
-          isLocked: false,
-          commentNumber: 0,
-          reactionsNumber: 0,
-          account: { uuid: "fe5d7852-8bbb-411a-ac4b-405cda47ffbc" },
-          // postMultimediaDTO: [],
-        };
-      }
+            account: { uuid: userUuid },
+          };
   
       formData.append('postDTO', new Blob([JSON.stringify(postDTO)], { type: 'application/json' }));
   
-      // Dodaj pliki multimedialne
-      // media.forEach((file) => {
-      //   formData.append('multimedia', file); // Możesz użyć innej nazwy jeśli serwer tego wymaga
-      // });
-      if (media.length > 0) {
-        console.log('dodaje pliki')
-        // media.forEach((file) => {
-        //   formData.append('multimedia', file); // Każdy plik dodawany osobno
-        // });
-        // formData.append('multimedia', media[0].file);
-        media.forEach((item, index) => {
-          if (item.file) {
-              console.log(`Dodawanie pliku ${index}:`, item.file);
-              formData.append('multimedia', item.file); // Dodawanie każdego pliku
-          } else {
-              console.error(`Element ${index} nie ma właściwości 'file':`, item);
-          }
-      });
-        for (let pair of formData.entries()) {
-          console.log(pair[0], pair[1]); // Powinno pokazać multimedia i odpowiednie pliki
-      }
-      
-        // formData.append('multimedia', multimedia);
-         
-    }
-    console.log(formData.get('multimedia'))
+      media.forEach((item) => formData.append('multimedia', item.file));
   
-      // Endpoint changes based on eventUuid
-      const pathBack = eventUuid ? `events/${eventUuid}` : '/';
-      const endpoint = eventUuid ? `http://localhost:8080/posts/event-post` : `http://localhost:8080/posts`;
+      const endpoint = eventUuid
+        ? `posts/event-post`
+        : groupUuid
+        ? `posts/group-post`
+        : `posts`;
   
+      console.log('Endpoint:', endpoint);
+  
+      // try {
+      //   const response = await fetch(endpoint, {
+      //     method: 'POST',
+      //     body: formData,
+      //   });
+  
+      //   if (!response.ok) {
+      //     const errorText = await response.text();
+      //     console.error('Błąd serwera:', errorText);
+      //     throw new Error(`Błąd: ${errorText}`);
+      //   }
+  
+      //   const data = await response.json();
+      //   console.log('Post created:', data);
+      //   onClose();
+      // } catch (error) {
+      //   console.error('Error:', error);
+      // }
+
       try {
-        const response = await fetch(endpoint, {
-          // mode: 'no-cors',
-          method: 'POST',
-          body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
-        });
-  
-        if (!response.ok) {
-          throw new Error('Failed to create post');
-        }
-  
-        const data = await response.json();
-        console.log('Post created:', data);
+        const data = await sendToBackend(endpoint, 'POST', formData);
+        console.log('Event created:', data);
+        onClose()
       } catch (error) {
         console.error('Error:', error);
       }
-      window.location.href = pathBack;
-    } else {
-      // alert('Nie ma nic');
+      finally {
+        setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
+      }
     }
-    
   };
+  
   
 
   const displayedMedia = media.slice(0, 6);
   const remainingCount = media.length - 6;
 
   return (
+    <>
+    <div className="overlay" ></div>
     <div className='create-post-container'>
       <div className='create-post-header'>
         <h2 className='create-post-title'>Create Post</h2>
@@ -190,6 +177,7 @@ function CreatePost({ onClose, owner, eventUuid }) {
         <AddMedia addMedia={handleAddMedia} uploadPost={uploadPost} />
       </div>
     </div>
+    </>
   );
 }
 

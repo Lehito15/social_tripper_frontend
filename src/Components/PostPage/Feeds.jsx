@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 function Feeds({ createGroup }) {
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0); // Domyślnie zaznaczony pierwszy przycisk
 
-  const buttons = ['Popular', 'Observed', 'Newest', 'Nearby']; // Tablica z nazwami przycisków
+  const buttons = ['Popular', 'Observed', 'Newest']; // Tablica z nazwami przycisków
 
   const handleButtonClick = (index) => {
     setSelectedButtonIndex(index);

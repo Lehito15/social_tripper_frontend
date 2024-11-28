@@ -5,16 +5,18 @@ import PostOwner from './PostOwner.jsx';
 import PostReaction from './PostReactions.jsx';
 import WriteComment from './WriteComment.jsx'
 
-function Post({post, openPost, closePost}){
+function Post({post, openPost, closePost, userUuid}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
 //   console.log('graphql')
- console.log(post)
+ console.log(post.account)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  
 
 
 
@@ -82,16 +84,16 @@ function Post({post, openPost, closePost}){
     <div className='slider-container-padding'>
       <div className= 'slider-container'   style={{height: postHeight}}>
       {/* {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && ( */}
-        <Slider multimedia={post.postMultimediaUrls} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} />
+        <Slider multimedia={post.postMultimediaUrls} postHeight={postHeight} openPost={openPost} closePost={closePost}  post={post} key={post.uuid}/>
       {/* // )} */}
       </div>
     </div>
      )}
     <div className='reactions-conteiner'>
-      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} isReacted={false} />
+      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber}  postUuid={post.uuid} userUuid={userUuid}  openPost={openPost} post={post} />
     </div>
     <div className='comment-container-post'>
-      <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
+      <WriteComment owner={post.account} postUuid={post.uuid}   />
     </div>
   </div>
 

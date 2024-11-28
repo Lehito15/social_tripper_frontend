@@ -1,31 +1,29 @@
-/* Lewy panel - przyklejony do lewej strony */
-/* .left-menu {
-  width: 250px;
+/* Stylizacja dla głównej zawartości */
+.main-content {
+  position: absolute;
+  top: 70px; /* Poniżej paska wyszukiwania */
+  left: 320px; /* Przesunięcie o szerokość lewego menu */
+  right: 300px; /* Przesunięcie o szerokość prawego menu */
+  background: rgba(240, 242, 245, 1);
+  display: flex;
+  justify-content: center;
+  /* width: calc(100% - 550px); Główna szerokość z uwzględnieniem obu paneli */
+  min-width: 700px; /* Minimalna szerokość treści */
+  transition: all 0.3s ease; /* Animacja zmian */
+}
+
+/* Lewy panel */
+.left-menu {
+  width: 320px;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 20;
-} */
-
-/* Pasek wyszukiwania - zajmuje przestrzeń pomiędzy lewym i prawym panelem */
-.searchbar {
-  position: fixed;
-  top: 0;
-  left: 250px; /* Przesunięcie o szerokość lewego menu */
-  right: 300px; /* Przesunięcie o szerokość prawego menu */
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffffff;
-  z-index: 10;
-  /* Wypełnia przestrzeń między lewym i prawym panelem */
-  width: calc(100% - 550px);
-  max-width: calc(100vw - 550px);
+  transition: all 0.3s ease;
 }
 
-/* Prawy panel - przyklejony do prawej strony */
+/* Prawy panel */
 .right-menu {
   width: 300px;
   height: 70px;
@@ -35,51 +33,95 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
-/* Rozszerzenie prawego panelu na resztę strony */
 .rightpanell {
   width: 300px;
   position: fixed;
-  top: 70px; /* Poniżej paska wyszukiwania */
+  top: 70px;
   right: 0;
-  height: calc(100vh - 70px); /* Wypełnia resztę wysokości ekranu */
+  height: calc(100vh - 70px);
+  transition: all 0.3s ease;
 }
 
-/* Główna zawartość - pomiędzy lewym i prawym panelem */
-.main-content {
-  position: absolute;
-  top: 70px; /* Poniżej paska wyszukiwania */
-  left: 250px; /* Przesunięcie o szerokość lewego menu */
-  right: 300px; /* Przesunięcie o szerokość prawego menu */
-  background: rgba(240, 242, 245, 1);
-
-  /* min-height: calc(100vh - 70px); Wypełnia wysokość okna minus pasek wyszukiwania */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* overflow-y: auto; Dodaje przewijanie pionowe, gdy treść przekroczy dostępne miejsce */
-}
-
-/* Modal - wycentrowany na ekranie */
-.add-post-modal {
+/* Pasek wyszukiwania */
+.searchbar {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  border-radius: 8px;
-  z-index: 1001;
+  top: 0;
+  left: 320px; /* Przesunięcie o szerokość lewego menu */
+  right: 300px; /* Przesunięcie o szerokość prawego menu */
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  z-index: 10;
+  /* max-width: calc(100vw - 550px); */
+  transition: all 0.3s ease;
 }
 
-/* Efekt rozmycia tła dla aktywnego modalu */
 .blur-background .main-content,
 .blur-background .left-menu,
 .blur-background .right-menu,
 .blur-background .searchbar,
-.blur-background .rightpanell {
-  filter: brightness(50%);
-  pointer-events: none;
+.blur-background .right-panel {
+ /* position: fixed;  */
+  /* top: 0; */
+  /* left: 0; */
+  /* width: 100%; */
+  /* height: 100vh;  */
+  /* background-color: rgba(0, 0, 0, 0.5); Półprzezroczysta nakładka */
+  /* z-index: 10000099999999999999; Nakładka musi znajdować się nad treścią */
+  /* pointer-events: none; Blokuje interakcje z nakładką, ale pozwala na interakcje z treścią */
+  /* overflow-y: none;
+  position: absolute; */
+  /* opacity: 0.7; */
+}
+
+
+/* Responsywne ukrywanie elementów */
+
+/* Usunięcie paddingów */
+@media (max-width: 1250px) {
+  .main-content {
+    /* padding: 0 20px; Zmniejszenie paddingów */
+    width: calc(100% - 570px); /* Dopasowanie do zmniejszających się paddingów */
+  }
+}
+
+/* Ukrycie prawego panelu */
+@media (max-width: 1270px) {
+  .right-menu,
+  .rightpanell {
+    display: none;
+  }
+
+  .main-content {
+    right: 0;
+    width: calc(100% - 250px); /* Dopasowanie do braku prawego panelu */
+  }
+
+  .searchbar {
+    right: 0;
+    width: calc(100% - 250px);
+  }
+}
+
+/* Ukrycie lewego panelu */
+@media (max-width: 970px) {
+  .left-menu {
+    display: none;
+  }
+
+  .main-content {
+    left: 0;
+    top: 70px;
+    width: 100%; /* Główna zawartość zajmuje pełną szerokość */
+  }
+
+  .searchbar {
+    /* left: 0; */
+    width: 100%;
+  }
 }

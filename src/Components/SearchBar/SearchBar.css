@@ -1,15 +1,14 @@
 .search-bar-container {
   display: flex;
   align-items: center; /* Wyśrodkowanie w pionie */
-  justify-content: space-between; /* Rozmieszczenie elementów po obu stronach */
+  justify-content: center; /* Wyśrodkowanie horyzontalne elementu głównego */
   background-color: #ffffff; /* Kolor tła kontenera */
-  /* width: 700px; */
-  /* width: clamp(500px, 80%, 900px); */
-  width: 100%;
-  height: 100%;
-  /* border: 0.1px inset #000000; */
+  width: 720px; /* Wypełnia całą dostępną szerokość */
+  height: 100%; /* Dopasowanie do wysokości */
+  /* padding: 0 15px; Minimalny padding z obu stron */
+  box-sizing: border-box; /* Uwzględnij padding w szerokości */
+  justify-content: space-between;
 }
-
 
 .search-bar {
   position: relative; /* Pozycjonowanie relatywne dla ikonki */

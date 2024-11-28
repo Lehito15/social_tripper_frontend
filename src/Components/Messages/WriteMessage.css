@@ -1,7 +1,7 @@
 .message-input {
     width: 100%; /* Szerokość paska wyszukiwania */
     height: 42px;
-    margin-left: 40px;
+    margin-left: 18px;
     margin-right: 40px;
     font-size: 16px;
     border: 0px solid;
@@ -9,6 +9,7 @@
     box-shadow: none;
     /* border-radius: 10px; Zaokrąglone rogi */
     background: rgba(240, 242, 245, 0.6);
+
     padding: 0;
   }
 
@@ -21,8 +22,6 @@
     align-items: center;
     border-radius: 50px;
     background: rgba(240, 242, 245, 0.6);
-
-    
   }
   
   .media-icon, .send-icon {
@@ -30,7 +29,7 @@
     /* left: 10px; Odległość od prawej krawędzi pola */
     width: 18px; /* Szerokość ikony */
     height: 18px; /* Wysokość ikony */
-    pointer-events: none; /* Wyłączenie interakcji z ikoną */
+    /* pointer-events: none; Wyłączenie interakcji z ikoną */
     opacity: 70%;
   }
 
@@ -40,5 +39,6 @@
   .send-icon {
     right: 10px;
     margin-left: auto;
+    cursor: pointer;
   }
 

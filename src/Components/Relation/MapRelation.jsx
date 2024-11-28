@@ -35,6 +35,7 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
 
         // Wywołaj onLocationAdded, jeśli został przekazany
         if (onLocationAdded) {
+          console.log('dodaje nowo')
           locations = null;
           setNewMarkerPosition([lat, lng]);
           onLocationAdded([lat, lng]);
@@ -74,6 +75,17 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
             }}
           />
         ))}
+
+        {locations && !onLocationAdded && (
+          locations.map(location => (
+            <Marker
+              key={location.id}
+              position={location.position}
+              icon ={ highlightedMarkerIcon}
+              
+              
+            />
+        )))}
 
       {/* Nowa pinezka na podstawie kliknięcia */}
       {newMarkerPosition && (

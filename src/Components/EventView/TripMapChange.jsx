@@ -1,11 +1,45 @@
 import MapReaction from "../Relation/MapRelation.jsx"
 import './TripMapChange.css';
+import React, { useState } from 'react';
 
-function TripMapChange({location, closeMap}){
-  console.log(location)
+function TripMapChange({longitude,latitude, closeMap, updateData,  start, reload}){
+  // console.log(location)
+  const [updatedLocation, setUpdatedLocaion] = useState([longitude, latitude])
+
+  console.log(updatedLocation[0])
   const updateLocation =(locationEvent) =>{
     console.log(locationEvent);
+    setUpdatedLocaion(locationEvent)
   }
+
+  const saveLocation = async()=>{
+
+
+    console.log(updatedLocation[0])
+    console.log(updatedLocation[1])
+
+    if(start){
+      await updateData({
+        startLongitude: updatedLocation[0],
+        startLatitude: updatedLocation[1]
+      })
+    }
+    else{
+      console.log('koniec')
+      await updateData({
+        stopLatitude: updatedLocation[1],
+        stopLongitude: updatedLocation[0]
+      })
+
+    }
+    reload();
+    closeMap();
+    
+    
+
+  }
+
+  console.log()
 
   return (
     
@@ -20,12 +54,14 @@ function TripMapChange({location, closeMap}){
             />
       </div>
       <div className="map-container">
-        <MapReaction locations={ [{id: 0, position: location}]} onLocationAdded={updateLocation}/>
-      </div>
+          {/* Sprawdzenie, czy istnieją współrzędne (latitude, longitude) */}
+            <MapReaction locations={[{ id: 0, position: updatedLocation }]} onLocationAdded={updateLocation} />
+       </div>
+
       <div className="button-map-change">
         <button
                 className="finish-button"
-                // onClick={() => setShowDatePicker(false)}
+                onClick={saveLocation}
               >
                 Finish
               </button>

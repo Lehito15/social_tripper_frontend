@@ -3,9 +3,7 @@ import React from 'react';
 import './LineMenu.css';
 import { NavLink } from 'react-router-dom';
 
-function LineMenu({ userUuid }) {
-  console.log('lineMenu')
-  console.log(userUuid)
+function LineMenu({userUuid }) {
   return (
     <div className="line-menu">
       {/* Dodanie UUID do każdej ścieżki */}

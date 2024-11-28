@@ -1,13 +1,20 @@
 import GeneralDetailsEvent from "./GeneralInformationEvent.jsx"
 import TripRules from "./TripRules.jsx";
 
-function TripInformation({event, isOwner}){
-  const eventPublicText = event.isPublic ? 'Public trip' : 'Private trip';
+function TripInformation({event, isOwner, isGroup, locationScope, updateData}){
+  const eventPublicText = isGroup
+  ? event.isPublic
+    ? 'Public Group'   
+    : 'Private Group' 
+  : event.isPublic
+  ? 'Public trip'
+  : 'Private trip';
+
   const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'public.png';
   return (
     <div className="trip-information-container">
       <div className="general-details-conteiner">
-        <GeneralDetailsEvent description={event.description} publicText={eventPublicText}  publicIcon={eventPublicIcon} maxMembers={event.maxNumberOfParticipants} eventCreated={event.dateOfCreation} isOwner={isOwner}/>
+        <GeneralDetailsEvent description={event.description} publicText={eventPublicText}  publicIcon={eventPublicIcon} maxMembers={event.maxNumberOfParticipants} eventCreated={event.dateOfCreation} isOwner={isOwner} isGroup={isGroup} locationScope={locationScope} eventUUID={event.uuid}  updateData={updateData}/>
       </div>
       <div className="trip-rules-container">
         <TripRules rules={event.rules} />

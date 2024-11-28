@@ -7,8 +7,9 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
   const [index, setIndex] = useState(0); // Zarządzanie aktywnym indeksem
   const carouselRef = useRef(null); // Używamy ref do całego kontenera Carousel
   console.log('mulimedia xdd')
-  console.log(multimedia)
+  console.log(post)
   console.log(relation)
+  console.log(multimedia)
 
   const handleSelect = (selectedIndex) => {
     const lastIndex = multimedia.length - 1; // Zakładamy, że mamy kilka slajdów (0, 1, 2, ..., n)
@@ -31,24 +32,21 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
   }, [markIndex]);
 
   useEffect(() => {
-    if (openPost) {
-      console.log('to jest post');
+    if (!openPost) {
+      console.log('gowno')
       const images = document.querySelectorAll('.img');
 
-      const handleOpenPost = () => openPost(post);
+    images.forEach((img) => {
+      img.style.pointerEvents = 'none';  // Zablokuj interakcję z obrazem
+    });
 
+    return () => {
       images.forEach((img) => {
-        img.addEventListener('click', handleOpenPost);
+        img.style.pointerEvents = '';  // Przywróć interakcję, jeśli post znowu jest dostępny
       });
-
-      // Usunięcie zdarzeń przy unmountingu komponentu
-      return () => {
-        images.forEach((img) => {
-          img.removeEventListener('click', handleOpenPost);
-        });
-      };
+    };
     }
-  }, [post, openPost]);
+  }, [post]);
 
 
   useEffect(() => {
@@ -70,7 +68,7 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
     }
   }, [relation, openRelation]);
 
-  console.log(document.querySelector(".img"));
+  // console.log(document.querySelector(".img"));
   // if( document.querySelector(".img")){
   //   if(openPost){
   //     document.querySelector(".img").addEventListener('click', () => openPost(post));
@@ -115,6 +113,7 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
         alt={`Slide ${idx + 1}`}
         className="img"
         style={{ height: postHeight }}
+        onClick={() => openPost(post)}
       />
     )}
   </Carousel.Item>

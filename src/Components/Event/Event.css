@@ -41,7 +41,7 @@
   width: 100%; /* Obrazek ma wypełnić szerokość kontenera */
   height: 100%; /* Obrazek ma wypełnić wysokość kontenera */
   border-radius: 10px;
-  /* object-fit: cover; Obrazek ma się dopasować, nie tracąc proporcji */
+  object-fit: fill; 
 }
 
 .event-details {
@@ -65,12 +65,28 @@
   width: auto;
   height: auto;
 }
+.event-name-container {
+  display: flex;
+  align-items: flex-start; /* Wyrównanie tekstu do góry kontenera */
+  justify-content: center; /* Wyrównanie poziome */
+  width: 100%; /* Dopasowanie do dostępnej szerokości */
+  overflow: hidden; /* Ukrycie nadmiaru */
+}
 
 .event-name {
-  font-size: 18px;
-  margin: 0 0 6px 0;
-  align-items: flex-start;
+  font-size: 18px; /* Ustawienie rozmiaru tekstu */
+  margin: 0; /* Resetowanie marginesów */
+  display: -webkit-box; /* Wymagane dla obsługi line-clamp */
+  -webkit-box-orient: vertical; /* Ustawienie osi pionowej */
+  -webkit-line-clamp: 4; /* Maksymalna liczba linii */
+  line-clamp: 4; /* Alternatywa dla nowoczesnych przeglądarek */
+  overflow: hidden; /* Ukrycie nadmiaru tekstu */
+  text-overflow: ellipsis; /* Dodanie kropek na końcu */
+  max-width: 100%; /* Zapewnienie, że tekst dopasuje się do szerokości */
+  word-wrap: break-word; /* Zawijanie tekstu w przypadku długich słów */
 }
+
+
 
 .event-name:hover{
   cursor: pointer;
@@ -91,12 +107,14 @@
   font-size: 14px;
   color: #666;
   margin: 0;    
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  white-space:inherit;
+  display: -webkit-box; /* Wymagane dla obsługi line-clamp */
+  -webkit-box-orient: vertical; /* Ustawienie osi pionowej */
+  -webkit-line-clamp: 3; /* Maksymalna liczba linii */
+  line-clamp: 3; /* Alternatywa dla nowoczesnych przeglądarek */
+  overflow: hidden; /* Ukrycie nadmiaru tekstu */
+  text-overflow: ellipsis; /* Dodanie kropek na końcu */
+  max-width: 100%; /* Zapewnienie, że tekst dopasuje się do szerokości */
+  word-wrap: break-word; /* Zawijanie tekstu w przypadku długich słów */
 }
 
 .event-owner {
@@ -113,7 +131,7 @@
   text-align: left;
 }
 .languages{
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
 }
 

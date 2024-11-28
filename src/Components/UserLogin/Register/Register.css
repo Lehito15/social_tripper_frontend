@@ -12,6 +12,17 @@
     z-index: 1001;
     overflow-y: auto;
     overflow-x: hidden;
+
+}
+
+.register-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie poziome */
+    align-items: center;    /* Wyśrodkowanie pionowe */
+    background: rgba(240, 242, 245, 1);
+
 }
 
 

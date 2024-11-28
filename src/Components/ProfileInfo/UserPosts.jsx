@@ -18,31 +18,42 @@ function UserPosts({ openPost}){
     
   }, []);
 
-  const GET_User_Posts = gql`
-  query GetPosts($userUuid: String!) {  # Poprawiony typ zmiennej
-    posts @rest(type: "Posts", path: "users/${userUuid}/posts") {  # Poprawiona składnia zmiennej w ścieżce
-      content
+  const GET_User_Postss = gql`
+  query GetUserPosts($userUuid: String!) {  # Poprawiony typ zmiennej
+    posts @rest(type: "UserPosts", path: "users/${userUuid}/posts") {  
+        content
       uuid
       dateOfPost
       commentsNumber
       reactionsNumber
-      postMultimediaDTO
+      multimediaUrls
+      postMultimediaUrls
+      account{
+        uuid
+        nickname
+        profilePictureUrl
+      }
     }
   }
 `;
 
 
-const { loading, error, data } = useQuery(GET_User_Posts);
+const { loading, error, data,refetch } = useQuery(GET_User_Postss, {
+  variables: { userUuid },
+  fetchPolicy: 'network-only',
+});;
 console.log(data);
 
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  console.log('posty uzytkownika')
+  console.log(data);
   return (
     <div className="Post-page">
  
         {data?.posts.slice().reverse().map((post) => (
-          <Post post={post} openPost={openPost} />
+          <Post post={post} openPost={openPost} userUuid={userUuid} />
         ))}
          
     </div>

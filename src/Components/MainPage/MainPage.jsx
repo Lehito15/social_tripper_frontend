@@ -13,6 +13,7 @@ import IndividualChat from '../Messages/IndividualChat.jsx';
 import MinimalizeChatContainer from '../Messages/MinimalizeChatContainer.jsx';
 import ProfileInfo from '../ProfileInfo/ProfileInfo.jsx';
 import PostDetail from '../PostPage/PostDetails.jsx';
+import PostDetailsNoImg from '../PostPage/PostDetailsNoImg.jsx';
 import  CreateEvent from '../CreateEvent/CreateEvent.jsx'
 import EventMain from '../EventView/EventMain.jsx';
 import TripEvents from '../TripEvents/TripEvents.jsx';
@@ -28,7 +29,7 @@ import { gql, useQuery } from '@apollo/client';
 
 
 
-function MainPage() {
+function MainPage({user}) {
   const [isAddPostOpen, setIsAddPostOpen] = useState(false);
   const addPostRef = useRef(null);
 
@@ -39,7 +40,10 @@ function MainPage() {
   const [minimizedChats, setMinimizedChats] = useState([]);
 
   const [isPostOpen, setPostOpen]  = useState(false);
+  const [isPostOpenNoImg, setPostOpenNoImg]  = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
+  const postDetailRef = useRef(null);
+  const postDetailsNoImg = useRef(null);
 
   const [isRelationOpen, setRelationOpen]  = useState(false);
   const [selectedRelation, setSelectedRelation] = useState(null);
@@ -50,15 +54,23 @@ function MainPage() {
 
   const [selectedEvent, setSelectedEvent] = useState(null);
 
-  const [eventUuid, setEventUuid] = useState(null)
+  const [eventUuid, setEventUuid] = useState(null);
+  const [groupUuid, setGroupUuid] = useState(null)
 
   const [userData,setUserData] = useState(null);
 
-  const navigate = useNavigate()
+  const [refetch, setRefetch]  = useState(false);
+
+  const navigate = useNavigate();
+  console.log('nasz user')
+  console.log(user);
+
+
 
  
   
-  const userUuid = "fe5d7852-8bbb-411a-ac4b-405cda47ffbc";
+  // const userUuid = "f36adeef-6d03-48f1-a28b-139808a775d6";
+  const userUuid = user.uuid;
 
 
   const GET_User = gql
@@ -107,14 +119,33 @@ console.log(data);
 
   const openPost = (post) =>  {
     console.log('otwieram posta XXDFWEF')
-    setPostOpen(true);
+    console.log(post);
     setSelectedPost(post);
+    if (post.postMultimediaUrls.length === 0){
+      console.log('otwieram noIMg')
+      setPostOpenNoImg(true);
+    }
+    else{
+      console.log('otwieram posta')
+      setPostOpen(true);
+    }
+    // setSelectedPost(post);
+    // setPostOpen(true);
+    
   };
 
   const closePost = ()  => {
     console.log('zamykam');
-    setPostOpen(false);
     setSelectedPost(null);
+    setPostOpen(false);
+    console.log(selectedPost)
+  };
+
+  const closePostNoImg = ()  => {
+    console.log('zamykam');
+    setSelectedPost(null);
+    setPostOpenNoImg(false);
+    console.log(selectedPost)
   };
 
   const openRelation = (relation) =>  {
@@ -129,9 +160,16 @@ console.log(data);
     setSelectedRelation(null);
   };
 
-  const toggleCreateTrip = () => {
+  const closeCreateTrip = () => {
     console.log("otwórz się")
-    setIsCreateTripOpen(!isCreateTripOpen);
+    setRefetch(!refetch);
+    setIsCreateTripOpen(false);
+    setGroupUuid(null);
+  }
+
+  const openCreateTrip = () => {
+    console.log("otwórz się")
+    setIsCreateTripOpen(true);
   }
 
   const closeCreateGroup = () => {
@@ -150,6 +188,7 @@ console.log(data);
 
   const closeAddPost = () =>{
     setIsAddPostOpen(false);
+    setRefetch(!refetch);
     setEventUuid(null);
   }
 
@@ -172,10 +211,22 @@ console.log(data);
     setIsAddPostOpen(!isAddPostOpen);
   }
 
+  const addGroupPost = (uuid) =>{
+    console.log('dodaje grupe');
+    setGroupUuid(uuid);
+    setIsAddPostOpen(!isAddPostOpen);
+  }
+
+  const createGroupEvent= (uuid) =>{
+    setGroupUuid(uuid);
+    setIsCreateTripOpen(!isCreateTripOpen);
+  }
+
 
 
 
   const handleClickOutside = (event) => {
+    // Jeśli kliknięcie jest poza dodawaniem posta
     if (
       addPostRef.current &&
       !addPostRef.current.contains(event.target) &&
@@ -183,14 +234,36 @@ console.log(data);
     ) {
       setIsAddPostOpen(false);
     }
-    else if(
+    // Jeśli kliknięcie jest poza czatem
+    else if (
       chatRef.current &&
       !chatRef.current.contains(event.target) &&
       isChatOpen
-    ){
+    ) {
       setChatOpen(false);
     }
+    // Jeśli kliknięcie jest poza szczegółami posta z obrazkiem
+    else if (
+      postDetailRef.current &&
+      !postDetailRef.current.contains(event.target) &&
+      isPostOpen
+    ) {
+      console.log('Zamykam post z obrazkiem');
+      setSelectedPost(null);
+      setPostOpen(false);
+    }
+    // Jeśli kliknięcie jest poza szczegółami posta bez obrazka
+    else if (
+      postDetailsNoImg.current &&
+      !postDetailsNoImg.current.contains(event.target) &&
+      isPostOpenNoImg
+    ) {
+      console.log('Zamykam post bez obrazka');
+      setSelectedPost(null);
+      setPostOpenNoImg(false);
+    }
   };
+  
   useEffect(() => {
     if (data) {
       setUserData(data.user);
@@ -204,7 +277,10 @@ console.log(data);
       // Usunięcie nasłuchiwacza kliknięć przy odmontowywaniu
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isAddPostOpen, isChatOpen]);
+  }, [isAddPostOpen, isChatOpen, isPostOpen, isPostOpenNoImg]);
+  useEffect(() => {
+    console.log('selectedPost zostało zaktualizowane:', selectedPost);
+  }, [selectedPost]);
 
  
   if (!data) {
@@ -229,7 +305,7 @@ console.log(data);
         </div>
     
         <div className="searchbar">
-          <SearchBar openTrip={toggleCreateTrip} />
+          <SearchBar openTrip={openCreateTrip} />
         </div>
     
         <div className="right-menu">
@@ -243,28 +319,29 @@ console.log(data);
 
     
         <div className="main-content">
+          
             <Routes>
-              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} openRelation={openRelation} closeRelation={closeRelation} />} />
+              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} openRelation={openRelation} closeRelation={closeRelation} userUuid={user.uuid} reLoad={refetch} />} />
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
-              <Route path="/profileinfo/:uuid/*" element={<ProfileInfo />} />
-              <Route path="/events" element={<TripEvents openEvent={openEvent}/>} />
+              <Route path="/profileinfo/:uuid/*" element={<ProfileInfo myUuid={user.uuid} />} />
+              <Route path="/events" element={<TripEvents openEvent={openEvent} reLoad={refetch}/>} />
               <Route path="/groups" element={<GroupPage createGroup={createGroup}  />} />
               <Route path="/relations" element={<RelationsPage  openRelation={openRelation}/>} />
-              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} />} />
-              <Route path="/groups/*" element={<GroupMain />} />
+              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} />} />
+              <Route path="/groups/*" element={<GroupMain openCreatePost={addGroupPost} openEvent={openEvent} createEvent={createGroupEvent} userUuid={user.uuid} />} />
             </Routes>
           </div>
       </div>  
 
       {isAddPostOpen && (
         <div className="add-post-modal" ref={addPostRef}>
-          <CreatePost onClose={closeAddPost} owner={userData } eventUuid={eventUuid}  />
+          <CreatePost onClose={closeAddPost} owner={userData } eventUuid={eventUuid} groupUuid={groupUuid} userUuid={user.uuid}  />
         </div>
       )}
 
       {isCreateGroupOpen&& (
         <div className="add-post-modal" ref={addPostRef}>
-          <CreateGroup closeCreateGroup ={closeCreateGroup}  />
+          <CreateGroup closeCreateGroup ={closeCreateGroup} userUuid={user.uuid} />
         </div>
       )}
 
@@ -289,15 +366,25 @@ console.log(data);
         />
 
       {isPostOpen  && (
-        <PostDetail post={selectedPost} closePost={closePost} />
+        <div className='post-details-modal'  ref={postDetailRef}>
+          <PostDetail post={selectedPost} closePost={closePost} />
+        </div>
       )}
+
+      {isPostOpenNoImg  && (
+        <div className='post-details-noimg-modal' ref={postDetailsNoImg} >
+          <PostDetailsNoImg post={selectedPost} closePost={closePostNoImg} isAlone={true} />
+        </div>
+      )}
+
+
 
       {isRelationOpen  && (
         <RelationDetails relation={selectedRelation} closeRelation={closeRelation} />
       )}
 
       {isCreateTripOpen  && (
-        <CreateEvent closeCreateEvent={toggleCreateTrip}  />
+        <CreateEvent closeCreateEvent={closeCreateTrip} groupUuid={groupUuid} userUuid={user.uuid}  />
       )}
     </div>   
 

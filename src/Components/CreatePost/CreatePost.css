@@ -131,6 +131,7 @@
 
 .custom-select{
   width: 100px;
+  z-index: 10000;
 }
 /* Stylizacja dla całego kontenera select */
 .custom-select__control {

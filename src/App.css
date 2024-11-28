@@ -17,3 +17,12 @@
   font-family: "Source Sans 3", serif;
 }
 
+#root{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* Wyśrodkowanie poziome */
+  align-items: center; 
+  background: rgba(240, 242, 245, 1);
+
+ }
+

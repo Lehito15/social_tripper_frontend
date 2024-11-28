@@ -46,7 +46,7 @@
 .message-right {
   justify-content: flex-end;
   margin-right: 10px;
-  /* flex-direction: row-reverse; */
+  flex-direction: row-reverse;
 }
 
 .friend-avatar {

@@ -1,6 +1,6 @@
 .user-stats {
   display: flex; /* Ustawienie elementów w wierszu */
-  justify-content: space-around; /* Rozłożenie elementów w przestrzeni */
+  justify-content: space-between; /* Rozłożenie elementów w przestrzeni */
   margin-top: 25px; /* Dynamiczny odstęp między imieniem a statystykami */
   width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
   text-transform: uppercase;
@@ -10,28 +10,31 @@
 .stat-item {
   text-align: center; /* Wyśrodkowanie tekstu */
   margin-top: 0px;
+  
 }
 
 .stat-value {
-  font-size: 20px;
-  line-height: 25.14px;
+  font-size: 22px;
+  /* line-height: 25.14px; */
+  /* margin-bottom: 20px; */
 
   font-weight: bold; /* Pogrubienie wartości */
 }
 
 .stat-title {
   display: block; /* Przeniesienie tytułu na nową linię */
- 
-  color: #555; /* Kolor tytułu */
-  font-size: 12px;
+  margin-top: 9px;
+  color: rgba(0, 0, 0, 0.55);/* Kolor tytułu */
+  font-size: 13px;
   line-height: 15.08px;
+  font-weight: 400;
 }
 
-@media (max-width: 1400px){
+/* @media (max-width: 1400px){
   .stat-value{
     font-size: 16px;
   }
   .stat-title{
     font-size: 10px;
   }
-}
+} */

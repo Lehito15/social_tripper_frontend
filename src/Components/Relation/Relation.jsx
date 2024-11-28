@@ -21,6 +21,11 @@ function Relation({post, openRelation}){
     setSelectedIndex(markerIndex);  
   };
 
+  const multimedia = [
+    'https://socialtripperstorage.blob.core.windows.net/blob/post%2F3bb95b25-3e90-40f9-b283-a46271a1e084%2F2fcaad00-c022-40db-ae28-c1c4ea84d5e9.jpeg',
+    '	https://socialtripperstorage.blob.core.windows.net/blob/users%2F7bd02457-71ca-4639-b766-8b5c256c06fc%2Feac4f622-3cbe-47b0-873f-e1d20944c9c2.jpg'
+  ]
+
  
 
   useEffect(() => {
@@ -73,7 +78,7 @@ function Relation({post, openRelation}){
     <div className='relation'  >
         <div className= 'slider-container'  style={{height: postHeight}}>
         {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
-        <Slider multimedia={post.postMultimediaDTO} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
+        <Slider multimedia={multimedia} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
         
 
         )}
@@ -86,7 +91,7 @@ function Relation({post, openRelation}){
       <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
     </div>
     <div className='comment-container'>
-      <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.date} status={"option"} />
+      <WriteComment owner={{nickname:'Kamil', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.date} status={"option"} />
     </div>
   </div>
 

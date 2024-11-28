@@ -4,14 +4,18 @@ import RateActivity from './RateActivity.jsx';
 import './Skills.css';
 import ActivityIcon from '../../Event/ActivityIcon.jsx';
 import LanguageFlag from '../../CreateGroup/LanguageFlag.jsx';
+import { getActivityIcon } from '../../../Utils/helper.js';
 
-function Skills({activieties, languages, updateActivieties, updateLanguages, event, group}) {
-  // console.log(activieties);
+function Skills({activieties, languages, updateActivieties, updateLanguages, event, group , onlyUpdate}) {
+  console.log(activieties);
   const [selectedActivities, setSelectedActivities] = useState(activieties || []);
   const [selectedLanguages, setSelectedLanguages] = useState(languages || []);
   console.log('langyuahes') 
   console.log(languages)
   console.log(activieties)
+
+  console.log(getActivityIcon('walking'))
+
 
   const addActivity = (newActivity) => {
     const isActivityExist = selectedActivities.some(activity => activity.label === newActivity.label);
@@ -41,8 +45,6 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
   }
 
   const removeActivity = (activity) => {
-    console.log('remove')
-    console.log(activity)
     setSelectedActivities((prev) => prev.filter((elem) => elem.label !== activity.name));
     updateActivieties((prev) => prev.filter((elem) => elem.label !== activity.name));
   }
@@ -142,13 +144,13 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
                   key={`activity-${index}`}
                   activity={{
                     name: activityItem.label,
-                    url: `${process.env.PUBLIC_URL}/walking-icon.png`, // Możesz to zmienić na dynamiczne URL dla aktywności
-                    rating: activityItem.rating || 5.0,
+                    url: `${process.env.PUBLIC_URL}${getActivityIcon(activityItem.label)}`, // Możesz to zmienić na dynamiczne URL dla aktywności
+                    rating: activityItem.rating || activityItem.experience || 5.0,
                   }}
                   event={event}
-                  removeActivity={removeActivity}
+                  removeActivity={onlyUpdate ? undefined : removeActivity}
                   updateActivity={(newRating) =>
-                    updateActivityRating(activityItem, newRating)
+                  updateActivityRating(activityItem, newRating)
                   }
                 />
               ))}
@@ -156,7 +158,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
           )}
         </div>
 
-        {/* Lista języków z flagami */}
+        {languages && (
         <div className="selector">
           <div className="select-group">
             <label htmlFor="language">Language:</label>
@@ -208,7 +210,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
               ))}
             </div>
           )}
-        </div>
+        </div>)}
       </div>
     </div>
   );

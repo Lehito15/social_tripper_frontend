@@ -1,10 +1,12 @@
+import React, { useState, useEffect } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import { getUuidFromUrl, sendToBackend } from '../../Utils/helper.js';
+import EventMembersReqeust from './EventMembersReqeust.jsx';
+
 import ActivityIcon from "../Event/ActivityIcon.jsx";
 import DateCard from "../Event/DateCard.jsx";
 import PostOwner from "../PostPage/PostOwner.jsx";
 import EventMembers from "../Event/EventMembers.jsx";
-import './EventMain.css';
-import EventOption from "./EventOption.jsx";
-import React ,  {useState, useEffect } from  'react';
 import DescriptionProfile from "../ProfileInfo/About/DescriptionProfile.jsx";
 import EventDetails from "./EventDetails.jsx";
 import TripDetails from "./TripDetails.jsx";
@@ -12,124 +14,207 @@ import PostPage from "../PostPage/PostPage.jsx";
 import EventMainMembers from "./EventMainMembers.jsx";
 import TripInformation from "./TripInformation.jsx";
 import EventPosts from "./EventPosts.jsx";
-import { gql, useQuery } from '@apollo/client';
-import { getUuidFromUrl } from '../../Utils/helper.js';
+import EventOption from "./EventOption.jsx";
 
-function EventMain({openCreatePost}){
+import './EventMain.css';
+
+function EventMain({ openCreatePost, userUuid }) {
   const options = ['Information', 'Trip details', 'Posts', 'Members'];
   const [currentStep, setCurrentStep] = useState(1);
   const [eventUuid, setEventUuid] = useState(null);
-  console.log('eventuuid we mainie')
-  console.log(eventUuid)
-  // const uuid ="f9c6a345-0f0a-45f4-9302-63f122e9e8ea"
+  const [reLoad, setReLoad] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [userStatus, setUserStatus] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
 
-  // function getEventUuidFromUrl() {
-  //   const url = window.location.pathname; 
-  //   const parts = url.split('/'); 
-  //   const uuid = parts[2];
-  //   return uuid;
-  // }
+  const toggleReload = () => {
+    setReLoad((prev) => !prev);
+  };
 
   useEffect(() => {
-    const url = window.location.pathname;
-    const uuid = getUuidFromUrl(url);
-    setEventUuid(uuid);
-    console.log('robie  uuid  ')
-    
-  }, []);
-  
+    const fetchStatus = async () => {
+      try {
+        const url = window.location.pathname;
+        const uuid = getUuidFromUrl(url);
+        setEventUuid(uuid);
+
+        console.log('Fetching membership status...');
+        const endpoint = `events/${uuid}/users/${userUuid}/is-member`;
+        const response = await sendToBackend(endpoint, "GET", null);
+
+        if (response) {
+          setUserStatus('member');
+        } else {
+          setUserStatus('no-member');
+        }
+      } catch (error) {
+        console.error("Error fetching membership status:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStatus();
+  }, [userUuid]); // useEffect should only run when userUuid changes
 
   const GET_Event = gql`
-  query GetEvent($eventUuid: String!) {
-    event @rest(type: "Post", path: "events/${eventUuid}") {
-      uuid
-      description
-      name
-      isPublic
-      dateOfCreation
-      eventStartTime
-      eventEndTime
-      numberOfParticipants
-      maxNumberOfParticipants
-      startLongitude
-      startLatitude
-      destinationLongitude
-      destinationLatitude
-      relation
-      owner {
+    query GetEvent($eventUuid: String!) {
+      event @rest(type: "Post", path: "events/${eventUuid}") {
         uuid
-        nickname
-        profilePicture
-        homePageUrl
-        profilePicture
+        description
+        name
+        isPublic
+        dateOfCreation
+        eventStartTime
+        eventEndTime
+        numberOfParticipants
+        maxNumberOfParticipants
+        startLongitude
+        startLatitude
+        stopLongitude
+        stopLatitude
+        destinationLongitude
+        destinationLatitude
+        relation
+        owner {
+          uuid
+          nickname
+          profilePictureUrl
+          homePageUrl
+        }
+        iconUrl
+        activities
+        languages
+        eventStatus{
+        status
+        }
       }
-      iconUrl
-      activities
-      languages
     }
-  }
-`;
+  `;
 
-const { loading, error, data } = useQuery(GET_Event, {
-  variables: { eventUuid },
-   fetchPolicy: 'network-only'
-});
+  const { loading, error, data, refetch } = useQuery(GET_Event, {
+    variables: { eventUuid },
+    fetchPolicy: 'network-only',
+  });
 
-if (loading) return <p>Loading...</p>;
-if (error) return <p>Error: {error.message}</p>;
-const event = data.event;
+  useEffect(() => {
+    refetch();
+  }, [refetch, reLoad]);
 
-  // const eventPublicText = event.isPublic ? 'Public trip' : 'Private trip';
-  // const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'private-icon.png';
-  console.log(data)
-  // console.log(event)
-  const eventPublicText ="Public trip";
+  useEffect(() => {
+    if (data && data.event) {
+      setIsOwner(data.event.owner.uuid === userUuid);
+    }
+  }, [data, userUuid]); // Only re-run when data or userUuid changes
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const event = data.event;
+
+  if (isLoading) return <p>Loading...</p>;
+
+  const eventPublicText = "Public trip";
   const eventPublicIcon = "public-icon.png'";
+
+  const updateData = async (body) => {
+    console.log('Updating event data:', body);
+
+    const endpoint = `events/${eventUuid}`;
+    sendToBackend(endpoint, 'PATCH', JSON.stringify(body));
+  };
+  console.log(data)
 
   const renderStepComponent = () => {
     switch (currentStep) {
-        case 1:
-            return (
-                <TripInformation
-                    event={event}
-                    isOwner={true}
-                />)
-       case 2:
-            return (
-                <TripDetails
-                    event={event}
-                    isOwner={true}
-                />) 
-        
-        case 3:
-            return (
-                <EventPosts
-                    uuid={event.uuid}
-                    openCreatePost={openCreatePost}
-                />)
-        case 4:
-            return (
-                <EventMainMembers
-                    event={event}
-                />)     
-
+      case 1:
+        return (
+          <TripInformation
+            event={event}
+            isOwner={isOwner}
+            updateData={updateData}
+          />
+        );
+      case 2:
+        return (
+          <TripDetails
+            event={event}
+            isOwner={isOwner}
+            updateData={updateData}
+            reload={toggleReload}
+          />
+        );
+      case 3:
+        return (
+          <EventPosts
+            uuid={event.uuid}
+            openCreatePost={openCreatePost}
+          />
+        );
+      case 4:
+        return (
+          <EventMainMembers
+            event={event}
+          />
+        );
+      case 5:
+        return (
+          isOwner ? (
+            <EventMembersReqeust eventUuid={event.uuid} />
+          ) : (
+            // <Memories eventUuid={event.uuid} /> // Nowy komponent dla Memories
+            <h1>elo</h1>
+          )
+        );
+      case 6:
+        return (
+          // <Memories eventUuid={event.uuid} /> // Obsługa Memories jako ostatnia opcja
+          <h1>elo</h1>
+        );
+      default:
+        return null;
     }
-};
+  };
+  
+  
 
-  return(
+  // Dynamically update options based on conditions
+  const dynamicOptions = [...options];
+
+  if (isOwner) {
+    dynamicOptions.push('Members Request'); // Show 'Members Request' for owners
+  }
+
+  if (event.relation) {
+    dynamicOptions.push('Summary'); // Show 'Summary' if relation is not null
+  }
+
+  return (
     <div className="event-main-container">
       <div className="event-main-image-container">
-        <img src={event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`} alt={event.description} className="event-image" />
+        <img
+          src={event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`}
+          alt={event.description}
+          className="event-image"
+        />
       </div>
-       <EventDetails event={event} />
-       <EventOption steps={options} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      <EventDetails
+        event={event}
+        status={userStatus}
+        userUuid={userUuid}
+        isOwner={isOwner}
+        eventStatus={event.eventStatus.status}
+      />
+      <EventOption
+        steps={dynamicOptions}
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
       <div className="event-more-details">
-       {renderStepComponent()}
-
-     </div>
-
-     </div>
-
+        {renderStepComponent()}
+      </div>
+    </div>
   );
 }
+
 export default EventMain;

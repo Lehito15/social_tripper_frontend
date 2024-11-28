@@ -1,6 +1,8 @@
 .Post-page {
-    width: clamp(500px, 80%, 900px);
+    /* width: clamp(500px, 80%, 900px); */
+    width: 700px;
     /* height: 100%; */
+    /* z-index: 20; */
    
 
 }

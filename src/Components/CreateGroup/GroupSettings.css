@@ -1,0 +1,12 @@
+.custom-select-group__option{
+  z-index: 2;
+
+}
+.group-location-map{
+  z-index: 1;
+  margin-top: 20px;
+}
+
+.select-container {
+  z-index: 2; /* Make sure the select box is above the map */
+}

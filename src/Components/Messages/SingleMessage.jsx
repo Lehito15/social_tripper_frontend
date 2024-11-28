@@ -6,7 +6,7 @@ function SingleMessage({ content, author }) {
     <div className='singlemessage-box'>
       {author && (
         <>
-          <span className='comment-author'>{author.name} {author.surname}</span>
+          <span className='comment-author'>{author.nickname} </span>
           <br />
         </>
       )}

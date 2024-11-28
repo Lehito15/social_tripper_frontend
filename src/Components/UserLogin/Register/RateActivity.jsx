@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import './RateActivity.css';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 
-function RateActivity({ activity, removeActivity, language, updateActivity, event, register }) {
+function RateActivity({ activity, removeActivity, language, updateActivity, event, register, showOption }) {
     const initialRating = activity?.rating ?? language?.rating ?? 5.0;
     const [skillLevel, setSkillLevel] = useState(initialRating);
-    console.log(event)
+    const showOnly = showOption || false;
+    console.log('moja aktwynosć')
+    console.log(showOption)
+
+    console.log(activity)
+
     let activityName = '';
     let flag = '';
     console.log('co jest')
@@ -48,6 +53,8 @@ function RateActivity({ activity, removeActivity, language, updateActivity, even
                         min="0.0"
                         step={0.1}
                         max="10"
+                        className="rating-range"
+                        disabled={showOnly}
                         value={skillLevel}
                         onChange={(e) => {
                             const newRating = parseFloat(e.target.value);

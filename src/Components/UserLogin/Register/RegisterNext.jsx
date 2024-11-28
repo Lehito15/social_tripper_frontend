@@ -1,7 +1,10 @@
 import './RegisterNext.css';
 import { Link } from 'react-router-dom'; 
+import { useAuthenticator } from '@aws-amplify/ui-react';
 
 function RegisterNext({ step, signIn, maxStep, setCurrentStep, createEvent }) {
+
+  const { signOut } = useAuthenticator();
   
   const handleNext = () => {
     if (step < maxStep) {
@@ -32,7 +35,7 @@ function RegisterNext({ step, signIn, maxStep, setCurrentStep, createEvent }) {
       {signIn && (
         <div className='sign-in'> 
           <span>Already have an Account?&nbsp;&nbsp;</span>
-          <Link to="/sign-in">Sign in</Link>
+          <span className='sign-in-link' onClick={signOut}>Sign in</span>
         </div>
       )}
     </div>

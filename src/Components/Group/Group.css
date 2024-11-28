@@ -1,6 +1,7 @@
 .group-container{
   background-color: white;
   margin-bottom: 20px;
+  border-radius: 10px;
 }
 
 .group-container .event-image{

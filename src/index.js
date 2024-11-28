@@ -11,6 +11,7 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import awsconfig from './aws-exports';
 import { Amplify } from 'aws-amplify';
 import {components, formFields} from './Login'
+import { BrowserRouter as Router } from 'react-router-dom'; // Import Router
 
 const restLink = new RestLink({ uri: 'http://localhost:8080/' });
 
@@ -28,7 +29,9 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
     <Authenticator  components={components}>
+    <Router>
       <App />
+    </Router>
       </Authenticator>
     </ApolloProvider>
   </React.StrictMode>

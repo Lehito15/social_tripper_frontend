@@ -6,17 +6,25 @@ import RegisterNext from "../UserLogin/Register/RegisterNext.jsx";
 import { v4 as uuidv4 } from 'uuid';
 import GroupSettings from "./GroupSettings.jsx";
 import './CreateGroup.css'
+import { useNavigate } from "react-router-dom";
+import {  sendToBackend } from '../../Utils/helper.js';
 
-function CreateGroup({closeCreateGroup}){
+function CreateGroup({closeCreateGroup, userUuid}){
   const steps = ['General Details', 'Description  and Rules', 'Settings'];
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
 
   const createGroup = async () => {
+    if (isSubmitting) return;
+    
 
     if(generalDetailsEvent.groupName === '' || generalDetailsEvent === ''){
       alert('fill inputs')
       return;
     }
+    setIsSubmitting(true);
     const formData = new FormData();
     console.log(languages)
       const isPublic = generalDetailsEvent.visibility !== 'Private';
@@ -29,22 +37,29 @@ function CreateGroup({closeCreateGroup}){
     const formattedLanguages = languages.map((language) => ({
             name: language.label,
     }));
+
+    const scope = groupSettings.scope.value === 'None' ? null : groupSettings.scope;
+
+    
     const groupUuid = uuidv4();
          const GroupDTO  = {
             uuid: groupUuid,
             name: generalDetailsEvent.eventName,
             description: descriptionAndRules.description,
             isPublic: isPublic,
+            ...(scope && { locationScope: { name: scope.value,
+              id: 0
+             } }),
             dateOfCreation: new Date().toISOString(),
             numberOfMembers: 1,
-            locationLongitude: groupSettings.groupLocation[0].position[0],
-            locationLatitude: groupSettings.groupLocation[0].position[1],
+            ...(groupSettings.groupLocation && {locationLongitude: groupSettings.groupLocation[0].position[0]}),
+            ...(groupSettings.groupLocation && {locationLatitude: groupSettings.groupLocation[0].position[1]}),
             homePageUrl: `http://localhost:3000/groups/${groupUuid}`,
             eventStatus:{
               status: 'Planned'
             },
             owner:{
-              uuid:"fe5d7852-8bbb-411a-ac4b-405cda47ffbc"
+              uuid: userUuid
             },
             // icon: null,
             activities: formattedActivities,
@@ -66,25 +81,19 @@ function CreateGroup({closeCreateGroup}){
       // const endpoint = eventUuid
       //   ? `http://localhost:8080/posts/event-post`
       //   : `http://localhost:8080/posts`;
-      const endpoint = 'http://localhost:8080/groups';
+      const endpoint = 'groups';
 
       try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          // mode: 'cors',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to create post');
-        }
-
-        const data = await response.json();
-        console.log('Event created:', data);
+        const data = await sendToBackend(endpoint, 'POST', formData);
+        console.log('Group created:', data);
       } catch (error) {
         console.error('Error:', error);
       }
-      window.location.href = pathBack;
+      finally {
+        setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
+      }
+      closeCreateGroup();
+      navigate('/groups');
    
   };
 
@@ -99,11 +108,12 @@ function CreateGroup({closeCreateGroup}){
 
   const [descriptionAndRules, setDescriptionAndRules] = useState({
     description: '',
-    rules: []
+    rules: ''
   });
 
   const  [groupSettings, setgroupSettings] = useState({
     groupLocation: null,
+    scope: "None"
   });
 
   const [activities, setActivities] = useState([]);
@@ -144,26 +154,29 @@ function CreateGroup({closeCreateGroup}){
     }
 };
   return(
-    <div className="create-post-container create-group">
-      <div className='create-post-header'>
-        <h2 className='create-post-title'>Create a Group</h2>
-        <img 
-          className="close-icon-post"
-          src={`${process.env.PUBLIC_URL}/close.png`}
-          onClick={closeCreateGroup}
-          alt="Close"
+    <>
+      <div className="overlay" ></div>
+      <div className="create-post-container create-group">
+        <div className='create-post-header'>
+          <h2 className='create-post-title'>Create a Group</h2>
+          <img 
+            className="close-icon-post"
+            src={`${process.env.PUBLIC_URL}/close.png`}
+            onClick={closeCreateGroup}
+            alt="Close"
+          />
+        </div>
+        <RegisterSteps 
+                  steps={steps} 
+                  currentStep={currentStep} 
+                  setCurrentStep={setCurrentStep} 
         />
+        <div className="different-profile-info">
+                  {renderStepComponent()}
+        </div>
+        <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createGroup}/>
       </div>
-      <RegisterSteps 
-                steps={steps} 
-                currentStep={currentStep} 
-                setCurrentStep={setCurrentStep} 
-      />
-      <div className="different-profile-info">
-                {renderStepComponent()}
-      </div>
-      <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createGroup}/>
-    </div>
+    </>
 
   );
 }

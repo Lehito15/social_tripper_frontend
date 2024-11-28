@@ -6,10 +6,12 @@ import PostReaction from './PostReactions.jsx';
 import WriteComment from './WriteComment.jsx';
 import SingleMessage from '../Messages/SingleMessage.jsx';
 import Comment from './Comment.jsx';
+import PostDetailsNoImg from './PostDetailsNoImg.jsx';
 
 function  PostDetail({post, closePost}){
   const author1 = {name: "Kurt", surname: "Kotarski", profile_picture_url: "https://graw.pl/wp-content/uploads/2022/11/Zbigniew-Kotarski-GRAW.jpg", id: 5, isActive: true};
   const author2 = { name: "Anna", surname: "Nowak", profile_picture_url: "https://ocdn.eu/pulscms-transforms/1/vKOk9kpTURBXy9kNmVhNTZkMzlmYTc5NzU2NzJlMGIxMjM2MzczMjUyYi5qcGeTlQPMxy7NBiHNA3KVAs0EsADDw5MJpjcxZjlmZgbeAAGhMAE/anna-maria-wesolowska-w-2011-r.jpeg", id: 6, isActive: false };
+  console.log('postdetale post');
   console.log(post)
 
   const messages = [
@@ -35,55 +37,25 @@ function  PostDetail({post, closePost}){
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  console.log('postdetale');
+  // console.log('postdetale');
   console.log(post.postMultimediaDTO)
   const windowHeight = window.innerHeight;
   const postDetailHeight = 0.91* windowHeight;
   console.log(windowHeight)
 
   return (
+    <>
+    <div className="overlay" ></div>
     <div className='post-details-container'>
       <div className='post-details-photo'>
-        <Slider multimedia={post.postMultimediaUrls} postHeight={postDetailHeight}  />
+        <Slider multimedia={post.postMultimediaUrls} postHeight={postDetailHeight} key={post.uuid}  />
       </div>
-      <div  className='post-left-details'>
-        <div  className='post-owner'>
-          <PostOwner owner={post.account} date={post.dateOfPost} status={"option"} />
-        </div>
-        <p className={`content-text ${isExpanded ? 'expanded' : ''}`}>
-          {isExpanded ? post.content : (post.content.length > maxChars ? post.content.slice(0, maxChars) + '...' : post.content)}
-          {post.content.length > maxChars && (
-            <span className="toggle-text" onClick={toggleExpand}>
-              {isExpanded ? 'Show less' : 'Show more'}
-            </span>
-          )}
-        </p>
-        <div className='reactions-conteiner'>
-            <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
-        </div>
-        <div  className='comment-section'> 
-        {messages.map((comment, index) => (
-          <Comment comment={comment} />
-        ))}
-
-
-        </div>
-        <div className='write-comment-container'>
-            <WriteComment owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} />
-        </div>
-       
-
+      <div className='post-left-details'>
+        <PostDetailsNoImg  post={post} closePost={closePost} />
       </div>
-      <div className="chat-button">
-          <img 
-              className="chat-options"
-              src={`${process.env.PUBLIC_URL}/close.png`}
-              alt="Minimize"
-              onClick={closePost}
-            />
-        </div>    
 
     </div>
+    </>
 
   );
 }

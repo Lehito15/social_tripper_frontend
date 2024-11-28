@@ -4,8 +4,10 @@ import MapReaction from '../Relation/MapRelation.jsx';
 import './TripMap.css';
 import TripMapChange from './TripMapChange.jsx';
 
-function TripMap({ location, title, isOwner, updateLocation }) {
+function TripMap({ longitude,latitude , title, isOwner, updateLocation, updateData, start, reload }) {
   const [isEditing, setIsEditing] = useState(false);
+
+  // console.log(location)
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -21,19 +23,23 @@ function TripMap({ location, title, isOwner, updateLocation }) {
         <span className='info-container-tittle'>{title}</span>
         {isOwner && (
           <span className='edit-text' onClick={handleEditClick}>
-            Edit
+            Editd
           </span>
         )}
       </div>
       <div className='elevation'></div>
       <div className='trip-map'>
-        <MapReaction locations={[{ id: 0, position: location }]} />
-      </div>
+  {/* Jeśli są dostępne dane lokalizacji (latitude, longitude), przekazujemy je do MapReaction */}
+        
+    <MapReaction locations={[{ id: 0, position: [longitude, latitude] }]} />
+
+</div>
+
 
       {/* Wyświetl TripMapChange jako modal, gdy isEditing jest true */}
       {isEditing && (
         <div className='change-location'>
-          <TripMapChange  location={location} updateLocation={updateLocation} closeMap={closeModal}/>
+          <TripMapChange  longitude ={longitude} latitude={latitude} updateLocation={updateLocation} closeMap={closeModal} updateData={updateData} start={start} reload={reload}/>
         </div>
       )}
     </div>

@@ -3,11 +3,8 @@ import AccountStatisticsBox from './AccountStatisticsBox.jsx';
 import DescriptionProfile from './DescriptionProfile.jsx';
 import ProfileInformation from './ProfileInformation.jsx';
 
-function About() {
-  const stats = {trips: 5, 
-    followers: 121,
-    following: 21,}
-    const ddescription = "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or 💯.11111";
+function About({stats, description}) {
+
   return (
     <div className='about-container'>
       <div className='left-about'>
@@ -15,12 +12,12 @@ function About() {
           <AccountStatisticsBox stats={stats}  />
         </div>
         <div className='stats-container'>
-          <DescriptionProfile  description={ddescription  }/>
+          <DescriptionProfile  description={description  }/>
         </div>
       </div>
       <div className='right-about'>
         <div className='info-container'>
-          <ProfileInformation info={ddescription  }/>
+          <ProfileInformation info={description  }/>
         </div>
       </div>
     

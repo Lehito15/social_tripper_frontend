@@ -1,5 +1,6 @@
 .skill-selector-container {
     width: 100%;
+    z-index: 1000000;
 }
   
   .selectors {

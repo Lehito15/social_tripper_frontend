@@ -5,7 +5,7 @@ import React from 'react';
 import './EventSettings.css';
 import MapReaction from '../Relation/MapRelation.jsx';
 
-function EventSettings({data, updateData}) {
+function EventSettings({data, updateData, group}) {
 
   const onLocationAddedStart = (location) =>  {
     console.log(location);
@@ -28,6 +28,7 @@ function EventSettings({data, updateData}) {
                 name="maxParticipant" 
                 placeholder='Maximum nuber of participants' 
                 value={data.maxParticipants} 
+                disabled={group}
                 onChange={(e) => updateData({ ...data, maxParticipants: e.target.value })}/>
         </div>
         <div className="form-group">

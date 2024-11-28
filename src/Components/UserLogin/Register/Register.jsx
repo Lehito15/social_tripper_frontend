@@ -1,14 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Register.css';
 import RegisterNext from './RegisterNext.jsx';
 import GeneralDetails from './GeneralDetails.jsx';
 import AccountDetails from './AccountDetails.jsx';
 import Skills from './Skills.jsx';
 import RegisterSteps from './RegisterSteps.jsx';
+import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
+import {  sendToBackend } from '../../../Utils/helper.js';
 
-function Register({userEmail}) {
-    console.log(userEmail)
+
+function Register() {
+    // console.log(userEmail)
+    const navigate = useNavigate();
     const steps = ['General Details', 'Account Details', 'Skills'];
+    const routeLocation = useLocation(); // Zmieniona nazw
+    const [userEmail, setUserEmail] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  useEffect(() => {
+        const email = routeLocation.state?.email || "";
+        setUserEmail(email); // Ustawiamy email w stanie, po wczytaniu komponentu
+    }, []);
 
     const [currentStep, setCurrentStep] = useState(1);
     const [generalDetails, setGeneralDetails] = useState({
@@ -27,7 +40,7 @@ function Register({userEmail}) {
         imageFile: null,
         weight: '',
         height: '',
-        physicality: ''
+        physicality: 5
 
     });
     const [activities, setActivities] = useState([]);
@@ -65,10 +78,13 @@ function Register({userEmail}) {
     };
 
     const createUser = async () =>{
+        if (isSubmitting) return;
+        console.log(userEmail);
         if (generalDetails.name ==='' || !generalDetails.surname ==='' || !generalDetails.dateOfBirth || !generalDetails.gender) {
             console.error('General details are incomplete!');
             return;
         }
+        setIsSubmitting(true);
         const height =  accountDetails.height /100;
         console.log(height);
         const formattedActivities = activities.map((activity) => ({
@@ -114,42 +130,56 @@ function Register({userEmail}) {
         if (accountDetails.imageFile) {
             formData.append('profilePicture', accountDetails.imageFile);
         }
-        const endpoint = 'http://localhost:8080/users'
+        const endpoint = 'users'
 
-        try {
-            const response = await fetch(endpoint, {
-              method: 'POST',
-              body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
-            });
+        // try {
+        //     const response = await fetch(endpoint, {
+        //       method: 'POST',
+        //       body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
+        //     });
       
-            if (!response.ok) {
-              throw new Error('Failed to create post');
-            }
+        //     if (!response.ok) {
+        //       throw new Error('Failed to create post');
+        //     }
       
-            const data = await response.json();
-            console.log('Post created:', data);
+        //     const data = await response.json();
+        //     console.log('Post created:', data);
+        //     // navigate('/');
+            
+        //   } catch (error) {
+        //     console.error('Error:', error);
+        //   }
+          try {
+            const data = await sendToBackend(endpoint, 'POST', formData);
+            console.log('User created:', data);
+            navigate('/')
           } catch (error) {
             console.error('Error:', error);
+          }
+          finally {
+            setIsSubmitting(false); 
           }
     }
 
 
 
     return (
-        <div className="register-container">
-            <div className="login-logo">
-                <img src={`${process.env.PUBLIC_URL}/LeftBarTopComponent.svg`} alt="Logo" className="logo-image" />
+        <div className='register-wrapper'>
+            <div className="register-container">
+                <div className="login-logo">
+                    <img src={`${process.env.PUBLIC_URL}/LeftBarTopComponent.svg`} alt="Logo" className="logo-image" />
+                </div>
+                <RegisterSteps 
+                    steps={steps} 
+                    currentStep={currentStep} 
+                    setCurrentStep={setCurrentStep} 
+                />
+            
+                <div className="different-profile-info">
+                    {renderStepComponent()}
+                </div>
+                <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createUser}  />
             </div>
-            <RegisterSteps 
-                steps={steps} 
-                currentStep={currentStep} 
-                setCurrentStep={setCurrentStep} 
-            />
-          
-            <div className="different-profile-info">
-                {renderStepComponent()}
-            </div>
-            <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createUser}  />
         </div>
     );
 }

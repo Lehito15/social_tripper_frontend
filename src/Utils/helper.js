@@ -1,8 +1,58 @@
+
 export const getUuidFromUrl = (url) =>{
   const parts = url.split('/'); 
   const uuid = parts[2];
   return uuid;
 }
+
+export const sendToBackend = async (path, method, body) => {
+  const baseUrl = 'http://localhost:8080/'; // Domyślna ścieżka bazowa
+  const endpoint = `${baseUrl}${path}`;
+
+  // Sprawdzenie, czy body jest instancją FormData
+  const isFormData = body instanceof FormData;
+
+  try {
+    const response = await fetch(endpoint, {
+      method,
+      headers: isFormData
+        ? undefined // FormData sam ustawia odpowiednie nagłówki
+        : { 'Content-Type': 'application/json' },
+      body: isFormData ? body : body ? body : null,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to send request. Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('Response data:', data);
+    return data;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error; // Przerzucamy błąd, aby umożliwić jego obsługę w miejscu wywołania funkcji
+  }
+};
+
+
+
+ const activitiesmapper = {
+  'camping': "walking.svg",
+  'hiking': "hiking.svg",
+   'ride': "ride.svg",
+   'running': "running.svg",
+   'sport': "sport.svg",
+   'walking': "walking.svg",
+   'water': "water.svg"
+}
+
+export const getActivityIcon = (activityName) => {
+  const fileName = activitiesmapper[activityName];
+  const file  = `${process.env.PUBLIC_URL}/${fileName}`
+  return file;
+};
+
+
 
 
 // export const calculateHeight = async (maxWidth,  post) => {

@@ -17,6 +17,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
     "flag-icons": "^7.2.3",
+    "focus-trap-react": "^10.3.1",
     "graphql": "^16.9.0",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
@@ -27,6 +28,7 @@
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.8.2",
+    "react-time-picker": "^7.0.0",
     "uuid": "^11.0.2",
     "web-vitals": "^2.1.4"
   },

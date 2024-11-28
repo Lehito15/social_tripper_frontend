@@ -12,7 +12,7 @@ function Comment({comment, author}){
           >
             {comment.author && (
               <img
-                src={comment.author.profile_picture_url}
+                src={comment.author.profilePictureUrl}
                 alt={comment.author.name}
                 className='friend-avatar'
               />
