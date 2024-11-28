@@ -2,7 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 18px;
+  padding: 36px;
   align-items: center;
 }
 .step-content {
@@ -42,4 +42,14 @@
   width: 155px;
   border-bottom: 2px solid #00000080;
   height: 0;
+}
+
+@media (-webkit-device-pixel-ratio: 1.5)
+{
+    .register-steps{
+        /* width: 565px; */
+        padding-top: 30px;
+        padding-bottom: 30px;
+
+    }
 }

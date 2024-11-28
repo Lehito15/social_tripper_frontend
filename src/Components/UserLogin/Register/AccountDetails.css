@@ -42,7 +42,7 @@
 
   .image-preview-profile {
     position: absolute;
-    right: -120px; 
+    right: -110px; 
     top: 50%;
     transform: translateY(-50%);
     width: 74px;
@@ -76,3 +76,16 @@
     width: 175px;
   }
 
+
+  @media (-webkit-device-pixel-ratio: 1.5)
+{
+    .account-details-form .profile-picture-inputr{
+        width: 170px;
+    }
+
+    .show-icon{
+      width: 15px;
+      height: 15px;
+    }
+
+}

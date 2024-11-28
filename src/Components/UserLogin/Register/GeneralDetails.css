@@ -1,10 +1,13 @@
 .general-details-form {
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 30px;
     width: 100%;
-    margin: 0 auto;
+    padding: 1px;
     font-family: "Source Sans 3", serif;
+    overflow-x: hidden;
+    z-index: 1;
+    
   }
   
   .form-row {
@@ -89,5 +92,47 @@
   height: 38px;
   width: 38px;
 }
+
+/* Stylowanie wysokości i szerokości całego Select */
+.custom-select-country__control {
+  height: 44px !important; /* Wysokość samego selecta */
+
+}
+
+/* Stylowanie inputa wewnątrz selecta */
+.custom-select-country__input {
+  height: 100% !important; /* Ustawienie wysokości inputa */
+}
+
+/* Stylowanie rozwijanej listy opcji */
+.custom-select-country__menu {
+  max-height: 150px;
+  position: absolute;
+  z-index:99999;
+  overflow-y: hidden;  /* Dodanie scrolla, jeśli lista jest zbyt długa */
+}
+
+/* Stylowanie opcji w rozwijanej liście */
+.custom-select-country__option {
+  padding: 10px; /* Możesz dostosować padding w opcjach */
+}
+
+
+
+
+@media (-webkit-device-pixel-ratio: 1.5)
+{
+    input{
+      height: 38px;
+    }
+
+    .custom-select-country__control {
+      height: 38px !important; /* Wysokość samego selecta */
+    
+    }
+    
+}
+
+
 
   

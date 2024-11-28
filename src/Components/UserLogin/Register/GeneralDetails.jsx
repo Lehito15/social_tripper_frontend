@@ -88,9 +88,11 @@ function GeneralDetails({data, updateData}) {
               options={countries}
               onChange={(selectedOption) => updateData({ ...data, country: selectedOption?.value })}
               placeholder="Select a country"
+              classNamePrefix="custom-select-country"
               isSearchable={true}
               value={countries.find(option => option.value === data.country)}
             />
+
         </div>
       </div>
     </form>

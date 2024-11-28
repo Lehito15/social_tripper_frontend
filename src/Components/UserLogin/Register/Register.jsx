@@ -78,10 +78,21 @@ function Register() {
     };
 
     const createUser = async () =>{
+        console.log('dodaje ')
         if (isSubmitting) return;
+
+        
+
+        
         console.log(userEmail);
         if (generalDetails.name ==='' || !generalDetails.surname ==='' || !generalDetails.dateOfBirth || !generalDetails.gender) {
-            console.error('General details are incomplete!');
+            alert("Fill all datas")
+            return;
+        }
+        const currentDate = new Date();
+        const dateOfBirth = new Date(generalDetails.dateOfBirth);
+        if (dateOfBirth >= currentDate) {
+            alert("Wrong Date o birth")
             return;
         }
         setIsSubmitting(true);
@@ -107,7 +118,8 @@ function Register() {
             gender: generalDetails.gender,
             weight: accountDetails.weight,
             height: height,
-            physicality: accountDetails.physicality,
+            isExpired: false,
+            physicality: accountDetails.physicality || 5,
             country:{
                 name:generalDetails.country
             },

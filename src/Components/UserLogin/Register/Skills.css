@@ -73,6 +73,14 @@
   }
   
 
+  @media (-webkit-device-pixel-ratio: 1.5)
+{
+    .rate-activities-list{
+        /* width: 565px; */
+        max-height: 165px;
+    }
+}
+
 
   
   

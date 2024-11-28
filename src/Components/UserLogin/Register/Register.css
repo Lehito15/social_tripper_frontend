@@ -26,3 +26,10 @@
 }
 
 
+@media (-webkit-device-pixel-ratio: 1.5)
+{
+    .register-container{
+        /* width: 565px; */
+        min-height: 450px;
+    }
+}

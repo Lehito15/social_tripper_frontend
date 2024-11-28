@@ -28,6 +28,7 @@
   .different-profile-info{
     min-height: 30px;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 350px;
   
   }
