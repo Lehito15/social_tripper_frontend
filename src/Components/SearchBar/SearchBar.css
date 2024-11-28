@@ -52,42 +52,10 @@
 }
 
 
-@media (max-width: 1200px) {
-  .search-bar-container {
-    padding: 0 15px; /* Zmniejszenie paddingu, gdy szerokość okna jest mniejsza */
-  }
-
-  .trip-button {
-    margin-right: 15px; /* Zmniejszenie odstępu między przyciskiem a polem wyszukiwania */
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .search-bar-container{
+    width: 600px;
   }
 }
 
-@media (max-width: 992px) {
-  .search-bar-container {
-    padding: 0 10px;
-  }
 
-  .trip-button {
-    margin-right: 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .search-bar-container {
-    padding: 0 5px;
-  }
-
-  .trip-button {
-    margin-right: 5px;
-  }
-}
-
-@media (max-width: 576px) {
-  .search-bar-container {
-    padding: 0 2px;
-  }
-
-  .trip-button {
-    margin-right: 2px;
-  }
-}

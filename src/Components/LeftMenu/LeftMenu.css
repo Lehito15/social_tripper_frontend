@@ -13,6 +13,15 @@
   overflow-y: auto;
   overflow-x: hidden;
 }
+.left-menu {
+  overflow-y: hidden;
+}
+
+/* .left-menu:hover {
+  overflow-y: overlay;
+  width: 265px;
+  transition: 0;
+} */
 
 .logo {
   width: 100%; /* Szerokość logo na 100% kontenera */
@@ -88,7 +97,8 @@ nav {
   display: flex; /* Flex dla ikony i tekstu */
   align-items: center; /* Wyrównanie pionowe */
   margin: 10%;
-  padding-left: 15% ;
+  margin-left: 0;
+
   height: 100%;
   width: 100%;
   
@@ -97,8 +107,9 @@ nav {
 .menu-item .text, .text_events {
   padding-left: 15.5%;
   white-space: nowrap;
-
-
+}
+ol, ul{
+  padding-left: 36px;
 }
 
 .menu-link.active .text {
@@ -112,6 +123,20 @@ nav {
 
 .menu-content-down {
   /* height: 20vh; Dolne menu zajmuje 20% wysokości */
+}
+
+.left-menu:hover {
+  overflow-y: overlay; /* Pasek pojawia się po najechaniu */
+}
+
+/* Pasek przewijania dla Chrome/Safari */
+.left-menu::-webkit-scrollbar {
+  width: 8px; /* Wąski pasek przewijania */
+}
+
+.left-menu::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-radius: 4px;
 }
 
 .left-menu::-webkit-scrollbar {
@@ -140,13 +165,36 @@ nav {
 .left-menu:hover::-webkit-scrollbar {
   opacity: 1; /* Wyświetla pasek przewijania po najechaniu */
 }
+.left-menu::-webkit-scrollbar-track {
+  background-color: transparent; /* Ukrycie tła paska */
+}
 
 
 
 
+@media (-webkit-device-pixel-ratio: 1.5){
+  .left-menu{
+    width: 250px;
+    transition: all 0s
+  }
+  .left-menu:hover {
+    overflow-y: overlay;
+    width: 258px;
 
+  }
+}
 
+@media (-webkit-device-pixel-ratio: 1.25){
+  .left-menu{
+    /* width: 250px; */
+    transition: all 0s
+  }
+  .left-menu:hover {
+    overflow-y: overlay;
+    width: 328px;
 
+  }
+}
 
 
 @media screen and (max-width: 1300px) {

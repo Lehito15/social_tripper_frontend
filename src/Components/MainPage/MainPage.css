@@ -83,7 +83,7 @@
 /* Responsywne ukrywanie elementów */
 
 /* Usunięcie paddingów */
-@media (max-width: 1250px) {
+@media (max-width: 1250px  ) and (-webkit-device-pixel-ratio: 1) {
   .main-content {
     /* padding: 0 20px; Zmniejszenie paddingów */
     width: calc(100% - 570px); /* Dopasowanie do zmniejszających się paddingów */
@@ -91,7 +91,7 @@
 }
 
 /* Ukrycie prawego panelu */
-@media (max-width: 1270px) {
+@media (max-width: 1270px) and (-webkit-device-pixel-ratio: 1) {
   .right-menu,
   .rightpanell {
     display: none;
@@ -109,7 +109,7 @@
 }
 
 /* Ukrycie lewego panelu */
-@media (max-width: 970px) {
+@media (max-width: 970px) and (-webkit-device-pixel-ratio: 1) {
   .left-menu {
     display: none;
   }
@@ -117,11 +117,66 @@
   .main-content {
     left: 0;
     top: 70px;
-    width: 100%; /* Główna zawartość zajmuje pełną szerokość */
+    width: 100%; 
   }
 
   .searchbar {
     /* left: 0; */
+    width: 100%;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .main-content {
+    left: 250px;
+  }
+  .left-menu {
+    width: 250px;
+  }
+  .searchbar{
+    left: 250px
+  }
+}
+
+@media (max-width: 1500px) and (-webkit-device-pixel-ratio: 1.5) {
+  .main-content {
+    width: calc(100% - 550px); /* Dopasowanie szerokości */
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 1220px) and (-webkit-device-pixel-ratio: 1.5) {
+  .right-menu,
+  .rightpanell {
+    display: none;
+  }
+
+  .main-content {
+    right: 0;
+    width: calc(100% - 250px); /* Dopasowanie do braku prawego panelu */
+    padding: 0 20px;
+  }
+
+  .searchbar {
+    right: 0;
+    width: calc(100% - 250px);
+  }
+}
+
+@media (max-width: 770px) and (-webkit-device-pixel-ratio: 1.5) {
+  .left-menu {
+    display: none;
+  }
+
+  .main-content {
+    left: 0;
+    top: 70px;
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .searchbar {
     width: 100%;
   }
 }

@@ -16,7 +16,7 @@
 }
 
 .event-image{
-  object-fit: fill;
+  object-fit: contain;
   border-radius: 0px;
   max-width: 768px;
   max-height: 432px;
@@ -47,4 +47,11 @@
 .pick-event-image .media-buttons {
   margin-right: 12px;
 
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .event-image{
+    max-height: 250px;
+    object-fit: contain;
+  }
 }

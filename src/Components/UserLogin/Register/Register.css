@@ -1,7 +1,7 @@
 .register-container{
     /* position: fixed; */
     width: 848px;
-    min-height: 670px;
+    /* min-height: 670px; */
     top: 10px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 0px #00000040;

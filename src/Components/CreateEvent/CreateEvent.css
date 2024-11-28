@@ -6,6 +6,8 @@
   top: 20px;
   left: auto;
   transform: none;
+
+
 }
 
 .line{
@@ -24,12 +26,23 @@
 }
 
 
-@media (max-height: 900px) {
+/* @media (max-height: 900px) {
   .different-profile-info{
     min-height: 30px;
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 350px;
   
+  }
+} */
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  /* Zmniejsz tylko zawartość strony */
+  .event {
+    transform: scale(0.75) translate(-0%, -65%) ;
+    top: 50%;
+    max-height: 700px;
+
+
   }
 }

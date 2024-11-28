@@ -214,7 +214,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
         <div className="different-profile-info">
                   {renderStepComponent()}
         </div>
-        <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={4} createEvent={createEvent}/>
+        <RegisterNext step={currentStep}  setCurrentStep={setCurrentStep} maxStep={4} createEvent={createEvent}/>
       </div>
     </>
 

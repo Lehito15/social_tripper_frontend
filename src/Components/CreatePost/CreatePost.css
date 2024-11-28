@@ -3,18 +3,31 @@
 /* Kontener modala Create Post */
 .create-post-container {
   position: fixed;
-  top: 50%; /* Ustawienie na środek pionowo */
+  top: 50%; 
   left: 50%; /* Ustawienie na środek poziomo */
   transform: translate(-50%, -50%); /* Przesunięcie o 50%, aby idealnie wyśrodkować */
-  width: 700px;
+  width: 710px;
   background-color: white; /* Tło modala */
   border-radius: 8px;
   z-index: 1010; /* Wyżej niż overlay */
-  padding: 20px;
+  padding: 18px;
+  
   -webkit-box-shadow: 0px 2px 4px 0px  rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 2px 4px 0px  rgba(0, 0, 0, 0.25);
   box-shadow: 0px 2px 4px 0px  rgba(0, 0, 0, 0.25);
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* max-height: calc(100); */
+  /* box-sizing: border-box; */
+  /* max-height:   90vh; */
+
 }
+
+/* html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+} */
 
 .close-icon-post {
   cursor: pointer;
@@ -181,6 +194,28 @@
   width: 16px;
   height: 16px; 
   margin-right: 8px;
+}
+
+/* @media (-webkit-device-pixel-ratio: 1.5){
+  .post-textarea{
+    height: 175px;
+  }
+  .create-post-container{
+    top: 50%;
+  }
+} */
+
+@media (-webkit-device-pixel-ratio: 1.5) or (-webkit-device-pixel-ratio: 1.25)  {
+  /* Zmniejsz tylko zawartość strony */
+  .create-post-container {
+    transform: scale(0.75) translate(-68%, -66%);
+    top: 50%;
+    max-height: 800px;
+
+  }
+  .post-textarea{
+    height: 175px;
+  }
 }
 
 

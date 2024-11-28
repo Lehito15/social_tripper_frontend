@@ -19,7 +19,12 @@
 .different-profile-info {
   /* flex-grow: 1; */
      /* Tylko ta sekcja przewija się */
-  margin-top: 10px;            /* Daje odstęp poniżej menu */
+  margin-top: 10px; 
+  /* padding-left: 18px;
+  padding-right: 18px */
+  margin-left: 18px;
+  margin-right: 18px;
+
 
 }
 

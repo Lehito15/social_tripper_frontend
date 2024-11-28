@@ -99,14 +99,14 @@ function Register() {
         const height =  accountDetails.height /100;
         console.log(height);
         const formattedActivities = activities.map((activity) => ({
-            experience: activity.rating,
+            experience: activity.rating || 5,
             activity: {
                 name: activity.label,
             },
         }));
     
         const formattedLanguages = languages.map((language) => ({
-            level: language.rating,
+            level: language.rating || 5,
             language: {
                 name: language.label,
             },

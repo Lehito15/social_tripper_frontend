@@ -18,7 +18,7 @@ function LeftMenu(user) {
       <div className="menu-content">
         <div className='nav-container'>
           <nav>
-              <ul>
+          <ul style={{ paddingLeft: '36px' }}>
                 <li>
                   <NavLink 
                     exact="true" 
@@ -94,7 +94,7 @@ function LeftMenu(user) {
       <div className='menu-content-down'>
         <div className='nav-container'>
           <nav>
-              <ul>
+             <ul style={{ paddingLeft: '36px' }}>
                 <li>
                   <NavLink 
                     exact="true" 

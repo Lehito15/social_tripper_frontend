@@ -39,6 +39,7 @@ function ProfileStatistcs({user}){
 
   return(
     <div className="user-profile">
+      {/* <div class="inner-content"> */}
     <img
       // src={user.profilePicture}
       src={owner.profilePictureUrl || `${process.env.PUBLIC_URL}/defoult-picture.png`}
@@ -57,6 +58,7 @@ function ProfileStatistcs({user}){
           following: owner.followingNumber,}} />
 
     </div>
+    {/* </div> */}
   </div>
 
   );
