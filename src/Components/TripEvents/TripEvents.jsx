@@ -20,6 +20,7 @@ function TripEvents({ openEvent, reLoad}){
       eventEndTime
       numberOfParticipants
       maxNumberOfParticipants
+      destination
       owner{
         uuid
         nickname

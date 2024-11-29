@@ -10,6 +10,7 @@
   /* width: calc(100% - 550px); Główna szerokość z uwzględnieniem obu paneli */
   min-width: 700px; /* Minimalna szerokość treści */
   transition: all 0.3s ease; /* Animacja zmian */
+  /* height: 100%; */
 }
 
 /* Lewy panel */

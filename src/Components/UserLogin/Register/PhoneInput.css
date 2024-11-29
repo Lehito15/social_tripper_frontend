@@ -1,0 +1,28 @@
+.phone-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-select-phone {
+  width: 200px;
+}
+
+.custom-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.flag-icon {
+  width: 24px;
+  height: 16px;
+}
+
+/* .phone-input-field {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex-grow: 1;
+} */

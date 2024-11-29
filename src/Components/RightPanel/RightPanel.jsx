@@ -3,15 +3,15 @@ import './RightPanel.css';
 import LastTrip from './LastTrip';
 import SuggestionsForYou from './SuggestionsForYou';
 
-function RightPanel(){
+function RightPanel({userUuid}){
 
 
   return (
     <div className='right-panel'>
       <div className='last-trip'>
-        <LastTrip />
-        
+        <LastTrip userUuid={userUuid} />
 
+        
       </div>
       <SuggestionsForYou />
       <h>ehfdwk</h>

@@ -11,22 +11,17 @@ function SelectInfoMenu({ user, isMyAccount, myUuid }) {
   useEffect(() => {
     const checkUserFollow = async () => {
       console.log('sprawdzam followawanie');
-      console.log(myUuid)
-      console.log(user.uuid)
+      console.log(myUuid);
+      console.log(user.uuid);
       try {
-        const endpoint = `users/is-following`;
-        // const endpoint = `http://localhost:8080/users/is-following?follower=${encodeURIComponent(myUuid)}&followed=${encodeURIComponent(user.uuid)}`;
-        const follow = {
-          follower: {
-            uuid: myUuid
-          },
-          followed: {
-            uuid: user.uuid
-          },
-        };
-        const response = await sendToBackend(endpoint, "GET", JSON.stringify(follow));
-        console.log(response)
-        setAreUsersFriends(response); // Zakładając, że odpowiedź to true/false
+        const endpoint = `users/is-following?followerUUID=${myUuid}&followedUUID=${user.uuid}`;
+        const response = await sendToBackend(endpoint, "GET",null);
+
+        // Zakładam, że odpowiedź z backendu to wartość true/false
+        if (response) {
+          console.log('tak');
+          setAreUsersFriends(response); // Oczekuję, że odpowiedź to true/false
+        }
       } catch (error) {
         console.error("Error fetching membership status:", error);
       }
@@ -35,7 +30,7 @@ function SelectInfoMenu({ user, isMyAccount, myUuid }) {
     if (myUuid) {
       checkUserFollow();
     }
-  }, []);
+  }, [myUuid, user.uuid]); // Zależności w useEffect, aby reagować na zmiany
 
   const handleFollowClick = async () => {
     try {
@@ -44,15 +39,15 @@ function SelectInfoMenu({ user, isMyAccount, myUuid }) {
         follower: {
           uuid: myUuid
         },
-        followed:{
+        followed: {
           uuid: user.uuid
         }
       };
       const response = await sendToBackend(endpoint, "POST", JSON.stringify(follow));
 
       if (response) {
-        console.log('ekstra')
-        setAreUsersFriends(!areUsersFriends);
+        console.log('ekstra');
+        setAreUsersFriends(!areUsersFriends); // Przełącz stan obserwowania
       }
     } catch (error) {
       console.error("Error toggling follow status:", error);

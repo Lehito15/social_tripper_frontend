@@ -18,5 +18,17 @@ width: 20px;
 }
 
 .carousel-indicators .active {
-  background-color: black; /* Kolor dla aktywnego indykatora */
+  background-color: #B0E26A; /* Kolor dla aktywnego indykatora */
+}
+
+.carousel-control-next-icon ,.carousel-control-prev-icon{
+  background-color: #B0E26A;
+  border-radius: 50px;
+  color: black;
+
+
+}
+.isually-hidden{
+  color: black;
+  background-color: black;
 }

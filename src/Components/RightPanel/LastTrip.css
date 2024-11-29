@@ -1,6 +1,94 @@
 .last-trip-container {
   width: 100%;
   align-items: flex-start;
+  margin-left: 9px ;
+  margin-right: 30px;
+  text-align: left;
+}
+
+.last-trip-container .event-date {
+  border: none;
+  padding-bottom: 6.89px ;
+}
+.last-trip-container .event-name{
+  font-size: 14px;
+}
+
+.last-trip-container .event-image-container{
+  width: 45%;
+}
+
+.last-trip-container .event-details{
+  width: 50%;
+  /* padding-left: 10px; */
+  margin-left: 9px;
+
+}
+
+
+.last-trip-container .event-about{
+  padding-bottom:9px ;
+  border: none
+}
+
+.last-trip-container .event-image{
+  border-radius:50%;
+  object-fit: fill;
+
+
+}
+
+.last-trip-container .event-name-container{
+  align-items: center;
+}
+
+
+.last-trip-container .event-date .date-card{
+  padding-left: 9px;
+  padding-right: 9px;
+  width: 48px ;
+  height: 66px;
+}
+
+.last-trip-container .event-date .date-card .date-card__day{
+  font-size: 24px;
+}
+
+.last-trip-container .event-card{
+  padding: 8px;
+
+}
+
+.last-trip-container .event-description {
+  font-size: 10px;
+  color: #666;
+  margin: 0;    
+  display: -webkit-box; /* Wymagane dla obsługi line-clamp */
+  -webkit-box-orient: vertical; /* Ustawienie osi pionowej */
+  -webkit-line-clamp: 1; /* Maksymalna liczba linii */
+  line-clamp: 1; /* Alternatywa dla nowoczesnych przeglądarek */
+  overflow: hidden; /* Ukrycie nadmiaru tekstu */
+  text-overflow: ellipsis; /* Dodanie kropek na końcu */
+  max-width: 100%; /* Zapewnienie, że tekst dopasuje się do szerokości */
+  word-wrap: break-word; /* Zawijanie tekstu w przypadku długich słów */
+}
+.last-trip-container .event-card .post-owner-avatar{
+  width: 20px;
+  height: 20px;
+}
+
+.last-trip-container .event-card .post-owner-name{
+  font-size: 11px;
+
+}
+
+.last-trip-container .event-card .icon-members{
+  height: 20px;
+  width: 20px;
+}
+
+.last-trip-container  .event-card .user-container{
+  padding-top: 0;
 }
 
 .component-title {
@@ -91,7 +179,7 @@ p{
 
 .trip-people {
   position: relative;   /* Umożliwia pozycjonowanie absolutne dzieci */
-  height: 50px;
+  height: 30px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -119,10 +207,7 @@ p{
   height: 50%;
 }
 
-.trip-owner .post-owner-avatar{
-  height: 20px;
-  width: 20px;
-}
+
 .trip-owner  .post-owner-name {
   margin: 0;
   font-size: 11px;

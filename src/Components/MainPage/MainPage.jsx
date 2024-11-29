@@ -23,7 +23,7 @@ import GroupPage from '../GroupPage/GroupPage.jsx';
 import GroupMain from '../GroupView/GroupMain.jsx';
 import CreateGroup from '../CreateGroup/CreateGroup.jsx';
 import { gql, useQuery } from '@apollo/client';
-
+import MapPage from '../Explore/MapPage.jsx';
 
 
 
@@ -312,7 +312,7 @@ console.log(data);
         <RightMenu toggleAddPost={addPost} toggleChat={toggleChat} />
         </div>
         <div className='rightpanell'>
-          <RightPanel />
+          <RightPanel userUuid={user.uuid} />
         </div>
         
         
@@ -325,6 +325,7 @@ console.log(data);
               <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
               <Route path="/profileinfo/:uuid/*" element={<ProfileInfo myUuid={user.uuid} />} />
               <Route path="/events" element={<TripEvents openEvent={openEvent} reLoad={refetch}/>} />
+              <Route path="/explore" element={<MapPage />} />
               <Route path="/groups" element={<GroupPage createGroup={createGroup}  />} />
               <Route path="/relations" element={<RelationsPage  openRelation={openRelation}/>} />
               <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} />} />

@@ -2,7 +2,9 @@
   display: flex;
   align-items: center; /* Wyśrodkowanie w pionie */
   justify-content: center; /* Wyśrodkowanie horyzontalne elementu głównego */
-  background-color: #ffffff; /* Kolor tła kontenera */
+
+  color: rgba(0, 0, 0, 0.5);
+
   width: 720px; /* Wypełnia całą dostępną szerokość */
   height: 100%; /* Dopasowanie do wysokości */
   /* padding: 0 15px; Minimalny padding z obu stron */
@@ -22,6 +24,7 @@
   width: 20px; /* Szerokość ikony */
   height: 20px; /* Wysokość ikony */
   pointer-events: none; /* Wyłączenie interakcji z ikoną */
+  opacity: 0.5;
 }
 
 .trip-button {

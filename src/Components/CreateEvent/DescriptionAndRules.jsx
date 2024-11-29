@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import './DescriptionAndRules.css';
+import { decodeRules } from '../../Utils/helper';
 
 function DescriptionAndRules({ data, updateData }) {
   const [ruleInput, setRuleInput] = useState('');
 
   console.log(data);
 
-  // Dekodowanie reguł ze stringa do tablicy
-  const decodeRules = (rulesString) =>
-    rulesString
-      ? rulesString.split(';').map((rule) => {
-          const [name, description = ''] = rule.split('|');
-          return { name, description };
-        })
-      : [];
-
-  // Kodowanie reguł z tablicy do stringa
+  // Funkcja kodująca reguły do stringa
   const encodeRules = (rules) =>
     rules.map((rule) => `${rule.name}|${rule.description}`).join(';');
 
@@ -52,6 +44,15 @@ function DescriptionAndRules({ data, updateData }) {
     });
   };
 
+  // Usunięcie reguły
+  const removeRule = (index) => {
+    const updatedRules = rules.filter((_, i) => i !== index); // Usuwa regułę po indexie
+    updateData({
+      ...data,
+      rules: encodeRules(updatedRules),
+    });
+  };
+
   return (
     <div className="trip-form">
       <div className="trip-description-section">
@@ -77,13 +78,24 @@ function DescriptionAndRules({ data, updateData }) {
                   <p className="rule-name">
                     {index + 1}. {rule.name}
                   </p>
+                  <img 
+                    className="remove-rule"
+                    src={`${process.env.PUBLIC_URL}/close.png`}
+                    onClick={() => removeRule(index)}
+                    alt="Close"
+                  />
                 </div>
+                <div>
                 <textarea
                   value={rule.description}
                   onChange={(e) => handleRuleChange(index, 'description', e.target.value)}
                   placeholder="Rule description"
                   className="textarea rule-description"
                 />
+                
+                
+                </div>
+                
               </div>
             ))
           ) : (

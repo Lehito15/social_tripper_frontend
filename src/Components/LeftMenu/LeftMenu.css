@@ -1,6 +1,6 @@
 .left-menu {
   background-color: #ffffff; /* Kolor tła */
-  border-right: 0.1px inset #000000;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   height: 100vh;
   width: 320px;
 
@@ -45,8 +45,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* Równomierne rozmieszczenie elementów */
-  border-top: rgba(0, 0, 0, 55) 1px inset;
-  border-bottom: rgba(0, 0, 0, 55) 1px solid;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .nav-container {
   margin-top: 20px; /* Odstęp od góry */
@@ -64,6 +64,7 @@
 nav {
   height: 100%; /* Umożliwia zajmowanie całej wysokości kontenera */
   display: flex;
+  width: 100%;
   align-items: center; /* Centruje elementy w pionie, jeżeli jest to potrzebne */
 }
 
@@ -88,7 +89,7 @@ nav {
   display: flex;
   justify-content: start; /* Wyrównaj tekst i ikonkę do początku */
   align-items: center;
-  width: 100%;
+  width: 160px;
   height: 100%;
   font-weight: 300;
 }
@@ -96,7 +97,7 @@ nav {
 .menu-item {
   display: flex; /* Flex dla ikony i tekstu */
   align-items: center; /* Wyrównanie pionowe */
-  margin: 10%;
+  margin-top: 20px;
   margin-left: 0;
 
   height: 100%;
@@ -105,7 +106,7 @@ nav {
 }
 
 .menu-item .text, .text_events {
-  padding-left: 15.5%;
+  margin-left: 15.5%;
   white-space: nowrap;
 }
 ol, ul{
@@ -115,11 +116,38 @@ ol, ul{
 .menu-link.active .text {
   font-weight: 500; /* Ustawia pogrubienie tekstu aktywnego elementu */
 }
+.hidden {
+  display: none;
+}
+
 .menu-item .icon {
   /* margin-right: 1vw; Odstęp od tekstu z użyciem jednostek viewportowych */
   width: 20px; /* Skalująca się szerokość ikony */
   height: 20px; /* Skalująca się wysokość ikony */
+  margin-right: 0;
 }
+
+.menu-item .icon-active-container{
+  background-color: #000000;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 0px 3px rgba(189, 242, 113, 1);
+
+}
+
+.icon-container{
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 
 .menu-content-down {
   /* height: 20vh; Dolne menu zajmuje 20% wysokości */

@@ -3,10 +3,12 @@
 import React from 'react';
 import './GeneralDetails.css';
 import Select from 'react-select';
-import {countriesList} from '../../../Utils/helper.js';
+// import {countriesList} from '../../../Utils/helper.js';
+import PhoneInput from './PhoneInput.jsx';
+import CountrySelect from './CountrySelect.jsx';
 
 function GeneralDetails({data, updateData}) {
-  const countries =  countriesList();
+  // const countries =  countriesList();
 
   return (
     <form className="general-details-form">
@@ -73,25 +75,29 @@ function GeneralDetails({data, updateData}) {
       <div className="form-row">
         <div className="form-group">
           <label htmlFor="phone">Phone Number</label>
-          <input 
+          {/* <input 
                 type="tel"
                 id="phone" 
                 name="phone" 
                 placeholder='5412234' 
                 value={data.telephone}
-                onChange={(e) => updateData({ ...data, telephone: e.target.value })} />
+                onChange={(e) => updateData({ ...data, telephone: e.target.value })} /> */}
+                <PhoneInput data={data} updateData={updateData} />
+
         </div>
         <div className="form-group">
-          <label htmlFor="address">Countryy</label>
-          <Select
+          <label htmlFor="address">Country</label>
+          {/* <Select
               id="language"
               options={countries}
               onChange={(selectedOption) => updateData({ ...data, country: selectedOption?.value })}
               placeholder="Select a country"
               classNamePrefix="custom-select-country"
               isSearchable={true}
+               menuPlacement="top"
               value={countries.find(option => option.value === data.country)}
-            />
+            /> */}
+            <CountrySelect data={data} updateData={updateData} />
 
         </div>
       </div>

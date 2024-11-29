@@ -18,7 +18,7 @@ const highlightedMarkerIcon = new L.Icon({
   popupAnchor: [0, -45],
 });
 
-function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded }) {
+function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded, isRelation }) {
   // const [newMarkerPosition, setNewMarkerPosition] = useState(locations?.[0]?.position || null);
   const [newMarkerPosition, setNewMarkerPosition] = useState(null);
 
@@ -54,6 +54,7 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
   }, [locations, onLocationAdded]);
 
   return (
+    <div>
     <MapContainer center={defaultCenter} zoom={13} style={{ height: "400px", width: "100%" }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -76,7 +77,7 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
           />
         ))}
 
-        {locations && !onLocationAdded && (
+        {locations && !onLocationAdded && !isRelation && (
           locations.map(location => (
             <Marker
               key={location.id}
@@ -92,6 +93,7 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded 
         <Marker position={newMarkerPosition} icon={customMarkerIcon} />
       )}
     </MapContainer>
+    </div>
   );
 }
 

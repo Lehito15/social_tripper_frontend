@@ -30,7 +30,8 @@ function Relation({post, openRelation}){
 
   useEffect(() => {
     const calculateHeight = async () => {
-      const maxWidth = containerRef.current ? containerRef.current.offsetWidth * (2/3) : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
+      const maxWidth = containerRef.current ? containerRef.current.offsetWidth  : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
+      
       if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
         const mediaHeights = await Promise.all(
           post.postMultimediaDTO.map((mediaItem) => {
@@ -84,7 +85,7 @@ function Relation({post, openRelation}){
         )}
         </div>
         <div className='map-container' style={{height: postHeight}} >
-            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  />
+            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true} />
         </div>
     </div>
     <div className='reactions-conteiner'>

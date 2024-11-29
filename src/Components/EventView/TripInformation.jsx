@@ -17,7 +17,7 @@ function TripInformation({event, isOwner, isGroup, locationScope, updateData}){
         <GeneralDetailsEvent description={event.description} publicText={eventPublicText}  publicIcon={eventPublicIcon} maxMembers={event.maxNumberOfParticipants} eventCreated={event.dateOfCreation} isOwner={isOwner} isGroup={isGroup} locationScope={locationScope} eventUUID={event.uuid}  updateData={updateData}/>
       </div>
       <div className="trip-rules-container">
-        <TripRules rules={event.rules} />
+        <TripRules rulesString={event.rules} />
       </div>
     </div>
   )

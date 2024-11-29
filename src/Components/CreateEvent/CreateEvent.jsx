@@ -8,6 +8,7 @@ import EventSettings from "./EventSettings.jsx";
 import EventSkills from "./EventSkills.jsx";
 import {  sendToBackend } from '../../Utils/helper.js';
 import { useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 
 function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
   const steps = ['General Details', 'Description  and Rules', 'Settings', 'Skills'];
@@ -17,7 +18,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
 
   const createEvent = async () => {
     if (isSubmitting) return;
-    setIsSubmitting(true);
+    
     console.log('rules');
     console.log(descriptionAndRules.rules);
   
@@ -30,10 +31,16 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
       return;
     }
   
-    if (generalDetailsEvent.eventName === '' || !eventSettings.tripStartDate || !eventSettings.eventStartLocation) {
+    if (generalDetailsEvent.eventName === '' || !eventSettings.tripStartDate || !eventSettings.eventStartLocation || !descriptionAndRules.description || !eventSettings.eventEndLocation) {
       alert('Fill all inputs');
       return;
     }
+
+    if(descriptionAndRules.rules.length > 5000){
+      alert('To many rules');
+      return;
+    }
+    setIsSubmitting(true);
   
     console.log(eventSettings.eventStartLocation[0].position[0]);
   
@@ -56,6 +63,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
     }));
   
     let eventDTO = {};
+    console.log(descriptionAndRules.rules);
   
     if (groupUuid) {
       eventDTO = {
@@ -73,6 +81,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
           owner: { uuid: userUuid },
           activities: formattedActivities,
           languages: formattedLanguages,
+          rules: descriptionAndRules.rules
         },
       };
     } else {
@@ -91,6 +100,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
         owner: { uuid: userUuid },
         activities: formattedActivities,
         languages: formattedLanguages,
+        rules: descriptionAndRules.rules
       };
     }
   
@@ -195,6 +205,12 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
 };
   return(
     <>
+
+      {isSubmitting && (
+              <div className="overlay-spinner">
+                <ClipLoader color="#36d7b7" loading={isSubmitting} size={50} />
+              </div>
+            )}
     <div className="overlay" ></div>
       <div className="create-post-container event">
         <div className='create-post-header'>

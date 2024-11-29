@@ -6,7 +6,7 @@ import ActivityIcon from './ActivityIcon.jsx';
 import EventMembers from './EventMembers.jsx';
 import DateCardTime from './DateCardTime.jsx';
 
-function EventCard({ event, openEvent }) {
+function EventCard({ event, openEvent, lastTrip }) {
   console.log(event)
   const languageToFlagCode = {
     English: "gb",
@@ -25,10 +25,10 @@ function EventCard({ event, openEvent }) {
   return (
     <div className="event-card">
       {/* Górna sekcja z małą ikonką */}
-      <div className="event-card-header">
+      {!lastTrip &&(<div className="event-card-header">
         <img src={`${process.env.PUBLIC_URL}/event_target.png`} alt="Target Icon" className="event-icon" />
-        {event.target && (<span>{event.target}</span>)}
-      </div>
+        {event.destination && (<span>{event.destination}</span>)}
+      </div>)}
 
       <div className="event-content">
         <div className="event-image-container">
@@ -38,19 +38,23 @@ function EventCard({ event, openEvent }) {
         {/* Prawa strona: Data, Name, Description */}
         <div className="event-details">
           <div className="event-date">
-            {event.eventStartTime && (<DateCardTime date={event.eventStartTime} />)}
-            {event.eventEndTime && (<DateCardTime date={event.eventEndTime} />)}
+            {event.eventStartTime && !lastTrip && (<DateCardTime date={event.eventStartTime} />)}
+            {event.eventEndTime && !lastTrip ? (
+                  <DateCardTime date={event.eventEndTime} />
+                ) : (
+                  <DateCard  date={event.eventEndTime} />
+                )}
             <div className='event-name-container'>
-              <span className="event-name" onClick={() => openEvent(event.uuid)}>{event.name}</span>
+              <span className="event-name ssp" onClick={() => openEvent(event.uuid)}>{event.name}</span>
             </div>
             {/* <h3 className="event-name" onClick={() => openEvent(event.uuid)}>{event.description}</h3> */}
           </div>
           <div className='event-about'>
             <div className='event-description-container'>
-              <p className='event-section-tittle'>Description</p>
+              {!lastTrip &&(<p className='event-section-tittle'>Description</p>)}
               <span className="event-description">{event.description}</span>
             </div>
-            <div className='activities-languages'>
+            { !lastTrip && (<div className='activities-languages'>
               <div className='event-section activities'>
                 <p className='event-section-tittle'>Activities</p>
                 <div className='activities-section'>
@@ -76,7 +80,7 @@ function EventCard({ event, openEvent }) {
 
               </div>
 
-            </div>
+            </div>)}
           </div>
           <div className='trip-people'>
             <div className='trip-owner'>

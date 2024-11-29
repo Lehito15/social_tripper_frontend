@@ -76,6 +76,7 @@ function EventMain({ openCreatePost, userUuid }) {
         destinationLongitude
         destinationLatitude
         relation
+        rules
         owner {
           uuid
           nickname

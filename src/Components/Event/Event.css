@@ -75,6 +75,7 @@
 
 .event-name {
   font-size: 18px; /* Ustawienie rozmiaru tekstu */
+  font-weight: 600;
   margin: 0; /* Resetowanie marginesów */
   display: -webkit-box; /* Wymagane dla obsługi line-clamp */
   -webkit-box-orient: vertical; /* Ustawienie osi pionowej */
@@ -86,7 +87,9 @@
   word-wrap: break-word; /* Zawijanie tekstu w przypadku długich słów */
 }
 
-
+.event-card .user-container{
+  padding-top: 20px;
+}
 
 .event-name:hover{
   cursor: pointer;
@@ -102,6 +105,8 @@
   max-height: 150px;
  
 }
+
+
 
 .event-description {
   font-size: 14px;
@@ -160,6 +165,8 @@
 
 .event-card .trip-owner{
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .event-card  .member-numbers{
@@ -178,4 +185,10 @@
   height: 24px;
   max-width: 24px;
   max-height: 24px;
+}
+
+.trip-people{
+  display: flex;
+  justify-content: space-between;
+
 }

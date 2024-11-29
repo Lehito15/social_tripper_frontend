@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileStatistics from './ProfileStatistics.jsx';
-import { NavLink } from 'react-router-dom'; 
+import { NavLink, useLocation } from 'react-router-dom';
 import '../LeftMenu/LeftMenu.css';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 
 function LeftMenu(user) {
   const { signOut } = useAuthenticator();
+  const location = useLocation(); // Pobiera aktualną ścieżkę URL
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const menuItems = [
+    { path: "", label: "Home", icon: "home.png", activeIcon: "home-active.png" },
+    { path: "/events", label: "Trip events", icon: "events_icon.png", activeIcon: "events-active.png" },
+    { path: "/relations", label: "Relations", icon: "relation_icon.png", activeIcon: "relations-active.png" },
+    { path: "/groups", label: "Groups", icon: "groups_icon.png", activeIcon: "groups-active.png" },
+    { path: "/memories", label: "Memories", icon: "memories_icon.png", activeIcon: "memories-active.png" },
+    { path: "/explore", label: "Explore", icon: "explore_icon.png", activeIcon: "explore-active.png" },
+  ];
+
+  // Ustawienie aktywnego indeksu na podstawie ścieżki URL
+  useEffect(() => {
+    const currentIndex = menuItems.findIndex(item => item.path === location.pathname);
+    if (currentIndex !== -1) {
+      setActiveIndex(currentIndex);
+    }
+  }, [location.pathname, menuItems]);
   return (
     <div className="left-menu">
       <div className='logo-container'>
@@ -19,74 +38,31 @@ function LeftMenu(user) {
         <div className='nav-container'>
           <nav>
           <ul style={{ paddingLeft: '36px' }}>
-                <li>
-                  <NavLink 
-                    exact="true" 
-                    to="/" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Home        </span>
-                    </div>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink 
-                    to="/events" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/events_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Trip events</span>
-                    </div>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink 
-                    to="/relations" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "  menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Relations   </span>
-                    </div>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink 
-                    to="/groups" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/groups_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Groups</span>
-                    </div>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink 
-                    to="/memories" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/memories_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Memories    </span>
-                    </div>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink 
-                    to="/explore" 
-                    className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
-                  >
-                    <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/explore_icon.png`} alt="Ikona" className="icon" />
-                      <span className='text'>Explore     </span>
-                    </div>
-                  </NavLink>
-                </li>
-              </ul>
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <NavLink
+                exact="true"
+                to={item.path}
+                className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
+                onClick={() => setActiveIndex(index)} // Aktualizacja aktywnego indeksu po kliknięciu
+              >
+                <div className="menu-item">
+                  <div className={`icon-container ${activeIndex === index ? 'icon-active-container' : ''}`}>
+                  <img
+                    src={activeIndex === index 
+                      ? `${process.env.PUBLIC_URL}/${item.activeIcon}` 
+                      : `${process.env.PUBLIC_URL}/${item.icon}`}
+                    alt={item.label}
+                    className={`icon ${activeIndex === index ? 'icon-active' : ''}`}
+                  />
+                  </div>
+
+                  <span className="text">{item.label}</span>
+                </div>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
             </nav>
         </div>
       </div>
@@ -100,9 +76,16 @@ function LeftMenu(user) {
                     exact="true" 
                     to="/register" 
                     className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
+                    onClick={() => setActiveIndex(6)}
                   >
                     <div className="menu-item">
-                      <img src={`${process.env.PUBLIC_URL}/settings_icon.png`} alt="Ikona" className="icon" />
+                    <img
+                    src={activeIndex === 6
+                      ? `${process.env.PUBLIC_URL}/settings_icon.png` 
+                      : `${process.env.PUBLIC_URL}/settings_icon.png`}
+                    alt={"settings"}
+                    className="icon"
+                  />
                       <span className='text'>Settings    </span>
                     </div>
                   </NavLink>

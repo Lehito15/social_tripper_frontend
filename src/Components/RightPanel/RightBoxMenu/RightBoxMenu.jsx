@@ -13,8 +13,8 @@ function RightMenu({toggleAddPost, toggleChat}){
       <button className="button-icon">
       <img src={`${process.env.PUBLIC_URL}/incoming_icon.png`} alt="Ikona" className="icon-right" />
       </button>
-      <button className="button-icon" onClick={toggleAddPost}>
-      <img src={`${process.env.PUBLIC_URL}/relation_icon.png`} alt="Ikona" className="icon-right" />
+      <button className="button-icon add-post-icon" onClick={toggleAddPost}>
+      <img src={`${process.env.PUBLIC_URL}/add-post-green.png`} alt="Ikona" className="icon-right" />
       </button>
     </div>
   );
