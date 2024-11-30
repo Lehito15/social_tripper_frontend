@@ -45,8 +45,8 @@ useEffect(() => {
 
   return (
     <div className="last-trip-container">
-      <span className='component-title'>Suggestions for you</span>
-      <Event event={data.events[0]} lastTrip={true} />
+      <span className='component-title'>Your Last Trip</span>
+      {data.events.lenght != 0 &&(<Event event={data.events[0]} lastTrip={true} />)}
     
     </div>
   );
