@@ -8,6 +8,7 @@ import RegisterSteps from './RegisterSteps.jsx';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import {  sendToBackend } from '../../../Utils/helper.js';
+import { ClipLoader } from "react-spinners";
 
 
 function Register() {
@@ -176,6 +177,13 @@ function Register() {
 
 
     return (
+        <>
+
+        {isSubmitting && (
+            <div className="overlay-spinner">
+              <ClipLoader color="#36d7b7" loading={isSubmitting} size={50} />
+            </div>
+          )}
         <div className='register-wrapper'>
             <div className="register-container">
                 <div className="login-logo">
@@ -193,6 +201,7 @@ function Register() {
                 <RegisterNext step={currentStep} signIn={true} setCurrentStep={setCurrentStep} maxStep={3} createEvent={createUser}  />
             </div>
         </div>
+        </>
     );
 }
 
