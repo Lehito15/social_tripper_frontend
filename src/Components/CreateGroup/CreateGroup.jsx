@@ -17,7 +17,9 @@ function CreateGroup({closeCreateGroup, userUuid}){
   const navigate = useNavigate();
 
   const createGroup = async () => {
+    console.log('start')
     if (isSubmitting) return;
+    console.log('nie')
     
 
     if(generalDetailsEvent.groupName === '' || generalDetailsEvent === ''){
@@ -35,7 +37,7 @@ function CreateGroup({closeCreateGroup, userUuid}){
     }));
 
     const formattedLanguages = languages.map((language) => ({
-            name: language.label,
+            name: language.value,
     }));
 
     const scope = groupSettings.scope.value === 'None' ? null : groupSettings.scope;
@@ -54,14 +56,9 @@ function CreateGroup({closeCreateGroup, userUuid}){
             numberOfMembers: 1,
             ...(groupSettings.groupLocation && {locationLongitude: groupSettings.groupLocation[0].position[0]}),
             ...(groupSettings.groupLocation && {locationLatitude: groupSettings.groupLocation[0].position[1]}),
-            homePageUrl: `http://localhost:3000/groups/${groupUuid}`,
-            eventStatus:{
-              status: 'Planned'
-            },
             owner:{
               uuid: userUuid
             },
-            // icon: null,
             activities: formattedActivities,
             languages:formattedLanguages
         }
@@ -84,6 +81,7 @@ function CreateGroup({closeCreateGroup, userUuid}){
       const endpoint = 'groups';
 
       try {
+        console.log('wysyłam')
         const data = await sendToBackend(endpoint, 'POST', formData);
         console.log('Group created:', data);
       } catch (error) {
@@ -92,8 +90,8 @@ function CreateGroup({closeCreateGroup, userUuid}){
       finally {
         setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
       }
-      closeCreateGroup();
-      navigate('/groups');
+      // closeCreateGroup();
+      // navigate('/groups');
    
   };
 

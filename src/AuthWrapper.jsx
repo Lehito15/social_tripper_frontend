@@ -17,7 +17,7 @@ const AuthWrapper = ({ children }) => {
         if (idToken) {
           const email = idToken.payload?.email;
 
-          const response = await fetch(`/accounts/email?email=${encodeURIComponent(email)}`);
+          const response = await fetch(`http://52.237.23.55:8080/accounts/email?email=${encodeURIComponent(email)}`);
           if (!response.ok) {
             navigate("/register", { state: { email } });
           } else {

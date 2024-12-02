@@ -44,7 +44,6 @@ function GeneralDetailsEvent({data, updateData, group}) {
                 name="firstName" 
                 placeholder='First Name' 
                 value={data.eventName} 
-                maxLength={30}
                 onChange={(e) => updateData({ ...data, eventName: e.target.value })}/>
         </div>
         <div className="form-group">

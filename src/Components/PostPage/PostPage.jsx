@@ -27,6 +27,7 @@ function PostPage({openPost, closePost, openEvent, openRelation, closeRelation, 
         uuid
         nickname
         profilePictureUrl
+        homePageUrl
       }
     }
   }

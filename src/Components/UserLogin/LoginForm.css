@@ -19,6 +19,23 @@
     color: rgb(189, 242, 113);
     border-radius: 12px;
   }
+
+  .amplify-input .amplify-field-group__control{
+    border-radius: 10px;
+
+  }
+  .amplify-input {
+    border-radius: 50px;
+    background: rgba(240, 242, 245, 0.6);
+
+
+  }
+  .amplify-button{
+    border-radius: 50px;
+    background: rgba(240, 242, 245, 0.6);
+
+    
+  }
  
   .login-logo {
     display: flex;

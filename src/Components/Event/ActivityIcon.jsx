@@ -16,7 +16,7 @@ function ActivityIcon({ icon, closeActivity, activity}) {
       )}
       {/* Activity Icon */}
       <img
-        src={`${process.env.PUBLIC_URL}/${icon}`}
+        src={`${process.env.PUBLIC_URL}${icon}`}
         alt="activity icon"
         className="activity-icon"
       />

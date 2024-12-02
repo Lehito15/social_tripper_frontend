@@ -4,7 +4,7 @@
 
 }
 .event-main-container {
-  width: 70%;
+  width: 900px;
   max-width: 900px; /* Maksymalna szerokość, jeśli chcesz ograniczyć na większych ekranach */
   margin: 0 auto; /* Wyśrodkuj kontener */
   gap: 18px;
@@ -21,3 +21,16 @@
   background-color: white;
   
 }
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .event-main-container{
+    width: 700px ;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .event-main-container{
+    width: 600px ;
+  }
+}
+

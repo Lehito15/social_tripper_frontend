@@ -10,26 +10,34 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
   useEffect(() => {
     const fetchReactionStatus = async () => {
       const endpoint = commentUuid 
-        ? `/comments/${commentUuid}/users/${userUuid}/did-react` 
-        : `/posts/${postUuid}/user/${userUuid}/did-react`;
+        ? `comments/${commentUuid}/users/${userUuid}/did-react` 
+        : `posts/${postUuid}/user/${userUuid}/did-react`;
 
-      try {
-        const response = await fetch(endpoint, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch reaction status');
+
+        try {
+          const response = await sendToBackend(endpoint, "GET", null);
+          console.log(response)
+          setReacted(response)
+        } catch (error) {
+          console.error("Error fetching membership status:", error);
         }
 
-        const data = await response.json();
-        setReacted(data);
-      } catch (error) {
-        console.error('Error fetching reaction status:', error);
-      }
+      // try {
+      //   const response = await sendToBackend(endpoint,"GET")
+        
+
+      //   if (!response.ok) {
+      //     throw new Error('Failed to fetch reaction status');
+      //   }
+
+      //   const data = await response.json();
+      //   console.log('czy dajefollowa')
+      //   console.log(response)
+      //   setReacted(data);
+      // } catch (error) {
+      //   console.error('Error fetching reaction status:', error);
+      // }
     };
 
     if (postUuid || commentUuid) {

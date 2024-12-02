@@ -6,8 +6,9 @@ export const getUuidFromUrl = (url) =>{
 }
 
 export const sendToBackend = async (path, method, body) => {
-  const baseUrl = 'http://localhost:8080/'; // Domyślna ścieżka bazowa
+  const baseUrl = 'http://52.237.23.55:8080/'; // Domyślna ścieżka bazowa
   const endpoint = `${baseUrl}${path}`;
+  console.log(endpoint)
 
   // Sprawdzenie, czy body jest instancją FormData
   const isFormData = body instanceof FormData;
@@ -30,7 +31,7 @@ export const sendToBackend = async (path, method, body) => {
     return data;
   } catch (error) {
     console.error('Error:', error);
-    throw error; // Przerzucamy błąd, aby umożliwić jego obsługę w miejscu wywołania funkcji
+    throw error; 
   }
 };
 

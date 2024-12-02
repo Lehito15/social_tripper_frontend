@@ -178,6 +178,7 @@ console.log(data);
   }
 
   const closeCreateGroup = () => {
+    setRefetch(!refetch);
     setIsCreateGroupOpen(false);
   }
 

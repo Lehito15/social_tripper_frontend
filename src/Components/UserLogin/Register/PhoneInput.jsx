@@ -16,7 +16,6 @@ const options = Object.entries(phoneCodesToCountries).map(([code, country]) => (
 }));
 
 function PhoneInput({ data, updateData }) {
-  // Znalezienie opcji dla Polski (+48)
   const defaultOption = options.find(option => option.value === '+48');
   
   const [selectedOption, setSelectedOption] = useState(defaultOption || options[0]);
@@ -24,14 +23,13 @@ function PhoneInput({ data, updateData }) {
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
-    const formattedPhoneNumber = `${selectedOption.value} ${phoneNumber.replace(/^\+?\d+\s?/, '')}`;
-    updateData({ ...data, countryCode: selectedOption.value, telephone: formattedPhoneNumber });
+    updateData({ ...data, countryCode: selectedOption.value }); // Zapisujemy tylko kod kraju
   };
 
   const handlePhoneChange = (e) => {
-    const newPhoneNumber = e.target.value;
+    const newPhoneNumber = e.target.value.replace(/[^\d]/g, ''); // Usuwa niecyfrowe znaki
     setPhoneNumber(newPhoneNumber);
-    updateData({ ...data, telephone: `${selectedOption.value} ${newPhoneNumber.replace(/^\+?\d+\s?/, '')}` });
+    updateData({ ...data, telephone: newPhoneNumber }); // Zapisujemy numer bez kodu kraju
   };
 
   return (
@@ -42,7 +40,7 @@ function PhoneInput({ data, updateData }) {
         options={options}
         className="custom-select-phone"
         isSearchable={false}
-          menuPlacement="top"
+        menuPlacement="top"
         components={{
           IndicatorSeparator: () => null,
         }}

@@ -7,6 +7,7 @@ import './EventDetails.css';
 import { sendToBackend } from '../../Utils/helper.js';
 import EventButtons from "./EventButtons.jsx";
 import { useNavigate } from "react-router-dom";
+import { getActivityIcon } from '../../Utils/helper.js';
 
 
 function EventDetails({event, status, userUuid, isOwner, eventStatus}){
@@ -81,7 +82,7 @@ function EventDetails({event, status, userUuid, isOwner, eventStatus}){
             {event.activities.map((activity) => {
                   console.log('aktywnośc tej')
                   console.log(activity)
-                  const icon = activitiesToIcon[activity.activity.name] || 'default-icon.png'; 
+                  const icon = getActivityIcon(activity.activity.name) || 'default-icon.png'; 
                   return <ActivityIcon icon={icon} />;
                 })}
 

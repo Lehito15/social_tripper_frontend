@@ -8,6 +8,7 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
   let public_icon = `${process.env.PUBLIC_URL}/public-icon.png`;
   const [areUsersFriends, setAreUsersFriends] = useState(areFriends);
 
+
   // useEffect(() => {
   //   const checkUserFollow = async () => {
   //     console.log('sprawdzam followawanie');
@@ -32,27 +33,26 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
   //   }
   // }, [myUuid, user.uuid]); 
 
-  const handleFollowClick = async () => {
+  const toggleFollowStatus = async (isFollowing) => {
     try {
       const endpoint = `users/follow`;
       const follow = {
-        follower: {
-          uuid: myUuid
-        },
-        followed: {
-          uuid: user.uuid
-        }
+        follower: { uuid: myUuid },
+        followed: { uuid: user.uuid }
       };
-      const response = await sendToBackend(endpoint, "POST", JSON.stringify(follow));
-
+  
+      const method = isFollowing ? "DELETE" : "POST"; // Dynamicznie wybieramy metodę
+      const response = await sendToBackend(endpoint, method, JSON.stringify(follow));
+  
       if (response) {
-        console.log('ekstra');
-        setAreUsersFriends(!areUsersFriends); // Przełącz stan obserwowania
+        console.log('Operacja zakończona sukcesem');
+        setAreUsersFriends(!isFollowing); // Przełącz stan
       }
     } catch (error) {
       console.error("Error toggling follow status:", error);
     }
   };
+  
 
   return (
     <div className='profile-info-select'>
@@ -64,7 +64,7 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
         />
         <div className='profile-img-container'>
           <span className="profile-name">{user.nickname}</span>
-          {areFriends ?(
+          {!user.isPublic ?(
             <img
             className="public-icon public-icon-profile"
             src={`${process.env.PUBLIC_URL}/private-icon.png`}
@@ -82,7 +82,10 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
         {/* Pokazuj tylko przycisk Follow lub Unfollow, jeśli to nie jest twój profil */}
         {isMyAccount === false && (
           <div>
-            <button className="trip-button" onClick={handleFollowClick}>
+            <button
+              className="trip-button"
+              onClick={() => toggleFollowStatus(areUsersFriends)}
+            >
               <img
                 src={`${process.env.PUBLIC_URL}/create-trip.png`}
                 alt="Ikona"
@@ -90,6 +93,7 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
               />
               {areUsersFriends ? 'Unfollow' : 'Follow'}
             </button>
+
           </div>
         )}
       </div>

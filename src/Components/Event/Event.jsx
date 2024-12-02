@@ -6,6 +6,8 @@ import ActivityIcon from './ActivityIcon.jsx';
 import EventMembers from './EventMembers.jsx';
 import DateCardTime from './DateCardTime.jsx';
 import { useNavigate } from 'react-router-dom';
+import languageToCountry from '../../JsonsToCode/language_to_country_code.json';
+import { getActivityIcon } from '../../Utils/helper.js';
 
 function EventCard({ event,  lastTrip }) {
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ function EventCard({ event,  lastTrip }) {
                   {event.activities.map((activity) => {
                     console.log('aktywnośc tej')
                     console.log(activity)
-                    const icon = activitiesToIcon[activity.activity.name] || 'default-icon.png'; 
+                    const icon = getActivityIcon(activity.activity.name) || 'default-icon.png'; 
                     return <ActivityIcon icon={icon} />;
                   })}
 
@@ -77,7 +79,7 @@ function EventCard({ event,  lastTrip }) {
                 <p className='event-section-tittle'>Languages</p>
                 <div className='activities-section'>
                   {event.languages.map((language) => {
-                    const flagCode = languageToFlagCode[language.language.name] || "unknown"; // Fallback to "unknown" if the language is not in the dictionary
+                    const flagCode = languageToCountry [language.language.name] || "unknown"; // Fallback to "unknown" if the language is not in the dictionary
                     return <span className={`fi fi-${flagCode}`}></span>;
                   })}
                 </div>

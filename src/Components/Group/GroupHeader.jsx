@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import ActivityIcon from "../Event/ActivityIcon";
 import './GroupHeader.css';
 import { useNavigate } from 'react-router-dom';
+import languageToCountry from '../../JsonsToCode/language_to_country_code.json';
+import { getActivityIcon } from '../../Utils/helper.js';
 
 function GroupHeader({ group }) {
   const [scope, setScope] = useState('');
@@ -98,7 +100,7 @@ function GroupHeader({ group }) {
           <p className='event-section-tittle'>Activities</p>
           <div className="activities-section">
           {group.activities && group.activities.map((activity, index) => {
-            const icon = activitiesToIcon[activity.name] || 'default-icon.png';
+            const icon = getActivityIcon(activity.name) || 'default-icon.png';
             return <ActivityIcon key={activity.id || index} icon={icon} />;
           })}
 
@@ -109,7 +111,7 @@ function GroupHeader({ group }) {
           <p className='event-section-tittle'>Languages</p>
           <div className="activities-section">
           {group.languages && group.languages.map((language, index) => {
-            const flagCode = languageToFlagCode[language.name] || "unknown";
+            const flagCode = languageToCountry[language.name] || "unknown";
             return <span key={language.id || index} className={`fi fi-${flagCode}`}></span>;
           })}
 

@@ -12,7 +12,7 @@ import { ClipLoader } from "react-spinners";
 
 
 function Register() {
-    // console.log(userEmail)
+   
     const navigate = useNavigate();
     const steps = ['General Details', 'Account Details', 'Skills'];
     const routeLocation = useLocation(); // Zmieniona nazw
@@ -22,6 +22,7 @@ function Register() {
   useEffect(() => {
         const email = routeLocation.state?.email || "";
         setUserEmail(email); // Ustawiamy email w stanie, po wczytaniu komponentu
+        console.log(email)
     }, []);
 
     const [currentStep, setCurrentStep] = useState(1);
@@ -31,6 +32,7 @@ function Register() {
         gender: null,
         dateOfBirth: null,
         telephone: '',
+        countryCode:'+48',
         country: ''
     });
     const [accountDetails, setAccountDetails] = useState({
@@ -98,6 +100,7 @@ function Register() {
         }
         setIsSubmitting(true);
         const height =  accountDetails.height /100;
+        const fullPhoneNumber = `${generalDetails.countryCode} ${generalDetails.telephone}`;
         console.log(height);
         const formattedActivities = activities.map((activity) => ({
             experience: activity.rating || 5,
@@ -109,7 +112,7 @@ function Register() {
         const formattedLanguages = languages.map((language) => ({
             level: language.rating || 5,
             language: {
-                name: language.label,
+                name: language.value,
             },
         }));
         const userDTO =  {
@@ -129,7 +132,7 @@ function Register() {
                 nickname: accountDetails.nickname,
                 email:userEmail ,
                 isPublic: true,
-                phone: generalDetails.telephone,
+                phone: fullPhoneNumber,
                 createdAt: new Date().toISOString(),
                 homePageUrl: '',
                 description: accountDetails.description,

@@ -9,6 +9,7 @@ function PostOwner({ owner, date, bottomText, addUserToEvent, removeRequest }) {
   const formattedDate = date ? dayjs(date).format('DD/MM/YY') : null;
   const navigate = useNavigate();
   const endpoint = extractAfterHttp(owner.homePageUrl);
+  console.log(owner);
  
   return (
     <div className="post-owner-container">

@@ -104,18 +104,14 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
   
   const activitiesList = [
     { name: "walking", label: "walking" },
-    { name: "cykling", label: "cykling" },
+    { name: "ride", label: "ride" },
     { name: "hiking", label: "hiking" },
-    { name: "running", label: "running" }
-  ];
-  const languagesList = [
-    { flag: "gb", label: "English"},
-    { flag: "es", label: "Spanish" },
-    { flag: "de", label: "German" },
-    { flag: "fr", label: "French" },  
-    { flag: "pl", label: "Polish" }
+    { name: "running", label: "running" },
+    { name: "water", label: "water" },
+    { name: "sport", label: "sport" },
 
   ];
+
 
   return (
     <div className="skill-selector-container">

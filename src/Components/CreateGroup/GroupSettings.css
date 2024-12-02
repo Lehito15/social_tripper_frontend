@@ -5,6 +5,7 @@
 .group-location-map{
   z-index: 1;
   margin-top: 20px;
+  height: 300px;
 }
 
 .select-container {

@@ -1,6 +1,7 @@
 .group-header-container{
   /* padding-bottom: 18px; */
   padding-left: 9px;
+  padding-right: 9px;
 }
 .group-header-container .event-main-info{
   padding-left: 0;

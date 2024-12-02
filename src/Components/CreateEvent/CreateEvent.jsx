@@ -134,8 +134,8 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
       setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
     }
     
-    // closeCreateEvent();
-    // navigate('/events');
+    closeCreateEvent();
+    navigate('/events');
   };
   
   
