@@ -1,5 +1,5 @@
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../PostPage/PostPage.css';
 // import Feeds from './Feeds.jsx';
 import Relation from '../Relation/Relation.jsx';
@@ -9,6 +9,8 @@ import { gql, useQuery } from '@apollo/client';
 import Feeds from '../PostPage/Feeds.jsx';
 
 function TripEvents({ openEvent, reLoad}){
+  console.log(reLoad)
+  const previousReload = useRef(reLoad);
   const GET_Events = gql`
   query GetPosts {
     events @rest(type: "Events", path: "events") {
@@ -34,11 +36,22 @@ function TripEvents({ openEvent, reLoad}){
   }
 `;
 
-const { loading, error, data, refetch } = useQuery(GET_Events);
+const { loading, error, data, refetch } = useQuery(GET_Events, {
+  fetchPolicy: 'cache-first',  // Cache first, czyli najpierw próbuje użyć danych z cache
+  notifyOnNetworkStatusChange: true
+});
 console.log(data);
+// useEffect(() => {
+//   console.log('reload')
+//   refetch();
+// }, [reLoad]);
 useEffect(() => {
-  refetch();
-}, [refetch, reLoad]);
+  if (reLoad !== previousReload.current) {
+    console.log('Reloading events...');
+    refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
+    previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
+  }
+}, [reLoad]);
 
 
   if (loading) return <p>Loading...</p>;

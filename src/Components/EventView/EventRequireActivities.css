@@ -1,0 +1,5 @@
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .stats-box .rateactivity-container{
+    width: 100% ;
+  }
+}

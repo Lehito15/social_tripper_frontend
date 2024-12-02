@@ -47,7 +47,7 @@
   padding: 8px 0; /* Opcjonalny odstęp */
   border-top: 1px solid #e0e0e0; /* Linie oddzielające */
 
-  max-height: 500px; /* Maksymalna wysokość z uwzględnieniem miejsca na write-comment-container */
+  /* max-height: 500px; Maksymalna wysokość z uwzględnieniem miejsca na write-comment-container */
   margin-bottom: 10px;
 }
 
@@ -57,7 +57,7 @@
 
 .comment-section::-webkit-scrollbar-thumb {
   background-color: #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .write-comment-container {
@@ -68,4 +68,12 @@
   padding: 8px 0; /* Odstęp w kontenerze */
   height: 60px; /* Ustaw wysokość kontenera */
   
+}
+
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .comment-section{
+    max-height: 500px;
+  }
+
 }

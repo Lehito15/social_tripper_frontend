@@ -6,10 +6,13 @@ import DateCardTime from "../Event/DateCardTime.jsx";
 import './EventDetails.css';
 import { sendToBackend } from '../../Utils/helper.js';
 import EventButtons from "./EventButtons.jsx";
+import { useNavigate } from "react-router-dom";
+
 
 function EventDetails({event, status, userUuid, isOwner, eventStatus}){
   const eventPublicText = event.isPublic ? 'Public trip' : 'Private trip';
-  const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'public-icon.png';
+  const eventPublicIcon = event.isPublic ? 'public-icon.png' : 'private-icon.png';
+  const navigate = useNavigate();
   console.log(event)
 
   const languageToFlagCode = {
@@ -33,10 +36,25 @@ function EventDetails({event, status, userUuid, isOwner, eventStatus}){
       eventUUID: event.uuid,  // Identyfikator wydarzenia
     };
   
-    const endpoint = 'http://localhost:8080/events/request';
+    const endpoint = 'events/request';
     console.log('User UUID:', userUuid);
     console.log('Event UUID:', event.uuid);
     sendToBackend(endpoint, 'POST', JSON.stringify(userRequestEventDTO));
+  };
+
+  const handleLeaveTrip = async () => {
+    try {
+      const endpoint = `events/remove-member`;
+      const userRequestDTO = { userUUID: userUuid, eventUUID: event.uuid };
+      const response = await sendToBackend(endpoint, "DELETE", JSON.stringify(userRequestDTO));
+      if (response) {
+        navigate('/events');
+      } else {
+        alert('Cannot leave the event');
+      }
+    } catch (error) {
+      console.error("Error leaving event:", error);
+    }
   };
   
   return(
@@ -97,7 +115,7 @@ function EventDetails({event, status, userUuid, isOwner, eventStatus}){
         </div>
       </div>
       <div className="event-buttons-container">
-        <EventButtons status={status} sendJoinRequest={sendJoinRequest} userUuid={userUuid} eventUuid={event.uuid} isOwner={isOwner} eventStatus={eventStatus} />
+        <EventButtons status={status} sendJoinRequest={sendJoinRequest} userUuid={userUuid} eventUuid={event.uuid} isOwner={isOwner} eventStatus={eventStatus} leaveEvent={handleLeaveTrip} />
       </div>
     </div>
 

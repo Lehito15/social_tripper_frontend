@@ -15,7 +15,7 @@
 .search-input {
   /* margin-left :40px; */
   width: 100%; /* Szerokość paska wyszukiwania */
-  height: 48px;
+  height: 40px;
   /* padding: 10px;   */
   padding-left: 40px;
   font-size: 16px;
@@ -34,4 +34,30 @@
   height: 50%; /* Wysokość ikony */
   opacity: 0.6;
   pointer-events: none; /* Wyłączenie interakcji z ikoną */
+}
+
+/* Stylowanie wyników wyszukiwania */
+/* Stylowanie wyników wyszukiwania */
+.search-results {
+  position: absolute;
+  top: 100%; /* Umieszczamy poniżej pola wyszukiwania */
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 9px; 
+  border-radius: 20px;
+}
+
+.search-result-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
 }

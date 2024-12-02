@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RateActivity from '../UserLogin/Register/RateActivity.jsx';
 import { getActivityIcon } from '../../Utils/helper.js';
 import UpdateSkill from './UpdateSkills.jsx';
+import  './EventRequireActivities.css';
 
 function EventRequireActivities({ activities, title, isOwner, reload, updateData, isUser }) {
   const [isEditing, setIsEditing] = useState(false);

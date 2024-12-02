@@ -26,11 +26,14 @@
 .logo {
   width: 100%; /* Szerokość logo na 100% kontenera */
   height: 70px; /* Wysokość automatyczna */
+  cursor: pointer;
   /* margin-bottom: 2vh; Odstęp poniżej logo z użyciem jednostek viewportowych */
 }
 
-.logo-conteiner {
+.logo-container {
   /* height: 8.5vh; Logo zajmuje 8.5% wysokości */
+  margin-left: 36px;
+  margin-right: 36px;
 }
 
 .profile-statistics {

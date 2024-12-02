@@ -54,8 +54,8 @@ function MapReaction({ locations, selectedIndex, onMarkerClick, onLocationAdded,
   }, [locations, onLocationAdded]);
 
   return (
-    <div>
-    <MapContainer center={defaultCenter} zoom={13} style={{ height: "400px", width: "100%" }}>
+    <div className='map-container-inner'>
+    <MapContainer center={defaultCenter} zoom={13} >
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

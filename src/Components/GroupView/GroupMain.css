@@ -1,12 +1,17 @@
 .group-owner{
   background-color: white;
-  margin-top: 24px;
+
 }
 
 .group-main-container{
-  background-color: white;
+  background: rgba(240, 242, 245, 1);
 }
 .group-owner{
   padding-left: 9px;
   padding-right: 9px;
+}
+
+.group-main-container .trip-button{
+  width: 200px;
+  margin-bottom: 18px;
 }

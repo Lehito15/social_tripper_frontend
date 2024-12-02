@@ -1,9 +1,13 @@
 .profile-user-info {
-  width: clamp(500px, 80%, 900px);
+  width: 900px;
   height: 100vh;               /* Pełna wysokość widoku */
   display: flex;
   flex-direction: column;
 
+}
+
+.profile-user-info .different-profile-info{
+  margin: 0;
 }
 
 .profile-select {
@@ -12,7 +16,7 @@
   top: 0;                      /* Ustawia element „sticky” przy górnej krawędzi */
     /* Utrzymuje tło dla widoczności przy przewijaniu */
   z-index: 1;
-  padding-bottom: 10px;
+  margin-bottom: 18px;
   margin-top: 20px;            /* Opcjonalne marginesy */
 }
 

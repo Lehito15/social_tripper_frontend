@@ -5,17 +5,24 @@ import './Skills.css';
 import ActivityIcon from '../../Event/ActivityIcon.jsx';
 import LanguageFlag from '../../CreateGroup/LanguageFlag.jsx';
 import { getActivityIcon } from '../../../Utils/helper.js';
+import languageToCountry from '../../../JsonsToCode/language_to_country_code.json';
+import countryToCode from '../../../JsonsToCode/country_to_code.json';
 
 function Skills({activieties, languages, updateActivieties, updateLanguages, event, group , onlyUpdate}) {
   console.log(activieties);
   const [selectedActivities, setSelectedActivities] = useState(activieties || []);
   const [selectedLanguages, setSelectedLanguages] = useState(languages || []);
-  console.log('langyuahes') 
-  console.log(languages)
-  console.log(activieties)
-
-  console.log(getActivityIcon('walking'))
-
+  const allLanguages = Object.entries(languageToCountry).map(([language, code], index) => ({
+    value: language,
+    flag: code,
+    label: (
+      <div key={index} className="custom-option">
+        <span className={'fi fi-' + code} style={{ marginRight: '8px' }}></span>
+        {language}
+      </div>
+    )
+  }));
+  
 
   const addActivity = (newActivity) => {
     const isActivityExist = selectedActivities.some(activity => activity.label === newActivity.label);
@@ -37,7 +44,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
   const addLanguage = (newLanguage)  => {
     console.log("elo");
     console.log(newLanguage)
-    const isLanguageExist = selectedLanguages.some(language => language.label === newLanguage.label);
+    const isLanguageExist = selectedLanguages.some(language => language.value === newLanguage.value);
     if (!isLanguageExist){
       setSelectedLanguages((prevLanguage) => [...prevLanguage, newLanguage])
       updateLanguages((prevLanguage) => [...prevLanguage, newLanguage])
@@ -51,8 +58,8 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
 
   const removeLanguage = (language) => {
     console.log(language)
-    setSelectedLanguages((prev) => prev.filter((elem) => elem.label !== (language.name || language.label)));
-    updateLanguages((prev) => prev.filter((elem) => elem.label !== (language.name || language.label) ));
+    setSelectedLanguages((prev) => prev.filter((elem) => elem.value !== (language.name || language.label)));
+    updateLanguages((prev) => prev.filter((elem) => elem.value!== (language.name || language.label) ));
   }
 
   const updateActivityRating = (updatedActivity, newRating) => {
@@ -164,7 +171,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
             <label htmlFor="language">Language:</label>
             <Select
               id="language"
-              options={languagesList}
+              options={allLanguages}
               onChange={addLanguage}
               placeholder="Select a language"
               isSearchable={false}
@@ -197,7 +204,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
                 <RateActivity
                   key={`language-${index}`}
                   language={{
-                    name: languageItem.label,
+                    name: languageItem.value,
                     flag: languageItem.flag,
                     rating: languageItem.rating || 5.0,
                   }}

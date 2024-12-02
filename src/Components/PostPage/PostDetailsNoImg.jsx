@@ -10,6 +10,7 @@ import FocusTrap from "focus-trap-react";
 function PostDetailsNoImg({post, closePost, isAlone}){
   const [isExpanded, setIsExpanded] = useState(false);
   const [reLoad, setReLoad] = useState(false);
+  const [newComment, setNewComment] = useState(false);
   console.log('isAlone')
   console.log(isAlone)
 
@@ -29,13 +30,25 @@ function PostDetailsNoImg({post, closePost, isAlone}){
     setReLoad((prev) => !prev);
   };
 
+  const addNewComent = () =>{
+    setNewComment(!newComment)
+  }
+
   const postUuid = post.uuid;
   const GET_Comments = gql`
   query GetComments($postUuid: String!) {
     comments @rest(type: "Post", path: "posts/${postUuid}/comments") {
+      uuid
       content
       timestamp
       reactionsNumber
+      commentsNumber
+      account{
+        uuid
+        nickname
+        profilePictureUrl
+        homePageUrl
+      }
     }
   }
 `;
@@ -46,7 +59,7 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
 
   useEffect(() => {
     refetch();
-  }, [refetch, reLoad]);
+  }, [ reLoad]);
 
   // Wyświetlanie różnych stanów zapytania
   if (loading) return <p>Loading...</p>;
@@ -133,15 +146,15 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
                 comments={post.commentsNumber}
                 userUuid={post.account.uuid}
                 postUuid={post.uuid}
+                newComment={newComment}
               />
             </div>
             <div className="comment-section">
               {data.comments.length > 0 &&
                 data.comments
                   ?.slice()
-                  .reverse()
                   .map((comment, index) => (
-                    <Comment key={index} comment={comment} />
+                    <Comment key={index} comment={comment}  />
                   ))}
             </div>
             <div className="write-comment-container">
@@ -149,6 +162,7 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
                 owner={post.account}
                 reload={toggleReload}
                 postUuid={post.uuid}
+                newComment={addNewComent}
               />
             </div>
           </div>

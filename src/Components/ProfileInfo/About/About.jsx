@@ -3,7 +3,8 @@ import AccountStatisticsBox from './AccountStatisticsBox.jsx';
 import DescriptionProfile from './DescriptionProfile.jsx';
 import ProfileInformation from './ProfileInformation.jsx';
 
-function About({stats, description}) {
+function About({stats, description, profileInfo, nickname}) {
+  console.log(profileInfo)
 
   return (
     <div className='about-container'>
@@ -17,7 +18,7 @@ function About({stats, description}) {
       </div>
       <div className='right-about'>
         <div className='info-container'>
-          <ProfileInformation info={description  }/>
+          <ProfileInformation info={profileInfo} nickname={nickname}/>
         </div>
       </div>
     

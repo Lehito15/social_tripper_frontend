@@ -1,8 +1,8 @@
 import React from 'react';
 import '../PostPage/WriteComment.css';
 import WriteMessage from '../Messages/WriteMessage';
-function WriteComment({owner, reload, postUuid, userUuid}){
-  console.log(owner)
+function WriteComment({owner, reload, postUuid, newComment}){
+  // console.log(owner)
   return (
     <div className="comment-container">
       <img 
@@ -11,7 +11,7 @@ function WriteComment({owner, reload, postUuid, userUuid}){
         className="comment-owner-avatar" 
       />
       <div className="comment-input-wrapper">
-       <WriteMessage text={"Write your comment..."} reload={reload} postUuid={postUuid}  userUuid={owner.uuid} />
+       <WriteMessage text={"Write your comment..."} reload={reload} postUuid={postUuid}  userUuid={owner.uuid} newComment={newComment} />
       </div>
       
     </div>

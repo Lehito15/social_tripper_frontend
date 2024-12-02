@@ -78,3 +78,14 @@
   background-color: #f0f0f0;
   border-radius: 50px;
 }
+
+/* Przyciski nawigacyjne (widoczne, ale nieaktywny) */
+.carousel-control-prev, .carousel-control-next {
+  pointer-events: none;  /* Blokuje interakcje z przyciskiem */
+}
+
+/* Akcja tylko dla ikon */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  pointer-events: auto; /* Pozwala na interakcje z ikoną */
+  cursor: pointer;      /* Zmienia kursor, aby wskazywał na akcję */
+}

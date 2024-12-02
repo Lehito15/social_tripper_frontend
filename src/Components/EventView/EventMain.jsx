@@ -18,7 +18,7 @@ import EventOption from "./EventOption.jsx";
 
 import './EventMain.css';
 
-function EventMain({ openCreatePost, userUuid }) {
+function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
   const options = ['Information', 'Trip details', 'Posts', 'Members'];
   const [currentStep, setCurrentStep] = useState(1);
   const [eventUuid, setEventUuid] = useState(null);
@@ -55,7 +55,7 @@ function EventMain({ openCreatePost, userUuid }) {
     };
 
     fetchStatus();
-  }, [userUuid]); // useEffect should only run when userUuid changes
+  }, [userUuid,window.location.pathname]); // useEffect should only run when userUuid changes
 
   const GET_Event = gql`
     query GetEvent($eventUuid: String!) {
@@ -100,7 +100,7 @@ function EventMain({ openCreatePost, userUuid }) {
 
   useEffect(() => {
     refetch();
-  }, [refetch, reLoad]);
+  }, [refetch, reLoad,window.location.pathname]);
 
   useEffect(() => {
     if (data && data.event) {
@@ -150,6 +150,9 @@ function EventMain({ openCreatePost, userUuid }) {
           <EventPosts
             uuid={event.uuid}
             openCreatePost={openCreatePost}
+            userUuid={userUuid}
+            openPost={openPost}
+            reLoad={reFetch}
           />
         );
       case 4:
@@ -181,14 +184,17 @@ function EventMain({ openCreatePost, userUuid }) {
 
   // Dynamically update options based on conditions
   const dynamicOptions = [...options];
+  let hasAccess = userStatus === 'member' || event.isPublic;
 
   if (isOwner) {
     dynamicOptions.push('Members Request'); // Show 'Members Request' for owners
+    hasAccess =true;
   }
 
   if (event.relation) {
     dynamicOptions.push('Summary'); // Show 'Summary' if relation is not null
   }
+  
 
   return (
     <div className="event-main-container">
@@ -211,9 +217,13 @@ function EventMain({ openCreatePost, userUuid }) {
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
       />
-      <div className="event-more-details">
-        {renderStepComponent()}
-      </div>
+      {hasAccess ? (
+        <div className="event-more-details">
+          {renderStepComponent()}
+        </div>
+      ) : (
+        <p>You have no access here</p>
+      )}
     </div>
   );
 }

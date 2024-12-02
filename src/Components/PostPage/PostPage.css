@@ -1,6 +1,6 @@
 .Post-page {
     /* width: clamp(500px, 80%, 900px); */
-    width: 700px;
+    width: 900px;
     /* height: 100%; */
     /* z-index: 20; */
    
@@ -17,5 +17,11 @@
 @media (-webkit-device-pixel-ratio: 1.5){
     .Post-page{
         width: 600px;
+    }
+}
+
+@media (-webkit-device-pixel-ratio: 1.25){
+    .Post-page{
+        width: 700px;
     }
 }

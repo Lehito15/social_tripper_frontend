@@ -1,23 +1,24 @@
   .about-container {
     display: flex; 
+    width: 100%;
     
     grid-auto-rows: auto;                   
-    gap: 15px;                               /* Odstęp między elementami */
+    gap: 18px;                               /* Odstęp między elementami */
     align-items: start;
     justify-items: start;
   }
   .left-about{
-    width: 30%;
+    width: 265px;
     height: 100vh;
   }
 
   .right-about {
-    width: 68%;
-    height: 100vh;                 /* Prawa kolumna zajmuje 67% szerokości */
+    width: 617px;
+    /* height: 100vh;                 Prawa kolumna zajmuje 67% szerokości */
   }
   .stats-container{
     width: 100%;
-    aspect-ratio: 100 / 47; 
+    aspect-ratio: 100 / 48.8; 
     margin-top: auto;
     margin-bottom: auto;
   }
@@ -25,4 +26,12 @@
   .info-container{
     width: 100%;
     aspect-ratio: 100 / 45;
+  }
+
+  .about-container .stat-value{
+    font-size: 20px
+  }
+
+  .about-container .stat-title{
+    font-size: 11px
   }

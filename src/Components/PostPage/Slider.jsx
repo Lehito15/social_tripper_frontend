@@ -6,10 +6,10 @@ import '../PostPage/Slider.css';
 function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, post, openRelation, relation }) {
   const [index, setIndex] = useState(0); // Zarządzanie aktywnym indeksem
   const carouselRef = useRef(null); // Używamy ref do całego kontenera Carousel
-  console.log('mulimedia xdd')
-  console.log(post)
-  console.log(relation)
-  console.log(multimedia)
+  // console.log('mulimedia xdd')
+  // console.log(post)
+  // console.log(relation)
+  // console.log(multimedia)
 
   const handleSelect = (selectedIndex) => {
     const lastIndex = multimedia.length - 1; // Zakładamy, że mamy kilka slajdów (0, 1, 2, ..., n)

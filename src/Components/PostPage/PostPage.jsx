@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import '../PostPage/PostPage.css';
 import Feeds from './Feeds.jsx';
 import Relation from '../Relation/Relation.jsx';
@@ -10,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 import Post from './Post.jsx'
 function PostPage({openPost, closePost, openEvent, openRelation, closeRelation, userUuid, reLoad}){
+  const previousReload = useRef(reLoad);
 
  const GET_POSTS = gql`
   query GetPosts {
@@ -29,11 +31,17 @@ function PostPage({openPost, closePost, openEvent, openRelation, closeRelation, 
     }
   }
 `;
-const { loading, error, data, refetch } = useQuery(GET_POSTS);
+const { loading, error, data, refetch } = useQuery(GET_POSTS, {
+  fetchPolicy: 'cache-first',  // Cache first, czyli najpierw próbuje użyć danych z cache
+});
 
-  useEffect(() => {
-    refetch();
-  }, [refetch, reLoad]);
+useEffect(() => {
+  if (reLoad !== previousReload.current) {
+    console.log('Reloading events...');
+    refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
+    previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
+  }
+}, [reLoad]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

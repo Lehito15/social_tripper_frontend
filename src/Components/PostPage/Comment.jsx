@@ -7,20 +7,20 @@ function Comment({comment, author}){
     <div className="comment-conteiner">
           <div
             className={`message-wrapper ${
-              comment.author ? 'message-left' : 'message-right'
+              comment.author ? 'message-left' : 'message-left'
             }`}
           >
-            {comment.author && (
+            {comment.account && (
               <img
-                src={comment.author.profilePictureUrl}
-                alt={comment.author.name}
+                src={comment.account.profilePictureUrl}
+                alt={comment.account.nickname}
                 className='friend-avatar'
               />
             )}
-            <SingleMessage content={comment.content} author={comment.author} />
+            <SingleMessage content={comment.content} author={comment.account} />
           </div>
           <div className='reactions-conteiner'>
-            <PostReaction reactions={1} comments={1} />
+            <PostReaction reactions={comment.reactionsNumber} comments={comment.commentsNumber} commentUuid={comment.uuid} userUuid={comment.account.uuid} />
           </div>
     </div>
 

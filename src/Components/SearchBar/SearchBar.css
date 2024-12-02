@@ -4,8 +4,9 @@
   justify-content: center; /* Wyśrodkowanie horyzontalne elementu głównego */
 
   color: rgba(0, 0, 0, 0.5);
+  margin-left: 8px;
 
-  width: 720px; /* Wypełnia całą dostępną szerokość */
+  width: 900px; /* Wypełnia całą dostępną szerokość */
   height: 100%; /* Dopasowanie do wysokości */
   /* padding: 0 15px; Minimalny padding z obu stron */
   box-sizing: border-box; /* Uwzględnij padding w szerokości */
@@ -61,4 +62,10 @@
   }
 }
 
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .search-bar-container{
+    width: 700px;
+  }
+
+}
 

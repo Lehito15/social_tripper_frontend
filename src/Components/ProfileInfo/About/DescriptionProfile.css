@@ -5,9 +5,8 @@
   font-weight: 400;    
   /* -webkit-box-orient: vertical;               
   overflow: hidden;                   
-  text-overflow: ellipsis;            */
-
-  margin: 10px;                            
+  text-overflow: ellipsis;            */ 
+  margin-top: 9px;                          
 }
 
 .tittle-container{

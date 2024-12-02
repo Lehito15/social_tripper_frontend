@@ -11,7 +11,7 @@
   padding-bottom: 6.89px ;
 }
 .last-trip-container .event-name{
-  font-size: 14px;
+  font-size: 13.5px;
 }
 
 .last-trip-container .event-image-container{
@@ -56,6 +56,9 @@
 
 .last-trip-container .event-card{
   padding: 8px;
+  padding-right: 0;
+  width: 96%;
+  margin: 0;
 
 }
 
@@ -71,6 +74,10 @@
   text-overflow: ellipsis; /* Dodanie kropek na końcu */
   max-width: 100%; /* Zapewnienie, że tekst dopasuje się do szerokości */
   word-wrap: break-word; /* Zawijanie tekstu w przypadku długich słów */
+}
+
+.last-trip-container .event-name{
+  -webkit-line-clamp: 3
 }
 .last-trip-container .event-card .post-owner-avatar{
   width: 20px;

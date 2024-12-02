@@ -1,0 +1,26 @@
+.upcomming-events-container{
+  position: fixed;                
+  top: 63px;                      
+  right: 20px;                       
+  width: 300px;
+  height: 85vh;
+  background-color: white;                               
+  border-radius: 10px;      
+  box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
+  z-index: 1000;                
+  overflow-y: auto;               
+  overflow-x: hidden;             
+  padding: 10px;
+  visibility: visible; 
+  text-align: left;
+}
+
+.upcomming-events{
+  margin-right: 0;
+}
+.upcomming-events-container .elevation{
+  margin-top: 18px;
+  margin-bottom: 10px;
+}

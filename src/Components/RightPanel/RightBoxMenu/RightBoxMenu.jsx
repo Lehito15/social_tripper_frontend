@@ -1,7 +1,7 @@
 import React from 'react';
 import './RightMenu.css';
 
-function RightMenu({toggleAddPost, toggleChat}){
+function RightMenu({toggleAddPost, toggleChat, toggleUpcomingEvents, IncommingButtonRef}){
   return (
     <div className="right-menu-container">
       <button className='button-icon' onClick={toggleChat}>
@@ -10,7 +10,7 @@ function RightMenu({toggleAddPost, toggleChat}){
       <button className="button-icon">
       <img src={`${process.env.PUBLIC_URL}/notification_icon.png`} alt="Ikona" className="icon-right" />
       </button>
-      <button className="button-icon">
+      <button className="button-icon" onClick={toggleUpcomingEvents} ref={IncommingButtonRef}>
       <img src={`${process.env.PUBLIC_URL}/incoming_icon.png`} alt="Ikona" className="icon-right" />
       </button>
       <button className="button-icon add-post-icon" onClick={toggleAddPost}>

@@ -39,8 +39,21 @@
 }
 
 .post-details-container .comment-section{
-  max-height: calc(70%);
+  max-height: calc(40%);
 }
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .post-details-container .comment-section{
+    max-height: 450px;
+  }}
+
+  @media (-webkit-device-pixel-ratio: 1.5) {
+    .post-details-container .comment-section{
+      max-height: 350px;
+    }
+  }
+
+
 
 
 

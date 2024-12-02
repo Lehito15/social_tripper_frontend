@@ -43,10 +43,12 @@ useEffect(() => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  if(data.events) return <p>No events  here</p>;
+  console.log(data.events)
   return (
     <div className="Post-page">
         
-        { data.events && (data?.events.slice().reverse().map((event) => (
+        { data.events && data.events.lenght != 0  && (data?.events.slice().reverse().map((event) => (
           <Event event={event} openEvent={openEvent} />
         )))}
       

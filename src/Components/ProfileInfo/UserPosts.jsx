@@ -20,7 +20,7 @@ function UserPosts({ openPost}){
 
   const GET_User_Postss = gql`
   query GetUserPosts($userUuid: String!) {  # Poprawiony typ zmiennej
-    posts @rest(type: "UserPosts", path: "users/${userUuid}/posts") {  
+    userposts @rest(type: "UserPosts", path: "users/${userUuid}/posts") {  
         content
       uuid
       dateOfPost
@@ -40,7 +40,7 @@ function UserPosts({ openPost}){
 
 const { loading, error, data,refetch } = useQuery(GET_User_Postss, {
   variables: { userUuid },
-  fetchPolicy: 'network-only',
+  fetchPolicy: 'cache-first',
 });;
 console.log(data);
 
@@ -52,7 +52,7 @@ console.log(data);
   return (
     <div className="Post-page">
  
-        {data?.posts.slice().reverse().map((post) => (
+        {data?.userposts.slice().reverse().map((post) => (
           <Post post={post} openPost={openPost} userUuid={userUuid} />
         ))}
          

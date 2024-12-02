@@ -2,24 +2,27 @@ import React from 'react';
 import '../PostPage/PostOwner.css';
 import dayjs from 'dayjs';
 import { useNavigate } from "react-router-dom";
+import { extractAfterHttp } from '../../Utils/helper.js';
+
 
 function PostOwner({ owner, date, bottomText, addUserToEvent, removeRequest }) {
   const formattedDate = date ? dayjs(date).format('DD/MM/YY') : null;
-  console.log(owner);
   const navigate = useNavigate();
-
+  const endpoint = extractAfterHttp(owner.homePageUrl);
+ 
   return (
     <div className="post-owner-container">
       <div className='user-container'>
       <div className='avatar-container'>
         <img 
-          src={owner.profilePictureUrl} 
+          src={owner.profilePictureUrl || `${process.env.PUBLIC_URL}/create-trip.png`} 
           alt={owner.nickname} 
           className="post-owner-avatar" 
         />
       </div>
       <div className={`post-owner-details ${!(formattedDate && bottomText) ? 'no-date' : ''}`}>
-        <h4 className="post-owner-name" onClick={() => navigate(`/profileinfo/${owner.uuid}`)}>
+        {/* <h4 className="post-owner-name" onClick={() => navigate(`/profileinfo/${owner.uuid}`)}> */}
+        <h4 className="post-owner-name" onClick={() => navigate(endpoint)}>
           {owner.nickname} 
         </h4>
         <p className="post-owner-date">

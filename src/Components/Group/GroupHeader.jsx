@@ -15,8 +15,6 @@ function GroupHeader({ group }) {
     // queryString = `?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`;
   
     const endpoint = `https://nominatim.openstreetmap.org/reverse?lat=53&lon=15&format=json&addressdetails=1`;
-
-    console.log(endpoint)
   
     try {
       const response = await fetch(endpoint);
@@ -28,7 +26,7 @@ function GroupHeader({ group }) {
         // Jeśli scope to 'City', zwróć tylko miasto
         if (scope === 'City') {
           locationString = data.address.city || data.address.town || data.address.village ||  data.address.hamlet ||  data.address.county || '';
-          console.log(data.address)
+          // console.log(data.address)
         }
   
         // Jeśli scope to 'Country', zwróć miasto i kraj
@@ -51,13 +49,10 @@ function GroupHeader({ group }) {
   // Ustawienie scope po zamontowaniu komponentu
   useEffect(() => {
     if (group.locationLatitude && group.locationLongitude) {
-      console.log(group.locationLatitude)
-      console.log('halo')
+      // console.log(group.locationLatitude)
+      // console.log('halo')
       const getLocation = async () => {
         const location = await fetchLocationFromCoordinates(group.locationLatitude, group.locationLongitude, "City");
-        console.log('no nie')
-        
-        
         setScope(location);
       };
 
@@ -68,7 +63,6 @@ function GroupHeader({ group }) {
   const openGroup = () => {
     navigate(`/groups/${group.uuid}`);
   };
-  console.log(group)
 
   const languageToFlagCode = {
     English: "gb",

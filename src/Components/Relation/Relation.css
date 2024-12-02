@@ -19,14 +19,24 @@
     overflow: hidden; /* Ukrywa elementy, które wychodzą poza kontener */
   }
   
-  .map-container {
+  .map-container-relation {
     flex: 1; /* Zajmuje 1/3 dostępnej przestrzeni */
     overflow: hidden;
+    height: 100%;
   }
   
   .relation-container {
     display: flex;
     flex-direction: column; /* Ustawia kierunek na pionowy */
     width: 100%;
+  }
+  .map-container-inner{
+    height: 100%;
+
+  }
+
+  .leaflet-container{
+    height: 100%;
+    z-index: 10;
   }
   

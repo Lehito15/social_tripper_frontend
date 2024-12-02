@@ -1,16 +1,18 @@
 .singlemessage-box {
-  display: flex;
-  flex-direction: column; /* Ustawienie elementów w kolumnie */
+  /* display: flex;
+  flex-direction: column; 
   justify-content: center;
-  align-items: flex-start; /* Wyrównanie do lewej */
-  line-height: 20px;
+  align-items: flex-start; 
+  line-height: 20px; */
   background: rgba(240, 242, 245, 1);
   border-radius: 15px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
   min-height: 30px;
   word-wrap: break-word; /* Zapewnia łamanie długich słów */
   overflow-wrap: break-word; /* Łamanie długich słów */
-  padding: 5px; /* Zmienione padding, aby tekst miał margines wewnątrz */
+  padding: 9px; /* Zmienione padding, aby tekst miał margines wewnątrz */
+  padding-top: 5px;
+  padding-bottom: 5px;
   max-width: 250px; /* Ustawienie maksymalnej szerokości */
   text-align: left;
   overflow: hidden; /* Zapobiega wyjściu tekstu poza kontener */

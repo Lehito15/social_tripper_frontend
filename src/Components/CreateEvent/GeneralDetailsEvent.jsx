@@ -2,7 +2,7 @@
 import './GeneralDetailsEvent.css';
 import React, { useRef, useState } from 'react';
 
-function GeneralDetailsEvent({data, updateData}) {
+function GeneralDetailsEvent({data, updateData, group}) {
   const fileInputRef = useRef(null);
   const [imagePreview, setImagePreview] = useState(data.eventImage);
   const [fileName, setFileName] = useState(data.imageName);
@@ -56,6 +56,7 @@ function GeneralDetailsEvent({data, updateData}) {
                     id="public" 
                     name="visibility"
                     value="Public" 
+                    disabled={group}
                     checked={data.visibility === 'Public'} 
                     onChange={(e) => updateData({ ...data, visibility: e.target.value })}/>
               <label htmlFor="male">Public</label>
@@ -67,6 +68,7 @@ function GeneralDetailsEvent({data, updateData}) {
                 name="visibility" 
                 value="Private" 
                 checked={data.visibility === 'Private'}
+                disabled={group}
                 onChange={(e) => updateData({ ...data, visibility: e.target.value })} />
                 <label htmlFor="male">Private</label>
             </div>
@@ -89,7 +91,7 @@ function GeneralDetailsEvent({data, updateData}) {
                 type="file"
                 ref={fileInputRef}
                 style={{ display: 'none' }}
-                accept="image/*, video/*"
+                accept="image/*"
                 onChange={handleFileChange}
               />
               <span className="file-name">{fileName}</span>

@@ -11,7 +11,7 @@
 .public-icon{
   height: 18px;
   width: 18px;
-  margin-left: 0;
+  /* margin-left: 0; */
 }
 
 .event-main-info{
@@ -22,7 +22,6 @@
 
 .event-main-info-details{
   width: 75%;
-  
 }
 
 .event-main-dates{
@@ -117,4 +116,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.event-posts .trip-button{
+  margin-bottom: 18px;
 }

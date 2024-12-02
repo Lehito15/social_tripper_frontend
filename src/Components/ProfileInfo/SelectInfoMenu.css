@@ -5,6 +5,10 @@
 
 
 }
+.public-icon-profile{
+  margin-left: 10px;
+
+}
 
 .profile-img {
   position: absolute;
@@ -27,7 +31,7 @@
   font-size: 24px;
   margin-bottom: 0;
 
-  margin-left: 85px; 
+  margin-left: 100px; 
 }
 
 .profile-info {
@@ -37,10 +41,14 @@
 }
 
 .line-menu {
-  margin-top: 10px;
-  margin-left: 10px;           /* Daje przestrzeń między menu a resztą */
+  margin-top: 10px;         /* Daje przestrzeń między menu a resztą */
   z-index: 1;
   position: relative;
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+ 
 }
 
 .public-icon {

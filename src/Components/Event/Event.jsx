@@ -5,9 +5,14 @@ import PostOwner from '../PostPage/PostOwner.jsx';
 import ActivityIcon from './ActivityIcon.jsx';
 import EventMembers from './EventMembers.jsx';
 import DateCardTime from './DateCardTime.jsx';
+import { useNavigate } from 'react-router-dom';
 
-function EventCard({ event, openEvent, lastTrip }) {
-  console.log(event)
+function EventCard({ event,  lastTrip }) {
+  const navigate = useNavigate();
+
+  const openEvent = () => {
+    navigate(`/events/${event.uuid}`);
+  };
   const languageToFlagCode = {
     English: "gb",
     French: "fr",

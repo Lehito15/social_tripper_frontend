@@ -32,20 +32,17 @@ function LastTrip({ userUuid }) {
 `;
 
 const { loading, error, data, refetch } = useQuery(GET_Events);
-console.log(data);
 useEffect(() => {
   refetch();
 }, [refetch]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log('last Trip')
-  console.log(data.events[0])
-  console.log('last Trip')
+
 
   return (
     <div className="last-trip-container">
-      <span className='component-title'>Suggestions for you</span>
+      <span className='component-title'>Your last trip</span>
       <Event event={data.events[0]} lastTrip={true} />
     
     </div>

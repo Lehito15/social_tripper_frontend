@@ -20,7 +20,8 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
     if (isSubmitting) return;
     
     console.log('rules');
-    console.log(descriptionAndRules.rules);
+    console.log(groupUuid)
+    console.log(eventSettings.tripDescriptor);
   
     const startDateTime = new Date(`${eventSettings.tripStartDate}T${eventSettings.tripStartTime || '00:00'}:00`);
     const endDateTime = new Date(`${eventSettings.tripEndDate}T${eventSettings.tripEndTime || '00:00'}:00`);
@@ -49,16 +50,16 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
   
     const isPublic = generalDetailsEvent.visibility !== 'Private';
     const formattedActivities = activities.map((activity) => ({
-      requiredExperience: activity.rating,
+      requiredExperience: activity.rating ||  5.0,
       activity: {
         name: activity.label,
       },
     }));
   
     const formattedLanguages = languages.map((language) => ({
-      requiredLevel: language.rating,
+      requiredLevel: language.rating || 5.0,
       language: {
-        name: language.label,
+        name: language.value,
       },
     }));
   
@@ -67,9 +68,10 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
   
     if (groupUuid) {
       eventDTO = {
-        groupUuid: groupUuid,
+        groupUUID: groupUuid.uuid,
         eventDTO: {
           name: generalDetailsEvent.eventName,
+          isPublic: true,
           description: descriptionAndRules.description,
           destination: eventSettings.tripDescriptor,
           eventStartTime: `${eventSettings.tripStartDate}T${eventSettings.tripStartTime || '00:00'}:00`,
@@ -103,6 +105,8 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
         rules: descriptionAndRules.rules
       };
     }
+
+    console.log(eventDTO)
   
     if (groupUuid) {
       formData.append('eventDTO', new Blob([JSON.stringify(eventDTO)], { type: 'application/json' }));
@@ -118,6 +122,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
     }
   
     const path = groupUuid ? 'events/group-events' : 'events';
+    console.log(path)
   
     try {
       const data = await sendToBackend(path, 'POST', formData);
@@ -129,8 +134,8 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
       setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
     }
     
-    closeCreateEvent();
-    navigate('/events');
+    // closeCreateEvent();
+    // navigate('/events');
   };
   
   
@@ -171,6 +176,7 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
                 <GeneralDetailsEvent 
                     data={generalDetailsEvent} 
                     updateData={setGeneralDetailsEvent} 
+                    group={groupUuid}
                 />
             );
         case 2:

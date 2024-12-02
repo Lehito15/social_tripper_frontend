@@ -9,12 +9,18 @@ function Post({post, openPost, closePost, userUuid}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
+
+  const [newComment, setNewComment] = useState(false);
 //   console.log('graphql')
- console.log(post.account)
+//  console.log(post.account)
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  const addNewComent = () =>{
+    setNewComment(!newComment)
+  }
 
   
 
@@ -22,8 +28,7 @@ function Post({post, openPost, closePost, userUuid}){
 
   useEffect(() => {
     const calculateHeight = async () => {
-      const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
-    
+      const maxWidth = containerRef.current ? containerRef.current.offsetWidth : 900 // Użycie offsetWidth kontenera, jeśli jest dostępny
       if (post.postMultimediaUrls && post.postMultimediaUrls.length > 0) {
         const mediaHeights = await Promise.all(
           post.postMultimediaUrls.map((mediaUrl) => {
@@ -90,10 +95,10 @@ function Post({post, openPost, closePost, userUuid}){
     </div>
      )}
     <div className='reactions-conteiner'>
-      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber}  postUuid={post.uuid} userUuid={userUuid}  openPost={openPost} post={post} />
+      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber}  postUuid={post.uuid} userUuid={userUuid}  openPost={openPost} post={post} newComment={newComment} />
     </div>
     <div className='comment-container-post'>
-      <WriteComment owner={post.account} postUuid={post.uuid}   />
+      <WriteComment owner={post.account} postUuid={post.uuid} newComment={addNewComent}   />
     </div>
   </div>
 

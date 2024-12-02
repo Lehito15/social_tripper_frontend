@@ -24,6 +24,7 @@ import GroupMain from '../GroupView/GroupMain.jsx';
 import CreateGroup from '../CreateGroup/CreateGroup.jsx';
 import { gql, useQuery } from '@apollo/client';
 import MapPage from '../Explore/MapPage.jsx';
+import UpcommingEvents from '../UpcomingEvents/UpcomingEvents.jsx';
 
 
 
@@ -35,6 +36,10 @@ function MainPage({user}) {
 
   const [isChatOpen, setChatOpen] = useState(false);
   const chatRef = useRef(null);
+
+  const [isUpcomgEventsOpen, setUpCommingEventsOpen] = useState(false);
+  const upcommingEventsRef = useRef(null);
+  const IncommingButtonRef = useRef();
 
   const [selectedChat, setSelectedChat] = useState(false);
   const [minimizedChats, setMinimizedChats] = useState([]);
@@ -197,13 +202,14 @@ console.log(data);
     setChatOpen(!isChatOpen);
   };
 
-  const openEvent = (uuid) =>{
-    console.log('openPost')
-    console.log(uuid)
-    setSelectedEvent(uuid);
-    console.log(selectedEvent)
-    navigate(`/events/${ uuid}`);
+  const toggleUpcomingEvents = () =>{
+    console.log(isUpcomgEventsOpen)
+    console.log('upcomming');
+    setUpCommingEventsOpen(prevState => !prevState); 
+    console.log(isUpcomgEventsOpen)
   }
+
+ 
 
   const addEventPost = (uuid) =>{
     console.log('dodaje event');
@@ -227,11 +233,18 @@ console.log(data);
 
   const handleClickOutside = (event) => {
     // Jeśli kliknięcie jest poza dodawaniem posta
+    console.log( upcommingEventsRef.current)
+    // console.log(!upcommingEventsRef.current.contains(event.target))
+    // console.log(!upcommingEventsRef.current.contains(event.target))
+    console.log(IncommingButtonRef.current)
+    // console.log(!IncommingButtonRef.current.contains(event.target))
+    console.log(isUpcomgEventsOpen)
     if (
       addPostRef.current &&
       !addPostRef.current.contains(event.target) &&
       isAddPostOpen
     ) {
+      console.log('1 open')
       setIsAddPostOpen(false);
     }
     // Jeśli kliknięcie jest poza czatem
@@ -240,6 +253,7 @@ console.log(data);
       !chatRef.current.contains(event.target) &&
       isChatOpen
     ) {
+      console.log('2 open')
       setChatOpen(false);
     }
     // Jeśli kliknięcie jest poza szczegółami posta z obrazkiem
@@ -261,6 +275,16 @@ console.log(data);
       console.log('Zamykam post bez obrazka');
       setSelectedPost(null);
       setPostOpenNoImg(false);
+    }
+    else if(
+      upcommingEventsRef.current &&
+      !upcommingEventsRef.current.contains(event.target) &&
+      IncommingButtonRef.current &&
+      !IncommingButtonRef.current.contains(event.target) 
+      // isUpcomgEventsOpen
+    ){
+      console.log('zamknij się')
+      setUpCommingEventsOpen(false);
     }
   };
   
@@ -309,7 +333,7 @@ console.log(data);
         </div>
     
         <div className="right-menu">
-        <RightMenu toggleAddPost={addPost} toggleChat={toggleChat} />
+        <RightMenu toggleAddPost={addPost} toggleChat={toggleChat} toggleUpcomingEvents={toggleUpcomingEvents} IncommingButtonRef={IncommingButtonRef} />
         </div>
         <div className='rightpanell'>
           <RightPanel userUuid={user.uuid} />
@@ -321,15 +345,14 @@ console.log(data);
         <div className="main-content">
           
             <Routes>
-              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost} openEvent={openEvent} openRelation={openRelation} closeRelation={closeRelation} userUuid={user.uuid} reLoad={refetch} />} />
-              <Route path="/rolki" element={<PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}}/>} />
-              <Route path="/profileinfo/:uuid/*" element={<ProfileInfo myUuid={user.uuid} />} />
-              <Route path="/events" element={<TripEvents openEvent={openEvent} reLoad={refetch}/>} />
+              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost}  openRelation={openRelation} closeRelation={closeRelation} userUuid={user.uuid} reLoad={refetch} />} />
+              <Route path="/users/:uuid/*" element={<ProfileInfo myUuid={user.uuid} />} />
+              <Route path="/events" element={<TripEvents  reLoad={refetch}/>} />
               <Route path="/explore" element={<MapPage />} />
-              <Route path="/groups" element={<GroupPage createGroup={createGroup}  />} />
+              <Route path="/groups" element={<GroupPage createGroup={createGroup} reLoad={refetch} openPost={openPost}   />} />
               <Route path="/relations" element={<RelationsPage  openRelation={openRelation}/>} />
-              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} />} />
-              <Route path="/groups/*" element={<GroupMain openCreatePost={addGroupPost} openEvent={openEvent} createEvent={createGroupEvent} userUuid={user.uuid} />} />
+              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} openPost={openPost} reFetch={refetch} />} />
+              <Route path="/groups/*" element={<GroupMain openCreatePost={addGroupPost}  createEvent={createGroupEvent} userUuid={user.uuid} openPost={openPost} reLoad={refetch}  />} />
             </Routes>
           </div>
       </div>  
@@ -350,6 +373,12 @@ console.log(data);
         <div className="chat" ref={chatRef}>
           <Chats openIndividualChat={openIndividualChat}  />
         </div>
+      )}
+
+      {isUpcomgEventsOpen &&(
+         <div className="add-post-moda" ref={upcommingEventsRef}>
+          <UpcommingEvents userUuid={user.uuid} />
+       </div>
       )}
 
       {selectedChat && (

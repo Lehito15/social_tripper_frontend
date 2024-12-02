@@ -120,7 +120,12 @@ function GeneralDetailsEvent({ description, publicText, publicIcon, eventCreated
             <p className="event-public-text">
               {isGroup && locationScope
                 ? `Group located at ${locationScope}`
-                : (isGroup ? '' : `Maximum members: ${updatedMaxMembers}`)}
+                : (isGroup 
+                    ? '' 
+                    : (updatedMaxMembers === -1 
+                        ? 'Maximum members: No limit' 
+                        : `Maximum members: ${updatedMaxMembers}`))}
+
             </p>
           )}
         </div>

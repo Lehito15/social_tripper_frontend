@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../Messages/WriteMessage.css';
 import { sendToBackend } from '../../Utils/helper.js';
 
-function WriteMessage({ text, postUuid, userUuid, reload }) {
+function WriteMessage({ text, postUuid, userUuid, reload, newComment }) {
   const [comment, setComment] = useState('');
 
   const sendComment = async() => {
@@ -26,6 +26,9 @@ function WriteMessage({ text, postUuid, userUuid, reload }) {
         setComment(''); // Resetowanie pola tekstowego
         if(reload){
           reload();
+        }
+        if(newComment){
+          newComment();
         }
         // Odświeżenie komentarzy
       } else {

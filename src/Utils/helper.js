@@ -34,6 +34,30 @@ export const sendToBackend = async (path, method, body) => {
   }
 };
 
+export const extractAfterHttp = (url)  => {
+  if (!url) {
+    console.error("URL is undefined or null");
+    return null; // Jeśli url jest undefined lub null, zwróć null
+  }
+
+  const regex = /^http:\/\/(.*)$/;
+  const match = url.match(regex);
+
+  if (match) {
+    return match[1];
+  } else {
+    console.error("URL doesn't match the expected format");
+    return null; // Jeśli URL nie pasuje do wzorca
+  }
+}
+
+
+// Przykład użycia
+const url = "http://events/b544ecce-09fe-4ea6-b185-7c9dcd076816";
+const extractedPart = extractAfterHttp(url);
+console.log(extractedPart); // Wydrukuje: events/b544ecce-09fe-4ea6-b185-7c9dcd076816
+
+
 
 
  const activitiesmapper = {

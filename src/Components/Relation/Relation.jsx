@@ -84,7 +84,7 @@ function Relation({post, openRelation}){
 
         )}
         </div>
-        <div className='map-container' style={{height: postHeight}} >
+        <div className='map-container-relation' style={{height: postHeight}} >
             <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true} />
         </div>
     </div>

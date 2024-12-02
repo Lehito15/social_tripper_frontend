@@ -36,6 +36,7 @@
   display: flex;
   border-radius: 5px;
   margin-bottom: 5px;
+  
 
 }
 
@@ -54,6 +55,7 @@
   overflow-y: auto;
   gap: 10px;
   margin-bottom: 10px;
+  overflow-x: hidden;
 }
 
 .rule-description {
@@ -89,11 +91,13 @@
 .rule-name-container{
   margin-bottom: 10px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
-  width: 768px;
+  width: 760px;
+  margin-left: 1px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-right: 9px;
+  padding-right: 18px;
+  border-radius: 5px;
 
 }
 

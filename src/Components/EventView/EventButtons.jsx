@@ -3,33 +3,35 @@ import { sendToBackend } from '../../Utils/helper.js';
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, eventStatus }) {
+function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, eventStatus, groupUuid, leaveEvent, groupIsPublic, joinGroup }) {
   const [isEventRequested, setIsEventRequested] = useState(false);
-  const [showOptions, setShowOptions] = useState(false); // Stan do pokazywania listy opcji (More)
-  const [showStatusOptions, setShowStatusOptions] = useState(false); // Stan do pokazywania listy statusów
-  const [selectedStatus, setSelectedStatus] = useState(eventStatus); // Przechowywanie aktualnego statusu
+  const [showOptions, setShowOptions] = useState(false);
+  const [showStatusOptions, setShowStatusOptions] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(eventStatus);
+  const [userStatus, setUserStatus] = useState(status);
   const dropdownRef = useRef(null);
   const statusDropdownRef = useRef(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkEventRequestStatus = async () => {
-      try {
-        const endpoint = `events/${eventUuid}/users/${userUuid}/is-event-requested`;
-        const response = await sendToBackend(endpoint, "GET", null);
-        setIsEventRequested(!!response);
-      } catch (error) {
-        console.error("Error fetching membership status:", error);
-      }
-    };
-
-    checkEventRequestStatus();
-  }, [eventUuid, userUuid]);
 
   const handleJoinRequest = async () => {
     setIsEventRequested(true);
     try {
       await sendJoinRequest();
+    } catch (error) {
+      console.error("Error sending join request:", error);
+      setIsEventRequested(false);
+    }
+  };
+
+  const handleJoinGroup = async () => {
+    try {
+      const response = await joinGroup();
+      console.log(response)
+
+        setUserStatus('member'); // Ustaw status po dołączeniu
+        setIsEventRequested(false);
+
+      
     } catch (error) {
       console.error("Error sending join request:", error);
       setIsEventRequested(false);
@@ -57,30 +59,17 @@ function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, e
     }
   };
 
-  const handleLeaveTrip = async () => {
-    try {
-      const endpoint = `events/remove-member`;
-      const userRequestDTO = { userUUID: userUuid, eventUUID: eventUuid };
-      const response = await sendToBackend(endpoint, "DELETE", JSON.stringify(userRequestDTO));
-      if (response) {
-        navigate('/events');
-      } else {
-        alert('Cannot leave the event');
-      }
-    } catch (error) {
-      console.error("Error leaving event:", error);
-    }
-  };
-
   const handleClickOutside = (event) => {
     if (
-      (dropdownRef.current && !dropdownRef.current.contains(event.target)) &&
+      (dropdownRef.current && !dropdownRef.current.contains(event.target)) ||
       (statusDropdownRef.current && !statusDropdownRef.current.contains(event.target))
     ) {
       setShowOptions(false);
       setShowStatusOptions(false);
     }
   };
+  
+  
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -88,21 +77,24 @@ function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, e
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+  
 
   return (
     <div className="event-buttons">
-      {status === 'owner' || status === 'member' ? (
+      {userStatus === 'owner' || userStatus === 'member' ? (
         <>
-          <button className="event-button">
-            <img src={`${process.env.PUBLIC_URL}/plus.png`} alt="Icon" className="icon" />
-            Invite
-          </button>
-
           <div className="dropdown-container">
-            <button className="event-button" onClick={toggleStatusOptions}>
-              <img src={`${process.env.PUBLIC_URL}/invite-icon.png`} alt="Icon" className="icon" />
-              {selectedStatus}
-            </button>
+            {groupUuid ? (
+              <button className="event-button">
+                <img src={`${process.env.PUBLIC_URL}/group.png`} alt="Icon" className="icon" />
+                Member
+              </button>
+            ) : (
+              <button className="event-button" onClick={toggleStatusOptions}>
+                <img src={`${process.env.PUBLIC_URL}/invite-icon.png`} alt="Icon" className="icon" />
+                {selectedStatus}
+              </button>
+            )}
 
             {showStatusOptions && (
               <div className="status-dropdown" ref={statusDropdownRef}>
@@ -126,7 +118,7 @@ function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, e
               </button>
 
               {showOptions && (
-                <div className="leave-event" ref={dropdownRef} onClick={handleLeaveTrip}>
+                <div className="leave-event" ref={dropdownRef} onClick={leaveEvent}>
                   <img src={`${process.env.PUBLIC_URL}/leave-icon.png`} alt="Icon" className="icon icon-more" />
                   <p className="leave-event-text">Leave event</p>
                 </div>
@@ -137,11 +129,11 @@ function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, e
       ) : (
         <button
           className="event-button"
-          onClick={handleJoinRequest}
+          onClick={groupUuid && groupIsPublic ? handleJoinGroup : handleJoinRequest}
           disabled={isEventRequested}
         >
           <img src={`${process.env.PUBLIC_URL}/group.png`} alt="Icon" className="icon" />
-          {isEventRequested ? 'Request Sent' : 'Request Join'}
+          {groupUuid && groupIsPublic ? 'Join Group' : isEventRequested ? 'Request Sent' : 'Request Join'}
         </button>
       )}
     </div>
