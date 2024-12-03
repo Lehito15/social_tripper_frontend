@@ -45,10 +45,10 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
     }
   }, [postUuid, commentUuid, userUuid]);
 
-  useEffect( () =>  {
-    setCommentsCount(commentsCount+1);
+  // useEffect( () =>  {
+  //   setCommentsCount(commentsCount+1);
 
-  },[newComment])
+  // },[newComment])
 
   const addReaction = async () => {
     const isComment = !!commentUuid; // Sprawdza, czy jest to reakcja na komentarz

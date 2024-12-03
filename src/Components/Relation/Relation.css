@@ -39,4 +39,9 @@
     height: 100%;
     z-index: 10;
   }
+
+  .relation-container .carousel-item img {
+    object-fit: cover;
+    width: 100%;
+  }
   

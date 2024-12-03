@@ -92,7 +92,7 @@ function Slider({ multimedia, postHeight, onSlideChange, markIndex, openPost, po
         controls={multimedia.length > 1} 
         indicators={multimedia.length > 1} 
         ref={carouselRef} // Używamy ref do całego kontenera Carousel
-        style={{ height: postHeight }}
+        style={{ height: postHeight , height: '100%'}}
       >
        {multimedia.map((url, idx) => (
   <Carousel.Item key={idx}>

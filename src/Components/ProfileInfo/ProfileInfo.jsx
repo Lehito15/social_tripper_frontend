@@ -109,7 +109,7 @@ function ProfileInfo({ myUuid }) {
 
   const privateAccount = !myAccount && !areUsersFriends && !data.user.isPublic;
 
-  if (isCheckingFollow) return <p>Checking follow status...</p>; // Dodatkowy komunikat
+  if (isCheckingFollow && data?.user && myUuid !== data.user.uuid ) return <p>Checking follow status...</p>; // Dodatkowy komunikat
 
   return (
     <div className="profile-user-info">

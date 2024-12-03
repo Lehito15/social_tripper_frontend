@@ -181,3 +181,46 @@
     width: 100%;
   }
 }
+
+@media (max-width: 1000px  ) and (-webkit-device-pixel-ratio: 1.25) {
+  .main-content {
+    /* padding: 0 20px; Zmniejszenie paddingów */
+    width: calc(100% - 570px); /* Dopasowanie do zmniejszających się paddingów */
+  }
+}
+
+/* Ukrycie prawego panelu */
+@media (max-width: 1330px) and (-webkit-device-pixel-ratio: 1.25) {
+  .right-menu,
+  .rightpanell {
+    display: none;
+  }
+
+  .main-content {
+    right: 0;
+    width: calc(100% - 320px); /* Dopasowanie do braku prawego panelu */
+  }
+
+  .searchbar {
+    /* right: 0; */
+    width: calc(100% - 320px);
+  }
+}
+
+/* Ukrycie lewego panelu */
+@media (max-width: 1030px) and (-webkit-device-pixel-ratio: 1.25) {
+  .left-menu {
+    display: none;
+  }
+
+  .main-content {
+    left: 0;
+    top: 70px;
+    width: 100%; 
+  }
+
+  .searchbar {
+    left: 0;
+    width: 100%;
+  }
+}

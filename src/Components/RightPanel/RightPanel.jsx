@@ -14,7 +14,7 @@ function RightPanel({userUuid}){
         
       </div>
       <SuggestionsForYou />
-      <h>ehfdwk</h>
+
 
   
 

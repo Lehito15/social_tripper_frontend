@@ -22,7 +22,7 @@ function Relation({post, openRelation}){
   };
 
   const multimedia = [
-    'https://socialtripperstorage.blob.core.windows.net/blob/post%2F3bb95b25-3e90-40f9-b283-a46271a1e084%2F2fcaad00-c022-40db-ae28-c1c4ea84d5e9.jpeg',
+    '					https://socialtripperstorage.blob.core.windows.net/blob/groups%2Fe2334b5b-94e5-4319-ae2a-0c6c9ad595de%2F3f535079-c366-4cb7-90bd-1c390afa5f4b.jpg',
     '	https://socialtripperstorage.blob.core.windows.net/blob/users%2F7bd02457-71ca-4639-b766-8b5c256c06fc%2Feac4f622-3cbe-47b0-873f-e1d20944c9c2.jpg'
   ]
 
@@ -31,17 +31,18 @@ function Relation({post, openRelation}){
   useEffect(() => {
     const calculateHeight = async () => {
       const maxWidth = containerRef.current ? containerRef.current.offsetWidth  : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
+
       
-      if (post.postMultimediaDTO && post.postMultimediaDTO.length > 0) {
+      if ( multimedia.length > 0) {
         const mediaHeights = await Promise.all(
-          post.postMultimediaDTO.map((mediaItem) => {
+          multimedia.map((mediaItem) => {
             if (mediaItem.type === 'image') {
               return new Promise((resolve) => {
                 const img = new Image();
                 img.src = mediaItem.src;
                 img.onload = () => {
                   const scaledHeight = (img.naturalHeight / img.naturalWidth) * maxWidth;
-                  resolve(Math.min(scaledHeight, 600)); // Ograniczamy do maksymalnej wysokości 600
+                  resolve(Math.min(scaledHeight, 700)); // Ograniczamy do maksymalnej wysokości 600
                 };
               });
             } else if (mediaItem.type === 'video') {
@@ -51,6 +52,7 @@ function Relation({post, openRelation}){
           })
         );
         const minHeight = Math.min(...mediaHeights); // Minimalna wysokość dla mediów
+        console.log(minHeight)
         setPostHeight(minHeight);
       } else {
         
@@ -59,9 +61,10 @@ function Relation({post, openRelation}){
     };
 
     calculateHeight();
-  }, [post]);
+  }, []);
   console.log('post');
   console.log(post.postMultimediaDTO)
+  console.log(postHeight)
   const maxChars = 205;
 
   return(
@@ -77,15 +80,15 @@ function Relation({post, openRelation}){
     </div>
    
     <div className='relation'  >
-        <div className= 'slider-container'  style={{height: postHeight}}>
+        <div className= 'slider-container'  style={{ height: postHeight || '300px' }}>
         {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
         <Slider multimedia={multimedia} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
         
 
         )}
         </div>
-        <div className='map-container-relation' style={{height: postHeight}} >
-            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true} />
+        <div className='map-container-relation' style={{ height: postHeight || '300px' }} >
+            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true}  />
         </div>
     </div>
     <div className='reactions-conteiner'>
