@@ -7,24 +7,24 @@ import './PostDetailsNoImg.css';
 import { gql, useQuery } from '@apollo/client';
 import FocusTrap from "focus-trap-react";
 
-function PostDetailsNoImg({post, closePost, isAlone}){
+function PostDetailsNoImg({post, closePost, isAlone, userUuid, userIcon}){
   const [isExpanded, setIsExpanded] = useState(false);
   const [reLoad, setReLoad] = useState(false);
   const [newComment, setNewComment] = useState(false);
   console.log('isAlone')
   console.log(isAlone)
 
-  // useEffect(() => {
-  //   // Blokowanie przewijania
-  //   // document.body.style.overflow = "hidden";
-  //   const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-  //   document.body.style.overflow = 'hidden';
-  //   document.body.style.marginRight = "10px"
-  //   return () => {
-  //     document.body.style.overflow = ""
-  //     document.body.style.marginRight = '';
-  //   };
-  // }, []);
+  useEffect(() => {
+    // Blokowanie przewijania
+    // document.body.style.overflow = "hidden";
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.overflow = 'hidden';
+    document.body.style.marginRight = "10px"
+    return () => {
+      document.body.style.overflow = ""
+      document.body.style.marginRight = '';
+    };
+  }, []);
 
   const toggleReload = () => {
     setReLoad((prev) => !prev);
@@ -69,40 +69,13 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
 
 
 
-//   const author1 = {name: "Kurt", surname: "Kotarski", profile_picture_url: "https://graw.pl/wp-content/uploads/2022/11/Zbigniew-Kotarski-GRAW.jpg", id: 5, isActive: true};
-//   const author2 = { name: "Anna", surname: "Nowak", profile_picture_url: "https://ocdn.eu/pulscms-transforms/1/vKOk9kpTURBXy9kNmVhNTZkMzlmYTc5NzU2NzJlMGIxMjM2MzczMjUyYi5qcGeTlQPMxy7NBiHNA3KVAs0EsADDw5MJpjcxZjlmZgbeAAGhMAE/anna-maria-wesolowska-w-2011-r.jpeg", id: 6, isActive: false };
-//   console.log('postdetale post');
-//   console.log(post)
-//   // const  post =  po
-
-//   const messages = [
-//     {
-//       author: author1,
-      
-//    content: "Lorem ipsum 123 abcasdasdsadsaddsadasdsadaskkakakakakakakkkakd kakaak kapi lej lej adam beerpong", 
-//    date: new Date('October 27, 2024 11:25') ,
-//     last_activity_date: new Date('October 27, 2024 11:24')
-//     },
-//     {
-//       author: author2,
-  
-//  content: "Hej, co nowego?", 
-//  date: new Date('January 17, 2022 08:24') ,
-
-//       last_activity_date: new Date('October 28, 2024 09:24')
-//     }
-//   ];
   
   const maxChars = 205;
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
-  // console.log('postdetale');
-  // console.log(post.postMultimediaDTO)
-  // const windowHeight = window.innerHeight;
-  // const postDetailHeight = 0.91* windowHeight;
-  // console.log(windowHeight)
+
 
   return (
     <>
@@ -154,7 +127,7 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
                 data.comments
                   ?.slice()
                   .map((comment, index) => (
-                    <Comment key={index} comment={comment}  />
+                    <Comment key={index} comment={comment} onClose={closePost} />
                   ))}
             </div>
             <div className="write-comment-container">
@@ -163,6 +136,8 @@ const { loading, error, data, refetch } = useQuery(GET_Comments, {
                 reload={toggleReload}
                 postUuid={post.uuid}
                 newComment={addNewComent}
+                userUuid={userUuid}
+                userIcon={userIcon}
               />
             </div>
           </div>

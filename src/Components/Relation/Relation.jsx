@@ -11,6 +11,7 @@ function Relation({post, openRelation}){
   const [postHeight, setPostHeight] = useState(null);
   const containerRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  console.log(post)
 
   const handleSlideChange = (newIndex) => {
     setSelectedIndex(newIndex);
@@ -21,10 +22,20 @@ function Relation({post, openRelation}){
     setSelectedIndex(markerIndex);  
   };
 
-  const multimedia = [
-    '					https://socialtripperstorage.blob.core.windows.net/blob/groups%2Fe2334b5b-94e5-4319-ae2a-0c6c9ad595de%2F3f535079-c366-4cb7-90bd-1c390afa5f4b.jpg',
-    '	https://socialtripperstorage.blob.core.windows.net/blob/users%2F7bd02457-71ca-4639-b766-8b5c256c06fc%2Feac4f622-3cbe-47b0-873f-e1d20944c9c2.jpg'
-  ]
+  // const multimedia = [
+  //   '					https://socialtripperstorage.blob.core.windows.net/blob/groups%2Fe2334b5b-94e5-4319-ae2a-0c6c9ad595de%2F3f535079-c366-4cb7-90bd-1c390afa5f4b.jpg',
+  //   '	https://socialtripperstorage.blob.core.windows.net/blob/users%2F7bd02457-71ca-4639-b766-8b5c256c06fc%2Feac4f622-3cbe-47b0-873f-e1d20944c9c2.jpg'
+  // ]
+
+  const multimedia = post?.multimedia?.map((item) => item?.multimediaUrl).filter(Boolean);
+  const locations = post.multimedia.map((item, index) => ({
+    id: index, // Use the index as the id
+    position: [item.latitude, item.longitude] // Array of [latitude, longitude]
+  }));
+  
+  console.log(locations);
+  
+  console.log(multimedia)
 
  
 
@@ -70,7 +81,7 @@ function Relation({post, openRelation}){
   return(
   <div className='relation-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <PostOwner owner={{name:'Kamil', surname: 'Grosicki', profile_picture_url: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.dateOfPost} status={"option"}  />
+      <PostOwner owner={post.event} date={post.dateOfPost} status={"option"}  />
       <div className="more-options-button">
         <img 
           className="more-options"
@@ -81,22 +92,22 @@ function Relation({post, openRelation}){
    
     <div className='relation'  >
         <div className= 'slider-container'  style={{ height: postHeight || '300px' }}>
-        {postHeight !== null && post.postMultimediaDTO && post.postMultimediaDTO.length > 0 && (
+        {postHeight !== null &&  multimedia.length > 0 && (
         <Slider multimedia={multimedia} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
         
 
         )}
         </div>
         <div className='map-container-relation' style={{ height: postHeight || '300px' }} >
-            <MapRelation locations={post.locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true}  />
+            <MapRelation locations={locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true}  />
         </div>
     </div>
-    <div className='reactions-conteiner'>
+    {/* <div className='reactions-conteiner'>
       <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
     </div>
     <div className='comment-container'>
       <WriteComment owner={{nickname:'Kamil', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.date} status={"option"} />
-    </div>
+    </div> */}
   </div>
 
   );

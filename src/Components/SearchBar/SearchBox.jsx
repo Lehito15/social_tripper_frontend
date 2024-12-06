@@ -1,27 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../SearchBar/SearchBox.css';
 import PostOwner from '../PostPage/PostOwner';
-import {  sendToBackend } from '../../Utils/helper.js';
+import { sendToBackend } from '../../Utils/helper.js';
 
 function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState('');  // Wartość pola wyszukiwania
-  const [results, setResults] = useState([]);        // Wyniki wyszukiwania
-  const [isLoading, setIsLoading] = useState(false);  // Stan ładowania danych
-  const [showResults, setShowResults] = useState(false); // Stan do pokazania wyników
-  const searchBoxRef = useRef(null); // Ref do obszaru wyszukiwania
- 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [userResults, setUserResults] = useState([]);  // Wyniki dla użytkowników
+  const [eventResults, setEventResults] = useState([]); // Wyniki dla wydarzeń
+  const [isLoading, setIsLoading] = useState(false);
+  const [showResults, setShowResults] = useState(false);
+  const searchBoxRef = useRef(null);
 
-  // Funkcja do obsługi zmiany w polu wyszukiwania
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
-    setShowResults(value.trim() !== ''); // Pokazuje wyniki, gdy tekst nie jest pusty
+    setShowResults(value.trim() !== '');
   };
 
-  // Funkcja do pobierania wyników z API
   useEffect(() => {
     if (searchTerm.trim() === '') {
-      setResults([]); // Jeśli pole jest puste, resetujemy wyniki
+      setUserResults([]);
+      setEventResults([]);
       return;
     }
 
@@ -29,10 +28,14 @@ function SearchBar() {
       setIsLoading(true);
 
       try {
-        const response = await sendToBackend(`events/by-name?name=${searchTerm}`, "GET",null)
-        
-        setResults(response); 
-        console.log(response)
+        // Wyszukiwanie użytkowników po nicku
+        const userResponse = await sendToBackend(`accounts/by-nickname?nickname=${encodeURIComponent(searchTerm)}`, "GET", null);
+        setUserResults(userResponse);
+
+        // Wyszukiwanie wydarzeń po nazwie
+        const eventResponse = await sendToBackend(`events/by-name?name=${encodeURIComponent(searchTerm)}`, "GET", null);
+        setEventResults(eventResponse);
+
       } catch (error) {
         console.error("Błąd pobierania danych:", error);
       } finally {
@@ -41,13 +44,12 @@ function SearchBar() {
     };
 
     fetchResults();
-  }, [searchTerm]); // Za każdym razem, gdy zmienia się `searchTerm`
+  }, [searchTerm]);
 
-  // Nasłuchiwacz kliknięć poza wyszukiwaniem
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchBoxRef.current && !searchBoxRef.current.contains(event.target)) {
-        setShowResults(false); // Ukrywa wyniki, gdy klikniemy poza polem wyszukiwania
+        setShowResults(false);
       }
     };
 
@@ -63,7 +65,7 @@ function SearchBar() {
       <input 
         type="text" 
         className="search-input" 
-        placeholder="Search..." 
+        placeholder="Search for users or events..." 
         value={searchTerm}
         onChange={handleSearchChange} 
       />
@@ -73,20 +75,40 @@ function SearchBar() {
         className="search-icon" 
       />
 
-      {/* Pokazanie wyników wyszukiwania */}
-      {/* {isLoading && <p>Loading...</p>} */}
-      {showResults && results.length > 0 && (
+      {showResults && (
         <div className="search-results">
-          {results.map((result) => (
-            <div key={result.uuid} className="search-result-item">
-              <PostOwner  owner={{nickname: result.name, profilePictureUrl: result.iconUrl, homePageUrl: result.homePageUrl}}/>
-            </div>
-          ))}
+
+          {!isLoading && (
+            <>
+              {/* Sekcja użytkowników */}
+              {userResults.length > 0 && (
+                <div className="user-results">
+                  {userResults.map((user) => (
+                    <div key={user.uuid} className="search-result-item">
+                      <PostOwner owner={{ nickname: user.nickname, profilePictureUrl: user.profilePictureUrl, homePageUrl: user.homePageUrl }} />
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Sekcja wydarzeń */}
+              {eventResults.length > 0 && (
+                <div className="event-results">
+                  {eventResults.map((event) => (
+                    <div key={event.uuid} className="search-result-item">
+                      <PostOwner  owner={{nickname: event.name, profilePictureUrl: event.iconUrl, homePageUrl: event.homePageUrl}}/>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+            
+            </>
+          )}
         </div>
       )}
-      {/* {showResults && results.length === 0 && !isLoading && <p>No results found</p>} */}
     </div>
   );
-};
+}
 
 export default SearchBar;

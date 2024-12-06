@@ -35,3 +35,27 @@
 .different-profile-info .Post-page {
   width: 100%;
 }
+
+@media (-webkit-device-pixel-ratio: 1.5){
+  .profile-user-info{
+    width: 600px;
+  }
+
+  .profile-user-info .user-stats{
+    margin-top: 0;
+  }
+  .profile-user-info  .about-container  .stat-title{
+    margin-top: 0;
+    font-size: 6px;
+  }
+  .profile-user-info .about-container .stat-value{
+    font-size: 14px;
+
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.25){
+  .profile-user-info{
+    width: 700px;
+  }
+}

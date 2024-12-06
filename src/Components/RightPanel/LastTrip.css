@@ -84,10 +84,15 @@
   height: 20px;
 }
 
-.last-trip-container .event-card .post-owner-name{
+.last-trip-container .event-card .post-owner-name {
   font-size: 11px;
-
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  max-width: 60px;
+  display: inline-block; 
 }
+
 
 .last-trip-container .event-card .icon-members{
   height: 20px;
@@ -184,12 +189,13 @@ p{
   text-overflow: ellipsis;
 }
 
-.trip-people {
+.last-trip-container .trip-people {
   position: relative;   /* Umożliwia pozycjonowanie absolutne dzieci */
   height: 30px;
   width: 100%;
   display: flex;
   align-items: center;
+  padding-top: 0;
 }
 
 .member-numbers {

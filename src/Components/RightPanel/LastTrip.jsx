@@ -8,8 +8,11 @@ import Event from '../Event/Event.jsx';
 
 function LastTrip({ userUuid }) {
   const GET_Events = gql`
-  query GetPosts {
-    events @rest(type: "Events", path: "events") {
+  query GetEvents($userUuid: String!, $numberOfEvents: Int!) {
+    lastTrip @rest(
+      type: "Events", 
+      path: "users/${userUuid}/accomplished-events?numberOfEvents=1"
+    ) {
       uuid
       name
       description
@@ -31,19 +34,19 @@ function LastTrip({ userUuid }) {
   }
 `;
 
-const { loading, error, data, refetch } = useQuery(GET_Events);
-useEffect(() => {
-  refetch();
-}, [refetch]);
+const { loading, error, data } = useQuery(GET_Events, {
+  variables: { userUuid },
+});
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
+  console.log(data)
 
 
   return (
     <div className="last-trip-container">
       <span className='component-title'>Your last trip</span>
-      <Event event={data.events[0]} lastTrip={true} />
+      {data.lastTrip && data.lastTrip.lenght ==0 && (<Event event={data.lastTrip[0]} lastTrip={true} />)}
     
     </div>
   );

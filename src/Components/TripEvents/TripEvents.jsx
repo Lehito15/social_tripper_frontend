@@ -1,84 +1,50 @@
-
-import React, { useEffect, useRef } from 'react';
-import '../PostPage/PostPage.css';
-// import Feeds from './Feeds.jsx';
-import Relation from '../Relation/Relation.jsx';
-import Event from '../Event/Event.jsx'
-import SelectInfoMenu from '../ProfileInfo/SelectInfoMenu.jsx';
-import { gql, useQuery } from '@apollo/client';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Feeds from '../PostPage/Feeds.jsx';
+import AllEvents from './AllEvents.jsx';
+import UserEvents from '../ProfileInfo/UserEvents.jsx';
 
-function TripEvents({ openEvent, reLoad}){
-  console.log(reLoad)
+function TripEvents({ openEvent, reLoad, userUuid, userIcon }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const previousReload = useRef(reLoad);
-  const GET_Events = gql`
-  query GetPosts {
-    events @rest(type: "Events", path: "events") {
-      uuid
-      name
-      description
-      isPublic
-      eventStartTime
-      eventEndTime
-      numberOfParticipants
-      maxNumberOfParticipants
-      destination
-      owner{
-        uuid
-        nickname
-        profilePictureUrl
-      }
-      iconUrl
-      activities
-      languages
-    
+  const [activeTab, setActiveTab] = useState(0); // 0 - popular, 1 - observed, 2 - newest
+
+  // Ustal aktywną zakładkę na podstawie ścieżki
+
+  const buttons = ['All', 'Yours'];
+
+  // Renderowanie odpowiednich komponentów
+  const renderEvents = () => {
+    if (activeTab === 0) {
+      return <AllEvents openEvent={openEvent} userIcon={userIcon} />;
+    } else {
+      return <UserEvents openEvent={openEvent} userUuid={userUuid} userIcon={userIcon} />;
     }
-  }
-`;
+  };
 
-const { loading, error, data, refetch } = useQuery(GET_Events, {
-  fetchPolicy: 'cache-first',  // Cache first, czyli najpierw próbuje użyć danych z cache
-  notifyOnNetworkStatusChange: true
-});
-console.log(data);
-// useEffect(() => {
-//   console.log('reload')
-//   refetch();
-// }, [reLoad]);
-useEffect(() => {
-  if (reLoad !== previousReload.current) {
-    console.log('Reloading events...');
-    refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
-    previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
-  }
-}, [reLoad]);
+  useEffect(() => {
+    if (reLoad !== previousReload.current) {
+      console.log('Reloading events...');
+      previousReload.current = reLoad;
+    }
+  }, [reLoad]);
 
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
   return (
     <div className="Post-page">
-        <div className='Feeds'> <Feeds  /></div>
+      {/* Feeds zawsze widoczny na górze */}
+      <div className="Feeds">
+        <Feeds
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          buttons={buttons}
+        />
+      </div>
 
-        {/* {data?.posts.slice().reverse().map((post) => (
-          <Post post={post} openPost={openPost} closePost={closePost} />
-        ))} */}
-        { data.events.lenght !=0 && (data?.events.slice().reverse().map((event) => (
-          <Event event={event} openEvent={openEvent} />
-        )))}
-
-
-
-
-{/* 
-        <Post post={post}  openPost={openPost} closePost={closePost} /> 
-        <Relation post={post} />
-        <Event event={event} openEvent={openEvent} /> */}
-        {/* <SelectInfoMenu /> */}
-        
-       
+      {/* Dynamiczna zmiana tylko dolnej części */}
+      <div className="events-content">{renderEvents()}</div>
     </div>
   );
-};
+}
 
 export default TripEvents;

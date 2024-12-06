@@ -49,3 +49,7 @@
 .group-name:hover{
   cursor: pointer;
 }
+
+.group-header-container .activities-languages{
+  padding-bottom: 9px;
+}

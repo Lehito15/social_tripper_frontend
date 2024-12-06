@@ -2,7 +2,7 @@ import Post from "../PostPage/Post.jsx";
 import { gql, useQuery } from '@apollo/client';
 import React, { useState, useEffect, useRef } from 'react';
 
-function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad}) {
+function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad, userIcon}) {
   console.log(uuid)
   const previousReload = useRef(reLoad);
   const GET_POSTS_Events = gql`
@@ -50,7 +50,7 @@ function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad}) {
       </button>
     
       {data.eventposts &&(data?.eventposts.slice().reverse().map((post) => (
-        <Post key={post.uuid} post={post} userUuid={userUuid} openPost={openPost} />
+        <Post key={post.uuid} post={post} userUuid={userUuid} openPost={openPost} userIcon={userIcon} />
       )))}`
     </div>
   );

@@ -136,7 +136,7 @@ function Skills({activieties, languages, updateActivieties, updateLanguages, eve
               { selectedActivities &&  (selectedActivities.map((activity, index) => {
                 console.log('aktywnośc tej', activity);
                 const icon = activitiesToIcon[activity.label] || 'default-icon.png'; 
-                return <ActivityIcon key={index} icon={icon} activity={activity} closeActivity={removeActivity}  />;
+                return <ActivityIcon key={index} icon={`${process.env.PUBLIC_URL}${getActivityIcon(activity.label)}`} activity={activity} closeActivity={removeActivity}  />;
               }))}
             </div>
           ) : (

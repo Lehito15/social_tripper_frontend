@@ -1,13 +1,9 @@
 import '../PostPage/Feeds.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function Feeds({ createGroup }) {
-  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0); // Domyślnie zaznaczony pierwszy przycisk
-
-  const buttons = ['Popular', 'Observed', 'Newest']; // Tablica z nazwami przycisków
-
+function Feeds({ createGroup, buttons = ['Newest', 'Observed', 'Popular'], activeTab, setActiveTab }) {
   const handleButtonClick = (index) => {
-    setSelectedButtonIndex(index);
+    setActiveTab(index); // Ustawia aktywną zakładkę na kliknięty przycisk
   };
 
   return (
@@ -18,19 +14,19 @@ function Feeds({ createGroup }) {
           {buttons.map((buttonName, index) => (
             <button 
               key={index} 
-              className={`button-feed ${selectedButtonIndex === index ? 'selected' : ''}`} 
-              onClick={() => handleButtonClick(index)}
+              className={`button-feed ${activeTab === index ? 'selected' : ''}`} 
+              onClick={() => handleButtonClick(index)} // Przekazuje index do funkcji
             >
               {buttonName}
             </button>
           ))}
         </div>
 
-        {/* Jeśli przekazany jest createGroup, wyświetlamy przycisk "Create Group" */}
         {createGroup && (
           <button className="trip-button create-group-button" onClick={createGroup}>
-          <img src={`${process.env.PUBLIC_URL}/create-trip.png`} alt="Ikona" className="icon"  />
-            Create a group</button>
+            <img src={`${process.env.PUBLIC_URL}/create-trip.png`} alt="Ikona" className="icon" />
+            Create a group
+          </button>
         )}
       </div>
     </div>

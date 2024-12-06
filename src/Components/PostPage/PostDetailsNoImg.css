@@ -49,10 +49,15 @@
 
   /* max-height: 500px; Maksymalna wysokość z uwzględnieniem miejsca na write-comment-container */
   margin-bottom: 10px;
+  max-height: 400px;
 }
 
 .comment-section::-webkit-scrollbar {
   width: 8px;
+}
+
+.comment-section .comment-conteiner .reactions-conteiner{
+  border: none;
 }
 
 .comment-section::-webkit-scrollbar-thumb {

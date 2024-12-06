@@ -8,7 +8,7 @@
 .step-content {
   display: flex;
   align-items: center;
-  gap: 8px; /* Adjust spacing between number and text */
+  gap: 8px; 
 }
 
 .register-steps .menu-option {

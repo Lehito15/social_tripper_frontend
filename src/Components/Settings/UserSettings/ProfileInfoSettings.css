@@ -1,0 +1,93 @@
+.profile-information-settings{
+  width: 100%;
+  padding: 18px;
+  
+}
+.change-photo-container{
+  display: flex;
+  padding: 18px;
+}
+
+ .profile-img-change{
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+}
+
+.change-photo-buttons{
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.profile-information-settings input{
+  width: 100%;
+
+}
+.profile-information-settings .gender-option{
+    width: 48%;
+}
+
+.profile-information-settings .gender-option input{
+  /* width: 100%; */
+  width: auto;
+
+}
+.profile-information-settings .form-weight input{
+  width: 100%;
+}
+
+.save-settings{
+  margin-top: 18px;
+}
+
+.save-settings-container{
+  display: flex;
+  justify-content: right;
+}
+
+.uplod-button{
+  border-radius: 6%;
+  background-color: black;
+  color: rgba(189, 242, 113, 1);
+  height: 44px;
+  width: 112px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  border:none;
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+
+}
+
+.uplod-button:hover{
+  -webkit-box-shadow: 0px 0px 2px 2px #B0E26A;
+    -moz-box-shadow: 0px 0px 2px 2px #B0E26A;
+    box-shadow: 0px 0px 2px 2px #B0E26A;
+}
+
+.delete-avatar{
+  background: rgba(240, 242, 245, 1);
+  color: black;
+}
+
+.delete-avatar:hover{
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .change-photo-buttons{
+    margin-left: 18px;
+  }
+  .settings-container .activityname-right{
+    font-size: 8px;
+  }
+}

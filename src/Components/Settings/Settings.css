@@ -1,0 +1,25 @@
+.settings-container{
+  width: 900px;
+  display: inline-flex;
+  gap: 18px
+}
+
+.settings-menu-container{
+  width: 215px;
+}
+
+.diffrent-options-settings{
+  width: 667px;
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .settings-container{
+    width: 600px;
+  }
+  .settings-menu-container{
+    width: 145px;
+  }
+  .diffrent-options-settings{
+    width: 444px;
+  }
+}

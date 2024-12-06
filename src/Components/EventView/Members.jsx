@@ -2,7 +2,7 @@ import './TripDates.css';
 import PostOwner from '../PostPage/PostOwner.jsx';
 import './Members.css';
 
-function Members({ title, owner, request, members, reload, ownerUuid }) {
+function Members({ title, owner, request, members, reload, ownerUuid, remove }) {
   console.log(members);
   let filteredMembers = [];
   if(members){
@@ -21,7 +21,7 @@ function Members({ title, owner, request, members, reload, ownerUuid }) {
         ) : (
           <div className='members-list'>
             { filteredMembers.lenght !=0  &&(filteredMembers.map((member, index) => (
-              <PostOwner owner={member} addUserToEvent={request} />)
+              <PostOwner owner={member} addUserToEvent={request} removeUser={remove} />)
             ))}
           </div>
         )}

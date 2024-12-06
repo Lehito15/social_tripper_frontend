@@ -1,38 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import LineMenu from './LineMenu.jsx';
 import './SelectInfoMenu.css';
 import { sendToBackend } from '../../Utils/helper.js';
 
-function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
+function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, followRequestSend }) {
   const profilePictureUrl = "https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg";
-  let public_icon = `${process.env.PUBLIC_URL}/public-icon.png`;
   const [areUsersFriends, setAreUsersFriends] = useState(areFriends);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
+  // Funkcja do wysyłania follow request dla prywatnych kont
+  const sendFollowRequest = async () => {
+    try {
+      const endpoint = `users/follow-request`;
+      const followRequest = {
+        follower: { uuid: myUuid },
+        followed: { uuid: user.uuid }
+      };
+      console.log(followRequest)
 
-  // useEffect(() => {
-  //   const checkUserFollow = async () => {
-  //     console.log('sprawdzam followawanie');
-  //     console.log(myUuid);
-  //     console.log(user.uuid);
-  //     try {
-  //       const endpoint = `users/is-following?followerUUID=${myUuid}&followedUUID=${user.uuid}`;
-  //       const response = await sendToBackend(endpoint, "GET",null);
+      await sendToBackend(endpoint, "POST", JSON.stringify(followRequest));
+      console.log('Follow request sent successfully');
+      setButtonDisabled(true);
+    } catch (error) {
+      console.error("Error sending follow request:", error);
+    }
+  };
 
-  //       // Zakładam, że odpowiedź z backendu to wartość true/false
-  //       if (response) {
-  //         console.log('tak');
-  //         setAreUsersFriends(response); // Oczekuję, że odpowiedź to true/false
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching membership status:", error);
-  //     }
-  //   };
-
-  //   if (myUuid) {
-  //     checkUserFollow();
-  //   }
-  // }, [myUuid, user.uuid]); 
-
+  // Funkcja do standardowego follow/unfollow
   const toggleFollowStatus = async (isFollowing) => {
     try {
       const endpoint = `users/follow`;
@@ -40,19 +34,31 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
         follower: { uuid: myUuid },
         followed: { uuid: user.uuid }
       };
-  
-      const method = isFollowing ? "DELETE" : "POST"; // Dynamicznie wybieramy metodę
-      const response = await sendToBackend(endpoint, method, JSON.stringify(follow));
-  
-      if (response) {
-        console.log('Operacja zakończona sukcesem');
-        setAreUsersFriends(!isFollowing); // Przełącz stan
-      }
+
+      const method = isFollowing ? "DELETE" : "POST";
+      await sendToBackend(endpoint, method, JSON.stringify(follow));
+      console.log('Follow/unfollow operation successful');
+
+      setAreUsersFriends(!isFollowing); // Przełączanie stanu
     } catch (error) {
       console.error("Error toggling follow status:", error);
     }
   };
-  
+
+  // Obsługa kliknięcia przycisku
+  const handleFollowClick = () => {
+    if (!isPublic && !areUsersFriends) {
+      // Konto jest prywatne i nie jesteśmy przyjaciółmi
+      sendFollowRequest();
+    } else {
+      // Standardowe follow/unfollow
+      toggleFollowStatus(areUsersFriends);
+    }
+  };
+  let haveAccess = areFriends || isPublic;
+  if(isMyAccount){
+    haveAccess = true
+  }
 
   return (
     <div className='profile-info-select'>
@@ -64,27 +70,22 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
         />
         <div className='profile-img-container'>
           <span className="profile-name">{user.nickname}</span>
-          {!user.isPublic ?(
-            <img
+          <img
             className="public-icon public-icon-profile"
-            src={`${process.env.PUBLIC_URL}/private-icon.png`}
+            src={`${process.env.PUBLIC_URL}/${isPublic ? 'public-icon.png' : 'private-icon.png'}`}
             alt={'public-icon'}
           />
-          ):(
-            <img
-            className="public-icon public-icon-profile"
-            src={`${process.env.PUBLIC_URL}/public-icon.png`}
-            alt={'public-icon'}
-          />
-
-          )}
         </div>
-        {/* Pokazuj tylko przycisk Follow lub Unfollow, jeśli to nie jest twój profil */}
-        {isMyAccount === false && (
+
+        {!isMyAccount && (
           <div>
             <button
               className="trip-button"
-              onClick={() => toggleFollowStatus(areUsersFriends)}
+              onClick={handleFollowClick} 
+              disabled={
+                buttonDisabled || 
+                (!areUsersFriends && !isPublic && followRequestSend) // Blokujemy przycisk w określonych warunkach
+              }
             >
               <img
                 src={`${process.env.PUBLIC_URL}/create-trip.png`}
@@ -93,12 +94,11 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends }) {
               />
               {areUsersFriends ? 'Unfollow' : 'Follow'}
             </button>
-
           </div>
         )}
       </div>
       <div className='menu-line'>
-        <LineMenu userUuid={user.uuid} />
+        <LineMenu userUuid={user.uuid} haveAccess={haveAccess}/>
       </div>
     </div>
   );

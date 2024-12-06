@@ -76,14 +76,18 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
           destination: eventSettings.tripDescriptor,
           eventStartTime: `${eventSettings.tripStartDate}T${eventSettings.tripStartTime || '00:00'}:00`,
           eventEndTime: `${eventSettings.tripEndDate}T${eventSettings.tripEndTime || '00:00'}:00`,
-          startLongitude: eventSettings.eventStartLocation[0].position[0],
-          startLatitude: eventSettings.eventStartLocation[0].position[1],
-          stopLongitude: eventSettings.eventEndLocation[0].position[0],
-          stopLatitude: eventSettings.eventEndLocation[0].position[1],
+          startLongitude: eventSettings.eventStartLocation[0].position[1],
+          startLatitude: eventSettings.eventStartLocation[0].position[0],
+          stopLongitude: eventSettings.eventEndLocation[0].position[1],
+          stopLatitude: eventSettings.eventEndLocation[0].position[0],
           owner: { uuid: userUuid },
           activities: formattedActivities,
           languages: formattedLanguages,
-          rules: descriptionAndRules.rules
+          rules: descriptionAndRules.rules,
+          maxNumberOfParticipants: 
+          eventSettings.maxParticipants == null || eventSettings.maxParticipants === '' 
+            ? -1 
+            : eventSettings.maxParticipants
         },
       };
     } else {
@@ -94,7 +98,10 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
         isPublic: isPublic,
         eventStartTime: `${eventSettings.tripStartDate}T${eventSettings.tripStartTime || '00:00'}:00`,
         eventEndTime: `${eventSettings.tripEndDate}T${eventSettings.tripEndTime || '00:00'}:00`,
-        ...(eventSettings.maxParticipants !== null && { maxNumberOfParticipants: eventSettings.maxParticipants }),
+        maxNumberOfParticipants: 
+        eventSettings.maxParticipants == null || eventSettings.maxParticipants === '' 
+          ? -1 
+          : eventSettings.maxParticipants,
         startLongitude: eventSettings.eventStartLocation[0].position[0],
         startLatitude: eventSettings.eventStartLocation[0].position[1],
         stopLongitude: eventSettings.eventEndLocation[0].position[0],
@@ -133,9 +140,17 @@ function CreateEvent({closeCreateEvent, groupUuid, userUuid}){
     finally {
       setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
     }
+    if(groupUuid){
+      closeCreateEvent();
+      // navigate('/groups/');
+    }
+    else{
+        closeCreateEvent();
+        navigate('/events');
+    }
     
-    closeCreateEvent();
-    navigate('/events');
+    // closeCreateEvent();
+    // navigate('/events');
   };
   
   

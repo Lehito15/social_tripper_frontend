@@ -1,4 +1,5 @@
 .map-container {
   width: 100%;
-  height: 90vh; /* 100vh oznacza 100% wysokości okna przeglądarki */
+  height: 80vh; /* 100vh oznacza 100% wysokości okna przeglądarki */
+  margin-top: 18px;
 }

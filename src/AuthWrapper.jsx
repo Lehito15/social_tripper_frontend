@@ -13,14 +13,22 @@ const AuthWrapper = ({ children }) => {
       try {
         const session = await fetchAuthSession();
         const idToken = session.tokens?.idToken;
+        console.log('nasze tokeny')
+
+       console.log(session.tokens.accessToken.toString())
+        // console.log('access token')
+        // console.log('Access Token:', accessToken);
+       
 
         if (idToken) {
           const email = idToken.payload?.email;
 
           const response = await fetch(`http://52.237.23.55:8080/accounts/email?email=${encodeURIComponent(email)}`);
+          // const response = await fetch(`http://localhost:8080/accounts/email?email=${encodeURIComponent(email)}`);
           if (!response.ok) {
             navigate("/register", { state: { email } });
           } else {
+           
             
             const userData = await response.json();
             console.log('logowanie usaerra dane')

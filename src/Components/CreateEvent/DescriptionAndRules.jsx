@@ -91,6 +91,7 @@ function DescriptionAndRules({ data, updateData }) {
                   onChange={(e) => handleRuleChange(index, 'description', e.target.value)}
                   placeholder="Rule description"
                   className="textarea rule-description"
+                  maxLength={5000}
                 />
                 
                 

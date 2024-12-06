@@ -53,6 +53,7 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
       ? {
           post: {
             content: description,
+            isPublic: true,
             account: { uuid: userUuid },
           },
           event: { uuid: eventUuid },
@@ -61,12 +62,14 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
       ? {
           post: {
             content: description,
+            isPublic: true,
             account: { uuid: userUuid },
           },
           group: { uuid: groupUuid },
         }
       : {
           content: description,
+          isPublic: true,
           account: { uuid: userUuid },
         };
 
@@ -117,7 +120,7 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
 
           <div className='post-owner'>
             <PostOwner owner={owner} />
-            <Select classNamePrefix="custom-select" options={options} defaultValue={options[0]} isSearchable={false} />
+            {/* <Select classNamePrefix="custom-select" options={options} defaultValue={options[0]} isSearchable={false} /> */}
           </div>
 
           <textarea

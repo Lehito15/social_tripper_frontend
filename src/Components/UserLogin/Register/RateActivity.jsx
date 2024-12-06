@@ -6,6 +6,7 @@ function RateActivity({ activity, removeActivity, language, updateActivity, even
     const initialRating = activity?.rating ?? language?.rating ?? 5.0;
     const [skillLevel, setSkillLevel] = useState(initialRating);
     const showOnly = showOption || false;
+    console.log(activity)
     // console.log('moja aktwynosć')
     // console.log(showOption)
 

@@ -12,6 +12,7 @@
 
 .info-container-tittle {
   font-size: 16px;
+  font-weight: 500;
 }
 .stats {
   display: flex;

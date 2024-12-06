@@ -5,7 +5,7 @@ import GeneralDetails from './GeneralDetails.jsx';
 import AccountDetails from './AccountDetails.jsx';
 import Skills from './Skills.jsx';
 import RegisterSteps from './RegisterSteps.jsx';
-import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
 import { useLocation } from "react-router-dom";
 import {  sendToBackend } from '../../../Utils/helper.js';
 import { ClipLoader } from "react-spinners";
@@ -15,13 +15,13 @@ function Register() {
    
     const navigate = useNavigate();
     const steps = ['General Details', 'Account Details', 'Skills'];
-    const routeLocation = useLocation(); // Zmieniona nazw
+    const routeLocation = useLocation(); 
     const [userEmail, setUserEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
   
   useEffect(() => {
         const email = routeLocation.state?.email || "";
-        setUserEmail(email); // Ustawiamy email w stanie, po wczytaniu komponentu
+        setUserEmail(email); 
         console.log(email)
     }, []);
 
@@ -81,17 +81,18 @@ function Register() {
     };
 
     const createUser = async () =>{
-        console.log('dodaje ')
         if (isSubmitting) return;
-
-        
-
-        
-        console.log(userEmail);
-        if (generalDetails.name ==='' || !generalDetails.surname ==='' || !generalDetails.dateOfBirth || !generalDetails.gender) {
-            alert("Fill all datas")
+        if (generalDetails.name ==='' || !generalDetails.surname ==='' || !generalDetails.dateOfBirth || !generalDetails.gender
+            || accountDetails.height === '' || accountDetails.weight  === ''
+        ) {
+            alert("Fill all datas");
             return;
         }
+        if(!accountDetails.imageFile){
+            alert("User must have icon");
+            return;
+        }
+
         const currentDate = new Date();
         const dateOfBirth = new Date(generalDetails.dateOfBirth);
         if (dateOfBirth >= currentDate) {
@@ -141,30 +142,13 @@ function Register() {
             languages: formattedLanguages
 
         }
+        console.log(userDTO)
         const formData = new FormData();
         formData.append('userDTO', new Blob([JSON.stringify(userDTO)], { type: 'application/json' }));
         if (accountDetails.imageFile) {
             formData.append('profilePicture', accountDetails.imageFile);
         }
         const endpoint = 'users'
-
-        // try {
-        //     const response = await fetch(endpoint, {
-        //       method: 'POST',
-        //       body: formData, // Fetch automatycznie doda odpowiedni nagłówek Content-Type
-        //     });
-      
-        //     if (!response.ok) {
-        //       throw new Error('Failed to create post');
-        //     }
-      
-        //     const data = await response.json();
-        //     console.log('Post created:', data);
-        //     // navigate('/');
-            
-        //   } catch (error) {
-        //     console.error('Error:', error);
-        //   }
           try {
             const data = await sendToBackend(endpoint, 'POST', formData);
             console.log('User created:', data);

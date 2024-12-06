@@ -119,10 +119,11 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
             createEvent={createEvent}
             openEvent={openEvent}
             ownerUuid={isOwner ? userUuid : null}
+            reLoad={reLoad}
           />
         );
       case 4:
-        return <GroupMainMembers event={group} />;
+        return <GroupMainMembers group={group} isOwner={isOwner}/>;
       default:
         return null;
     }
@@ -178,7 +179,7 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
 
   return (
     <div className="event-main-container group-main-container">
-      {data && <Group group={group} />}
+      {data && <Group group={group} isOwner={isOwner}  userUuid={userUuid} />}
       <div className="event-owner group-owner">
         <div className="event-main-owner">
           <p className="owned-by">Owned by</p>

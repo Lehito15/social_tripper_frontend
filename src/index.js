@@ -14,10 +14,21 @@ import {components, formFields} from './Login'
 import { BrowserRouter as Router } from 'react-router-dom'; // Import Router
 
 const restLink = new RestLink({ uri: 'http://52.237.23.55:8080/' });
+// const restLink = new RestLink({ uri: 'http://localhost:8080/' });
 
 const client = new ApolloClient({
   link: restLink,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          events: {
+            keyArgs: ["path"], // Cache'owanie na podstawie ścieżki
+          },
+        },
+      },
+    },
+  }),
 });
 Amplify.configure(awsconfig);
 

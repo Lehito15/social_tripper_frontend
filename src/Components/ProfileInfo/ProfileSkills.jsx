@@ -1,39 +1,71 @@
 import EventRequireActivities from "../EventView/EventRequireActivities";
 import EventRequireLanguages from "../EventView/EventRequireLanguages";
-import { getUuidFromUrl, sendToBackend } from '../../Utils/helper.js';
+import { sendToBackend } from '../../Utils/helper.js';
 import React, { useState, useEffect } from 'react';
-function ProfileSkills({activities, languages, userUuid, reload}){
-  const [updateActivieties, setUpdatedActivities] = useState(activities);
+import { useNavigate } from "react-router-dom";
+
+function ProfileSkills({ activities, forceRender, languages, userUuid,  reload, edit }) {
+  const [updatedActivities, setUpdatedActivities] = useState(activities);
+  const navigate = useNavigate();
 
   const saveActivities = async (formattedActivities) => {
-    console.log('nasza lista')
-    console.log(formattedActivities); 
-  
-    const endpoint = `${userUuid}/activities`;
-  
-    for (let activity of formattedActivities.
-      activities) {
+    console.log('Zapisujemy aktywności:', formattedActivities); 
+    const endpoint = `users/${userUuid}/activities`;
 
-        console.log(activity)
-      try {
-        const response = await sendToBackend(endpoint, "POST", JSON.stringify(activity));
-        console.log('updatuje aktywnośąci')
-        setUpdatedActivities(formattedActivities.activities)
-        // window.location.reload()
-      } catch (error) {
-        console.error("Error saving activity:", activity, error);
+    try {
+      for (let activity of formattedActivities.activities) {
+        await sendToBackend(endpoint, "POST", JSON.stringify(activity));
       }
+
+      // Aktualizuj zarówno lokalny stan, jak i stan rodzica
+      const updatedList = [...formattedActivities.activities];
+      setUpdatedActivities(updatedList);
+      forceRender()
+      
+      
+    } catch (error) {
+      console.error("Error saving activity:", error);
     }
   };
-  
-  
 
-  return(
+  const saveLanguages = async (formattedLanguages) => {
+    console.log(formattedLanguages)
+
+    const endpoint = `users/${userUuid}/languages`;
+
+    try {
+      for (let language of formattedLanguages.languages) {
+        await sendToBackend(endpoint, "POST", JSON.stringify(language));
+      }
+    
+      setUpdatedActivities(formattedLanguages);
+
+      
+    } catch (error) {
+      console.error("Error saving activity:", error);
+    }
+  };
+
+  return (
     <div className="event-requiered trip-maps">
-      <EventRequireActivities activities = {activities} title={'Activity skills '} isOwner={true} updateActivieties={setUpdatedActivities} updateData={saveActivities } reload={reload} />
-      <EventRequireLanguages languages={languages} title='Languages' />
+      <EventRequireActivities 
+        activities={updatedActivities} 
+        title={'Activity skills'} 
+        isOwner={true} 
+        updateActivieties={setUpdatedActivities} 
+        updateData={saveActivities} 
+        reload={reload} 
+        edit={edit} 
+      />
+      <EventRequireLanguages 
+        languages={languages} 
+        title='Languages'  
+        edit={edit} 
+        updateData={saveLanguages}
+      />
     </div>
-
   );
 }
+
+
 export default ProfileSkills;

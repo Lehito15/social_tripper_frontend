@@ -40,7 +40,7 @@ function CreateGroup({closeCreateGroup, userUuid}){
             name: language.value,
     }));
 
-    const scope = groupSettings.scope.value === 'None' ? null : groupSettings.scope;
+    const scope = groupSettings.scope === 'None' ? null : groupSettings.scope;
 
     
     const groupUuid = uuidv4();
@@ -54,8 +54,8 @@ function CreateGroup({closeCreateGroup, userUuid}){
              } }),
             dateOfCreation: new Date().toISOString(),
             numberOfMembers: 1,
-            ...(groupSettings.groupLocation && {locationLongitude: groupSettings.groupLocation[0].position[0]}),
-            ...(groupSettings.groupLocation && {locationLatitude: groupSettings.groupLocation[0].position[1]}),
+            ...(groupSettings.groupLocation && {locationLongitude: groupSettings.groupLocation[0].position[1]}),
+            ...(groupSettings.groupLocation && {locationLatitude: groupSettings.groupLocation[0].position[0]}),
             owner:{
               uuid: userUuid
             },
@@ -79,19 +79,20 @@ function CreateGroup({closeCreateGroup, userUuid}){
       //   ? `http://localhost:8080/posts/event-post`
       //   : `http://localhost:8080/posts`;
       const endpoint = 'groups';
+      console.log(GroupDTO)
 
       try {
         console.log('wysyłam')
         const data = await sendToBackend(endpoint, 'POST', formData);
-        console.log('Group created:', data);
+        // console.log('Group created:', data);
       } catch (error) {
         console.error('Error:', error);
       }
       finally {
         setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
       }
-      // closeCreateGroup();
-      // navigate('/groups');
+      closeCreateGroup();
+      navigate('/groups');
    
   };
 

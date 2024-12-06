@@ -192,6 +192,11 @@
 .trip-people{
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
+
+  position: relative;   /* Umożliwia pozycjonowanie absolutne dzieci */
+  height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 
 }

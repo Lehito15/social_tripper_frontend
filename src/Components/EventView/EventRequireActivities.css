@@ -9,3 +9,13 @@
     width: 100% ;
   }
 }
+
+.edit-activities{
+  display: flex;
+  justify-content: right;
+  padding: 18px;
+}
+
+.add-activity-section{
+  padding: 18px;
+}

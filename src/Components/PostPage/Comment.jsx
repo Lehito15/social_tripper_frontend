@@ -2,7 +2,8 @@ import SingleMessage from "../Messages/SingleMessage";
 import PostReaction from "./PostReactions.jsx";
 import './Comment.css'
 
-function Comment({comment, author}){
+function Comment({comment, onClose}){
+  console.log(comment.account)
   return(
     <div className="comment-conteiner">
           <div
@@ -17,7 +18,7 @@ function Comment({comment, author}){
                 className='friend-avatar'
               />
             )}
-            <SingleMessage content={comment.content} author={comment.account} />
+            <SingleMessage content={comment.content} author={comment.account} onClose={onClose} />
           </div>
           <div className='reactions-conteiner'>
             <PostReaction reactions={comment.reactionsNumber} comments={comment.commentsNumber} commentUuid={comment.uuid} userUuid={comment.account.uuid} />

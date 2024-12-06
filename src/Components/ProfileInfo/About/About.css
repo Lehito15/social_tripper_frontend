@@ -35,3 +35,12 @@
   .about-container .stat-title{
     font-size: 11px
   }
+
+  @media (-webkit-device-pixel-ratio: 1.5) {
+    .left-about{
+      width: 175px;
+    }
+    .right-about{
+      width: 412px;
+    }
+  }

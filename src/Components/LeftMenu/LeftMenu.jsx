@@ -80,7 +80,7 @@ function LeftMenu(user ) {
               <li>
                 <NavLink
                   exact="true"
-                  to="/register"
+                  to="/settings"
                   className={({ isActive }) => isActive ? "menu-link active" : "menu-link"}
                   onClick={() => handleImageClick(6)}
                 >

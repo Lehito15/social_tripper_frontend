@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 import countryToCode from '../../../JsonsToCode/country_to_code.json';
 import phoneCodesToCountries from '../../../JsonsToCode/phone_codes_to_countries.json';
@@ -17,9 +17,17 @@ const options = Object.entries(phoneCodesToCountries).map(([code, country]) => (
 
 function PhoneInput({ data, updateData }) {
   const defaultOption = options.find(option => option.value === '+48');
-  
-  const [selectedOption, setSelectedOption] = useState(defaultOption || options[0]);
-  const [phoneNumber, setPhoneNumber] = useState(data.telephone || '');
+  const userOption = options.find(option => option.value === data.countryCod);
+
+  const [selectedOption, setSelectedOption] = useState(userOption || defaultOption || options[0]);
+  const [phoneNumber, setPhoneNumber] = useState(data.telephone || ''); // Ustawienie początkowego numeru
+
+  // Zaktualizuj dane, gdy zmieni się numer telefonu lub kod kraju
+  useEffect(() => {
+    if (data.telephone !== phoneNumber) {
+      setPhoneNumber(data.telephone || '');
+    }
+  }, [data.telephone]); // Zaktualizuj numer telefonu, gdy dane się zmienią
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
@@ -50,9 +58,10 @@ function PhoneInput({ data, updateData }) {
         id="phone"
         name="phone"
         placeholder="5412234"
-        value={phoneNumber}
+        value={phoneNumber} // Upewnij się, że jest ustawione w value
         onChange={handlePhoneChange}
         className="phone-input-field"
+        maxLength={12}
       />
     </div>
   );

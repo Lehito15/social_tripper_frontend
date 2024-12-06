@@ -9,35 +9,44 @@ function GroupHeader({ group }) {
   const [scope, setScope] = useState('');
   const navigate = useNavigate();
 
+  const MAX_DISPLAY_ITEMS = 4;
+  const activities = group.activities || [];
+  const displayedActivities = activities.slice(0, MAX_DISPLAY_ITEMS);
+  const remainingActivities = activities.length - displayedActivities.length;
+
+  const languages = group.languages || [];
+  const displayedLanguages = languages.slice(0, MAX_DISPLAY_ITEMS);
+  const remainingLanguages = languages.length - displayedLanguages.length;
+
   // Funkcja do pobrania lokalizacji z OpenStreetMap
   const fetchLocationFromCoordinates = async (latitude, longitude, scope) => {
     let queryString = '';
-  
+    const MAX_DISPLAY_ITEMS = 3;
+
     // Konstrukcja zapytania w zależności od scope
-    // queryString = `?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`;
-  
-    const endpoint = `https://nominatim.openstreetmap.org/reverse?lat=53&lon=15&format=json&addressdetails=1`;
+    queryString = `?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`;
+
+    const endpoint = `https://nominatim.openstreetmap.org/reverse${queryString}`;
   
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
-  
+
       if (data && data.address) {
         let locationString = '';
-  
+
         // Jeśli scope to 'City', zwróć tylko miasto
-        if (scope === 'City') {
-          locationString = data.address.city || data.address.town || data.address.village ||  data.address.hamlet ||  data.address.county || '';
-          // console.log(data.address)
+        if (scope === 'city') {
+          locationString = data.address.city || data.address.town || data.address.village || data.address.hamlet || data.address.county || '';
         }
-  
+
         // Jeśli scope to 'Country', zwróć miasto i kraj
-        if (scope === 'Country') {
-          const city = data.address.city || data.address.town || data.address.village || data.address.hamlet ||  data.address.county || '';
+        if (scope === 'country') {
+          const city = data.address.city || data.address.town || data.address.village || data.address.hamlet || data.address.county || '';
           const country = data.address.country || '';
           locationString = city && country ? `${city}, ${country}` : city || country || '';
         }
-  
+
         return locationString;
       } else {
         throw new Error('No data found');
@@ -51,35 +60,20 @@ function GroupHeader({ group }) {
   // Ustawienie scope po zamontowaniu komponentu
   useEffect(() => {
     if (group.locationLatitude && group.locationLongitude) {
-      // console.log(group.locationLatitude)
-      // console.log('halo')
       const getLocation = async () => {
-        const location = await fetchLocationFromCoordinates(group.locationLatitude, group.locationLongitude, "City");
-        setScope(location);
+        // Pobieramy lokalizację, najpierw ustawiamy 'City'
+        const location = await fetchLocationFromCoordinates(group.locationLatitude, group.locationLongitude, group.locationScope.name);
+        setScope(location); // Przechowujemy lokalizację w stanie
       };
 
       getLocation();
     }
-  }, []); // W zależności od zmiany group, ponownie uruchom useEffect
+  }, [group.locationLatitude, group.locationLongitude]); // Wartość scope będzie aktualizowana, jeśli zmienią się współrzędne
 
   const openGroup = () => {
     navigate(`/groups/${group.uuid}`);
   };
-
-  const languageToFlagCode = {
-    English: "gb",
-    French: "fr",
-    German: "de",
-    Polish: "pl",
-    Spanish: "es",
-  };
-
-  const activitiesToIcon = {
-    running: 'walking-icon-dark.png',
-    hiking: 'walking-icon-dark.png',
-    walking: 'walking-icon-dark.png',
-    cycling: 'walking-icon-dark.png'
-  };
+  console.log(group)
 
   return (
     <div className="group-header-container">
@@ -88,38 +82,39 @@ function GroupHeader({ group }) {
           <div className="group-name-container">
             <h3 className="group-name ssp" onClick={openGroup}>{group.name || "No name"}</h3>
             <div>
-              <img src={`${process.env.PUBLIC_URL}/event_target.png`} alt="Target Icon" className="event-icon" />
-              {  (<span className="group-scope ssp">{scope}</span>)}
+              {scope !== '' && (
+                <div>
+                  <img src={`${process.env.PUBLIC_URL}/event_target.png`} alt="Target Icon" className="event-icon" />
+                  <span className="group-scope ssp">{scope}</span>
+                </div>
+              )}
             </div>
           </div>
           <p className="members-number ssp">{group.numberOfMembers} Members</p>
         </div>
       </div>
-      <div className='activities-languages-friends'>
-        <div className='group-section activities'>
-          <p className='event-section-tittle'>Activities</p>
+
+      <div className="activities-languages">
+        <div className="event-section activities">
+          <p className="event-section-tittle">Activities</p>
           <div className="activities-section">
-          {group.activities && group.activities.map((activity, index) => {
-            const icon = getActivityIcon(activity.name) || 'default-icon.png';
-            return <ActivityIcon key={activity.id || index} icon={icon} />;
-          })}
-
+            {displayedActivities.map((activity, index) => {
+              const icon = getActivityIcon(activity.name) || 'default-icon.png';
+              return <ActivityIcon key={index} icon={icon} />;
+            })}
+            {remainingActivities > 0 && <span className="remaining-items">+{remainingActivities}</span>}
           </div>
-         
         </div>
-        <div className='group-section languages'>
-          <p className='event-section-tittle'>Languages</p>
+
+        <div className="event-section languages">
+          <p className="event-section-tittle">Languages</p>
           <div className="activities-section">
-          {group.languages && group.languages.map((language, index) => {
-            const flagCode = languageToCountry[language.name] || "unknown";
-            return <span key={language.id || index} className={`fi fi-${flagCode}`}></span>;
-          })}
-
+            {displayedLanguages.map((language, index) => {
+              const flagCode = languageToCountry[language.name] || 'unknown'; 
+              return <span key={index} className={`fi fi-${flagCode}`}></span>;
+            })}
+            {remainingLanguages > 0 && <span className="remaining-items">+{remainingLanguages}</span>}
           </div>
-
-        </div>
-        <div className='group-section friends'>
-          <p className='event-section-tittle'>Friends</p>
         </div>
       </div>
     </div>

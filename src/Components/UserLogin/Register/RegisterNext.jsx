@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { useAuthenticator } from '@aws-amplify/ui-react';
 
 function RegisterNext({ step, signIn, maxStep, setCurrentStep, createEvent }) {
-
   const { signOut } = useAuthenticator();
   
   const handleNext = () => {
     if (step < maxStep) {
       setCurrentStep(step + 1);
     } else {
-      createEvent(); // Wywołanie funkcji createEvent na ostatnim kroku
+      createEvent(); 
     }
   };
 

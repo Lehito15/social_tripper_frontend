@@ -12,6 +12,23 @@ function EventButtons({ status, sendJoinRequest, eventUuid, userUuid, isOwner, e
   const dropdownRef = useRef(null);
   const statusDropdownRef = useRef(null);
   const navigate = useNavigate();
+ 
+
+  useEffect(() => {
+    const checkRequestStatus = async () => {
+      try {
+        const response = await sendToBackend(`events/${eventUuid}/users/${userUuid}/is-event-requested`);
+        console.log(response)
+        setIsEventRequested(response); 
+      } catch (error) {
+        console.error("Error checking event request status:", error);
+      }
+    };
+
+    if (status === 'no-member') {
+      checkRequestStatus();
+    }
+  }, []);
 
   const handleJoinRequest = async () => {
     setIsEventRequested(true);

@@ -5,26 +5,21 @@ import PostOwner from './PostOwner.jsx';
 import PostReaction from './PostReactions.jsx';
 import WriteComment from './WriteComment.jsx'
 
-function Post({post, openPost, closePost, userUuid}){
+function Post({post, openPost, closePost, userUuid, userIcon}){
   const [postHeight, setPostHeight] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const containerRef = useRef(null);
-
-  const [newComment, setNewComment] = useState(false);
-//   console.log('graphql')
-//  console.log(post.account)
+  const [commentsNumber, setCommentsNumber] = useState(post.commentsNumber || 0);
+ 
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const addNewComent = () =>{
-    setNewComment(!newComment)
-  }
-
-  
-
-
+  const incrementComments = () => {
+    console.log('doje komentaerz')
+    setCommentsNumber(commentsNumber + 1); 
+  };
 
   useEffect(() => {
     const calculateHeight = async () => {
@@ -95,10 +90,10 @@ function Post({post, openPost, closePost, userUuid}){
     </div>
      )}
     <div className='reactions-conteiner'>
-      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber}  postUuid={post.uuid} userUuid={userUuid}  openPost={openPost} post={post} newComment={newComment} />
+      <PostReaction reactions={post.reactionsNumber} comments={commentsNumber}  postUuid={post.uuid} userUuid={userUuid}  openPost={openPost} post={post} newComment={incrementComments} />
     </div>
     <div className='comment-container-post'>
-      <WriteComment owner={post.account} postUuid={post.uuid} newComment={addNewComent}   />
+      <WriteComment owner={post.account} postUuid={post.uuid} newComment={incrementComments} userUuid={userUuid} userIcon={userIcon}   />
     </div>
   </div>
 

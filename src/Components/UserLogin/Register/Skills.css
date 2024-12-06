@@ -6,7 +6,6 @@
   .selectors {
     display: flex;
     gap: 10px;
-    /* justify-content: space-between; */
     margin-bottom: 20px;
     
   }
@@ -55,8 +54,8 @@
   }
   
   .language-flags span {
-    width: 24px; /* szerokość flagi */
-    height: 24px; /* wysokość flagi */
+    width: 24px; 
+    height: 24px; 
     background-size: cover;
   }
   

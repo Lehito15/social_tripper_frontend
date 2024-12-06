@@ -25,6 +25,8 @@ import CreateGroup from '../CreateGroup/CreateGroup.jsx';
 import { gql, useQuery } from '@apollo/client';
 import MapPage from '../Explore/MapPage.jsx';
 import UpcommingEvents from '../UpcomingEvents/UpcomingEvents.jsx';
+import Settings from '../Settings/Settings.jsx';
+import AllRelations from '../RelationPage.jsx/AllRelations.jsx';
 
 
 
@@ -233,13 +235,6 @@ console.log(data);
 
 
   const handleClickOutside = (event) => {
-    // Jeśli kliknięcie jest poza dodawaniem posta
-    console.log( upcommingEventsRef.current)
-    // console.log(!upcommingEventsRef.current.contains(event.target))
-    // console.log(!upcommingEventsRef.current.contains(event.target))
-    console.log(IncommingButtonRef.current)
-    // console.log(!IncommingButtonRef.current.contains(event.target))
-    console.log(isUpcomgEventsOpen)
     if (
       addPostRef.current &&
       !addPostRef.current.contains(event.target) &&
@@ -248,7 +243,6 @@ console.log(data);
       console.log('1 open')
       setIsAddPostOpen(false);
     }
-    // Jeśli kliknięcie jest poza czatem
     else if (
       chatRef.current &&
       !chatRef.current.contains(event.target) &&
@@ -257,7 +251,6 @@ console.log(data);
       console.log('2 open')
       setChatOpen(false);
     }
-    // Jeśli kliknięcie jest poza szczegółami posta z obrazkiem
     else if (
       postDetailRef.current &&
       !postDetailRef.current.contains(event.target) &&
@@ -267,7 +260,7 @@ console.log(data);
       setSelectedPost(null);
       setPostOpen(false);
     }
-    // Jeśli kliknięcie jest poza szczegółami posta bez obrazka
+
     else if (
       postDetailsNoImg.current &&
       !postDetailsNoImg.current.contains(event.target) &&
@@ -346,14 +339,15 @@ console.log(data);
         <div className="main-content">
           
             <Routes>
-              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost}  openRelation={openRelation} closeRelation={closeRelation} userUuid={user.uuid} reLoad={refetch} />} />
-              <Route path="/users/:uuid/*" element={<ProfileInfo myUuid={user.uuid} />} />
-              <Route path="/events" element={<TripEvents  reLoad={refetch}/>} />
+              <Route path="/" element={<PostPage openPost={openPost}  closePost={closePost}  openRelation={openRelation} closeRelation={closeRelation} userUuid={user.uuid} reLoad={refetch}  userIcon={user.profilePictureUrl} />} />
+              <Route path="/users/:uuid/*" element={<ProfileInfo myUuid={user.uuid} userIcon={user.profilePictureUrl} openPost={openPost}  closePost={closePost}  />} />
+              <Route path="/events" element={<TripEvents  reLoad={refetch} userUuid={userUuid}/>}  />
               <Route path="/explore" element={<MapPage />} />
-              <Route path="/groups" element={<GroupPage createGroup={createGroup} reLoad={refetch} openPost={openPost}   />} />
-              <Route path="/relations" element={<RelationsPage  openRelation={openRelation}/>} />
-              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} openPost={openPost} reFetch={refetch} />} />
+              <Route path="/groups" element={<GroupPage createGroup={createGroup} reLoad={refetch} openPost={openPost} userUuid={user.uuid}  />} />
+              <Route path="/relations" element={<AllRelations openRelation={openRelation}/>} />
+              <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} openPost={openPost} reFetch={refetch} userIcon={user.profilePictureUrl} />} />
               <Route path="/groups/*" element={<GroupMain openCreatePost={addGroupPost}  createEvent={createGroupEvent} userUuid={user.uuid} openPost={openPost} reLoad={refetch}  />} />
+              <Route path="/settings" element={<Settings user={user} />} />
             </Routes>
           </div>
       </div>  
@@ -398,13 +392,13 @@ console.log(data);
 
       {isPostOpen  && (
         <div className='post-details-modal'  ref={postDetailRef}>
-          <PostDetail post={selectedPost} closePost={closePost} />
+          <PostDetail post={selectedPost} closePost={closePost} userUuid={user.uuid} userIcon={user.profilePictureUrl}  />
         </div>
       )}
 
       {isPostOpenNoImg  && (
         <div className='post-details-noimg-modal' ref={postDetailsNoImg} >
-          <PostDetailsNoImg post={selectedPost} closePost={closePostNoImg} isAlone={true} />
+          <PostDetailsNoImg post={selectedPost} closePost={closePostNoImg} isAlone={true} userUuid={user.uuid} userIcon={user.profilePictureUrl}   />
         </div>
       )}
 

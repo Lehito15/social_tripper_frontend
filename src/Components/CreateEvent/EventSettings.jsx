@@ -39,6 +39,7 @@ function EventSettings({data, updateData, group}) {
                 name="tripDescriptor" 
                 placeholder='Trip destination descriptor' 
                 value={data.tripDescriptor}
+                maxLength={30}
                 onChange={(e) => updateData({ ...data, tripDescriptor: e.target.value })} 
                 />
         </div>

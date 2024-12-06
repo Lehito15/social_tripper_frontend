@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { getUuidFromUrl, sendToBackend } from '../../Utils/helper.js';
-import EventMembersReqeust from './EventMembersReqeust.jsx';
 
+import EventMembersReqeust from './EventMembersReqeust.jsx';
 import ActivityIcon from "../Event/ActivityIcon.jsx";
 import DateCard from "../Event/DateCard.jsx";
 import PostOwner from "../PostPage/PostOwner.jsx";
@@ -15,10 +15,11 @@ import EventMainMembers from "./EventMainMembers.jsx";
 import TripInformation from "./TripInformation.jsx";
 import EventPosts from "./EventPosts.jsx";
 import EventOption from "./EventOption.jsx";
+import EventImage from './EventImage.jsx';
 
 import './EventMain.css';
 
-function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
+function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
   const options = ['Information', 'Trip details', 'Posts', 'Members'];
   const [currentStep, setCurrentStep] = useState(1);
   const [eventUuid, setEventUuid] = useState(null);
@@ -26,10 +27,11 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
   const [isLoading, setIsLoading] = useState(true);
   const [userStatus, setUserStatus] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [newFile, setNewFile] = useState(null);
 
-  const toggleReload = () => {
-    setReLoad((prev) => !prev);
-  };
+  const toggleReload = () => setReLoad((prev) => !prev);
 
   useEffect(() => {
     const fetchStatus = async () => {
@@ -42,11 +44,7 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
         const endpoint = `events/${uuid}/users/${userUuid}/is-member`;
         const response = await sendToBackend(endpoint, "GET", null);
 
-        if (response) {
-          setUserStatus('member');
-        } else {
-          setUserStatus('no-member');
-        }
+        setUserStatus(response ? 'member' : 'no-member');
       } catch (error) {
         console.error("Error fetching membership status:", error);
       } finally {
@@ -55,7 +53,7 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
     };
 
     fetchStatus();
-  }, [userUuid,window.location.pathname]); // useEffect should only run when userUuid changes
+  }, [userUuid, window.location.pathname]);
 
   const GET_Event = gql`
     query GetEvent($eventUuid: String!) {
@@ -86,8 +84,8 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
         iconUrl
         activities
         languages
-        eventStatus{
-        status
+        eventStatus {
+          status
         }
       }
     }
@@ -100,51 +98,32 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
 
   useEffect(() => {
     refetch();
-  }, [refetch, reLoad,window.location.pathname]);
+  }, [refetch, reLoad, window.location.pathname]);
 
   useEffect(() => {
-    if (data && data.event) {
+    if (data?.event) {
       setIsOwner(data.event.owner.uuid === userUuid);
+      setCurrentImage(data.event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`);
     }
-  }, [data, userUuid]); // Only re-run when data or userUuid changes
+  }, [data, userUuid]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const event = data.event;
 
-  if (isLoading) return <p>Loading...</p>;
-
-  const eventPublicText = "Public trip";
-  const eventPublicIcon = "public-icon.png'";
-
   const updateData = async (body) => {
     console.log('Updating event data:', body);
-
     const endpoint = `events/${eventUuid}`;
-    sendToBackend(endpoint, 'PATCH', JSON.stringify(body));
+    await sendToBackend(endpoint, 'PATCH', JSON.stringify(body));
   };
-  console.log(data)
 
   const renderStepComponent = () => {
     switch (currentStep) {
       case 1:
-        return (
-          <TripInformation
-            event={event}
-            isOwner={isOwner}
-            updateData={updateData}
-          />
-        );
+        return <TripInformation event={event} isOwner={isOwner} updateData={updateData} />;
       case 2:
-        return (
-          <TripDetails
-            event={event}
-            isOwner={isOwner}
-            updateData={updateData}
-            reload={toggleReload}
-          />
-        );
+        return <TripDetails event={event} isOwner={isOwner} updateData={updateData} reload={toggleReload} />;
       case 3:
         return (
           <EventPosts
@@ -153,77 +132,90 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch }) {
             userUuid={userUuid}
             openPost={openPost}
             reLoad={reFetch}
+            userIcon={userIcon}
           />
         );
       case 4:
-        return (
-          <EventMainMembers
-            event={event}
-          />
-        );
+        return <EventMainMembers event={event} isOwner={isOwner} />;
       case 5:
-        return (
-          isOwner ? (
-            <EventMembersReqeust eventUuid={event.uuid} />
-          ) : (
-            // <Memories eventUuid={event.uuid} /> // Nowy komponent dla Memories
-            <h1>elo</h1>
-          )
-        );
-      case 6:
-        return (
-          // <Memories eventUuid={event.uuid} /> // Obsługa Memories jako ostatnia opcja
-          <h1>elo</h1>
-        );
+        return isOwner ? <EventMembersReqeust eventUuid={event.uuid} /> : <h1>No Access</h1>;
       default:
         return null;
     }
   };
-  
-  
 
-  // Dynamically update options based on conditions
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewFile(file);
+      const reader = new FileReader();
+      reader.onload = () => setPreviewImage(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleBack = () => setPreviewImage(null);
+
+  const handleImageUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('multimedia', newFile);
+      formData.append(
+        'eventMultimediaMetadataDTO',
+        new Blob([JSON.stringify({ userUUID: userUuid, eventUUID: data.event.uuid })], {
+          type: 'application/json',
+        })
+      );
+
+      const endpoint = `events/multimedia`;
+      await sendToBackend(endpoint, 'POST', formData);
+
+      setCurrentImage(previewImage);
+      setPreviewImage(null);
+      alert('Image uploaded successfully!');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+    }
+  };
+
   const dynamicOptions = [...options];
   let hasAccess = userStatus === 'member' || event.isPublic;
 
-  if (isOwner) {
-    dynamicOptions.push('Members Request'); // Show 'Members Request' for owners
-    hasAccess =true;
-  }
+  if (isOwner) dynamicOptions.push('Members Request');
+  if (event.relation) dynamicOptions.push('Summary');
 
-  if (event.relation) {
-    dynamicOptions.push('Summary'); // Show 'Summary' if relation is not null
-  }
-  
+  hasAccess = hasAccess || isOwner;
 
   return (
     <div className="event-main-container">
       <div className="event-main-image-container">
-        <img
-          src={event.iconUrl || `${process.env.PUBLIC_URL}/create-trip.png`}
-          alt={event.description}
-          className="event-image"
-        />
+        <EventImage isOwner={isOwner} img={currentImage} eventUuid={data.event.uuid} userUuid={userUuid} />
+        {/* {currentImage && <img src={previewImage || currentImage} alt={event.description} className="event-image" />}
+        {previewImage && (
+          <div className="image-action-buttons">
+            <button onClick={handleImageUpload} className="save-button">Save</button>
+            <button onClick={handleBack} className="back-button">Back</button>
+          </div>
+        )}
+        {isOwner && (
+          <div className="change-image-button">
+            <img src={`${process.env.PUBLIC_URL}/edit-icon.jpeg`} alt="Edit" className="icon-change" />
+            <label htmlFor="upload-image" className="change-image-label">Change Image</label>
+            <input
+              type="file"
+              id="upload-image"
+              style={{ display: "none" }}
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+          </div>
+        )} */}
       </div>
-      <EventDetails
-        event={event}
-        status={userStatus}
-        userUuid={userUuid}
-        isOwner={isOwner}
-        eventStatus={event.eventStatus.status}
-      />
-      <EventOption
-        steps={dynamicOptions}
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-      />
-      {hasAccess ? (
-        <div className="event-more-details">
-          {renderStepComponent()}
-        </div>
-      ) : (
-        <p>You have no access here</p>
-      )}
+
+      <EventDetails event={event} status={userStatus} userUuid={userUuid} isOwner={isOwner} eventStatus={event.eventStatus.status} />
+      <EventOption steps={dynamicOptions} currentStep={currentStep} setCurrentStep={setCurrentStep} />
+      
+      {hasAccess ? <div className="event-more-details">{renderStepComponent()}</div> : <p>You have no access here</p>}
     </div>
   );
 }

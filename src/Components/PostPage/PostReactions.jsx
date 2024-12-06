@@ -4,7 +4,6 @@ import { sendToBackend } from '../../Utils/helper.js';
 
 function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post, commentUuid , newComment}) {
   const [reactionCount, setReactionCount] = useState(reactions);
-  const [commentsCount, setCommentsCount] = useState(comments);
   const [userReacted, setReacted] = useState(false);
 
   useEffect(() => {
@@ -13,31 +12,13 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
         ? `comments/${commentUuid}/users/${userUuid}/did-react` 
         : `posts/${postUuid}/user/${userUuid}/did-react`;
 
-
-
         try {
           const response = await sendToBackend(endpoint, "GET", null);
-          console.log(response)
+          // console.log(response)
           setReacted(response)
         } catch (error) {
           console.error("Error fetching membership status:", error);
         }
-
-      // try {
-      //   const response = await sendToBackend(endpoint,"GET")
-        
-
-      //   if (!response.ok) {
-      //     throw new Error('Failed to fetch reaction status');
-      //   }
-
-      //   const data = await response.json();
-      //   console.log('czy dajefollowa')
-      //   console.log(response)
-      //   setReacted(data);
-      // } catch (error) {
-      //   console.error('Error fetching reaction status:', error);
-      // }
     };
 
     if (postUuid || commentUuid) {
@@ -45,13 +26,10 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
     }
   }, [postUuid, commentUuid, userUuid]);
 
-  // useEffect( () =>  {
-  //   setCommentsCount(commentsCount+1);
 
-  // },[newComment])
 
   const addReaction = async () => {
-    const isComment = !!commentUuid; // Sprawdza, czy jest to reakcja na komentarz
+    const isComment = !!commentUuid; 
     const endpoint = commentUuid
       ? `comments/${commentUuid}/users/${userUuid}/react` 
       : `posts/react`;
@@ -63,7 +41,7 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
     if(commentUuid){
       payload = null;
     }
-    console.log(endpoint)
+    // console.log(endpoint)
 
     if (!userReacted) {
       setReactionCount(reactionCount + 1);
@@ -97,7 +75,7 @@ function PostReaction({ reactions, comments, userUuid, postUuid, openPost, post,
             className="reaction-icon" 
             onClick={() => openPost(post)}
           />
-          <span className="reaction_number ssp">{commentsCount}</span>
+          <span className="reaction_number ssp">{comments}</span>
         </div>
       )}
     </div>
