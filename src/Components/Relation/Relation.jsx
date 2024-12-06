@@ -77,11 +77,12 @@ function Relation({post, openRelation}){
   console.log(post.postMultimediaDTO)
   console.log(postHeight)
   const maxChars = 205;
+  console.log(post.event)
 
   return(
   <div className='relation-container' style={{ minHeight: postHeight }} ref={containerRef}>
     <div className='post-owner-container'>
-      <PostOwner owner={post.event} date={post.dateOfPost} status={"option"}  />
+     {post.event && ( <PostOwner owner={post.event} date={post.dateOfPost} status={"option"}  />)}
       <div className="more-options-button">
         <img 
           className="more-options"

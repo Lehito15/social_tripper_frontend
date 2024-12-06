@@ -16,11 +16,12 @@ import TripInformation from "./TripInformation.jsx";
 import EventPosts from "./EventPosts.jsx";
 import EventOption from "./EventOption.jsx";
 import EventImage from './EventImage.jsx';
+import EventRelation from './EventRelation.jsx';
 
 import './EventMain.css';
 
 function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
-  const options = ['Information', 'Trip details', 'Posts', 'Members'];
+  const options = ['Information', 'Trip details', 'Posts', 'Members', 'Summary'];
   const [currentStep, setCurrentStep] = useState(1);
   const [eventUuid, setEventUuid] = useState(null);
   const [reLoad, setReLoad] = useState(false);
@@ -137,8 +138,10 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
         );
       case 4:
         return <EventMainMembers event={event} isOwner={isOwner} />;
-      case 5:
+      case 6:
         return isOwner ? <EventMembersReqeust eventUuid={event.uuid} /> : <h1>No Access</h1>;
+      case 5: // Add case for EventRelation (finished event)
+        return <EventRelation eventUuid={event.uuid} />;
       default:
         return null;
     }
@@ -182,7 +185,7 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
   let hasAccess = userStatus === 'member' || event.isPublic;
 
   if (isOwner) dynamicOptions.push('Members Request');
-  if (event.relation) dynamicOptions.push('Summary');
+  // if (event.eventStatus.status === 'finished') dynamicOptions.push('Summary');
 
   hasAccess = hasAccess || isOwner;
 
@@ -190,26 +193,6 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
     <div className="event-main-container">
       <div className="event-main-image-container">
         <EventImage isOwner={isOwner} img={currentImage} eventUuid={data.event.uuid} userUuid={userUuid} />
-        {/* {currentImage && <img src={previewImage || currentImage} alt={event.description} className="event-image" />}
-        {previewImage && (
-          <div className="image-action-buttons">
-            <button onClick={handleImageUpload} className="save-button">Save</button>
-            <button onClick={handleBack} className="back-button">Back</button>
-          </div>
-        )}
-        {isOwner && (
-          <div className="change-image-button">
-            <img src={`${process.env.PUBLIC_URL}/edit-icon.jpeg`} alt="Edit" className="icon-change" />
-            <label htmlFor="upload-image" className="change-image-label">Change Image</label>
-            <input
-              type="file"
-              id="upload-image"
-              style={{ display: "none" }}
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-          </div>
-        )} */}
       </div>
 
       <EventDetails event={event} status={userStatus} userUuid={userUuid} isOwner={isOwner} eventStatus={event.eventStatus.status} />

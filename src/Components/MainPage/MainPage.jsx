@@ -27,6 +27,7 @@ import MapPage from '../Explore/MapPage.jsx';
 import UpcommingEvents from '../UpcomingEvents/UpcomingEvents.jsx';
 import Settings from '../Settings/Settings.jsx';
 import AllRelations from '../RelationPage.jsx/AllRelations.jsx';
+import UserMemories from '../Memories/UserMemories.jsx';
 
 
 
@@ -348,6 +349,7 @@ console.log(data);
               <Route path="/events/*" element={<EventMain eventUuid={selectedEvent} openCreatePost={addEventPost} userUuid={user.uuid} openPost={openPost} reFetch={refetch} userIcon={user.profilePictureUrl} />} />
               <Route path="/groups/*" element={<GroupMain openCreatePost={addGroupPost}  createEvent={createGroupEvent} userUuid={user.uuid} openPost={openPost} reLoad={refetch}  />} />
               <Route path="/settings" element={<Settings user={user} />} />
+              <Route path="/memories" element={<UserMemories userUuid={user.uuid} />} />
             </Routes>
           </div>
       </div>  
