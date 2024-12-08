@@ -5,6 +5,7 @@ import EventRequireLanguages from "./EventRequireLanguages.jsx";
 import EventRequireActivities from "./EventRequireActivities.jsx";
 
 function TripDetails({event, updateData, reload, isOwner}){
+  console.log(event.activities)
   return(
     <div>
       <div className="trip-dates-container">

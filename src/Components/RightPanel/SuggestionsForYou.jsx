@@ -1,20 +1,90 @@
 import PostOwner from "../PostPage/PostOwner";
-import './SuggestionsForYou.css'
+import "./SuggestionsForYou.css";
+import { gql, useQuery } from "@apollo/client";
 
+function SuggestionsForYou({ userUuid }) {
+  const GET_SUGGESTED_Accounts = gql`
+    query GetSuggestedAccounts($userUuid: String!) {
+      suggestedaccounts @rest(type: "Events", path: "users/${userUuid}/recommended-accounts") {
+        uuid
+        nickname
+        homePageUrl
+        profilePictureUrl
+      }
+    }
+  `;
 
-function SuggestionsForYou(){
+  const GET_SUGGESTED_Events = gql`
+    query GetSuggestedEvents($userUuid: String!) {
+      suggestedevents @rest(type: "Events", path: "users/${userUuid}/recommended-events") {
+        uuid
+        name
+        homePageUrl
+        profilePictureUrl
+        iconUrl
+      }
+    }
+  `;
 
-  return(
-    <div className="suuggestions-container">
-      <span className='component-title'>Suggestions for you</span>
+  const {
+    loading: loadingAccounts,
+    error: errorAccounts,
+    data: dataAccounts,
+  } = useQuery(GET_SUGGESTED_Accounts, {
+    variables: { userUuid },
+  });
+
+  const {
+    loading: loadingEvents,
+    error: errorEvents,
+    data: dataEvents,
+  } = useQuery(GET_SUGGESTED_Events, {
+    variables: { userUuid },
+  });
+
+  if (loadingAccounts || loadingEvents) return <p>Loading...</p>;
+
+  if (errorAccounts || errorEvents) {
+    return <p>Error: {errorAccounts?.message || errorEvents?.message}</p>;
+  }
+
+  return (
+    <div className="suggestions-container">
+      <span className="component-title">Suggestions for you</span>
       <div className="list-of-suggestions">
-        <PostOwner  owner={{nickname: 'Kamil Grosicki', profilePictureUrl: 'https://socialtripperstorage.blob.core.windows.net/blob/events%2Ffa639008-6973-456a-b4b5-1f43bbd70485%2Fusers%2F3c6f8532-cef0-4705-8a0c-844d70477b0d%2F434f7ce9-1d92-4a09-90f3-c874be926d85.png'}} bottomText={'New Tripper'}/>
+        {dataAccounts.suggestedaccounts &&
+          dataAccounts.suggestedaccounts.length > 0 && (
+            <div className="suggestions-section">
+              <span className="suggestions-header">Suggested Accounts</span>
+              {dataAccounts.suggestedaccounts.map((member) => (
+                <PostOwner
+                  key={member.uuid}
+                  owner={member}
+                  bottomText={"New Tripper"}
+                />
+              ))}
+            </div>
+          )}
+        {dataEvents.suggestedevents &&
+          dataEvents.suggestedevents.length > 0 && (
+            <div className="suggestions-section">
+              <span className="suggestions-header">Suggested Events</span>
+              {dataEvents.suggestedevents.map((event) => (
+                <PostOwner
+                  key={event.uuid}
+                  owner={{
+                    nickname: event.name,
+                    profilePictureUrl: event.iconUrl,
+                    homePageUrl: event.homePageUrl,
+                  }}
+                  bottomText={"Event"}
+                />
+              ))}
+            </div>
+          )}
       </div>
-     
-    </div>      
-
+    </div>
   );
- 
 }
 
 export default SuggestionsForYou;

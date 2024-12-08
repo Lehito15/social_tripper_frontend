@@ -2,7 +2,7 @@ import Post from "../PostPage/Post.jsx";
 import { gql, useQuery } from '@apollo/client';
 import React, { useState, useEffect, useRef } from 'react';
 
-function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad, userIcon}) {
+function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad, userIcon, status}) {
   console.log(uuid)
   const previousReload = useRef(reLoad);
   const GET_POSTS_Events = gql`
@@ -44,10 +44,13 @@ function EventPosts({ uuid, openCreatePost,  userUuid, openPost, reLoad, userIco
 
   return (
     <div className="event-posts">
-      <button className="trip-button" onClick={() => openCreatePost(uuid)} >
-        <img src={`${process.env.PUBLIC_URL}/create-trip.png`} alt="Ikona" className="icon"  />
-           Create post
-      </button>
+      {status === 'member' && (
+        <button className="trip-button" onClick={() => openCreatePost(uuid)}>
+          <img src={`${process.env.PUBLIC_URL}/create-trip.png`} alt="Ikona" className="icon" />
+          Create post
+        </button>
+      )}
+
     
       {data.eventposts &&(data?.eventposts.slice().reverse().map((post) => (
         <Post key={post.uuid} post={post} userUuid={userUuid} openPost={openPost} userIcon={userIcon} />

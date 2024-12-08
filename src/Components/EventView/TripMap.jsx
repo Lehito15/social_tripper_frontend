@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
-import './TripDates.css';
-import MapReaction from '../Relation/MapRelation.jsx';
-import './TripMap.css';
-import TripMapChange from './TripMapChange.jsx';
+import React, { useState } from "react";
+import "./TripDates.css";
+import MapReaction from "../Relation/MapRelation.jsx";
+import "./TripMap.css";
+import TripMapChange from "./TripMapChange.jsx";
 
-function TripMap({ longitude,latitude , title, isOwner, updateLocation, updateData, start, reload }) {
+function TripMap({
+  longitude,
+  latitude,
+  title,
+  isOwner,
+  updateLocation,
+  updateData,
+  start,
+  reload,
+}) {
   const [isEditing, setIsEditing] = useState(false);
 
   // console.log(location)
@@ -18,28 +27,34 @@ function TripMap({ longitude,latitude , title, isOwner, updateLocation, updateDa
   };
 
   return (
-    <div className='stats-box event-map'>
-      <div className='tittle-container'>
-        <span className='info-container-tittle'>{title}</span>
+    <div className="stats-box event-map">
+      <div className="tittle-container">
+        <span className="info-container-tittle">{title}</span>
         {isOwner && (
-          <span className='edit-text' onClick={handleEditClick}>
-            Editd
+          <span className="edit-text" onClick={handleEditClick}>
+            Edit
           </span>
         )}
       </div>
-      <div className='elevation'></div>
-      <div className='trip-map'>
-  {/* Jeśli są dostępne dane lokalizacji (latitude, longitude), przekazujemy je do MapReaction */}
-        
-    <MapReaction locations={[{ id: 0, position: [longitude, latitude] }]} />
+      <div className="elevation"></div>
+      <div className="trip-map">
+        {/* Jeśli są dostępne dane lokalizacji (latitude, longitude), przekazujemy je do MapReaction */}
 
-</div>
-
+        <MapReaction locations={[{ id: 0, position: [longitude, latitude] }]} />
+      </div>
 
       {/* Wyświetl TripMapChange jako modal, gdy isEditing jest true */}
       {isEditing && (
-        <div className='change-location'>
-          <TripMapChange  longitude ={longitude} latitude={latitude} updateLocation={updateLocation} closeMap={closeModal} updateData={updateData} start={start} reload={reload}/>
+        <div className="change-location">
+          <TripMapChange
+            longitude={longitude}
+            latitude={latitude}
+            updateLocation={updateLocation}
+            closeMap={closeModal}
+            updateData={updateData}
+            start={start}
+            reload={reload}
+          />
         </div>
       )}
     </div>

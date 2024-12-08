@@ -1,33 +1,30 @@
-.trip-info{
+.trip-info {
   flex-direction: column;
-  align-items: flex-start
+  align-items: flex-start;
 }
 
-.trip-info .public-icon,
-.trip-info .text-decription{
-  margin-left: 18px ;
+.trip-info,
+.trip-info .text-decription {
+  margin-bottom: 18px;
 }
 
-.edit-text{
+.edit-text {
   font-size: 15px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.51);
-
 }
 
-.edit-text:hover{
+.edit-text:hover {
   cursor: pointer;
 }
 
-.event-public{
+.event-public {
   display: flex;
   align-items: center;
   margin-bottom: 18px;
-
+  margin-top: 5px;
 }
 
-.text-decription-event{
+.text-decription-event {
   font-size: 14px;
-
 }
-

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import '../PostPage/PostPage.css';
-import { gql, useQuery } from '@apollo/client';
-import Members from '../EventView/Members.jsx';
-import { sendToBackend } from '../../Utils/helper.js';
+import React, { useEffect, useState } from "react";
+import "../PostPage/PostPage.css";
+import { gql, useQuery } from "@apollo/client";
+import Members from "../EventView/Members.jsx";
+import { sendToBackend } from "../../Utils/helper.js";
 
-function UserFollowing({ userUuid }) {
+function UserFollowing({ userUuid, myAccount }) {
   const [reload, setReload] = useState(false);
 
   const GET_FOLLOWING_ACCOUNTS = gql`
@@ -30,11 +30,21 @@ function UserFollowing({ userUuid }) {
   `;
 
   // Zapytania dla `follows` i `requests`
-  const { loading: loadingFollows, error: errorFollows, data: dataFollows, refetch: refetchFollows } = useQuery(GET_FOLLOWING_ACCOUNTS, {
+  const {
+    loading: loadingFollows,
+    error: errorFollows,
+    data: dataFollows,
+    refetch: refetchFollows,
+  } = useQuery(GET_FOLLOWING_ACCOUNTS, {
     variables: { userUuid },
   });
 
-  const { loading: loadingRequests, error: errorRequests, data: dataRequests, refetch: refetchRequests } = useQuery(GET_REQUESTS, {
+  const {
+    loading: loadingRequests,
+    error: errorRequests,
+    data: dataRequests,
+    refetch: refetchRequests,
+  } = useQuery(GET_REQUESTS, {
     variables: { userUuid },
   });
 
@@ -49,11 +59,11 @@ function UserFollowing({ userUuid }) {
     try {
       const endpoint = `users/follow`;
       const follow = {
-        follower: { uuid: userUuid }, 
-        followed: { uuid: friendUuid }, 
+        follower: { uuid: userUuid },
+        followed: { uuid: friendUuid },
       };
       await sendToBackend(endpoint, "POST", JSON.stringify(follow));
-      console.log('User added successfully');
+      console.log("User added successfully");
       setReload(!reload); // Odśwież dane po dodaniu użytkownika
     } catch (error) {
       console.error("Error adding user:", error);
@@ -61,18 +71,21 @@ function UserFollowing({ userUuid }) {
   };
 
   if (loadingFollows || loadingRequests) return <p>Loading...</p>;
-  if (errorFollows || errorRequests) return <p>Error: {errorFollows?.message || errorRequests?.message}</p>;
+  if (errorFollows || errorRequests)
+    return <p>Error: {errorFollows?.message || errorRequests?.message}</p>;
 
   return (
     <div className="Post-page">
-      <div className="event-owner-container">
-        <Members 
-          title="Requests" 
-          members={dataRequests?.userrequests || []} 
-          request={addUserToEvent} 
-          reload={setReload} 
-        />
-      </div>
+      {myAccount && myAccount && dataRequests?.userrequests?.length > 0 && (
+        <div className="event-owner-container">
+          <Members
+            title="Requests"
+            members={dataRequests?.userrequests || []}
+            request={addUserToEvent}
+            reload={setReload}
+          />
+        </div>
+      )}
       <Members members={dataFollows?.follows || []} title="Followed" />
     </div>
   );

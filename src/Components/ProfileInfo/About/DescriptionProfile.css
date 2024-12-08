@@ -1,15 +1,15 @@
 .text-decription {
-  font-size: 13px; 
+  font-size: 13px;
   font-family: "Source Sans 3", serif;
   list-style: 17.6px;
-  font-weight: 400;    
-  /* -webkit-box-orient: vertical;               
-  overflow: hidden;                   
-  text-overflow: ellipsis;            */ 
-  margin-top: 9px;                          
+  font-weight: 400;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 9px;
 }
 
-.tittle-container{
+.tittle-container {
   display: flex;
   justify-content: space-between;
   padding-left: 18px;
@@ -17,10 +17,31 @@
   height: 40px;
 }
 
-@media (max-width: 1400px) {
-  .text-decription{
-    font-size: 8px ;
+/* @media (max-width: 1400px) {
+  .text-decription {
+    font-size: 8px;
     margin: 3px;
+  }
+} */
 
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .tittle-container {
+    height: 25px;
+  }
+  .text-decription {
+    font-size: 8px;
+    margin: 0px;
+    margin-top: 3px;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .tittle-container {
+    height: 25px;
+  }
+  .text-decription {
+    font-size: 10px;
+    margin: 0px;
+    margin-top: 3px;
   }
 }

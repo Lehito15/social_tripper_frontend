@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "../PostPage/PostPage.css";
 import Feeds from "./Feeds.jsx";
-import AllPosts from "./AllPosts.jsx";
+import AllPosts from "./PostPages/AllPosts.jsx";
 import ObservedPosts from "./ObservedPosts.jsx";
 import PopularPosts from "./PopularPosts.jsx";
 

@@ -72,6 +72,7 @@
 .more-options-button {
   margin-left: auto; 
   cursor: pointer; /* Zmienia kursor na wskaźnik, gdy najeżdżasz na przycisk */
+  position: relative;
 }
 
 .more-options-button:hover .more-options {
@@ -88,4 +89,19 @@
 .carousel-control-prev-icon, .carousel-control-next-icon {
   pointer-events: auto; /* Pozwala na interakcje z ikoną */
   cursor: pointer;      /* Zmienia kursor, aby wskazywał na akcję */
+}
+
+
+.post-container .post-owner-container .leave-event{
+  top: 30px;
+  right: 0px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-container .post-owner-container .leave-event-text{
+  margin-left: 0;
+  margin-bottom: 0;
 }

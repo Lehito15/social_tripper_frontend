@@ -117,7 +117,7 @@ function EventRequireLanguages({ languages, title, isOwner, isUser, edit, update
               language={{
                 name: languageItem.language.name,
                 flag: getFlag(languageItem.language.name),
-                rating: languageItem.level,
+                rating: languageItem.level || languageItem.requiredLevel,
               }}
               showOption={!isEditing}
               event={true}

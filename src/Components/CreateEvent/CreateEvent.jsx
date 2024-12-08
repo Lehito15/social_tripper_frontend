@@ -35,7 +35,6 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
       `${eventSettings.tripEndDate}T${eventSettings.tripEndTime || "00:00"}:00`
     );
 
-    // Walidacja czasu rozpoczęcia i zakończenia
     if (startDateTime >= endDateTime) {
       alert("The start time must be earlier than the end time.");
       return;
@@ -91,10 +90,10 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
           destination: eventSettings.tripDescriptor,
           eventStartTime: `${eventSettings.tripStartDate}T${eventSettings.tripStartTime || "00:00"}:00`,
           eventEndTime: `${eventSettings.tripEndDate}T${eventSettings.tripEndTime || "00:00"}:00`,
-          startLongitude: eventSettings.eventStartLocation[0].position[1],
-          startLatitude: eventSettings.eventStartLocation[0].position[0],
-          stopLongitude: eventSettings.eventEndLocation[0].position[1],
-          stopLatitude: eventSettings.eventEndLocation[0].position[0],
+          startLongitude: eventSettings.eventStartLocation[0].position[0],
+          startLatitude: eventSettings.eventStartLocation[0].position[1],
+          stopLongitude: eventSettings.eventEndLocation[0].position[0],
+          stopLatitude: eventSettings.eventEndLocation[0].position[1],
           owner: { uuid: userUuid },
           activities: formattedActivities,
           languages: formattedLanguages,
@@ -160,18 +159,14 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-      setIsSubmitting(false); // Odblokowanie przycisku po zakończeniu
+      setIsSubmitting(false);
     }
     if (groupUuid) {
       closeCreateEvent();
-      // navigate('/groups/');
     } else {
       closeCreateEvent();
       navigate("/events");
     }
-
-    // closeCreateEvent();
-    // navigate('/events');
   };
 
   const [generalDetailsEvent, setGeneralDetailsEvent] = useState({

@@ -1,20 +1,26 @@
-.event-option{
+.event-option {
   display: flex;
   width: 100%;
   height: 50px;
-  gap:  82px;
+  gap: 82px;
   align-items: center;
   background-color: white;
   padding-left: 9px;
+  padding-right: 9px;
 }
 
 .step-text:hover {
   cursor: pointer;
-
 }
 
 @media (-webkit-device-pixel-ratio: 1.25) {
-  .event-option{
-    width: 700px ;
+  .event-option {
+    gap: 40px;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .event-option {
+    gap: 21px;
   }
 }

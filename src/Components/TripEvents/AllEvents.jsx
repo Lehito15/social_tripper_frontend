@@ -1,6 +1,6 @@
-import React from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Event from '../Event/Event';
+import React from "react";
+import { gql, useQuery } from "@apollo/client";
+import Event from "../Event/Event";
 
 const GET_ALL_EVENTS = gql`
   query GetAllEvents {
@@ -18,6 +18,7 @@ const GET_ALL_EVENTS = gql`
         uuid
         nickname
         profilePictureUrl
+        homePageUrl
       }
       iconUrl
       activities
@@ -29,12 +30,12 @@ const GET_ALL_EVENTS = gql`
 function AllEvents() {
   const { loading, error, data } = useQuery(GET_ALL_EVENTS, {
     variables: { path: "events" }, // Dynamiczna ścieżka
-    fetchPolicy: 'cache-first', // Unikalne cache dzięki keyArgs
+    fetchPolicy: "cache-first", // Unikalne cache dzięki keyArgs
   });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data)
+  console.log(data);
 
   return (
     <div>

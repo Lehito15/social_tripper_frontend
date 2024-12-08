@@ -3,10 +3,11 @@ import LineMenu from './LineMenu.jsx';
 import './SelectInfoMenu.css';
 import { sendToBackend } from '../../Utils/helper.js';
 
-function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, followRequestSend }) {
+function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, followRequsetSend }) {
   const profilePictureUrl = "https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg";
   const [areUsersFriends, setAreUsersFriends] = useState(areFriends);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(followRequsetSend );
+  console.log(buttonDisabled)
 
   // Funkcja do wysyłania follow request dla prywatnych kont
   const sendFollowRequest = async () => {
@@ -48,7 +49,7 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, follo
   // Obsługa kliknięcia przycisku
   const handleFollowClick = () => {
     if (!isPublic && !areUsersFriends) {
-      // Konto jest prywatne i nie jesteśmy przyjaciółmi
+      console.log('klikam')
       sendFollowRequest();
     } else {
       // Standardowe follow/unfollow
@@ -79,21 +80,23 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, follo
 
         {!isMyAccount && (
           <div>
-            <button
-              className="trip-button"
-              onClick={handleFollowClick} 
-              disabled={
-                buttonDisabled || 
-                (!areUsersFriends && !isPublic && followRequestSend) // Blokujemy przycisk w określonych warunkach
-              }
-            >
-              <img
-                src={`${process.env.PUBLIC_URL}/create-trip.png`}
-                alt="Ikona"
-                className="icon"
-              />
-              {areUsersFriends ? 'Unfollow' : 'Follow'}
-            </button>
+          <button
+  className="trip-button"
+  onClick={handleFollowClick}
+  disabled={buttonDisabled}
+>
+  <img
+    src={`${process.env.PUBLIC_URL}/create-trip.png`}
+    alt="Ikona"
+    className="icon"
+  />
+  {buttonDisabled
+    ? 'Request Sent' // Wyświetlane, gdy przycisk jest disabled
+    : areUsersFriends
+    ? 'Unfollow'      // Wyświetlane, gdy użytkownicy są znajomymi
+    : 'Follow'}       
+</button>
+
           </div>
         )}
       </div>

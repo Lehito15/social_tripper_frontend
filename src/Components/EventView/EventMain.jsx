@@ -134,6 +134,7 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
             openPost={openPost}
             reLoad={reFetch}
             userIcon={userIcon}
+            status={userStatus}
           />
         );
       case 4:
@@ -147,39 +148,7 @@ function EventMain({ openCreatePost, userUuid, openPost, reFetch, userIcon }) {
     }
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setNewFile(file);
-      const reader = new FileReader();
-      reader.onload = () => setPreviewImage(reader.result);
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleBack = () => setPreviewImage(null);
-
-  const handleImageUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('multimedia', newFile);
-      formData.append(
-        'eventMultimediaMetadataDTO',
-        new Blob([JSON.stringify({ userUUID: userUuid, eventUUID: data.event.uuid })], {
-          type: 'application/json',
-        })
-      );
-
-      const endpoint = `events/multimedia`;
-      await sendToBackend(endpoint, 'POST', formData);
-
-      setCurrentImage(previewImage);
-      setPreviewImage(null);
-      alert('Image uploaded successfully!');
-    } catch (error) {
-      console.error('Error uploading image:', error);
-    }
-  };
+ console.log(event)
 
   const dynamicOptions = [...options];
   let hasAccess = userStatus === 'member' || event.isPublic;

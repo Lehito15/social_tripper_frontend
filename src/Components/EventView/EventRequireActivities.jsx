@@ -11,12 +11,14 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
   const [initialActivities, setInitialActivities] = useState([]);  // Początkowy stan
   const [reload, setReload] = useState(false);
 
+  console.log(activities)
+
   useEffect(() => {
     // Zamieniamy dane przy pierwszym załadowaniu
     const transformedActivities = activities.map((activity) => ({
       name: activity.name || activity.activity.name,
       label: activity.name || activity.activity.name,
-      rating: activity.experience,
+      rating: activity.experience ||  activity.requiredExperience,
     }));
     // Ustawiamy stan zarówno z początkowymi danymi, jak i aktywnościami do edycji
     setUpdatedActivities(transformedActivities);

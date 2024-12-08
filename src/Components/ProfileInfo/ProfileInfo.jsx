@@ -24,7 +24,10 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   console.log(myUuid)
 
   useEffect(() => {
-    const uuid = window.location.pathname.split("/").pop(); // Wyciąganie UUID z URL
+    let uuid = window.location.pathname.split("/").pop() ; 
+    if(uuid.length < 15){
+      uuid = window.location.pathname.split("/")[2]
+    }
     setUserUuid(uuid);
   }, []);
   console.log(userUuid)
@@ -72,7 +75,7 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
 
   useEffect(() => {
     if (data?.user) {
-      setMyAccount(myUuid === data.user.uuid); // Sprawdzamy, czy to nasz profil
+      setMyAccount(myUuid === data.user.uuid); 
     }
   }, [data, myUuid]);
 
@@ -119,6 +122,9 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   };
 
   const privateAccount = !myAccount && !areUsersFriends && !data.user.isPublic;
+  console.log('request')
+
+  console.log(isFollowRequested)
 
   return (
     <div className="profile-user-info">
@@ -138,7 +144,7 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
           <Routes>
             <Route path="/" element={<Navigate to="posts" replace />} />
             <Route path="posts" element={<UserPosts userIcon={userIcon} openPost={openPost} closePost={closePost} />} />
-            <Route path="followers" element={<UserFollowing userUuid={userUuid} />} />
+            <Route path="followers" element={<UserFollowing userUuid={userUuid} myAccount={myAccount}  />} />
             <Route path="followed" element={<UserFollowed userUuid={userUuid} myAccount={myAccount} />} />
             <Route path="about" element={<About stats={stats} description={data.user.description} profileInfo={data.user.user} nickname={data.user.nickname} />} />
             <Route path="trips" element={<UserEvents userUuid={userUuid} owner={data.user} />} />

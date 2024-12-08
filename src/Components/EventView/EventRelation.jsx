@@ -3,21 +3,19 @@ import { sendToBackend } from '../../Utils/helper.js';
 import Relation from '../Relation/Relation.jsx';
 
 function EventRelation({ eventUuid }) {
-  const [relationData, setRelationData] = useState(null); // Pojedyncza relacja
+  const [relationData, setRelationData] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMultimedia = async () => {
       try {
-        // Pobieranie multimediów dla wydarzenia
         const response = await sendToBackend(
           `events/${eventUuid}/multimedia`,
           'GET',
           null
         );
         
-        // Jeśli odpowiedź jest poprawna, ustawiamy dane relacji
         setRelationData({
           multimedia: response,
         });
@@ -43,7 +41,7 @@ function EventRelation({ eventUuid }) {
 
   return (
     <div className="Post-page">
-      <Relation post={relationData} /> {/* Przekazujemy dane do komponentu Relation */}
+      <Relation post={relationData} /> 
     </div>
   );
 }

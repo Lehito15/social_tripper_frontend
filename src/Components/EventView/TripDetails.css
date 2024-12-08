@@ -4,10 +4,14 @@
   gap: 18px;
 }
 
-.event-languages-main{
+.event-languages-main {
   padding-left: 13px;
 }
-.activity-list-event-profile{
+.activity-list-event-profile {
   padding-top: 18px;
   padding-bottom: 18px;
+}
+
+.event-requiered .rateactivity-container {
+  width: 100%;
 }

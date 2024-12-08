@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gql, useQuery } from '@apollo/client';
-import Post from './Post.jsx';
+import Post from '../Post';
 
 const GET_NEWEST_POSTS = gql`
   query GetNewestPosts {

@@ -4,13 +4,11 @@
   margin-top: 25px; /* Dynamiczny odstęp między imieniem a statystykami */
   width: 100%; /* Ustaw szerokość na 100% dla kontenera statystyk */
   text-transform: uppercase;
-
 }
 
 .stat-item {
   text-align: center; /* Wyśrodkowanie tekstu */
   margin-top: 0px;
-  
 }
 
 .stat-value {
@@ -24,20 +22,20 @@
 .stat-title {
   display: block; /* Przeniesienie tytułu na nową linię */
   margin-top: 9px;
-  color: rgba(0, 0, 0, 0.55);/* Kolor tytułu */
+  color: rgba(0, 0, 0, 0.55); /* Kolor tytułu */
   font-size: 13px;
   line-height: 15.08px;
   font-weight: 400;
 }
 
-@media (max-width: 1300px){
-  .stat-value{
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .stat-value {
     font-size: 16px;
   }
-  .stat-title{
+  .stat-title {
     font-size: 10px;
   }
-  .user-stats{
+  .user-stats {
     /* margin-top: 0; */
   }
 }

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import { getUuidFromUrl, sendToBackend } from '../../Utils/helper.js';
+import React, { useState, useEffect } from "react";
+import { gql, useQuery } from "@apollo/client";
+import { getUuidFromUrl, sendToBackend } from "../../Utils/helper.js";
 import Group from "../Group/Group.jsx";
 import PostOwner from "../PostPage/PostOwner.jsx";
 import EventOption from "../EventView/EventOption.jsx";
@@ -9,17 +9,25 @@ import GroupPosts from "./GroupPosts.jsx";
 import GroupMainMembers from "./GroupMembers.jsx";
 import GroupTrips from "./GroupTrips.jsx";
 import EventButtons from "../EventView/EventButtons.jsx";
-import './GroupMain.css';
+import "./GroupMain.css";
 import { useNavigate } from "react-router-dom";
 
-function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost, reLoad }) {
+function GroupMain({
+  openCreatePost,
+  openEvent,
+  createEvent,
+  userUuid,
+  openPost,
+  reLoad,
+  userIcon,
+}) {
   const [groupUuid, setGroupUuid] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [userStatus, setUserStatus] = useState(null);
   const [isOwner, setIsOwner] = useState(false);
 
-  const options = ['Information', 'Posts', 'Trips', 'Members'];
+  const options = ["Information", "Posts", "Trips", "Members"];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +36,10 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
     setGroupUuid(uuid);
 
     const fetchStatus = async () => {
-      // if (!groupUuid) return;
-
       try {
         const endpoint = `users/${userUuid}/groups/${uuid}/is-member`;
         const response = await sendToBackend(endpoint, "GET", null);
-        setUserStatus(response ? 'member' : 'no-member');
+        setUserStatus(response ? "member" : "no-member");
       } catch (error) {
         console.error("Error fetching membership status:", error);
       } finally {
@@ -71,10 +77,14 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
     }
   `;
 
-  const { loading: groupLoading, error: groupError, data } = useQuery(GET_GROUP, {
+  const {
+    loading: groupLoading,
+    error: groupError,
+    data,
+  } = useQuery(GET_GROUP, {
     variables: { groupUuid },
     skip: !groupUuid,
-    fetchPolicy: 'cache-first', // Use cache-first to reduce network requests
+    fetchPolicy: "cache-first",
   });
 
   useEffect(() => {
@@ -110,6 +120,7 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
             userUuid={userUuid}
             openPost={openPost}
             reLoad={reLoad}
+            userIcon={userIcon}
           />
         );
       case 3:
@@ -123,7 +134,7 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
           />
         );
       case 4:
-        return <GroupMainMembers group={group} isOwner={isOwner}/>;
+        return <GroupMainMembers group={group} isOwner={isOwner} />;
       default:
         return null;
     }
@@ -131,7 +142,7 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
 
   const updateData = async (body) => {
     const endpoint = `groups/${groupUuid}`;
-    await sendToBackend(endpoint, 'PATCH', JSON.stringify(body));
+    await sendToBackend(endpoint, "PATCH", JSON.stringify(body));
   };
 
   const sendJoinRequest = async () => {
@@ -140,8 +151,8 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
       groupUUID: group.uuid,
     };
 
-    const endpoint = 'groups/requests';
-    await sendToBackend(endpoint, 'POST', JSON.stringify(userRequestGroup));
+    const endpoint = "groups/requests";
+    await sendToBackend(endpoint, "POST", JSON.stringify(userRequestGroup));
   };
 
   const handleLeaveGroup = async () => {
@@ -149,10 +160,10 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
       const endpoint = `groups/${groupUuid}/users/${userUuid}`;
       const response = await sendToBackend(endpoint, "DELETE");
       if (response) {
-        alert('You left the group');
-        navigate('/groups');
+        alert("You left the group");
+        navigate("/groups");
       } else {
-        alert('Cannot leave the event');
+        alert("Cannot leave the event");
       }
     } catch (error) {
       console.error("Error leaving event:", error);
@@ -164,22 +175,19 @@ function GroupMain({ openCreatePost, openEvent, createEvent, userUuid, openPost,
       const endpoint = `groups/${groupUuid}/users/${userUuid}`;
       const response = await sendToBackend(endpoint, "POST");
       if (response) {
-        // navigate('/groups'); // Optionally navigate after joining
       } else {
-        alert('Cannot join the group');
+        alert("Cannot join the group");
       }
     } catch (error) {
       console.error("Error leaving event:", error);
     }
   };
 
-  // if (userStatus === null) return <p>Loading user status...</p>;
-
-  const hasAccess = userStatus === 'member' || group.isPublic || isOwner;
+  const hasAccess = userStatus === "member" || group.isPublic || isOwner;
 
   return (
     <div className="event-main-container group-main-container">
-      {data && <Group group={group} isOwner={isOwner}  userUuid={userUuid} />}
+      {data && <Group group={group} isOwner={isOwner} userUuid={userUuid} />}
       <div className="event-owner group-owner">
         <div className="event-main-owner">
           <p className="owned-by">Owned by</p>
