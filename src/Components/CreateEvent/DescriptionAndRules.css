@@ -1,8 +1,8 @@
-.trip-form{
+.trip-form {
   text-align: left;
   margin-bottom: 20px;
 }
-.textarea{
+.textarea {
   border-radius: 5px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
@@ -11,13 +11,12 @@
   padding-right: 17px;
 }
 
-.textarea:focus{
+.textarea:focus {
   outline: none;
 }
-.trip-textarea{
+.trip-textarea {
   width: 768px;
   height: 176px;
- 
 }
 
 .rule-item {
@@ -36,8 +35,6 @@
   display: flex;
   border-radius: 5px;
   margin-bottom: 5px;
-  
-
 }
 
 .rule-name {
@@ -46,7 +43,6 @@
   font-family: "Source Sans 3", serif;
   margin-bottom: 0;
   padding-left: 17px;
-
 }
 
 .rules-list {
@@ -64,15 +60,15 @@
   width: 768px;
 }
 
-.rule-input{
+.rule-input {
   width: 90%;
   box-shadow: none;
 }
-.rule-input:focus{
+.rule-input:focus {
   box-shadow: none;
 }
 
-.add-rule{
+.add-rule {
   display: flex;
   width: 768px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
@@ -81,14 +77,14 @@
   padding-right: 0;
 }
 
-.add-rule-button{
+.add-rule-button {
   width: 20px;
   height: 20px;
   margin-right: 12px;
   cursor: pointer;
 }
 
-.rule-name-container{
+.rule-name-container {
   margin-bottom: 10px;
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
   width: 760px;
@@ -98,10 +94,9 @@
   align-items: center;
   padding-right: 18px;
   border-radius: 5px;
-
 }
 
-.remove-rule{
+.remove-rule {
   width: 20px;
   height: 20px;
   cursor: pointer;

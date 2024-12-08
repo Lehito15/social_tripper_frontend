@@ -1,7 +1,7 @@
 .add-media-container {
-  display: flex; 
-  align-items: center; 
-  height: 100%; 
+  display: flex;
+  align-items: center;
+  height: 100%;
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
@@ -10,37 +10,33 @@
 .add-media-icon {
   height: 24px;
   width: 24px;
-  /* margin-right: 20px; */
 }
 .media-buttons {
   margin-right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px; 
+  width: 40px;
   height: 40px;
-  border-radius: 50%; 
+  border-radius: 50%;
   background-color: transparent;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
 .media-buttons:hover {
-  background-color: #f0f0f0; /* Kolor tła po najechaniu kursorem */
-  
+  background-color: #f0f0f0;
 }
 
 .create-button {
-  margin-left: auto; 
+  margin-left: auto;
   margin-right: 0;
   width: 98px;
   height: 30px;
   background: rgba(0, 0, 0, 1);
   color: rgba(176, 226, 106, 1);
   box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 0px 2px 0px 0px  rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: 0px 0px 2px 0px  rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
 }
-
-

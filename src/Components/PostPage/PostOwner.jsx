@@ -10,8 +10,8 @@ function PostOwner({ owner, date, bottomText, addUserToEvent, removeRequest, rem
   const endpoint = owner.homePageUrl;
   const dropdownRef = useRef(null);
   const statusDropdownRef = useRef(null);
-  console.log('url')
-  console.log(owner.homePageUrl)
+  // console.log('url')
+  // console.log(owner.homePageUrl)
 
   const toggleOptions = () => {
     setShowOptions(!showOptions); // Przełącz widoczność listy

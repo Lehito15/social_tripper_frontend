@@ -13,8 +13,8 @@ function SelectInfoMenu({ user, isMyAccount, myUuid, areFriends, isPublic, follo
     try {
       const endpoint = `users/follow-request`;
       const followRequest = {
-        follower: { uuid: myUuid },
-        followed: { uuid: user.uuid }
+        follower: { uuid: user.uuid },
+        followed: { uuid: myUuid }
       };
       console.log(followRequest)
 
