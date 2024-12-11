@@ -28,7 +28,7 @@
 
 .create-post-header {
   display: flex;
-  justify-content: center; /* Wyśrodkowanie tytułu */
+  justify-content: center;
   align-items: center;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -39,7 +39,6 @@
   font-weight: 600;
 }
 
-/* Textarea */
 .post-textarea {
   width: 664px;
   height: 264px;
@@ -61,9 +60,8 @@
 
 .post-owner {
   display: flex;
-  align-items: center; /* Wyśrodkowanie elementów w pionie */
-  justify-content: space-between; /* Rozstawienie elementów w poziomie */
-
+  align-items: center;
+  justify-content: space-between;
   height: 60px;
   width: 100%;
 }
@@ -125,36 +123,28 @@
   width: 100px;
   z-index: 10000;
 }
-/* Stylizacja dla całego kontenera select */
 .custom-select__control {
   background-color: white;
   box-shadow: 0px 0px 2px 0px #00000040;
   align-items: center;
   width: 130px;
-
-  /* height: 40px; */
   display: flex;
-  padding-left: 0; /* Usuń padding z lewej strony */
-  font-size: 13px; /* Ustawienie jednolitego rozmiaru tekstu */
-  justify-content: flex-start; /* Wyrównanie zawartości do lewej */
+  padding-left: 0;
+  font-size: 13px;
+  justify-content: flex-start;
 }
 
-/* Stylizacja wybranej wartości */
 .custom-select__single-value {
   display: flex;
   align-items: center;
-  font-size: 13px; /* Rozmiar tekstu dla wybranej opcji */
+  font-size: 13px;
   justify-content: flex-start;
-
   padding-left: 0px;
 }
 
-/* Stylizacja opcji */
 .custom-select__option {
   display: flex;
-  /* align-items: center; */
-  font-size: 13px; /* Rozmiar tekstu dla opcji */
-  /* padding: 8px; */
+  font-size: 13px;
   cursor: pointer;
   justify-content: flex-start;
 }

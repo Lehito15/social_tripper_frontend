@@ -1,0 +1,106 @@
+.post-owner-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.user-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.avatar-container {
+  display: flex;
+  justify-content: center;
+  max-width: 48px;
+  max-height: 48px;
+  min-width: 20px;
+}
+
+.post-owner-avatar {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+  object-fit: cover;
+}
+
+.post-owner-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  align-items: flex-start;
+}
+
+.post-owner-details.no-date {
+  justify-content: center;
+}
+
+.post-owner-name {
+  margin: 0;
+  font-size: 18px;
+  cursor: pointer;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+  display: block;
+}
+
+.post-owner-date {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.55);
+  margin: 0;
+}
+
+.post-owner-icons {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 18px;
+  cursor: pointer;
+}
+
+.post-owner-icon {
+  width: 12px;
+  height: 12px;
+}
+.accept-request {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  background-color: black;
+  width: 20px;
+  height: 20px;
+}
+
+.options-list {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  z-index: 100;
+}
+
+.option-item {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.option-item:hover {
+  background-color: #f0f0f0;
+}
+.post-owner-icons {
+  position: relative;
+}
+
+.post-owner-container .leave-event {
+  margin: 0;
+  top: 20px;
+  right: 10px;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+}

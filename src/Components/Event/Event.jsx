@@ -1,10 +1,10 @@
 import React from "react";
-import DateCard from "./DateCard.jsx";
+import DateCard from "./DateCard/DateCard.jsx";
 import "./Event.css";
-import PostOwner from "../PostPage/PostOwner.jsx";
-import ActivityIcon from "./ActivityIcon.jsx";
-import EventMembers from "./EventMembers.jsx";
-import DateCardTime from "./DateCardTime.jsx";
+import PostOwner from "../PostPage/PostOwner/PostOwner.jsx";
+import ActivityIcon from "./ActivityIcon/ActivityIcon.jsx";
+import EventMembers from "./EventMember/EventMembers.jsx";
+import DateCardTime from "./DateCardTime/DateCardTime.jsx";
 import { useNavigate } from "react-router-dom";
 import languageToCountry from "../../JsonsToCode/language_to_country_code.json";
 import { getActivityIcon } from "../../Utils/helper.js";

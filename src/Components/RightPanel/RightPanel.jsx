@@ -1,7 +1,7 @@
 import React from "react";
 import "./RightPanel.css";
-import LastTrip from "./LastTrip";
-import SuggestionsForYou from "./SuggestionsForYou";
+import LastTrip from "./LastTrip/LastTrip";
+import SuggestionsForYou from "./SuggestionsForYou/SuggestionsForYou";
 
 function RightPanel({ userUuid }) {
   return (

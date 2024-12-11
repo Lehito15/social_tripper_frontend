@@ -1,101 +1,30 @@
 {
   "auth": {
-    "socialtripperfronten6b651474": {
+    "socialtripperfronteneec6db90": {
       "customAuth": false,
       "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito",
-      "serviceType": "imported"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_auth_socialtripperfronten6b651474_allowUnauthenticatedIdentities": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_authRoleArn": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_authRoleName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_identityPoolId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_identityPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_nativeClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_unauthRoleArn": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_unauthRoleName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_userPoolId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_userPoolName": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
-    },
-    "AMPLIFY_auth_socialtripperfronten6b651474_webClientId": {
-      "usedBy": [
-        {
-          "category": "auth",
-          "resourceName": "socialtripperfronten6b651474"
-        }
-      ]
+      "service": "Cognito"
     }
   }
 }

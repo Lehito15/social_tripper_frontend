@@ -10,22 +10,21 @@ import {
 } from "react-router-dom";
 import RightMenu from "../RightPanel/RightBoxMenu/RightBoxMenu.jsx";
 import RightPanel from "../RightPanel/RightPanel.jsx";
-import PostPage from "../PostPage/PostPage.jsx";
+import PostPage from "../PostPage/PostPages/PostPage.jsx";
 import CreatePost from "../CreatePost/CreatePost.jsx";
-import PostOwner from "../PostPage/PostOwner.jsx";
+import PostOwner from "../PostPage/PostOwner/PostOwner.jsx";
 import Chats from "../Messages/Chats.jsx";
 import IndividualChat from "../Messages/IndividualChat.jsx";
 import MinimalizeChatContainer from "../Messages/MinimalizeChatContainer.jsx";
 import ProfileInfo from "../ProfileInfo/ProfileInfo.jsx";
-import PostDetail from "../PostPage/PostDetails.jsx";
-import PostDetailsNoImg from "../PostPage/PostDetailsNoImg.jsx";
+import PostDetail from "../PostPage/PostDetails/PostDetails.jsx";
+import PostDetailsNoImg from "../PostPage/PostDetailsNoImg/PostDetailsNoImg.jsx";
 import CreateEvent from "../CreateEvent/CreateEvent.jsx";
-import EventMain from "../EventView/EventMain.jsx";
+import EventMain from "../EventView/EventMain/EventMain.jsx";
 import TripEvents from "../TripEvents/TripEvents.jsx";
 import RelationDetails from "../Relation/RelationDetails.jsx";
-import RelationsPage from "../RelationsPage/RelationsPage.jsx";
 import GroupPage from "../GroupPage/GroupPage.jsx";
-import GroupMain from "../GroupView/GroupMain.jsx";
+import GroupMain from "../GroupView/GroupMain/GroupMain.jsx";
 import CreateGroup from "../CreateGroup/CreateGroup.jsx";
 import { gql, useQuery } from "@apollo/client";
 import MapPage from "../Explore/MapPage.jsx";
@@ -378,6 +377,7 @@ function MainPage({ user }) {
                   openPost={openPost}
                   reFetch={refetch}
                   userIcon={user.profilePictureUrl}
+                  openRelation={openRelation}
                 />
               }
             />
@@ -397,7 +397,12 @@ function MainPage({ user }) {
             <Route path="/settings" element={<Settings user={user} />} />
             <Route
               path="/memories"
-              element={<UserMemories userUuid={user.uuid} />}
+              element={
+                <UserMemories
+                  userUuid={user.uuid}
+                  openRelation={openRelation}
+                />
+              }
             />
           </Routes>
         </div>

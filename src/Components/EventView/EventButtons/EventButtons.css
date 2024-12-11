@@ -1,0 +1,58 @@
+.event-buttons {
+  display: flex;
+  gap: 9px;
+  margin-right: 9px;
+  align-items: center;
+}
+
+.event-button {
+  border: none;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  height: 32px;
+}
+
+.event-button .icon {
+  height: 20px;
+  width: 20px;
+  margin-right: 7px;
+}
+
+.icon-more {
+  margin: 0;
+}
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.leave-event {
+  position: absolute;
+  margin-bottom: 10px;
+  background-color: white;
+  width: 120px;
+  height: 34px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.leave-event-text {
+  font-size: 15px;
+  margin-left: 12px;
+}
+
+.status-dropdown {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 100;
+  border-radius: 10px;
+}
+
+.status-option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.status-option:hover {
+  background-color: #f0f0f0;
+}

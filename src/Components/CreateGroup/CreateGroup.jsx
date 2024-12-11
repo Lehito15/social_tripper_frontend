@@ -1,10 +1,10 @@
-import RegisterSteps from "../UserLogin/Register/RegisterSteps.jsx";
+import RegisterSteps from "../UserLogin/Register/RegisterSteps/RegisterSteps.jsx";
 import { useState } from "react";
-import GeneralDetailsEvent from "../CreateEvent/GeneralDetailsEvent.jsx";
-import DescriptionAndRules from "../CreateEvent/DescriptionAndRules.jsx";
-import RegisterNext from "../UserLogin/Register/RegisterNext.jsx";
+import GeneralDetailsEvent from "../CreateEvent/GeneralDetailsEvent/GeneralDetailsEvent.jsx";
+import DescriptionAndRules from "../CreateEvent/DescriptionAndRules/DescriptionAndRules.jsx";
+import RegisterNext from "../UserLogin/Register/RegisterNext/RegisterNext.jsx";
 import { v4 as uuidv4 } from "uuid";
-import GroupSettings from "./GroupSettings.jsx";
+import GroupSettings from "./GroupSettings/GroupSettings.jsx";
 import "./CreateGroup.css";
 import { useNavigate } from "react-router-dom";
 import { sendToBackend } from "../../Utils/helper.js";

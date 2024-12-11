@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Group from '../Group/Group';
+import React, { useEffect, useRef, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import Group from "../Group/Group";
 
 const GET_ALL_GROUPS = gql`
   query GetAllGroups {
@@ -28,23 +28,22 @@ const GET_ALL_GROUPS = gql`
   }
 `;
 
-function AllGroups({ userUuid, reLoad}) {
+function AllGroups({ userUuid, reLoad }) {
   const previousReload = useRef(reLoad);
   const { loading, error, data, refetch } = useQuery(GET_ALL_GROUPS, {
-    fetchPolicy: 'cache-first', // Unikalne cache dzięki keyArgs
+    fetchPolicy: "cache-first",
   });
 
   useEffect(() => {
     if (reLoad !== previousReload.current) {
-      console.log('Reloading events...');
-      refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
-      previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
+      refetch();
+      previousReload.current = reLoad;
     }
   }, [reLoad]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data)
+  console.log(data);
 
   return (
     <div>
@@ -52,7 +51,9 @@ function AllGroups({ userUuid, reLoad}) {
         data.allgroups
           .slice()
           .reverse()
-          .map((group) => <Group key={group.uuid} group={group} userUuid={userUuid} />)
+          .map((group) => (
+            <Group key={group.uuid} group={group} userUuid={userUuid} />
+          ))
       ) : (
         <p>No events available.</p>
       )}

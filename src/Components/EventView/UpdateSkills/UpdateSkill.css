@@ -1,0 +1,12 @@
+.update-skills {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  padding-top: 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1100;
+  border-radius: 15px;
+}

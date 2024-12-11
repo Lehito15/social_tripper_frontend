@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import '../CreatePost/CreatePost.css';
-import PostOwner from '../PostPage/PostOwner';
-import AddMedia from '../CreatePost/AddMedia.jsx';
-import Select from 'react-select';
-import { sendToBackend } from '../../Utils/helper.js';
+import React, { useState } from "react";
+import "../CreatePost/CreatePost.css";
+import PostOwner from "../PostPage/PostOwner/PostOwner.jsx";
+import AddMedia from "./AddMedia/AddMedia.jsx";
+import { sendToBackend } from "../../Utils/helper.js";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 
@@ -11,18 +10,42 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [media, setMedia] = useState([]);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState("");
 
   const options = [
-    { value: 'public', label: <><img src={`${process.env.PUBLIC_URL}/public-icon.png`} alt="Public" className="option-icon" /> Public</> },
-    { value: 'private', label: <><img src={`${process.env.PUBLIC_URL}/private-icon.png`} alt="Private" className="option-icon" /> Private</> }
+    {
+      value: "public",
+      label: (
+        <>
+          <img
+            src={`${process.env.PUBLIC_URL}/public-icon.png`}
+            alt="Public"
+            className="option-icon"
+          />{" "}
+          Public
+        </>
+      ),
+    },
+    {
+      value: "private",
+      label: (
+        <>
+          <img
+            src={`${process.env.PUBLIC_URL}/private-icon.png`}
+            alt="Private"
+            className="option-icon"
+          />{" "}
+          Private
+        </>
+      ),
+    },
   ];
 
   const handleAddMedia = (file) => {
     const newMediaItem = {
-      type: file.type.includes('image') ? 'image' : 'video',
+      type: file.type.includes("image") ? "image" : "video",
       src: URL.createObjectURL(file),
-      file: file
+      file: file,
     };
     setMedia((prevMedia) => [...prevMedia, newMediaItem]);
   };
@@ -36,17 +59,14 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
   };
 
   const uploadPost = async () => {
-    if (isSubmitting) return; // Prevent submitting if already submitting
+    if (isSubmitting) return;
     setIsSubmitting(true);
 
-    // Make sure there's either a description or media before submitting
-    if (media.length === 0 && description === '') {
+    if (media.length === 0 && description === "") {
       alert("Please provide content or media for the post");
-      setIsSubmitting(false); // Reset submitting state
+      setIsSubmitting(false);
       return;
     }
-
-    
 
     const formData = new FormData();
     let postDTO = eventUuid
@@ -59,38 +79,40 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
           event: { uuid: eventUuid },
         }
       : groupUuid
-      ? {
-          post: {
+        ? {
+            post: {
+              content: description,
+              isPublic: true,
+              account: { uuid: userUuid },
+            },
+            group: { uuid: groupUuid },
+          }
+        : {
             content: description,
             isPublic: true,
             account: { uuid: userUuid },
-          },
-          group: { uuid: groupUuid },
-        }
-      : {
-          content: description,
-          isPublic: true,
-          account: { uuid: userUuid },
-        };
+          };
 
-    formData.append('postDTO', new Blob([JSON.stringify(postDTO)], { type: 'application/json' }));
+    formData.append(
+      "postDTO",
+      new Blob([JSON.stringify(postDTO)], { type: "application/json" })
+    );
 
-    media.forEach((item) => formData.append('multimedia', item.file));
+    media.forEach((item) => formData.append("multimedia", item.file));
 
     const endpoint = eventUuid
       ? `posts/event-post`
       : groupUuid
-      ? `posts/group-post`
-      : `posts`;
+        ? `posts/group-post`
+        : `posts`;
 
     try {
-      const data = await sendToBackend(endpoint, 'POST', formData);
-      console.log('Post created:', data);
-      onClose(); // Close the modal after successful post creation
+      const data = await sendToBackend(endpoint, "POST", formData);
+      onClose();
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     } finally {
-      setIsSubmitting(false); // Enable submit button after process
+      setIsSubmitting(false);
     }
   };
 
@@ -106,11 +128,11 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
       )}
 
       <div className="overlay"></div>
-      <div className='create-post-container'>
+      <div className="create-post-container">
         <>
-          <div className='create-post-header'>
-            <h2 className='create-post-title'>Create Post</h2>
-            <img 
+          <div className="create-post-header">
+            <h2 className="create-post-title">Create Post</h2>
+            <img
               className="close-icon-post"
               src={`${process.env.PUBLIC_URL}/close.png`}
               onClick={onClose}
@@ -118,33 +140,40 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
             />
           </div>
 
-          <div className='post-owner'>
+          <div className="post-owner">
             <PostOwner owner={owner} />
             {/* <Select classNamePrefix="custom-select" options={options} defaultValue={options[0]} isSearchable={false} /> */}
           </div>
 
           <textarea
-            className='post-textarea'
+            className="post-textarea"
             placeholder="What's on your mind?"
             value={description}
             onChange={handleContentChange}
           />
 
-          <div className='media-prewview'>
+          <div className="media-prewview">
             {displayedMedia.map((mediaItem, index) => (
               <div key={index} className="media-item">
-                {mediaItem.type === 'image' ? (
+                {mediaItem.type === "image" ? (
                   <img
-                    className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? ' blurred' : ''}`}
+                    className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? " blurred" : ""}`}
                     src={mediaItem.src}
                     alt={`Post ${index + 1} Image`}
                   />
                 ) : (
                   <video
-                    className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? ' blurred' : ''}`}
+                    className={`uploaded-media index${index}${index === 5 && remainingCount > 0 ? " blurred" : ""}`}
                     controls
                   >
-                    <source src={mediaItem.src} type={mediaItem.src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'} />
+                    <source
+                      src={mediaItem.src}
+                      type={
+                        mediaItem.src.endsWith(".mp4")
+                          ? "video/mp4"
+                          : "video/webm"
+                      }
+                    />
                     Your browser does not support the video tag.
                   </video>
                 )}
@@ -158,13 +187,11 @@ function CreatePost({ onClose, owner, eventUuid, groupUuid, userUuid }) {
             ))}
 
             {remainingCount > 0 && (
-              <div className="more-count">
-                +{remainingCount}
-              </div>
+              <div className="more-count">+{remainingCount}</div>
             )}
           </div>
 
-          <div className='media'>
+          <div className="media">
             <AddMedia addMedia={handleAddMedia} uploadPost={uploadPost} />
           </div>
         </>

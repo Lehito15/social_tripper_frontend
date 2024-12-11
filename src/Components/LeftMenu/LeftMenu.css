@@ -1,14 +1,12 @@
 .left-menu {
-  background-color: #ffffff; /* Kolor tła */
+  background-color: #ffffff;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
   height: 100vh;
   width: 320px;
 
- 
   position: fixed;
   top: 0;
   left: 0;
-  /* display: flex; */
   align-items: center;
   overflow-y: auto;
   overflow-x: hidden;
@@ -17,80 +15,64 @@
   overflow-y: hidden;
 }
 
-/* .left-menu:hover {
-  overflow-y: overlay;
-  width: 265px;
-  transition: 0;
-} */
-
 .logo {
-  width: 100%; /* Szerokość logo na 100% kontenera */
-  height: 70px; /* Wysokość automatyczna */
+  width: 100%;
+  height: 70px;
   cursor: pointer;
-  /* margin-bottom: 2vh; Odstęp poniżej logo z użyciem jednostek viewportowych */
 }
 
 .logo-container {
-  /* height: 8.5vh; Logo zajmuje 8.5% wysokości */
   margin-left: 36px;
   margin-right: 36px;
 }
 
 .profile-statistics {
-  /* height: 27.5vh; Statystyki zajmują 27.5% wysokości */
-  width: 100%; /* Opcjonalnie, aby zająć całą szerokość kontenera */  
+  width: 100%;
 }
 
 .menu-content {
-  /* height: 44vh; Menu zajmuje 44% wysokości */
   top: 51px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Równomierne rozmieszczenie elementów */
+  justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .nav-container {
-  margin-top: 20px; /* Odstęp od góry */
+  margin-top: 20px;
   flex-grow: 1;
   margin-bottom: 20px;
 }
 
-.menu-content-down{
-  padding-top: 70px; /* Odstęp od góry */
+.menu-content-down {
+  padding-top: 70px;
   flex-grow: 1;
 }
 
-
-
 nav {
-  height: 100%; /* Umożliwia zajmowanie całej wysokości kontenera */
+  height: 100%;
   display: flex;
   width: 100%;
-  align-items: center; /* Centruje elementy w pionie, jeżeli jest to potrzebne */
+  align-items: center;
 }
 
-.menu-content ul, .menu-content-down ul {
-   
+.menu-content ul,
+.menu-content-down ul {
   list-style: none;
   display: flex;
-  flex-direction: column; /* Ułożenie elementów w kolumnie */
-  justify-content: space-between; /* Równomierne rozmieszczenie elementów */
-  margin: 0; /* Usuń marginesy listy */
-}
-
-/* .menu-content ul li {
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0;
-} */
+}
 
 .menu-link {
   text-decoration: none;
-  color: rgb(0, 0, 0); /* Domyślny kolor linków */
+  color: rgb(0, 0, 0);
   font-size: 18px;
-  line-height:22.63px;
+  line-height: 22.63px;
   display: flex;
-  justify-content: start; /* Wyrównaj tekst i ikonkę do początku */
+  justify-content: start;
   align-items: center;
   width: 160px;
   height: 100%;
@@ -98,39 +80,39 @@ nav {
 }
 
 .menu-item {
-  display: flex; /* Flex dla ikony i tekstu */
-  align-items: center; /* Wyrównanie pionowe */
+  display: flex;
+  align-items: center;
   margin-top: 20px;
   margin-left: 0;
 
   height: 100%;
   width: 100%;
-  
 }
 
-.menu-item .text, .text_events {
+.menu-item .text,
+.text_events {
   margin-left: 15.5%;
   white-space: nowrap;
 }
-ol, ul{
+ol,
+ul {
   padding-left: 36px;
 }
 
 .menu-link.active .text {
-  font-weight: 500; /* Ustawia pogrubienie tekstu aktywnego elementu */
+  font-weight: 500;
 }
 .hidden {
   display: none;
 }
 
 .menu-item .icon {
-  /* margin-right: 1vw; Odstęp od tekstu z użyciem jednostek viewportowych */
-  width: 20px; /* Skalująca się szerokość ikony */
-  height: 20px; /* Skalująca się wysokość ikony */
+  width: 20px;
+  height: 20px;
   margin-right: 0;
 }
 
-.menu-item .icon-active-container{
+.menu-item .icon-active-container {
   background-color: #000000;
   border-radius: 50%;
   width: 34px;
@@ -139,10 +121,9 @@ ol, ul{
   justify-content: center;
   align-items: center;
   box-shadow: 0px 0px 0px 3px rgba(189, 242, 113, 1);
-
 }
 
-.icon-container{
+.icon-container {
   width: 34px;
   height: 34px;
   display: flex;
@@ -150,19 +131,12 @@ ol, ul{
   align-items: center;
 }
 
-
-
-.menu-content-down {
-  /* height: 20vh; Dolne menu zajmuje 20% wysokości */
-}
-
 .left-menu:hover {
-  overflow-y: overlay; /* Pasek pojawia się po najechaniu */
+  overflow-y: overlay;
 }
 
-/* Pasek przewijania dla Chrome/Safari */
 .left-menu::-webkit-scrollbar {
-  width: 8px; /* Wąski pasek przewijania */
+  width: 8px;
 }
 
 .left-menu::-webkit-scrollbar-thumb {
@@ -171,72 +145,58 @@ ol, ul{
 }
 
 .left-menu::-webkit-scrollbar {
-  width: 8px; /* Szerokość paska przewijania */
-  opacity: 0; /* Ukrywa pasek przewijania domyślnie */
-  transition: opacity 0.3s ease; /* Płynne przejście */
+  width: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Uchwyt paska przewijania */
 .left-menu::-webkit-scrollbar-thumb {
-  background-color: #888; /* Kolor uchwytu */
-  border-radius: 30px; /* Okrągły kształt uchwytu */
+  background-color: #888;
+  border-radius: 30px;
 }
 
-/* Tor paska przewijania */
 .left-menu::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Kolor toru */
+  background-color: #f1f1f1;
 }
 
-/* Ukrywa strzałki */
 .left-menu::-webkit-scrollbar-button {
-  display: none; /* Ukrywa strzałki */
+  display: none;
 }
 
-/* Wyświetla pasek przewijania tylko na hover */
 .left-menu:hover::-webkit-scrollbar {
-  opacity: 1; /* Wyświetla pasek przewijania po najechaniu */
+  opacity: 1;
 }
 .left-menu::-webkit-scrollbar-track {
-  background-color: transparent; /* Ukrycie tła paska */
+  background-color: transparent;
 }
 
-
-
-
-@media (-webkit-device-pixel-ratio: 1.5){
-  .left-menu{
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .left-menu {
     width: 250px;
-    transition: all 0s
+    transition: all 0s;
   }
   .left-menu:hover {
     overflow-y: overlay;
     width: 258px;
-
   }
 }
 
-@media (-webkit-device-pixel-ratio: 1.25){
-  .left-menu{
-    /* width: 250px; */
-    transition: all 0s
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .left-menu {
+    transition: all 0s;
   }
   .left-menu:hover {
     overflow-y: overlay;
     width: 328px;
-
   }
 }
-
 
 @media screen and (max-width: 1300px) {
   .menu-link {
     font-size: 15px;
   }
   .menu-item .icon {
-    /* margin-right: 1vw; Odstęp od tekstu z użyciem jednostek viewportowych */
-    width: 17px; /* Skalująca się szerokość ikony */
-    height: 17px; /* Skalująca się wysokość ikony */
+    width: 17px;
+    height: 17px;
   }
 }
-
-

@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Event from '../Event/Event';
-import Group from '../Group/Group';
+import React, { useEffect, useRef, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import Group from "../Group/Group";
 
-
-function UserGroups({userUuid, reLoad}) {
+function UserGroups({ userUuid, reLoad }) {
   const previousReload = useRef(reLoad);
 
   const GET_USER_GROUPS = gql`
   query GetAllEvents {
     usergroups @rest(type: "Group", path: "users/${userUuid}/groups") {
-      uuid
+     uuid
       name
       isPublic
       homePageUrl
@@ -18,7 +16,7 @@ function UserGroups({userUuid, reLoad}) {
       numberOfMembers
       iconUrl
       locationLongitude
-        locationLatitude
+      locationLatitude
       owner {
         uuid
         nickname
@@ -33,20 +31,19 @@ function UserGroups({userUuid, reLoad}) {
   }
 `;
   const { loading, error, data, refetch } = useQuery(GET_USER_GROUPS, {
-    variables: { userUuid}, // Dynamiczna ścieżka
-    fetchPolicy: 'cache-first', // Unikalne cache dzięki keyArgs
+    variables: { userUuid },
+    fetchPolicy: "cache-first",
   });
   useEffect(() => {
     if (reLoad !== previousReload.current) {
-      console.log('Reloading events...');
-      refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
-      previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
+      refetch();
+      previousReload.current = reLoad;
     }
   }, [reLoad]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data.usergroups)
+  console.log(data.usergroups);
 
   return (
     <div>
@@ -54,7 +51,9 @@ function UserGroups({userUuid, reLoad}) {
         data.usergroups
           .slice()
           .reverse()
-          .map((group) => <Group key={group.uuid} group={group} userUuid={userUuid} />)
+          .map((group) => (
+            <Group key={group.uuid} group={group} userUuid={userUuid} />
+          ))
       ) : (
         <p>No groups available.</p>
       )}

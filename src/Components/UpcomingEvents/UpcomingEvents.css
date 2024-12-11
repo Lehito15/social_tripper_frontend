@@ -1,30 +1,35 @@
-.upcomming-events-container{
-  position: fixed;                
-  top: 63px;                      
-  right: 20px;                       
+.upcomming-events-container {
+  position: fixed;
+  top: 63px;
+  right: 20px;
   width: 300px;
   height: 85vh;
-  background-color: white;                               
-  border-radius: 10px;      
+  background-color: white;
+  border-radius: 10px;
   box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.25);
-  z-index: 1000;                
-  overflow-y: auto;               
-  overflow-x: hidden;             
+  z-index: 1000;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px;
-  visibility: visible; 
+  visibility: visible;
   text-align: left;
 }
 
-.upcomming-events{
+.upcomming-events {
   margin-right: 0;
+  margin-left: 5px;
 }
-.upcomming-events-container .elevation{
+.upcomming-events-container .elevation {
   margin-top: 18px;
   margin-bottom: 10px;
 }
 
-.upcomming-events-container .event-about{
+.upcomming-events-container .event-about {
   padding-bottom: 0;
+}
+.upcomming-events-container .last-trip-container .event-card {
+  /* margin: 10px auto; */
+  padding-right: 8px;
 }

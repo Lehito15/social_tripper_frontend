@@ -1,8 +1,12 @@
-.post-details-photo-slider{
+.post-details-photo-slider {
   height: 71%;
 }
 
-.relation-map-container{
+.relation-map-container {
   overflow: hidden;
   height: 29%;
+}
+
+.relation-details-container {
+  width: 100%;
 }

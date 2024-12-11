@@ -1,0 +1,15 @@
+.rule-item {
+  width: 100%;
+  font-family: "Source Sans 3", serif;
+}
+
+.rule-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.rule-item .text-decription {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}

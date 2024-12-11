@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import Post from '../Post';
+import React, { useEffect, useRef, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import Post from "../Post/Post";
 
 const GET_NEWEST_POSTS = gql`
   query GetNewestPosts {
@@ -26,28 +26,26 @@ const GET_NEWEST_POSTS = gql`
 function AllPosts({ openPost, closePost, userUuid, userIcon, reLoad }) {
   const previousReload = useRef(reLoad);
   const { loading, error, data, refetch } = useQuery(GET_NEWEST_POSTS, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: "cache-first",
     context: {
-      cacheKey: 'newestPosts', // Unikalny klucz dla pamięci podręcznej
+      cacheKey: "newestPosts",
     },
   });
 
   useEffect(() => {
     if (reLoad !== previousReload.current) {
-      console.log('Reloading events...');
-      refetch(); // Odświeżamy dane, jeśli reLoad się zmienił
-      previousReload.current = reLoad; // Zaktualizuj poprzednią wartość reLoad
+      refetch();
+      previousReload.current = reLoad;
     }
   }, [reLoad]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data)
+  console.log(data);
 
   return (
     <div>
       {data?.postsAll
-        // .filter(post => post.isPublic) // Filtracja postów, tylko te, które mają isPublic === true
         .slice()
         .reverse()
         .map((post) => (

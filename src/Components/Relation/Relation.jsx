@@ -1,17 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import '../Relation/Relation.css';
-import '../PostPage/Post.css';
-import Slider from '../PostPage/Slider.jsx'
-import PostOwner from '../PostPage/PostOwner.jsx';
-import PostReaction from '../PostPage/PostReactions.jsx';
-import MapRelation from './MapRelation.jsx';
-import WriteComment from '../PostPage/WriteComment.jsx';
+import React, { useState, useEffect, useRef } from "react";
+import "../Relation/Relation.css";
 
-function Relation({post, openRelation}){
+import Slider from "../PostPage/Slider/Slider.jsx";
+import PostOwner from "../PostPage/PostOwner/PostOwner.jsx";
+import MapRelation from "./MapRelation/MapRelation.jsx";
+
+function Relation({ post, openRelation }) {
   const [postHeight, setPostHeight] = useState(null);
   const containerRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  console.log(post)
+  const dropdownRef = useRef(null);
+  const [showOptions, setShowOptions] = useState(false); // Nowy stan dla opcji
 
   const handleSlideChange = (newIndex) => {
     setSelectedIndex(newIndex);
@@ -19,99 +18,131 @@ function Relation({post, openRelation}){
 
   const handleMarkerClick = (markerIndex) => {
     console.log(markerIndex);
-    setSelectedIndex(markerIndex);  
+    setSelectedIndex(markerIndex);
   };
 
-  // const multimedia = [
-  //   '					https://socialtripperstorage.blob.core.windows.net/blob/groups%2Fe2334b5b-94e5-4319-ae2a-0c6c9ad595de%2F3f535079-c366-4cb7-90bd-1c390afa5f4b.jpg',
-  //   '	https://socialtripperstorage.blob.core.windows.net/blob/users%2F7bd02457-71ca-4639-b766-8b5c256c06fc%2Feac4f622-3cbe-47b0-873f-e1d20944c9c2.jpg'
-  // ]
-
-  const multimedia = post?.multimedia?.map((item) => item?.multimediaUrl).filter(Boolean);
+  const multimedia = post?.multimedia
+    ?.map((item) => item?.multimediaUrl)
+    .filter(Boolean);
   const locations = post.multimedia.map((item, index) => ({
-    id: index, // Use the index as the id
-    position: [item.latitude, item.longitude] // Array of [latitude, longitude]
+    id: index,
+    position: [item.latitude, item.longitude],
   }));
-  
-  console.log(locations);
-  
-  console.log(multimedia)
 
- 
+  const toggleOptions = () => {
+    setShowOptions(!showOptions);
+  };
+
+  const reportContent = () => {
+    alert("Content reported!");
+    setShowOptions(false);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowOptions(false);
+    }
+  };
 
   useEffect(() => {
     const calculateHeight = async () => {
-      const maxWidth = containerRef.current ? containerRef.current.offsetWidth  : 868; // Użycie offsetWidth kontenera, jeśli jest dostępny
+      const maxWidth = containerRef.current
+        ? containerRef.current.offsetWidth
+        : 868;
 
-      
-      if ( multimedia.length > 0) {
+      if (multimedia.length > 0) {
         const mediaHeights = await Promise.all(
           multimedia.map((mediaItem) => {
-            if (mediaItem.type === 'image') {
+            if (mediaItem.type === "image") {
               return new Promise((resolve) => {
                 const img = new Image();
                 img.src = mediaItem.src;
                 img.onload = () => {
-                  const scaledHeight = (img.naturalHeight / img.naturalWidth) * maxWidth;
-                  resolve(Math.min(scaledHeight, 700)); // Ograniczamy do maksymalnej wysokości 600
+                  const scaledHeight =
+                    (img.naturalHeight / img.naturalWidth) * maxWidth;
+                  resolve(Math.min(scaledHeight, 700));
                 };
               });
-            } else if (mediaItem.type === 'video') {
-              return Promise.resolve(600); // Wysokość dla wideo
+            } else if (mediaItem.type === "video") {
+              return Promise.resolve(600);
             }
-            return Promise.resolve(450); // Domyślna wysokość
+            return Promise.resolve(450);
           })
         );
-        const minHeight = Math.min(...mediaHeights); // Minimalna wysokość dla mediów
-        console.log(minHeight)
+        const minHeight = Math.min(...mediaHeights);
+        console.log(minHeight);
         setPostHeight(minHeight);
       } else {
-        
-        setPostHeight(0); // Jeśli brak mediów, wysokość to 0
+        setPostHeight(0);
       }
     };
 
     calculateHeight();
   }, []);
-  console.log('post');
-  console.log(post.postMultimediaDTO)
-  console.log(postHeight)
   const maxChars = 205;
-  console.log(post.event)
 
-  return(
-  <div className='relation-container' style={{ minHeight: postHeight }} ref={containerRef}>
-    <div className='post-owner-container'>
-     {post.event && ( <PostOwner owner={post.event} date={post.dateOfPost} status={"option"}  />)}
-      <div className="more-options-button">
-        <img 
-          className="more-options"
-          src={`${process.env.PUBLIC_URL}/more.png`}
-        />
+  return (
+    <div
+      className="relation-container"
+      style={{ minHeight: postHeight }}
+      ref={containerRef}
+    >
+      <div className="post-owner-container">
+        {post.event && (
+          <PostOwner
+            owner={post.event}
+            date={post.dateOfPost}
+            status={"option"}
+          />
+        )}
+        <div className="more-options-button">
+          <img
+            className="more-options"
+            src={`${process.env.PUBLIC_URL}/more.png`}
+            onClick={toggleOptions}
+            alt="More options"
+          />
+          {showOptions && (
+            <div
+              className="leave-event"
+              onClick={reportContent}
+              ref={dropdownRef}
+            >
+              <p className="leave-event-text">Report Content</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="relation">
+        <div
+          className="slider-container"
+          style={{ height: postHeight || "300px" }}
+        >
+          {postHeight !== null && multimedia.length > 0 && (
+            <Slider
+              multimedia={multimedia}
+              postHeight={postHeight}
+              onSlideChange={handleSlideChange}
+              markIndex={selectedIndex}
+              openRelation={openRelation}
+              relation={post}
+            />
+          )}
+        </div>
+        <div
+          className="map-container-relation"
+          style={{ height: postHeight || "300px" }}
+        >
+          <MapRelation
+            locations={locations}
+            selectedIndex={selectedIndex}
+            onMarkerClick={handleMarkerClick}
+            isRelation={true}
+          />
+        </div>
       </div>
     </div>
-   
-    <div className='relation'  >
-        <div className= 'slider-container'  style={{ height: postHeight || '300px' }}>
-        {postHeight !== null &&  multimedia.length > 0 && (
-        <Slider multimedia={multimedia} postHeight={postHeight} onSlideChange={handleSlideChange} markIndex={selectedIndex} openRelation={openRelation} relation={post} />
-        
-
-        )}
-        </div>
-        <div className='map-container-relation' style={{ height: postHeight || '300px' }} >
-            <MapRelation locations={locations} selectedIndex={selectedIndex} onMarkerClick={handleMarkerClick}  isRelation={true}  />
-        </div>
-    </div>
-    {/* <div className='reactions-conteiner'>
-      <PostReaction reactions={post.reactionsNumber} comments={post.commentsNumber} />
-    </div>
-    <div className='comment-container'>
-      <WriteComment owner={{nickname:'Kamil', profilePictureUrl: 'https://fwcdn.pl/ppo/48/41/2384841/409951.1.jpg'}} date={post.date} status={"option"} />
-    </div> */}
-  </div>
-
   );
-
 }
 export default Relation;

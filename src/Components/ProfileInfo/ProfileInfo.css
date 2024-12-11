@@ -1,6 +1,6 @@
 .profile-user-info {
   width: 900px;
-  height: 100vh; /* Pełna wysokość widoku */
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -11,20 +11,14 @@
 
 .profile-select {
   height: 80px;
-
-  top: 0; /* Ustawia element „sticky” przy górnej krawędzi */
-  /* Utrzymuje tło dla widoczności przy przewijaniu */
+  top: 0; 
   z-index: 1;
   margin-bottom: 18px;
-  margin-top: 20px; /* Opcjonalne marginesy */
+  margin-top: 20px; 
 }
 
 .different-profile-info {
-  /* flex-grow: 1; */
-  /* Tylko ta sekcja przewija się */
   margin-top: 10px;
-  /* padding-left: 18px;
-  padding-right: 18px */
   margin-left: 18px;
   margin-right: 18px;
 }

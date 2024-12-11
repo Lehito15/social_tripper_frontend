@@ -1,71 +1,71 @@
 .search-bar-container {
   display: flex;
-  align-items: center; /* Wyśrodkowanie w pionie */
-  justify-content: center; /* Wyśrodkowanie horyzontalne elementu głównego */
+  align-items: center;
+  justify-content: center;
 
   color: rgba(0, 0, 0, 0.5);
   margin-left: 8px;
 
-  width: 900px; /* Wypełnia całą dostępną szerokość */
-  height: 100%; /* Dopasowanie do wysokości */
-  /* padding: 0 15px; Minimalny padding z obu stron */
-  box-sizing: border-box; /* Uwzględnij padding w szerokości */
+  width: 900px;
+  height: 100%;
+  box-sizing: border-box;
   justify-content: space-between;
 }
 
 .search-bar {
-  position: relative; /* Pozycjonowanie relatywne dla ikonki */
+  position: relative;
   display: flex;
   align-items: center;
 }
 
 .search-icon {
-  position: absolute; /* Pozycjonowanie absolutne względem kontenera */
-  left: 10px; /* Odległość od prawej krawędzi pola */
-  width: 20px; /* Szerokość ikony */
-  height: 20px; /* Wysokość ikony */
-  pointer-events: none; /* Wyłączenie interakcji z ikoną */
+  position: absolute;
+  left: 10px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
   opacity: 0.5;
 }
 
 .trip-button {
-  
-  display: flex; /* Użycie flexbox do wyśrodkowania zawartości */
-  align-items: center; /* Wyśrodkowanie w pionie */
-  justify-content: center; 
-  margin-right :10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 10px;
   width: 166px;
   height: 40px;
-  background-color: #000000; /* Kolor przycisku */
-  color: #B0E26A;
+  background-color: #000000;
+  color: #b0e26a;
   position: relative;
 
-  
-  border-radius: 30px; /* Zaokrąglone rogi przycisku */
+  border-radius: 30px;
   cursor: pointer;
   font-size: 16px;
 }
 
+.trip-button:hover {
+  -webkit-box-shadow: 0px 0px 2px 2px #b0e26a;
+  -moz-box-shadow: 0px 0px 2px 2px #b0e26a;
+  box-shadow: 0px 0px 2px 2px #b0e26a;
+}
+
 .search-button:hover {
-  background-color: #0056b3; /* Zmiana koloru przycisku po najechaniu */
+  background-color: #0056b3;
 }
 .icon {
-  margin-right: 20px;
+  /* margin-right: 20px; */
   width: 20px;
   height: 20px;
 }
 
-
 @media (-webkit-device-pixel-ratio: 1.5) {
-  .search-bar-container{
+  .search-bar-container {
     width: 600px;
   }
 }
 
 @media (-webkit-device-pixel-ratio: 1.25) {
-  .search-bar-container{
+  .search-bar-container {
     width: 700px;
   }
-
 }
-

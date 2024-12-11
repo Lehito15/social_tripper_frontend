@@ -1,0 +1,13 @@
+.comment-conteiner .reaction-icon {
+  height: 16px;
+  width: 16px;
+}
+
+.comment-conteiner .message-left {
+  margin-bottom: 0;
+}
+
+.comment-conteiner .post-reaction-container {
+  height: auto;
+  padding-left: 9px;
+}

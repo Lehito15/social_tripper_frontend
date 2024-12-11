@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import { sendToBackend } from '../../Utils/helper.js';
-import Relation from '../Relation/Relation.jsx';
+import React, { useEffect, useState } from "react";
+import { gql, useQuery } from "@apollo/client";
+import { sendToBackend } from "../../Utils/helper.js";
+import Relation from "../Relation/Relation.jsx";
 
-
-
-function UserMemories({userUuid}) {
+function UserMemories({ userUuid, openRelation }) {
   const [finishedEvents, setFinishedEvents] = useState([]);
   const [relations, setRelations] = useState([]);
 
@@ -26,19 +24,18 @@ query GetEvents($userUuid: String!) {
 `;
 
   const { loading, error, data, refetch } = useQuery(GET_Events_user, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: "cache-first",
   });
-
-  // Filter finished events
   useEffect(() => {
     if (data?.eventsUserFinish) {
-      const finished = data.eventsUserFinish.filter((event) => event.eventStatus.status === 'finished');
+      const finished = data.eventsUserFinish.filter(
+        (event) => event.eventStatus.status === "finished"
+      );
       setFinishedEvents(finished);
     }
   }, [data]);
-  console.log(finishedEvents)
+  console.log(finishedEvents);
 
-  // Fetch relations for finished events
   useEffect(() => {
     const fetchMultimedia = async () => {
       if (finishedEvents.length > 0) {
@@ -47,35 +44,40 @@ query GetEvents($userUuid: String!) {
             finishedEvents.map(async (event) => {
               const response = await sendToBackend(
                 `events/${event.uuid}/multimedia`,
-                'GET',
+                "GET",
                 null
               );
-              return { event: {nickname: event.name, profilePictureUrl: event.iconUrl, homePageUrl: event.homePageUrl}, multimedia: response }; // Assuming response is a list of EventMultimediaMetadataDTO
+              return {
+                event: {
+                  nickname: event.name,
+                  profilePictureUrl: event.iconUrl,
+                  homePageUrl: event.homePageUrl,
+                },
+                multimedia: response,
+              };
             })
           );
-          setRelations(multimediaResponses); // Store the list of multimedia per event
+          setRelations(multimediaResponses);
         } catch (err) {
-          console.error('Error fetching multimedia:', err);
+          console.error("Error fetching multimedia:", err);
         }
       }
     };
-  
+
     fetchMultimedia();
   }, [finishedEvents]);
-  
 
   if (loading) return <p>Loading events...</p>;
   if (error) return <p>Error loading events: {error.message}</p>;
 
-  console.log(relations)
+  console.log(relations);
 
   return (
     <div className="Post-page">
       <h1>Your relations</h1>
       {finishedEvents.length > 0 && relations.length > 0 ? (
         relations.map((relationData) => (
-          <Relation post={relationData} />
-      
+          <Relation post={relationData} openRelation={openRelation} />
         ))
       ) : (
         <p>No relations for finished events found.</p>

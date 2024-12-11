@@ -1,19 +1,15 @@
-/* Stylizacja dla głównej zawartości */
 .main-content {
   position: absolute;
-  top: 70px; /* Poniżej paska wyszukiwania */
-  left: 320px; /* Przesunięcie o szerokość lewego menu */
-  right: 300px; /* Przesunięcie o szerokość prawego menu */
+  top: 70px;
+  left: 320px;
+  right: 300px;
   background: rgba(240, 242, 245, 1);
   display: flex;
   justify-content: center;
-  /* width: calc(100% - 550px); Główna szerokość z uwzględnieniem obu paneli */
-  min-width: 700px; /* Minimalna szerokość treści */
-  transition: all 0.3s ease; /* Animacja zmian */
-  /* height: 100%; */
+  min-width: 700px;
+  transition: all 0.3s ease;
 }
 
-/* Lewy panel */
 .left-menu {
   width: 320px;
   height: 100vh;
@@ -24,7 +20,6 @@
   transition: all 0.3s ease;
 }
 
-/* Prawy panel */
 .right-menu {
   width: 300px;
   height: 70px;
@@ -46,52 +41,26 @@
   transition: all 0.3s ease;
 }
 
-/* Pasek wyszukiwania */
 .searchbar {
   position: fixed;
   top: 0;
-  left: 320px; /* Przesunięcie o szerokość lewego menu */
-  right: 300px; /* Przesunięcie o szerokość prawego menu */
+  left: 320px;
+  right: 300px;
   height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
   z-index: 100;
-  /* max-width: calc(100vw - 550px); */
   transition: all 0.3s ease;
 }
 
-.blur-background .main-content,
-.blur-background .left-menu,
-.blur-background .right-menu,
-.blur-background .searchbar,
-.blur-background .right-panel {
- /* position: fixed;  */
-  /* top: 0; */
-  /* left: 0; */
-  /* width: 100%; */
-  /* height: 100vh;  */
-  /* background-color: rgba(0, 0, 0, 0.5); Półprzezroczysta nakładka */
-  /* z-index: 10000099999999999999; Nakładka musi znajdować się nad treścią */
-  /* pointer-events: none; Blokuje interakcje z nakładką, ale pozwala na interakcje z treścią */
-  /* overflow-y: none;
-  position: absolute; */
-  /* opacity: 0.7; */
-}
-
-
-/* Responsywne ukrywanie elementów */
-
-/* Usunięcie paddingów */
-@media (max-width: 1250px  ) and (-webkit-device-pixel-ratio: 1) {
+@media (max-width: 1250px) and (-webkit-device-pixel-ratio: 1) {
   .main-content {
-    /* padding: 0 20px; Zmniejszenie paddingów */
-    width: calc(100% - 570px); /* Dopasowanie do zmniejszających się paddingów */
+    width: calc(100% - 570px);
   }
 }
 
-/* Ukrycie prawego panelu */
 @media (max-width: 1535px) and (-webkit-device-pixel-ratio: 1) {
   .right-menu,
   .rightpanell {
@@ -100,7 +69,7 @@
 
   .main-content {
     right: 0;
-    width: calc(100% - 320px); /* Dopasowanie do braku prawego panelu */
+    width: calc(100% - 320px);
   }
 
   .searchbar {
@@ -109,7 +78,6 @@
   }
 }
 
-/* Ukrycie lewego panelu */
 @media (max-width: 1220px) and (-webkit-device-pixel-ratio: 1) {
   .left-menu {
     display: none;
@@ -118,7 +86,7 @@
   .main-content {
     left: 0;
     top: 70px;
-    width: 100%; 
+    width: 100%;
   }
 
   .searchbar {
@@ -134,15 +102,15 @@
   .left-menu {
     width: 250px;
   }
-  .searchbar{
-    left: 250px
+  .searchbar {
+    left: 250px;
   }
 }
 
-@media (max-width: 1500px) and (-webkit-device-pixel-ratio: 1.5) {
+@media (max-width: 2000px) and (-webkit-device-pixel-ratio: 1.5) {
   .main-content {
-    width: calc(100% - 550px); /* Dopasowanie szerokości */
-    padding: 0 20px;
+    width: calc(100% - 550px);
+    /* padding: 0 20px; */
   }
 }
 
@@ -154,8 +122,7 @@
 
   .main-content {
     right: 0;
-    width: calc(100% - 250px); /* Dopasowanie do braku prawego panelu */
-    padding: 0 20px;
+    width: calc(100% - 250px);
   }
 
   .searchbar {
@@ -182,14 +149,12 @@
   }
 }
 
-@media (max-width: 1000px  ) and (-webkit-device-pixel-ratio: 1.25) {
+@media (max-width: 1000px) and (-webkit-device-pixel-ratio: 1.25) {
   .main-content {
-    /* padding: 0 20px; Zmniejszenie paddingów */
-    width: calc(100% - 570px); /* Dopasowanie do zmniejszających się paddingów */
+    width: calc(100% - 570px);
   }
 }
 
-/* Ukrycie prawego panelu */
 @media (max-width: 1330px) and (-webkit-device-pixel-ratio: 1.25) {
   .right-menu,
   .rightpanell {
@@ -198,16 +163,14 @@
 
   .main-content {
     right: 0;
-    width: calc(100% - 320px); /* Dopasowanie do braku prawego panelu */
+    width: calc(100% - 320px);
   }
 
   .searchbar {
-    /* right: 0; */
     width: calc(100% - 320px);
   }
 }
 
-/* Ukrycie lewego panelu */
 @media (max-width: 1030px) and (-webkit-device-pixel-ratio: 1.25) {
   .left-menu {
     display: none;
@@ -216,7 +179,7 @@
   .main-content {
     left: 0;
     top: 70px;
-    width: 100%; 
+    width: 100%;
   }
 
   .searchbar {
@@ -224,4 +187,3 @@
     width: 100%;
   }
 }
-

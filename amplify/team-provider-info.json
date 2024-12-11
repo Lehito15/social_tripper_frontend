@@ -1,31 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-socialtripperfronten-dev-f4e2b-authRole",
-      "UnauthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-f4e2b-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-f4e2b-authRole",
+      "AuthRoleName": "amplify-socialtripperfronten-dev-841b5-authRole",
+      "UnauthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-841b5-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-841b5-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-socialtripperfronten-dev-f4e2b-deployment",
-      "UnauthRoleName": "amplify-socialtripperfronten-dev-f4e2b-unauthRole",
-      "StackName": "amplify-socialtripperfronten-dev-f4e2b",
-      "StackId": "arn:aws:cloudformation:us-east-1:761018860208:stack/amplify-socialtripperfronten-dev-f4e2b/f9ed8110-a8ba-11ef-b318-122f989a8957",
-      "AmplifyAppId": "d26feg16wwmdk5"
+      "DeploymentBucketName": "amplify-socialtripperfronten-dev-841b5-deployment",
+      "UnauthRoleName": "amplify-socialtripperfronten-dev-841b5-unauthRole",
+      "StackName": "amplify-socialtripperfronten-dev-841b5",
+      "StackId": "arn:aws:cloudformation:us-east-1:761018860208:stack/amplify-socialtripperfronten-dev-841b5/1276e410-b65d-11ef-960f-0e8a44e3fe5f",
+      "AmplifyAppId": "d198456zia4ja8"
     },
     "categories": {
       "auth": {
-        "socialtripperfronten6b651474": {
-          "userPoolId": "us-east-1_wzWATk9X1",
-          "userPoolName": "socialtripperfronten41d0de92_userpool_41d0de92-dev",
-          "webClientId": "3un0a9e1ti72pie1cc7ekh3qo2",
-          "nativeClientId": "3un0a9e1ti72pie1cc7ekh3qo2",
-          "identityPoolId": "us-east-1:9381a3c7-4dfb-4ccd-af77-a12afb12c991",
-          "identityPoolName": "socialtripperfronten41d0de92_identitypool_41d0de92__dev",
-          "allowUnauthenticatedIdentities": false,
-          "authRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-ecdf6-authRole",
-          "authRoleName": "amplify-socialtripperfronten-dev-ecdf6-authRole",
-          "unauthRoleArn": "arn:aws:iam::761018860208:role/amplify-socialtripperfronten-dev-ecdf6-unauthRole",
-          "unauthRoleName": "amplify-socialtripperfronten-dev-ecdf6-unauthRole"
-        }
+        "socialtripperfronteneec6db90": {}
       }
     }
   }

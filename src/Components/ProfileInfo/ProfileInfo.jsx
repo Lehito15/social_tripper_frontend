@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import SelectInfoMenu from "./SelectInfoMenu.jsx";
-import './ProfileInfo.css';
-import { Route, Routes, Navigate } from 'react-router-dom';
-import UserPosts from './UserPosts.jsx';
-import About from './About/About.jsx';
-import UserFollowing from "./UserFollowing.jsx";
-import UserFollowed from "./UserFollowed.jsx";
-import UserEvents from "./UserEvents.jsx";
-import ProfileSkills from "./ProfileSkills.jsx";
-import { gql, useQuery } from '@apollo/client';
-import { sendToBackend } from '../../Utils/helper.js';
+import React, { useState, useEffect } from "react";
+import SelectInfoMenu from "./SelectInfoMenu/SelectInfoMenu.jsx";
+import "./ProfileInfo.css";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
+import UserPosts from "./UserPosts/UserPosts.jsx";
+import About from "./About/About.jsx";
+import UserFollowing from "./UserFollowing/UserFollowing.jsx";
+import UserFollowed from "./UserFollowed/UserFollowed.jsx";
+import UserEvents from "./UseEvents/UserEvents.jsx";
+import ProfileSkills from "./ProfileSkills/ProfileSkills.jsx";
+import { gql, useQuery } from "@apollo/client";
+import { sendToBackend } from "../../Utils/helper.js";
 
 function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   const [myAccount, setMyAccount] = useState(false);
@@ -18,19 +18,26 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   const [isCheckingFollow, setIsCheckingFollow] = useState(true);
   const [isFollowRequested, setIsFollowRequested] = useState(false); // Nowy stan
   const [reload, setReload] = useState(false);
+  const location = useLocation();
 
   const reFresh = () => setReload(!reload);
 
-  console.log(myUuid)
+  console.log(myUuid);
 
   useEffect(() => {
-    let uuid = window.location.pathname.split("/").pop() ; 
-    if(uuid.length < 15){
-      uuid = window.location.pathname.split("/")[2]
+    // Pobierz UUID z bieżącego URL
+    let uuid = location.pathname.split("/").pop();
+    if (uuid.length < 15) {
+      uuid = location.pathname.split("/")[2];
     }
-    setUserUuid(uuid);
-  }, []);
-  console.log(userUuid)
+    console.log(userUuid);
+    console.log(uuid);
+
+    // Ustaw userUuid tylko wtedy, gdy jest inny
+    if (userUuid !== uuid) {
+      setUserUuid(uuid);
+    }
+  }, [location.pathname, userUuid]);
 
   const GET_User = gql`
     query GetEvent($userUuid: String!) {
@@ -65,7 +72,7 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
 
   const { loading, error, data, refetch } = useQuery(GET_User, {
     variables: { userUuid },
-    fetchPolicy: 'network-only',
+    fetchPolicy: "network-only",
     skip: !userUuid,
   });
 
@@ -75,7 +82,7 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
 
   useEffect(() => {
     if (data?.user) {
-      setMyAccount(myUuid === data.user.uuid); 
+      setMyAccount(myUuid === data.user.uuid);
     }
   }, [data, myUuid]);
 
@@ -84,16 +91,24 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
       if (data?.user && myUuid !== data.user.uuid) {
         try {
           setIsCheckingFollow(true);
-  
+
           // Sprawdzanie statusu "is-following"
           const followStatusEndpoint = `users/is-following?followerUUID=${myUuid}&followedUUID=${data.user.uuid}`;
-          const isFollowingResponse = await sendToBackend(followStatusEndpoint, "GET", null);
+          const isFollowingResponse = await sendToBackend(
+            followStatusEndpoint,
+            "GET",
+            null
+          );
           setAreUsersFriends(isFollowingResponse);
-  
+
           // Sprawdzanie "is-follow-requested" tylko jeśli nie obserwuje i konto niepubliczne
           if (!isFollowingResponse && !data.user.isPublic) {
             const followRequestEndpoint = `users/is-follow-requested?followerUUID=${myUuid}&followedUUID=${data.user.uuid}`;
-            const requestResponse = await sendToBackend(followRequestEndpoint, "GET", null);
+            const requestResponse = await sendToBackend(
+              followRequestEndpoint,
+              "GET",
+              null
+            );
             setIsFollowRequested(requestResponse);
           }
         } catch (error) {
@@ -106,12 +121,12 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
         setIsCheckingFollow(false); // Gdy użytkownik to właściciel profilu
       }
     };
-  
+
     checkUserFollow();
   }, [data, myUuid]);
-  
 
-  if (loading || isCheckingFollow) return <p>Loading user data or checking follow status...</p>;
+  if (loading || isCheckingFollow)
+    return <p>Loading user data or checking follow status...</p>;
   if (error) return <p>Error: co jest {error.message}</p>;
   if (!data || !data.user) return <p>No user data available</p>;
 
@@ -122,19 +137,19 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   };
 
   const privateAccount = !myAccount && !areUsersFriends && !data.user.isPublic;
-  console.log('request')
+  console.log("request");
 
-  console.log(isFollowRequested)
+  console.log(isFollowRequested);
 
   return (
     <div className="profile-user-info">
       <div className="profile-select">
-        <SelectInfoMenu 
-          user={data.user} 
-          isMyAccount={myAccount} 
-          myUuid={myUuid} 
-          areFriends={areUsersFriends} 
-          isPublic={data.user.isPublic} 
+        <SelectInfoMenu
+          user={data.user}
+          isMyAccount={myAccount}
+          myUuid={myUuid}
+          areFriends={areUsersFriends}
+          isPublic={data.user.isPublic}
           followRequsetSend={isFollowRequested}
         />
       </div>
@@ -143,35 +158,106 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
         <div className="different-profile-info">
           <Routes>
             <Route path="/" element={<Navigate to="posts" replace />} />
-            <Route path="posts" element={<UserPosts userIcon={userIcon} openPost={openPost} closePost={closePost} />} />
-            <Route path="followers" element={<UserFollowing userUuid={userUuid} myAccount={myAccount}  />} />
-            <Route path="followed" element={<UserFollowed userUuid={userUuid} myAccount={myAccount} />} />
-            <Route path="about" element={<About stats={stats} description={data.user.description} profileInfo={data.user.user} nickname={data.user.nickname} />} />
-            <Route path="trips" element={<UserEvents userUuid={userUuid} owner={data.user} />} />
-            <Route path="skills" element={<ProfileSkills activities={data.user.user.activities} languages={data.user.user.languages} userUuid={data.user.user.uuid} reload={reFresh} />} />
+            <Route
+              path="posts"
+              element={
+                <UserPosts
+                  userIcon={userIcon}
+                  openPost={openPost}
+                  closePost={closePost}
+                />
+              }
+            />
+            <Route
+              path="followers"
+              element={
+                <UserFollowing userUuid={userUuid} myAccount={myAccount} />
+              }
+            />
+            <Route
+              path="followed"
+              element={
+                <UserFollowed userUuid={userUuid} myAccount={myAccount} />
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <About
+                  stats={stats}
+                  description={data.user.description}
+                  profileInfo={data.user.user}
+                  nickname={data.user.nickname}
+                />
+              }
+            />
+            <Route
+              path="trips"
+              element={<UserEvents userUuid={userUuid} owner={data.user} />}
+            />
+            <Route
+              path="skills"
+              element={
+                <ProfileSkills
+                  activities={data.user.user.activities}
+                  languages={data.user.user.languages}
+                  userUuid={data.user.user.uuid}
+                  reload={reFresh}
+                />
+              }
+            />
           </Routes>
         </div>
-      ) : (
-        // Jeżeli konto jest prywatne i nie jestem znajomym, nie pokazuj treści
-        privateAccount ? (
-          isFollowRequested ? (
-            <p>Follow request pending. Please wait for approval.</p>
-          ) : (
-            <p>This account is private. Send a follow request to view content.</p>
-          )
+      ) : // Jeżeli konto jest prywatne i nie jestem znajomym, nie pokazuj treści
+      privateAccount ? (
+        isFollowRequested ? (
+          <p>Follow request pending. Please wait for approval.</p>
         ) : (
-          <div className="different-profile-info">
-            <Routes>
-              <Route path="/" element={<Navigate to="posts" replace />} />
-              <Route path="posts" element={<UserPosts userIcon={userIcon} />} />
-              <Route path="followers" element={<UserFollowing userUuid={userUuid} />} />
-              <Route path="followed" element={<UserFollowed userUuid={userUuid} myAccount={myAccount} />} />
-              <Route path="about" element={<About stats={stats} description={data.user.description} profileInfo={data.user.user} nickname={data.user.nickname} />} />
-              <Route path="trips" element={<UserEvents userUuid={userUuid} owner={data.user} />} />
-              <Route path="skills" element={<ProfileSkills activities={data.user.user.activities} languages={data.user.user.languages} userUuid={data.user.user.uuid} reload={reFresh} />} />
-            </Routes>
-          </div>
+          <p>This account is private. Send a follow request to view content.</p>
         )
+      ) : (
+        <div className="different-profile-info">
+          <Routes>
+            <Route path="/" element={<Navigate to="posts" replace />} />
+            <Route path="posts" element={<UserPosts userIcon={userIcon} />} />
+            <Route
+              path="followers"
+              element={<UserFollowing userUuid={userUuid} />}
+            />
+            <Route
+              path="followed"
+              element={
+                <UserFollowed userUuid={userUuid} myAccount={myAccount} />
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <About
+                  stats={stats}
+                  description={data.user.description}
+                  profileInfo={data.user.user}
+                  nickname={data.user.nickname}
+                />
+              }
+            />
+            <Route
+              path="trips"
+              element={<UserEvents userUuid={userUuid} owner={data.user} />}
+            />
+            <Route
+              path="skills"
+              element={
+                <ProfileSkills
+                  activities={data.user.user.activities}
+                  languages={data.user.user.languages}
+                  userUuid={data.user.user.uuid}
+                  reload={reFresh}
+                />
+              }
+            />
+          </Routes>
+        </div>
       )}
     </div>
   );

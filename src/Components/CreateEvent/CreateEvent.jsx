@@ -1,11 +1,11 @@
-import RegisterSteps from "../UserLogin/Register/RegisterSteps.jsx";
+import RegisterSteps from "../UserLogin/Register/RegisterSteps/RegisterSteps.jsx";
 import { useState } from "react";
 import "./CreateEvent.css";
-import GeneralDetailsEvent from "./GeneralDetailsEvent.jsx";
-import DescriptionAndRules from "./DescriptionAndRules.jsx";
-import RegisterNext from "../UserLogin/Register/RegisterNext.jsx";
-import EventSettings from "./EventSettings.jsx";
-import EventSkills from "./EventSkills.jsx";
+import GeneralDetailsEvent from "./GeneralDetailsEvent/GeneralDetailsEvent.jsx";
+import DescriptionAndRules from "./DescriptionAndRules/DescriptionAndRules.jsx";
+import RegisterNext from "../UserLogin/Register/RegisterNext/RegisterNext.jsx";
+import EventSettings from "./EventSettings/EventSettings.jsx";
+import EventSkills from "./EventSkills/EventSkills.jsx";
 import { sendToBackend } from "../../Utils/helper.js";
 import { useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
@@ -37,6 +37,11 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
 
     if (startDateTime >= endDateTime) {
       alert("The start time must be earlier than the end time.");
+      return;
+    }
+
+    if (eventSettings.maxParticipants && eventSettings?.maxParticipants <= 0) {
+      alert("maxmum  number of participans must be over 0");
       return;
     }
 
@@ -129,22 +134,17 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
       };
     }
 
-    console.log(eventDTO);
-
     if (groupUuid) {
       formData.append(
         "eventDTO",
         new Blob([JSON.stringify(eventDTO)], { type: "application/json" })
       );
     } else {
-      console.log(eventDTO);
       formData.append(
         "event",
         new Blob([JSON.stringify(eventDTO)], { type: "application/json" })
       );
     }
-
-    console.log(generalDetailsEvent.eventImageFile);
 
     if (generalDetailsEvent.eventImageFile && !groupUuid) {
       formData.append("icon", generalDetailsEvent.eventImageFile);
@@ -155,7 +155,6 @@ function CreateEvent({ closeCreateEvent, groupUuid, userUuid }) {
 
     try {
       const data = await sendToBackend(path, "POST", formData);
-      console.log("Event created:", data);
     } catch (error) {
       console.error("Error:", error);
     } finally {

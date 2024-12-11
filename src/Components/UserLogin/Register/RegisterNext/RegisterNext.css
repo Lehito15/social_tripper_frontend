@@ -1,0 +1,54 @@
+.register-next {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding-top: 9px;
+}
+
+.form-buttons {
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-buttons.single-button {
+    justify-content: flex-end;
+}
+
+.next-button {
+    color: #BDF271;
+    background: #000000;
+    border-radius: 44px;
+    width: 121px;
+    height: 42px;
+    font-weight: 600;
+}
+
+.back-button {
+    background: #F0F2F5;
+    border-radius: 44px;
+    width: 121px;
+    height: 42px;
+    border: none;
+    font-weight: 600;
+}
+
+.next-button:hover {
+    box-shadow: 0px 0px 2px 2px #BDF271;
+}
+
+.sign-in {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    width: 100%;
+    display: inline;
+    text-align: center;
+}
+.sign-in-link{
+    text-decoration: underline;
+    cursor: pointer;
+
+}

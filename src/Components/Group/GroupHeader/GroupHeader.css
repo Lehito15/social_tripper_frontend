@@ -1,0 +1,53 @@
+.group-header-container {
+  padding-left: 9px;
+  padding-right: 9px;
+}
+.group-header-container .event-main-info {
+  padding-left: 0;
+}
+.group-name {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.group-name-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.group-header-container .group-header-container {
+  width: 100%;
+}
+
+.group-main-info-details {
+  width: 100%;
+  margin-bottom: 11px;
+}
+
+.members-number {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.activities-languages-friends {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  padding-right: 9px;
+  padding-right: 9px;
+  padding-bottom: 18px;
+}
+
+.group-scope {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.group-name:hover {
+  cursor: pointer;
+}
+
+.group-header-container .activities-languages {
+  padding-bottom: 9px;
+}

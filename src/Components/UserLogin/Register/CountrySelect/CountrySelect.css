@@ -1,0 +1,23 @@
+.custom-option {
+  display: flex;
+  align-items: center;
+}
+
+.fi {
+  width: 24px;
+  height: 16px;
+}
+
+.custom-select-country__control {
+  display: flex;
+  align-items: center;
+}
+
+.custom-select-country__single-value {
+  display: flex;
+  align-items: center;
+}
+
+.custom-select-country__menu {
+  z-index: 1000;
+}

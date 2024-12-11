@@ -1,47 +1,58 @@
 .relation-container {
-    background-color: white;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
-    padding: 9px 18px;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  padding: 9px 18px;
+}
 
-  }
+.relation {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-top: 9px;
+}
 
-  .relation {
-    display: flex; /* Ustawia flexbox */
-    flex-direction: row; /* Ustawia kierunek na poziomy */
-    height: 100%;
-    margin-top: 9px;
-  }
-  
-  .slider-container {
-    flex: 2; /* Zajmuje 2/3 dostępnej przestrzeni */
-    overflow: hidden; /* Ukrywa elementy, które wychodzą poza kontener */
-  }
-  
-  .map-container-relation {
-    flex: 1; /* Zajmuje 1/3 dostępnej przestrzeni */
-    overflow: hidden;
-    height: 100%;
-  }
-  
-  .relation-container {
-    display: flex;
-    flex-direction: column; /* Ustawia kierunek na pionowy */
-    width: 100%;
-  }
-  .map-container-inner{
-    height: 100%;
+.slider-container {
+  flex: 2;
+  overflow: hidden;
+}
 
-  }
+.map-container-relation {
+  flex: 1;
+  overflow: hidden;
+  height: 100%;
+}
 
-  .leaflet-container{
-    height: 100%;
-    z-index: 10;
-  }
+.relation-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.map-container-inner {
+  height: 100%;
+}
 
-  .relation-container .carousel-item img {
-    object-fit: cover;
-    width: 100%;
-  }
-  
+.leaflet-container {
+  height: 100%;
+  z-index: 10;
+}
+
+.relation-container .carousel-item img {
+  width: 100%;
+}
+
+.relation-container .post-owner-container .leave-event {
+  top: 30px;
+  right: 0px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.relation-container .post-owner-container .leave-event-text {
+  margin-left: 0;
+  margin-bottom: 0;
+}

@@ -7,15 +7,15 @@ import "leaflet/dist/leaflet.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 import { Authenticator } from "@aws-amplify/ui-react";
-// import '@aws-amplify/ui-react/styles.css';
 import awsconfig from "./aws-exports";
 import { Amplify } from "aws-amplify";
 import { components } from "./Login";
 import { BrowserRouter as Router } from "react-router-dom";
-import { isMobile } from "react-device-detect"; // Importowanie isMobile
+import { isMobile } from "react-device-detect";
+import { Helmet } from "react-helmet";
 
 const restLink = new RestLink({ uri: "http://52.237.23.55:8080/" });
-// const restLink = new RestLink({ uri: 'http://localhost:8080/' });
+// const restLink = new RestLink({ uri: "http://localhost:8080/" });
 
 const client = new ApolloClient({
   link: restLink,
@@ -24,7 +24,7 @@ const client = new ApolloClient({
       Query: {
         fields: {
           events: {
-            keyArgs: ["path"], // Cache'owanie na podstawie ścieżki
+            keyArgs: ["path"],
           },
         },
       },
@@ -34,17 +34,33 @@ const client = new ApolloClient({
 Amplify.configure(awsconfig);
 
 function RootApp() {
+  if (isMobile) {
+    return (
+      <div className="mobile-app-banner">
+        <p>Download our mobile app or visit from a desktop.</p>
+      </div>
+    );
+  }
+
+  if (window.location.protocol === "https:") {
+    return (
+      <a href="http://socialtripper-cna3btdnckbpazd8.polandcentral-01.azurewebsites.net/">
+        {" "}
+        change https to http in url
+      </a>
+    );
+  }
+
   return (
     <React.StrictMode>
       <ApolloProvider client={client}>
         <Authenticator components={components}>
           <Router>
-            {isMobile && (
-              <div className="mobile-app-banner">
-                <p>Download our mobile app for the best experience! </p>
-              </div>
-            )}
             <App />
+            <Helmet>
+              <meta charSet="utf-8" />
+              <title>SocialTripper</title>
+            </Helmet>
           </Router>
         </Authenticator>
       </ApolloProvider>
