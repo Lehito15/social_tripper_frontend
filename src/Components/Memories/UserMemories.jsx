@@ -17,6 +17,9 @@ query GetEvents($userUuid: String!) {
       eventStatus {
         status
       }
+        owner{
+        uuid
+        }
       isPublic
   
   }
@@ -43,7 +46,7 @@ query GetEvents($userUuid: String!) {
           const multimediaResponses = await Promise.all(
             finishedEvents.map(async (event) => {
               const response = await sendToBackend(
-                `events/${event.uuid}/multimedia`,
+                `events/${event.uuid}/users/${event.owner.uuid}`,
                 "GET",
                 null
               );
@@ -69,6 +72,8 @@ query GetEvents($userUuid: String!) {
 
   if (loading) return <p>Loading events...</p>;
   if (error) return <p>Error loading events: {error.message}</p>;
+  console.log(finishedEvents);
+  console.log("relacje");
 
   console.log(relations);
 

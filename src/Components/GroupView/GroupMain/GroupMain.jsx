@@ -11,6 +11,7 @@ import GroupTrips from "../GroupTrips/GroupTrips.jsx";
 import EventButtons from "../../EventView/EventButtons/EventButtons.jsx";
 import "./GroupMain.css";
 import { useNavigate } from "react-router-dom";
+import GroupReqeust from "../GroupRequests/GroupRequests.jsx";
 
 function GroupMain({
   openCreatePost,
@@ -137,7 +138,7 @@ function GroupMain({
       case 4:
         return <GroupMainMembers group={group} isOwner={isOwner} />;
       case 5: // Nowa zakładka Members requests
-      // return <MembersRequests groupUuid={group.uuid} />;
+        return <GroupReqeust groupUuid={group.uuid} />;
       default:
         return null;
     }
@@ -218,6 +219,7 @@ function GroupMain({
             leaveEvent={handleLeaveGroup}
             sendJoinRequest={sendJoinRequest}
             joinGroup={handleJoinGroup}
+            userUuid={userUuid}
           />
         </div>
       </div>

@@ -46,7 +46,6 @@ function EventMain({
         const uuid = getUuidFromUrl(url);
         setEventUuid(uuid);
 
-        console.log("Fetching membership status...");
         const endpoint = `events/${uuid}/users/${userUuid}/is-member`;
         const response = await sendToBackend(endpoint, "GET", null);
 
@@ -121,7 +120,6 @@ function EventMain({
   const event = data.event;
 
   const updateData = async (body) => {
-    console.log("Updating event data:", body);
     const endpoint = `events/${eventUuid}`;
     await sendToBackend(endpoint, "PATCH", JSON.stringify(body));
   };
@@ -167,14 +165,16 @@ function EventMain({
         );
       case 5:
         return (
-          <EventRelation eventUuid={event.uuid} openRelation={openRelation} />
+          <EventRelation
+            eventUuid={event.uuid}
+            openRelation={openRelation}
+            ownerUuid={event.owner.uuid}
+          />
         );
       default:
         return null;
     }
   };
-
-  console.log(event);
 
   const dynamicOptions = [...options];
   let hasAccess = userStatus === "member" || event.isPublic;

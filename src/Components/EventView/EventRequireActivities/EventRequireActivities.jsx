@@ -8,24 +8,22 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedActivities, setUpdatedActivities] = useState([]);
   const [newActivity, setNewActivity] = useState(null);
-  const [initialActivities, setInitialActivities] = useState([]);
   const [reload, setReload] = useState(false);
-
   console.log(activities);
 
   useEffect(() => {
     const transformedActivities = activities.map((activity) => ({
       name: activity.name || activity.activity.name,
       label: activity.name || activity.activity.name,
-      rating: activity.experience || activity.requiredExperience,
+      rating:
+        activity.experience || activity.requiredExperience || activity.rating,
     }));
     setUpdatedActivities(transformedActivities);
-    setInitialActivities(transformedActivities);
-  }, []);
+  }, [activities]);
+  // console.log(updatedActivities);
 
   const toggleEdit = () => {
     if (isEditing) {
-      setUpdatedActivities(initialActivities);
       setNewActivity(null);
       setReload(!reload);
     }
@@ -33,28 +31,28 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
   };
 
   const handleRatingChange = (index, newRating) => {
-    setUpdatedActivities((prevActivities) => {
-      const updatedList = [...prevActivities];
-      updatedList[index].rating = newRating;
-      return updatedList;
-    });
+    setUpdatedActivities((prevActivities) =>
+      prevActivities.map((activity, i) =>
+        i === index ? { ...activity, rating: newRating } : activity
+      )
+    );
   };
 
   const saveActivities = async () => {
     const formattedActivities = updatedActivities.map((activity) => ({
       experience: activity.rating,
       activity: {
-        name: activity.label,
+        name: activity.name,
       },
     }));
 
     try {
       await updateData({ activities: formattedActivities });
-      setUpdatedActivities(formattedActivities);
+      setUpdatedActivities(formattedActivities); // Zaktualizuj stan po zapisaniu
     } catch (error) {
       console.error("Error updating activities:", error);
     } finally {
-      toggleEdit();
+      toggleEdit(); // Przełącz tryb edycji
     }
   };
 
@@ -68,23 +66,25 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
   ];
 
   const addActivity = (selectedOption) => {
-    if (selectedOption) {
-      const isActivityExist = updatedActivities.some(
-        (activity) => activity.label === selectedOption.label
-      );
-      if (!isActivityExist) {
-        const newActivity = {
-          name: selectedOption.name,
-          label: selectedOption.label,
-          rating: 0,
-        };
-        setUpdatedActivities((prevActivities) => [
-          ...prevActivities,
-          newActivity,
-        ]);
-      }
-      setNewActivity(null);
+    if (!selectedOption) return;
+
+    const isActivityExist = updatedActivities.some(
+      (activity) => activity.name === selectedOption.name
+    );
+
+    if (!isActivityExist) {
+      const newActivity = {
+        name: selectedOption.name,
+        label: selectedOption.label,
+        rating: 0,
+      };
+      setUpdatedActivities((prevActivities) => [
+        ...prevActivities,
+        newActivity,
+      ]);
     }
+
+    setNewActivity(null); // Resetuj wartość selektora
   };
 
   return (
@@ -142,14 +142,19 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
       )}
 
       {isEditing && updatedActivities.length > 0 && (
-        <button className="trip-button save-settings" onClick={saveActivities}>
-          <img
-            src={`${process.env.PUBLIC_URL}/create-trip.png`}
-            alt="Icon"
-            className="icon"
-          />
-          Save
-        </button>
+        <div className="edit-activities">
+          <button
+            className="trip-button save-settings"
+            onClick={saveActivities}
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/create-trip.png`}
+              alt="Icon"
+              className="icon"
+            />
+            Save
+          </button>
+        </div>
       )}
     </div>
   );

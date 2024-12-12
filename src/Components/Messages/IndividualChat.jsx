@@ -5,7 +5,6 @@ import SingleMessage from "./SingleMessage.jsx";
 import WriteMessage from "./WriteMessage.jsx";
 
 function IndividualChat({ chat, closeIndividualChat, minimizedChats }) {
-  console.log(chat.messages);
   return (
     <div className="individual-chat-container">
       <div className="chat-friend-upper">
@@ -33,7 +32,6 @@ function IndividualChat({ chat, closeIndividualChat, minimizedChats }) {
               message.author ? "message-left" : "message-right"
             }`}
           >
-            {/* Jeśli autor wiadomości to znajomy, pokaż zdjęcie */}
             {message.author && (
               <img
                 src={chat.author.profile_picture_url}

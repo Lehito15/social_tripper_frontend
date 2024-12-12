@@ -69,10 +69,6 @@ function MainPage({ user }) {
 
   const [refetch, setRefetch] = useState(false);
 
-  const navigate = useNavigate();
-  console.log("nasz user");
-  console.log(user);
-
   const userUuid = user.uuid;
 
   const GET_User = gql`query GetEvent($usertUuid: String!) {
@@ -92,7 +88,6 @@ function MainPage({ user }) {
     variables: { userUuid },
     fetchPolicy: "network-only",
   });
-  console.log(data);
 
   const openIndividualChat = (friend) => {
     setSelectedChat(friend);
@@ -115,60 +110,47 @@ function MainPage({ user }) {
   };
 
   const removeChat = (chat) => {
-    console.log("usuwam");
     setMinimizedChats((prev) =>
       prev.filter((minChat) => minChat.author.id !== chat.author.id)
     );
   };
 
   const openPost = (post) => {
-    console.log("otwieram posta XXDFWEF");
-    console.log(post);
     setSelectedPost(post);
     if (post.postMultimediaUrls.length === 0) {
-      console.log("otwieram noIMg");
       setPostOpenNoImg(true);
     } else {
-      console.log("otwieram posta");
       setPostOpen(true);
     }
   };
 
   const closePost = () => {
-    console.log("zamykam");
     setSelectedPost(null);
     setPostOpen(false);
-    console.log(selectedPost);
   };
 
   const closePostNoImg = () => {
-    console.log("zamykam");
     setSelectedPost(null);
     setPostOpenNoImg(false);
-    console.log(selectedPost);
   };
 
   const openRelation = (relation) => {
-    console.log("otwieram relacje ok");
     setRelationOpen(true);
     setSelectedRelation(relation);
   };
 
   const closeRelation = () => {
-    console.log("zamykam");
     setRelationOpen(false);
     setSelectedRelation(null);
   };
 
   const closeCreateTrip = () => {
-    console.log("otwórz się");
     setRefetch(!refetch);
     setIsCreateTripOpen(false);
     setGroupUuid(null);
   };
 
   const openCreateTrip = () => {
-    console.log("otwórz się");
     setIsCreateTripOpen(true);
   };
 
@@ -178,12 +160,10 @@ function MainPage({ user }) {
   };
 
   const addPost = () => {
-    console.log("createpod");
     setIsAddPostOpen(true);
   };
 
   const createGroup = () => {
-    console.log("otwieran grupę");
     setIsCreateGroupOpen(true);
   };
 
@@ -194,25 +174,19 @@ function MainPage({ user }) {
   };
 
   const toggleChat = () => {
-    console.log("createpod");
     setChatOpen(!isChatOpen);
   };
 
   const toggleUpcomingEvents = () => {
-    console.log(isUpcomgEventsOpen);
-    console.log("upcomming");
     setUpCommingEventsOpen((prevState) => !prevState);
-    console.log(isUpcomgEventsOpen);
   };
 
   const addEventPost = (uuid) => {
-    console.log("dodaje event");
     setEventUuid(uuid);
     setIsAddPostOpen(!isAddPostOpen);
   };
 
   const addGroupPost = (uuid) => {
-    console.log("dodaje grupe");
     setGroupUuid(uuid);
     setIsAddPostOpen(!isAddPostOpen);
   };
@@ -228,21 +202,18 @@ function MainPage({ user }) {
       !addPostRef.current.contains(event.target) &&
       isAddPostOpen
     ) {
-      console.log("1 open");
       setIsAddPostOpen(false);
     } else if (
       chatRef.current &&
       !chatRef.current.contains(event.target) &&
       isChatOpen
     ) {
-      console.log("2 open");
       setChatOpen(false);
     } else if (
       postDetailRef.current &&
       !postDetailRef.current.contains(event.target) &&
       isPostOpen
     ) {
-      console.log("Zamykam post z obrazkiem");
       setSelectedPost(null);
       setPostOpen(false);
     } else if (
@@ -250,7 +221,6 @@ function MainPage({ user }) {
       !postDetailsNoImg.current.contains(event.target) &&
       isPostOpenNoImg
     ) {
-      console.log("Zamykam post bez obrazka");
       setSelectedPost(null);
       setPostOpenNoImg(false);
     } else if (
@@ -258,9 +228,7 @@ function MainPage({ user }) {
       !upcommingEventsRef.current.contains(event.target) &&
       IncommingButtonRef.current &&
       !IncommingButtonRef.current.contains(event.target)
-      // isUpcomgEventsOpen
     ) {
-      console.log("zamknij się");
       setUpCommingEventsOpen(false);
     }
   };
@@ -279,9 +247,6 @@ function MainPage({ user }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isAddPostOpen, isChatOpen, isPostOpen, isPostOpenNoImg]);
-  useEffect(() => {
-    console.log("selectedPost zostało zaktualizowane:", selectedPost);
-  }, [selectedPost]);
 
   if (!data) {
     return <p>Loading...</p>;

@@ -57,7 +57,6 @@ function ProfileInfoSettings({ user, onSave }) {
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        console.log(reader.result);
         setProfileImage(reader.result);
         setFile(file);
         setProfileImageName(file.name);
@@ -87,6 +86,25 @@ function ProfileInfoSettings({ user, onSave }) {
       alert("height  or weight cannot be empty");
       return;
     }
+    console.log(data.weight);
+
+    if (data.weight < 0 || data.weight > 1000) {
+      alert("Wrong weight");
+      return;
+    }
+
+    const height = data.height / 100;
+    if (height < 0 || height > 10) {
+      alert("Wrong weight");
+      return;
+    }
+
+    const currentDate = new Date();
+    const dateOfBirth = new Date(data.dateOfBirth);
+    if (dateOfBirth >= currentDate) {
+      alert("Wrong Date o birth");
+      return;
+    }
 
     const fullPhoneNumber = `${data.countryCode} ${data.telephone}`;
     const updatedProfile = {
@@ -106,8 +124,6 @@ function ProfileInfoSettings({ user, onSave }) {
 
     onSave(updatedProfile, account, file, profileImageName);
   };
-
-  console.log(data);
 
   return (
     <div className="settings-menu stats-box profile-information-settings">

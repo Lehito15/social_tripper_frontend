@@ -52,9 +52,9 @@ function EventMainMembers({ event, isOwner }) {
   };
 
   if (loading) {
-    return <p>loadfing....</p>;
+    return <p>loading....</p>;
   }
-  console.log(data);
+
   return (
     <div>
       <div className="event-owner-conatiner">

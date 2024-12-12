@@ -49,7 +49,7 @@ function GeneralDetailsEvent({ data, updateData, group }) {
               type="text"
               id="firstName"
               name="firstName"
-              placeholder="First Name"
+              placeholder="Name"
               value={data.eventName}
               onChange={(e) =>
                 updateData({ ...data, eventName: e.target.value })

@@ -41,23 +41,24 @@ function AllPosts({ openPost, closePost, userUuid, userIcon, reLoad }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data);
+
+  // Sortowanie postów po dacie
+  const sortedPosts = data?.postsAll
+    .slice()
+    .sort((a, b) => new Date(b.dateOfPost) - new Date(a.dateOfPost)); // Sortuj malejąco po dacie
 
   return (
     <div>
-      {data?.postsAll
-        .slice()
-        .reverse()
-        .map((post) => (
-          <Post
-            key={post.uuid}
-            post={post}
-            openPost={() => openPost(post)}
-            closePost={closePost}
-            userUuid={userUuid}
-            userIcon={userIcon}
-          />
-        ))}
+      {sortedPosts?.map((post) => (
+        <Post
+          key={post.uuid}
+          post={post}
+          openPost={() => openPost(post)}
+          closePost={closePost}
+          userUuid={userUuid}
+          userIcon={userIcon}
+        />
+      ))}
     </div>
   );
 }

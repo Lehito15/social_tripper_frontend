@@ -34,4 +34,8 @@
   .diffrent-options-settings {
     width: 520px;
   }
+
+  .settings-container .tittle-container {
+    /* height: auto; */
+  }
 }

@@ -1,6 +1,7 @@
 .profile-information-settings {
   width: 100%;
   padding: 18px;
+  padding-top: 9px;
 }
 .change-photo-container {
   display: flex;

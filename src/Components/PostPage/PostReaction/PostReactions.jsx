@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./PostReactions.css";
 import { sendToBackend } from "../../../Utils/helper.js";
+import { useApolloClient } from "@apollo/client";
 
 function PostReaction({
   reactions,
@@ -12,8 +13,9 @@ function PostReaction({
   commentUuid,
   newComment,
 }) {
-  const [reactionCount, setReactionCount] = useState(reactions);
+  const [reactionCount, setReactionCount] = useState(reactions || 0);
   const [userReacted, setReacted] = useState(false);
+  const client = useApolloClient();
 
   useEffect(() => {
     const fetchReactionStatus = async () => {
@@ -25,7 +27,7 @@ function PostReaction({
         const response = await sendToBackend(endpoint, "GET", null);
         setReacted(response);
       } catch (error) {
-        console.error("Error fetching membership status:", error);
+        console.error("Error fetching reaction status:", error);
       }
     };
 
@@ -35,29 +37,56 @@ function PostReaction({
   }, [postUuid, commentUuid, userUuid]);
 
   const addReaction = async () => {
-    const isComment = !!commentUuid;
     const endpoint = commentUuid
       ? `comments/${commentUuid}/users/${userUuid}/react`
       : `posts/react`;
 
-    let payload = {
-      userUUID: userUuid,
-      postUUID: postUuid,
-    };
-    if (commentUuid) {
-      payload = null;
-    }
+    const payload = commentUuid
+      ? null
+      : JSON.stringify({
+          userUUID: userUuid,
+          postUUID: postUuid,
+        });
 
-    if (!userReacted) {
-      setReactionCount(reactionCount + 1);
-      setReacted(true);
+    try {
+      if (!userReacted) {
+        await sendToBackend(endpoint, "POST", payload);
 
-      sendToBackend(endpoint, "POST", JSON.stringify(payload));
-    } else {
-      setReactionCount(reactionCount - 1);
-      setReacted(false);
+        client.cache.modify({
+          id: client.cache.identify({ __typename: "Post", uuid: postUuid }),
+          fields: {
+            reactionsNumber(existingReactions = 0) {
+              return existingReactions + 1;
+            },
+            userReacted() {
+              return true;
+            },
+          },
+        });
 
-      sendToBackend(endpoint, "DELETE", JSON.stringify(payload));
+        setReactionCount((prev) => prev + 1);
+        setReacted(true);
+      } else {
+        await sendToBackend(endpoint, "DELETE", payload);
+
+        client.cache.modify({
+          id: client.cache.identify({ __typename: "Post", uuid: postUuid }),
+          fields: {
+            reactionsNumber(existingReactions = 0) {
+              return Math.max(existingReactions - 1, 0);
+            },
+            userReacted() {
+              return false;
+            },
+          },
+        });
+
+        setReactionCount((prev) => prev - 1);
+        setReacted(false);
+      }
+    } catch (error) {
+      console.error("Error updating reaction:", error);
+      alert("Something went wrong. Please try again.");
     }
   };
 

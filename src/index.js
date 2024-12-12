@@ -14,17 +14,30 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { Helmet } from "react-helmet";
 
-const restLink = new RestLink({ uri: "http://52.237.23.55:8080/" });
-// const restLink = new RestLink({ uri: "http://localhost:8080/" });
+// const restLink = new RestLink({ uri: "http://52.237.23.55:8080/" });
+const restLink = new RestLink({ uri: "http://74.248.145.105:8080/" });
 
 const client = new ApolloClient({
   link: restLink,
   cache: new InMemoryCache({
     typePolicies: {
-      Query: {
+      Post: {
+        keyFields: ["uuid"], // Ustawienie `uuid` jako identyfikatora obiektu `Post`
         fields: {
-          events: {
-            keyArgs: ["path"],
+          reactionsNumber: {
+            merge(existing = 0, incoming) {
+              return incoming; // Zachowuje się jak nadpisywanie
+            },
+          },
+          userReacted: {
+            merge(existing = false, incoming) {
+              return incoming;
+            },
+          },
+          commentsNumber: {
+            merge(existing = 0, incoming) {
+              return incoming; // Analogicznie jak dla `reactionsNumber`
+            },
           },
         },
       },

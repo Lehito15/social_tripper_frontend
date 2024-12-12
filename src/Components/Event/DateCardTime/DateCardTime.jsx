@@ -1,5 +1,4 @@
 import DateCard from "../DateCard/DateCard";
-
 import "./DateCardTime.css";
 
 function DateCardTime({ date }) {

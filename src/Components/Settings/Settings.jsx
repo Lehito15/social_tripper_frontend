@@ -12,7 +12,6 @@ function Settings({ user }) {
 
   const [userActivities, setUserActivities] = useState(user.user.activities);
 
-  // Funkcja do renderowania komponentów na podstawie aktywnej opcji
   const renderContent = () => {
     switch (activeOption) {
       case "profile":
@@ -23,7 +22,6 @@ function Settings({ user }) {
         );
       case "skills":
         return <SkillSettings user={user} />;
-      // return <ProfileSkills  activities={userActivities} updateActivities= {setUserActivities} languages={user.user.languages} userUuid={user.user.uuid} edit= {true}/>
 
       default:
         return <div>Select an option from the menu</div>;
@@ -39,12 +37,14 @@ function Settings({ user }) {
 
     const endpoint2 = `accounts/${user.uuid}`;
     sendToBackend(endpoint2, "PATCH", JSON.stringify(bodyAccount));
+    const userNameElement = document.querySelector(".user-name");
+    userNameElement.textContent = bodyAccount.nickname;
 
     if (fileName !== user.profilePictureUrl) {
       const newImageUrl = URL.createObjectURL(file);
       const imageElement = document.querySelector(".profile-picture");
       if (imageElement) {
-        imageElement.src = newImageUrl; // Zmiana src obrazka lokalnie
+        imageElement.src = newImageUrl;
       }
       let formData = new FormData();
       formData.append("profilePicture", file);

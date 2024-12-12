@@ -17,17 +17,22 @@ function CreateGroup({ closeCreateGroup, userUuid }) {
   const navigate = useNavigate();
 
   const createGroup = async () => {
-    console.log("start");
     if (isSubmitting) return;
-    console.log("nie");
 
-    if (generalDetailsEvent.groupName === "" || generalDetailsEvent === "") {
+    if (
+      generalDetailsEvent.eventName === "" ||
+      descriptionAndRules.description === ""
+    ) {
       alert("fill inputs");
+      return;
+    }
+
+    if (!groupSettings.scope || !groupSettings.groupLocation) {
+      alert("SET GROUP LOCATION");
       return;
     }
     setIsSubmitting(true);
     const formData = new FormData();
-    console.log(languages);
     const isPublic = generalDetailsEvent.visibility !== "Private";
     const formattedActivities = activities.map((activity) => ({
       name: activity.label,
@@ -61,7 +66,6 @@ function CreateGroup({ closeCreateGroup, userUuid }) {
       languages: formattedLanguages,
     };
 
-    console.log(GroupDTO);
     formData.append(
       "groupDTO",
       new Blob([JSON.stringify(GroupDTO)], { type: "application/json" })
@@ -72,7 +76,6 @@ function CreateGroup({ closeCreateGroup, userUuid }) {
     }
 
     const endpoint = "groups";
-    console.log(GroupDTO);
 
     try {
       const data = await sendToBackend(endpoint, "POST", formData);
@@ -165,7 +168,6 @@ function CreateGroup({ closeCreateGroup, userUuid }) {
         <div className="different-profile-info">{renderStepComponent()}</div>
         <RegisterNext
           step={currentStep}
-          signIn={true}
           setCurrentStep={setCurrentStep}
           maxStep={3}
           createEvent={createGroup}

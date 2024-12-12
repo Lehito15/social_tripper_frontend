@@ -3,7 +3,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  overflow: visible; /* Umożliwia wystawanie elementów poza granice kontenera */
+  overflow: visible;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -13,17 +13,16 @@
   height: 100%;
   border-radius: 50%;
   object-fit: fill;
-  border: 1px solid rgba(0, 0, 0, 1)
+  border: 1px solid rgba(0, 0, 0, 1);
 }
 
-/* X icon that appears on hover */
 .close-icon {
   position: absolute;
-  top: -5px; /* Ustawienie ikony tak, by wystawała ponad zdjęcie */
-  right: 0px; /* Ustawienie ikony tak, by wystawała z prawej strony zdjęcia */
+  top: -5px;
+  right: 0px;
   width: 18px;
   height: 18px;
-  background-color: rgba(0, 0, 0, 0.5); 
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 50%;
   color: white;
   padding: 3px;
@@ -33,15 +32,12 @@
   align-items: center;
   z-index: 1001;
   display: none;
- 
 }
 
-/* Show the X icon when hovering over the container */
 .min-chat-container:hover .close-icon {
   display: flex;
 }
 
-/* Green dot for active status */
 .status-dot {
   position: absolute;
   bottom: 4px;

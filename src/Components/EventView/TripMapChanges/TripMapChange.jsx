@@ -30,8 +30,8 @@ function TripMapChange({
     } else {
       console.log("koniec");
       await updateData({
-        stopLatitude: updatedLocation[1],
-        startLongitude: updatedLocation[0],
+        stoptLatitude: updatedLocation[1],
+        stopLongitude: updatedLocation[0],
       });
     }
     reload();

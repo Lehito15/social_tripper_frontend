@@ -4,7 +4,6 @@ import MapReaction from "../../Relation/MapRelation/MapRelation.jsx";
 
 function EventSettings({ data, updateData, group }) {
   const onLocationAddedStart = (location) => {
-    console.log(location);
     updateData({
       ...data,
       eventStartLocation: [{ id: 0, position: location }],

@@ -11,6 +11,9 @@ const GET_ALL_EVENTS = gql`
       name
       homePageUrl
       iconUrl
+      owner {
+        uuid
+      }
       eventStatus {
         status
       }
@@ -42,7 +45,7 @@ function AllRelations({ openRelation }) {
           const multimediaResponses = await Promise.all(
             finishedEvents.map(async (event) => {
               const response = await sendToBackend(
-                `events/${event.uuid}/multimedia`,
+                `events/${event.uuid}/users/${event.owner.uuid}`,
                 "GET",
                 null
               );

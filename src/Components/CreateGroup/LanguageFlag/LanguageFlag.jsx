@@ -3,6 +3,7 @@ import "./LanguageFlag.css";
 
 function LanguageFlag({ language, onRemove }) {
   const { name, flag } = language;
+  console.log(language);
 
   return (
     <div className="language-item">

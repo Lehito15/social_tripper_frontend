@@ -1,7 +1,7 @@
-import React from 'react';
-import './MinimalizeChat.css';
+import React from "react";
+import "./MinimalizeChat.css";
 
-function MinimalizeChat({chat, removeChat, openIndividualChat}) {
+function MinimalizeChat({ chat, removeChat, openIndividualChat }) {
   return (
     <div className="min-chat-container">
       <img
@@ -10,7 +10,9 @@ function MinimalizeChat({chat, removeChat, openIndividualChat}) {
         className="chat-avatar"
         onClick={() => openIndividualChat(chat)}
       />
-      <div className="close-icon"onClick={() => removeChat(chat)} >X</div>
+      <div className="close-icon" onClick={() => removeChat(chat)}>
+        X
+      </div>
       {chat.author.isActive && <div className="status-dot"></div>}
     </div>
   );

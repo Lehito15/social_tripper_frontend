@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { sendToBackend } from "../../../Utils/helper.js";
 import Relation from "../../Relation/Relation.jsx";
 
-function EventRelation({ eventUuid, openRelation }) {
+function EventRelation({ eventUuid, openRelation, ownerUuid }) {
   const [relationData, setRelationData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,7 +11,7 @@ function EventRelation({ eventUuid, openRelation }) {
     const fetchMultimedia = async () => {
       try {
         const response = await sendToBackend(
-          `events/${eventUuid}/multimedia`,
+          `events/${eventUuid}/users/${ownerUuid}`,
           "GET",
           null
         );
@@ -35,7 +35,7 @@ function EventRelation({ eventUuid, openRelation }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  if (!relationData || relationData.multimedia.length === 0) {
+  if (!relationData || relationData.multimedia.multimedia.length === 0) {
     return <p>No multimedia found for this event.</p>;
   }
 

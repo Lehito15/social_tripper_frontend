@@ -83,7 +83,7 @@ function PostOwner({
             src={`${process.env.PUBLIC_URL}/close.png`}
             alt="Close"
             className="post-owner-icon"
-            onClick={() => addUserToEvent(owner.uuid)}
+            onClick={() => removeRequest(owner.uuid)}
           />
         </div>
       )}

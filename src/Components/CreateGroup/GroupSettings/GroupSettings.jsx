@@ -12,13 +12,11 @@ function GroupSettings({
   updateData,
 }) {
   const onLocationAddedStart = (location) => {
-    console.log(location);
     updateData({ ...data, groupLocation: [{ id: 0, position: location }] });
   };
   const options = [
     { value: "City", label: "City" },
     { value: "Country", label: "Country" },
-    { value: "None", label: "None" },
   ];
 
   return (
@@ -32,12 +30,12 @@ function GroupSettings({
       />
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="tripEndDate">Group location (optional)</label>
+          <label htmlFor="tripEndDate">Group location</label>
           <div className="select-container">
             <Select
               classNamePrefix="custom-select-group"
               options={options}
-              value={data.scope}
+              value={data.scope || options[0]}
               placeholder="Location scope"
               isSearchable={false}
               onChange={(e) => updateData({ ...data, scope: e })}

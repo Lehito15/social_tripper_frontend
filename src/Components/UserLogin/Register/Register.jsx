@@ -106,8 +106,20 @@ function Register() {
       alert("Wrong Date o birth");
       return;
     }
-    setIsSubmitting(true);
+
+    if (accountDetails.weight < 0 || accountDetails.weight > 1000) {
+      alert("Wrong weight");
+      return;
+    }
+
     const height = accountDetails.height / 100;
+    if (height < 0 || height > 10) {
+      alert("Wrong weight");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     const fullPhoneNumber = `${generalDetails.countryCode} ${generalDetails.telephone}`;
     console.log(height);
     const formattedActivities = activities.map((activity) => ({
@@ -163,7 +175,8 @@ function Register() {
       console.log("User created:", data);
       navigate("/");
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error.response);
+      alert(error);
     } finally {
       setIsSubmitting(false);
     }

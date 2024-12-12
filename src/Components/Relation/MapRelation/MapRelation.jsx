@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Polyline,
+  useMapEvents,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
@@ -23,6 +29,7 @@ function MapReaction({
   onMarkerClick,
   onLocationAdded,
   isRelation,
+  routeLocations,
 }) {
   const [newMarkerPosition, setNewMarkerPosition] = useState(null);
 
@@ -33,7 +40,7 @@ function MapReaction({
       click(e) {
         const { lat, lng } = e.latlng;
         if (onLocationAdded) {
-          console.log("dodaje nowo");
+          console.log("Adding new location...");
           locations = null;
           setNewMarkerPosition([lat, lng]);
           onLocationAdded([lat, lng]);
@@ -86,6 +93,10 @@ function MapReaction({
 
         {newMarkerPosition && (
           <Marker position={newMarkerPosition} icon={customMarkerIcon} />
+        )}
+
+        {routeLocations && routeLocations.length > 1 && (
+          <Polyline positions={routeLocations} color="green" />
         )}
       </MapContainer>
     </div>

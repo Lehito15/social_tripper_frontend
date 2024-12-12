@@ -27,20 +27,25 @@ function EventButtons({
   useEffect(() => {
     const checkRequestStatus = async () => {
       try {
-        const response = await sendToBackend(
-          `events/${eventUuid}/users/${userUuid}/is-event-requested`
-        );
-        console.log(response);
+        let endpoint;
+
+        if (groupUuid) {
+          endpoint = `groups/${groupUuid}/users/${userUuid}/is-group-requested`;
+        } else {
+          endpoint = `events/${eventUuid}/users/${userUuid}/is-event-requested`;
+        }
+
+        const response = await sendToBackend(endpoint);
         setIsEventRequested(response);
       } catch (error) {
-        console.error("Error checking event request status:", error);
+        console.error("Error checking request status:", error);
       }
     };
 
     if (status === "no-member") {
       checkRequestStatus();
     }
-  }, []);
+  }, [groupUuid, eventUuid, userUuid, status]);
 
   const handleJoinRequest = async () => {
     setIsEventRequested(true);
@@ -55,9 +60,7 @@ function EventButtons({
   const handleJoinGroup = async () => {
     try {
       const response = await joinGroup();
-      console.log(response);
-
-      setUserStatus("member"); 
+      setUserStatus("member");
       setIsEventRequested(false);
     } catch (error) {
       console.error("Error sending join request:", error);
@@ -80,7 +83,6 @@ function EventButtons({
       const endpoint = `events/${eventUuid}/set-status`;
       const body = { status: newStatus };
       await sendToBackend(endpoint, "PATCH", JSON.stringify(body));
-      console.log(`Status updated to: ${newStatus}`);
     } catch (error) {
       console.error("Error updating status:", error);
     }

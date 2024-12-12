@@ -42,7 +42,7 @@ function ProfileSkills({
         await sendToBackend(endpoint, "POST", JSON.stringify(language));
       }
 
-      setUpdatedActivities(formattedLanguages);
+      // setUpdatedActivities(formattedLanguages);
     } catch (error) {
       console.error("Error saving activity:", error);
     }

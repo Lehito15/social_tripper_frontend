@@ -17,11 +17,13 @@ function Skills({
   group,
   onlyUpdate,
 }) {
-  console.log(activieties);
+  console.log("start");
+  console.log(languages);
   const [selectedActivities, setSelectedActivities] = useState(
     activieties || []
   );
-  const [selectedLanguages, setSelectedLanguages] = useState(languages || []);
+  const [selectedLanguages, setSelectedLanguages] = useState(languages);
+  console.log(selectedLanguages);
   const allLanguages = Object.entries(languageToCountry).map(
     ([language, code], index) => ({
       value: language,
@@ -67,6 +69,7 @@ function Skills({
       updateLanguages((prevLanguage) => [...prevLanguage, newLanguage]);
     }
   };
+  console.log(selectedLanguages);
 
   const removeActivity = (activity) => {
     setSelectedActivities((prev) =>
@@ -79,11 +82,19 @@ function Skills({
 
   const removeLanguage = (language) => {
     console.log(language);
+    console.log("eko");
+    console.log(selectedLanguages);
     setSelectedLanguages((prev) =>
-      prev.filter((elem) => elem.value !== (language.name || language.label))
+      prev.filter(
+        (elem) =>
+          elem.value !== (language.value || language.name || language.label)
+      )
     );
     updateLanguages((prev) =>
-      prev.filter((elem) => elem.value !== (language.name || language.label))
+      prev.filter(
+        (elem) =>
+          elem.value !== (language.value || language.name || language.label)
+      )
     );
   };
 
@@ -207,7 +218,7 @@ function Skills({
 
             {group ? (
               <div className="language-flags">
-                {languages.map((language, index) => (
+                {selectedLanguages.map((language, index) => (
                   <LanguageFlag
                     key={index}
                     language={language}

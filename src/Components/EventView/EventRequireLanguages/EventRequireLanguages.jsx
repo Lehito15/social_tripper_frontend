@@ -15,24 +15,12 @@ function EventRequireLanguages({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [updatedLanguages, setUpdatedLanguages] = useState(languages);
-  const [newLanguage, setNewLanguage] = useState(null); // Do trzymania nowego języka
-
-  console.log(languages);
+  const [newLanguage, setNewLanguage] = useState(null);
 
   const getFlag = (name) => {
     const flag = flagsCode[name];
     return flag;
   };
-
-  // useEffect(() => {
-  //   // Zamieniamy dane przy pierwszym załadowaniu
-  //   const transformedLanguages = languages.map((language) => ({
-  //     name: language.language.name || 'name',
-  //     flag: getFlag('Finish'),
-  //     rating: language.level,
-  //   }));
-  //   setUpdatedLanguages(transformedLanguages);
-  // }, [languages]);
 
   const allLanguages = Object.entries(languageToCountry).map(
     ([language, code], index) => ({
@@ -57,12 +45,12 @@ function EventRequireLanguages({
   const handleAddLanguage = (selectedOption) => {
     if (selectedOption) {
       const isLanguageExist = updatedLanguages.some(
-        (language) => language.language.name === selectedOption.label
+        (language) => language.language.name === selectedOption.value
       );
       if (!isLanguageExist) {
         const newLanguage = {
-          language: { name: selectedOption.label },
-          level: 0, // Domyślny poziom
+          language: { name: selectedOption.value },
+          level: 0,
         };
         setUpdatedLanguages((prevLanguages) => [...prevLanguages, newLanguage]);
       }
@@ -70,28 +58,28 @@ function EventRequireLanguages({
   };
 
   const handleRatingChange = (index, newRating) => {
-    setUpdatedLanguages((prevActivities) => {
-      const updatedList = [...prevActivities];
-      updatedList[index].rating = newRating;
-      return updatedList;
-    });
+    setUpdatedLanguages((prevLanguages) =>
+      prevLanguages.map((language, i) =>
+        i === index ? { ...language, level: newRating } : language
+      )
+    );
   };
 
   const saveLanguages = async () => {
-    console.log(updatedLanguages[0].language.name);
-    const formattedActivities = updatedLanguages.map((language) => ({
-      level: language.rating,
+    const formattedLanguages = updatedLanguages.map((language) => ({
+      level: language.level,
       language: {
         name: language.language.name,
       },
     }));
+
     try {
-      await updateData({ languages: formattedActivities });
-      setUpdatedLanguages(formattedActivities); // Aktualizujemy stan
+      await updateData({ languages: formattedLanguages });
+      setUpdatedLanguages(formattedLanguages);
     } catch (error) {
-      console.error("Error updating activities:", error);
+      console.error("Error updating languages:", error);
     } finally {
-      toggleEdit(); // Kończymy edycję po zapisaniu
+      toggleEdit();
     }
   };
 
@@ -105,10 +93,8 @@ function EventRequireLanguages({
             className="edit-text"
             onClick={() => {
               if (isEditing) {
-                // Jeśli jesteśmy w trybie edycji, wywołaj funkcję saveActivities
                 saveLanguages();
               } else {
-                // Jeśli nie jesteśmy w trybie edycji, włącz edycję
                 toggleEdit();
               }
             }}
@@ -120,7 +106,7 @@ function EventRequireLanguages({
       <div className="elevation"></div>
 
       <div className="activities-list event-languages-main activity-list-event-profile">
-        {updatedLanguages.length !== 0 &&
+        {updatedLanguages.length > 0 &&
           updatedLanguages.map((languageItem, index) => (
             <RateActivity
               key={`language-${index}`}
@@ -147,7 +133,7 @@ function EventRequireLanguages({
             onChange={handleAddLanguage}
             placeholder="Select a language"
             isSearchable={false}
-            value={null}
+            value={newLanguage}
           />
         </div>
       )}

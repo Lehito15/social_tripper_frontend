@@ -1,44 +1,41 @@
 .message-input {
-    width: 100%; /* Szerokość paska wyszukiwania */
-    height: 42px;
-    margin-left: 18px;
-    margin-right: 40px;
-    font-size: 16px;
-    border: 0px solid;
-    outline: none;
-    box-shadow: none;
-    /* border-radius: 10px; Zaokrąglone rogi */
-    background: rgba(240, 242, 245, 0.6);
+  width: 100%;
+  height: 42px;
+  margin-left: 18px;
+  margin-right: 40px;
+  font-size: 16px;
+  border: 0px solid;
+  outline: none;
+  box-shadow: none;
+  background: rgba(240, 242, 245, 0.6);
 
-    padding: 0;
-  }
+  padding: 0;
+}
 
-  .message-input:focus {
-    box-shadow: none;     /* Usunięcie obramowania */
-  }
-  .message-input-wrapper {
-    position: relative; /* Pozycjonowanie relatywne dla ikonki */
-    display: flex;
-    align-items: center;
-    border-radius: 50px;
-    background: rgba(240, 242, 245, 0.6);
-  }
-  
-  .media-icon, .send-icon {
-    position: absolute; /* Pozycjonowanie absolutne względem kontenera */
-    /* left: 10px; Odległość od prawej krawędzi pola */
-    width: 18px; /* Szerokość ikony */
-    height: 18px; /* Wysokość ikony */
-    /* pointer-events: none; Wyłączenie interakcji z ikoną */
-    opacity: 70%;
-  }
+.message-input:focus {
+  box-shadow: none;
+}
+.message-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background: rgba(240, 242, 245, 0.6);
+}
 
-  .media-icon{
-    left: 10px; 
-  }
-  .send-icon {
-    right: 10px;
-    margin-left: auto;
-    cursor: pointer;
-  }
+.media-icon,
+.send-icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  opacity: 70%;
+}
 
+.media-icon {
+  left: 10px;
+}
+.send-icon {
+  right: 10px;
+  margin-left: auto;
+  cursor: pointer;
+}

@@ -17,7 +17,7 @@
   .event {
     transform: scale(0.75) translate(-0%, -65%);
     top: 50%;
-    max-height: 700px;
+    max-height: 800px;
   }
 }
 
@@ -25,6 +25,6 @@
   .event {
     transform: scale(0.83) translate(-0%, -65%);
     top: 55%;
-    max-height: 850px;
+    max-height: 880px;
   }
 }

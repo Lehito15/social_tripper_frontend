@@ -61,10 +61,10 @@ function RelationDetails({ relation, closeRelation }) {
     setIsExpanded(!isExpanded);
   };
 
-  const multimedia = relation?.multimedia
+  const multimedia = relation?.multimedia.multimedia
     ?.map((item) => item?.multimediaUrl)
     .filter(Boolean);
-  const locations = relation.multimedia.map((item, index) => ({
+  const locations = relation.multimedia.multimedia.map((item, index) => ({
     id: index,
     position: [item.latitude, item.longitude],
   }));
@@ -72,6 +72,10 @@ function RelationDetails({ relation, closeRelation }) {
 
   const windowHeight = window.innerHeight;
   const postDetailHeight = 0.63 * windowHeight;
+  const routeLocations = relation.multimedia.pathPoints.map((point) => [
+    point.latitude,
+    point.longitude,
+  ]);
 
   return (
     <>
@@ -93,6 +97,7 @@ function RelationDetails({ relation, closeRelation }) {
               selectedIndex={selectedIndex}
               onMarkerClick={handleMarkerClick}
               isRelation={true}
+              routeLocations={routeLocations}
             />
           </div>
         </div>

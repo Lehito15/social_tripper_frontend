@@ -28,3 +28,15 @@
 .text-decription-event {
   font-size: 14px;
 }
+
+@media (-webkit-device-pixel-ratio: 1.25) {
+  .trip-textarea {
+    width: 600px;
+  }
+}
+
+@media (-webkit-device-pixel-ratio: 1.5) {
+  .trip-textarea {
+    width: 500px;
+  }
+}

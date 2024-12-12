@@ -17,14 +17,13 @@ function Relation({ post, openRelation }) {
   };
 
   const handleMarkerClick = (markerIndex) => {
-    console.log(markerIndex);
     setSelectedIndex(markerIndex);
   };
 
-  const multimedia = post?.multimedia
+  const multimedia = post?.multimedia.multimedia
     ?.map((item) => item?.multimediaUrl)
     .filter(Boolean);
-  const locations = post.multimedia.map((item, index) => ({
+  const locations = post.multimedia.multimedia.map((item, index) => ({
     id: index,
     position: [item.latitude, item.longitude],
   }));
@@ -79,7 +78,10 @@ function Relation({ post, openRelation }) {
 
     calculateHeight();
   }, []);
-  const maxChars = 205;
+  const routeLocations = post.multimedia.pathPoints.map((point) => [
+    point.latitude,
+    point.longitude,
+  ]);
 
   return (
     <div
@@ -139,6 +141,7 @@ function Relation({ post, openRelation }) {
             selectedIndex={selectedIndex}
             onMarkerClick={handleMarkerClick}
             isRelation={true}
+            routeLocations={routeLocations}
           />
         </div>
       </div>

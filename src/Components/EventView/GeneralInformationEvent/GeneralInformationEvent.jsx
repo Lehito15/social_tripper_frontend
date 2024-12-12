@@ -20,8 +20,6 @@ function GeneralDetailsEvent({
   const [updatedPublicText, setUpdatedPublicText] = useState(publicText);
   const [updatedMaxMembers, setUpdatedMaxMembers] = useState(maxMembers);
 
-  console.log(locationScope);
-
   const options = [
     {
       value: "public",
@@ -58,7 +56,6 @@ function GeneralDetailsEvent({
       isPublic: updatedPublicText === "Public",
       maxNumberOfParticipants: updatedMaxMembers,
     };
-    console.log(eventUUID);
 
     await updateData(updatedEvent);
     alert("Event description updated successfully!");
@@ -159,7 +156,7 @@ function GeneralDetailsEvent({
             />
           )}
 
-          {isEditing ? (
+          {isEditing && !isGroup ? (
             <input
               type="number"
               className="event-public-input"
