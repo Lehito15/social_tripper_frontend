@@ -51,6 +51,10 @@ function RootApp() {
     return (
       <div className="mobile-app-banner">
         <p>Download our mobile app or visit from a desktop.</p>
+        <br></br>
+        <a href="https://apkfab.com/socialtrippermobile/com.example.social_tripper_mobile/apk?h=4cdd19b24d161b30b1885665a9ade39317a36015470e0fa306bbbec5a185225c">
+          Click to Download
+        </a>
       </div>
     );
   }
