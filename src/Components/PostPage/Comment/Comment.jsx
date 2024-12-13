@@ -3,7 +3,6 @@ import PostReaction from "../PostReaction/PostReactions.jsx";
 import "./Comment.css";
 
 function Comment({ comment, onClose }) {
-  console.log(comment.account);
   return (
     <div className="comment-conteiner">
       <div

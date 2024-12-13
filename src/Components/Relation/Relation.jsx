@@ -10,7 +10,7 @@ function Relation({ post, openRelation }) {
   const containerRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const dropdownRef = useRef(null);
-  const [showOptions, setShowOptions] = useState(false); // Nowy stan dla opcji
+  const [showOptions, setShowOptions] = useState(false);
 
   const handleSlideChange = (newIndex) => {
     setSelectedIndex(newIndex);
@@ -69,7 +69,6 @@ function Relation({ post, openRelation }) {
           })
         );
         const minHeight = Math.min(...mediaHeights);
-        console.log(minHeight);
         setPostHeight(minHeight);
       } else {
         setPostHeight(0);

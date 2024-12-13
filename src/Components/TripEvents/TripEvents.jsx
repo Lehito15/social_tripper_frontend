@@ -44,11 +44,7 @@ function TripEvents({ openEvent, reLoad, userUuid, userIcon }) {
     fetchPolicy: "cache-first",
   });
   useEffect(() => {
-    console.log("moje reloady");
-    console.log(reLoad);
-    console.log(previousReload);
     if (reLoad !== previousReload.current) {
-      console.log("Reloading events...");
       refetch();
       previousReload.current = reLoad;
     }
@@ -56,11 +52,9 @@ function TripEvents({ openEvent, reLoad, userUuid, userIcon }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  console.log(data);
   const ownedEvents = data.events2.filter(
     (event) => event.owner.uuid === userUuid
   );
-  console.log(ownedEvents);
 
   const renderEvents = () => {
     if (activeTab === 0) {
@@ -81,7 +75,6 @@ function TripEvents({ openEvent, reLoad, userUuid, userIcon }) {
         />
       );
     } else {
-      // Filtrowanie eventów, w których użytkownik jest właścicielem
       const ownedEvents = data.events2.filter(
         (event) => event.owner.uuid === userUuid
       );

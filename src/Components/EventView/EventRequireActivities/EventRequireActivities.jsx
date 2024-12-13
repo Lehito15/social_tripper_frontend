@@ -9,7 +9,6 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
   const [updatedActivities, setUpdatedActivities] = useState([]);
   const [newActivity, setNewActivity] = useState(null);
   const [reload, setReload] = useState(false);
-  console.log(activities);
 
   useEffect(() => {
     const transformedActivities = activities.map((activity) => ({
@@ -20,7 +19,6 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
     }));
     setUpdatedActivities(transformedActivities);
   }, [activities]);
-  // console.log(updatedActivities);
 
   const toggleEdit = () => {
     if (isEditing) {
@@ -48,11 +46,11 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
 
     try {
       await updateData({ activities: formattedActivities });
-      setUpdatedActivities(formattedActivities); // Zaktualizuj stan po zapisaniu
+      setUpdatedActivities(formattedActivities);
     } catch (error) {
       console.error("Error updating activities:", error);
     } finally {
-      toggleEdit(); // Przełącz tryb edycji
+      toggleEdit();
     }
   };
 
@@ -84,7 +82,7 @@ function EventRequireActivities({ activities, title, updateData, edit }) {
       ]);
     }
 
-    setNewActivity(null); // Resetuj wartość selektora
+    setNewActivity(null);
   };
 
   return (

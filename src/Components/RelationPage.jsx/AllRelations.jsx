@@ -23,7 +23,6 @@ const GET_ALL_EVENTS = gql`
 `;
 
 function AllRelations({ openRelation }) {
-  console.log(openRelation);
   const [finishedEvents, setFinishedEvents] = useState([]);
   const [relations, setRelations] = useState([]);
   const { loading, error, data, refetch } = useQuery(GET_ALL_EVENTS, {
@@ -71,8 +70,6 @@ function AllRelations({ openRelation }) {
 
   if (loading) return <p>Loading events...</p>;
   if (error) return <p>Error loading events: {error.message}</p>;
-
-  console.log(relations);
 
   return (
     <div className="all-relation-container">

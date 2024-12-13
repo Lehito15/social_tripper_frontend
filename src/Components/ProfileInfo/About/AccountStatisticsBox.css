@@ -4,8 +4,8 @@
   background: rgba(255, 255, 255, 1);
   text-align: left;
   height: 100%;
-  flex-direction: column; /* Ustaw kierunek na kolumnowy */
-  justify-content: center; /* Centruje w pionie */
+  flex-direction: column;
+  justify-content: center;
   margin-top: 18px;
 }
 
@@ -15,7 +15,6 @@
 }
 .stats {
   display: flex;
-  /* align-items: center;   */
   height: 68%;
   padding-left: 18px;
   padding-right: 18px;
@@ -28,7 +27,7 @@
 
 .tittle-container {
   height: 32%;
-  display: flex; /* Użyj Flexbox */
+  display: flex;
   align-items: center;
 }
 

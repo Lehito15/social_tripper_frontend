@@ -31,7 +31,6 @@ export const sendToBackend = async (path, method, body) => {
     }
 
     const data = await response.json();
-    console.log("Response data:", data);
     return data;
   } catch (error) {
     console.error("Error:", error);

@@ -18,12 +18,9 @@ function GroupHeader({ group, setLocation }) {
   const displayedLanguages = languages.slice(0, MAX_DISPLAY_ITEMS);
   const remainingLanguages = languages.length - displayedLanguages.length;
 
-  // Funkcja do pobrania lokalizacji z OpenStreetMap
   const fetchLocationFromCoordinates = async (latitude, longitude, scope) => {
     let queryString = "";
     const MAX_DISPLAY_ITEMS = 3;
-
-    // Konstrukcja zapytania w zależności od scope
     queryString = `?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`;
 
     const endpoint = `https://nominatim.openstreetmap.org/reverse${queryString}`;
@@ -89,7 +86,6 @@ function GroupHeader({ group, setLocation }) {
   const openGroup = () => {
     navigate(`/groups/${group.uuid}`);
   };
-  console.log(group);
 
   return (
     <div className="group-header-container">

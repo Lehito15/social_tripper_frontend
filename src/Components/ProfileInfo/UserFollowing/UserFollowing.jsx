@@ -59,11 +59,8 @@ function UserFollowing({ userUuid, myAccount }) {
         followed: { uuid: userUuid },
       };
       await sendToBackend(endpoint, "POST", JSON.stringify(follow));
-      console.log("User added successfully");
       setReload(!reload);
-    } catch (error) {
-      console.error("Error adding user:", error);
-    }
+    } catch (error) {}
   };
 
   const removeRequest = async (friendUuid) => {
@@ -74,7 +71,6 @@ function UserFollowing({ userUuid, myAccount }) {
         followed: { uuid: userUuid },
       };
       await sendToBackend(endpoint, "DELETE", JSON.stringify(follow));
-      console.log("User added successfully");
       setReload(!reload);
     } catch (error) {
       console.error("Error adding user:", error);
@@ -84,8 +80,6 @@ function UserFollowing({ userUuid, myAccount }) {
   if (loadingFollows || loadingRequests) return <p>Loading...</p>;
   if (errorFollows || errorRequests)
     return <p>Error: {errorFollows?.message || errorRequests?.message}</p>;
-
-  console.log(dataRequests);
 
   return (
     <div className="Post-page">

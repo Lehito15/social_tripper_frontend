@@ -37,7 +37,6 @@ query GetEvents($userUuid: String!) {
       setFinishedEvents(finished);
     }
   }, [data]);
-  console.log(finishedEvents);
 
   useEffect(() => {
     const fetchMultimedia = async () => {
@@ -72,10 +71,6 @@ query GetEvents($userUuid: String!) {
 
   if (loading) return <p>Loading events...</p>;
   if (error) return <p>Error loading events: {error.message}</p>;
-  console.log(finishedEvents);
-  console.log("relacje");
-
-  console.log(relations);
 
   return (
     <div className="Post-page">

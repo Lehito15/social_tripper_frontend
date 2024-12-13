@@ -11,19 +11,6 @@ function PostDetailsNoImg({ post, closePost, isAlone, userUuid, userIcon }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [reLoad, setReLoad] = useState(false);
   const [newComment, setNewComment] = useState(false);
-  console.log("isAlone");
-  console.log(isAlone);
-
-  // useEffect(() => {
-  //   const scrollbarWidth =
-  //     window.innerWidth - document.documentElement.clientWidth;
-  //   document.body.style.overflow = "hidden";
-  //   document.body.style.marginRight = "10px";
-  //   return () => {
-  //     document.body.style.overflow = "";
-  //     document.body.style.marginRight = "";
-  //   };
-  // }, []);
 
   const toggleReload = () => {
     setReLoad((prev) => !prev);
@@ -62,8 +49,6 @@ function PostDetailsNoImg({ post, closePost, isAlone, userUuid, userIcon }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
-  console.log(data);
 
   const maxChars = 205;
 
@@ -109,7 +94,7 @@ function PostDetailsNoImg({ post, closePost, isAlone, userUuid, userIcon }) {
             <PostReaction
               reactions={post.reactionsNumber}
               comments={post.commentsNumber}
-              userUuid={post.account.uuid}
+              userUuid={userUuid}
               postUuid={post.uuid}
               newComment={newComment}
             />

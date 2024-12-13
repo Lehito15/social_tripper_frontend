@@ -7,7 +7,6 @@ function SettingsMenu({ onOptionSelect }) {
   const handleOptionClick = (option) => {
     setActiveOption(option);
     onOptionSelect(option);
-    console.log(activeOption);
   };
 
   return (

@@ -2,8 +2,6 @@ import "./AccountStatisticsBox.css";
 import "./ProfileInformation.css";
 
 function ProfileInformation({ info, nickname }) {
-  console.log(info);
-
   const calculateAge = (birthDate) => {
     const today = new Date();
     const birth = new Date(birthDate);
@@ -11,7 +9,6 @@ function ProfileInformation({ info, nickname }) {
     let age = today.getFullYear() - birth.getFullYear();
     const monthDifference = today.getMonth() - birth.getMonth();
 
-    // Sprawdzenie, czy urodziny w bieżącym roku już minęły
     if (
       monthDifference < 0 ||
       (monthDifference === 0 && today.getDate() < birth.getDate())

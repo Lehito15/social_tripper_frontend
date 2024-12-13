@@ -18,7 +18,6 @@ function UserFollowed({ userUuid, myAccount }) {
 `;
 
   const { loading, error, data, refetch } = useQuery(GET_Followed_Accounts);
-  console.log(data);
   useEffect(() => {
     refetch();
   }, [refetch, reload]);

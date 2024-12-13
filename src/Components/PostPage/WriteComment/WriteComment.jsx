@@ -9,7 +9,6 @@ function WriteComment({
   userUuid,
   userIcon,
 }) {
-  console.log(userIcon);
   return (
     <div className="comment-container">
       <img

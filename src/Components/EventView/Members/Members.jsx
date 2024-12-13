@@ -11,7 +11,6 @@ function Members({
   remove,
   removeRequest,
 }) {
-  console.log(members);
   let filteredMembers = [];
   if (members) {
     filteredMembers = members.filter((member) => member.uuid !== ownerUuid);

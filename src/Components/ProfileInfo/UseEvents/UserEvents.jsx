@@ -34,7 +34,6 @@ function UserEvents({ openEvent, userUuid, owner }) {
     variables: { path: `users/${userUuid}/events` },
     fetchPolicy: "cache-first",
   });
-  console.log(data);
   useEffect(() => {
     refetch();
   }, [refetch]);
@@ -42,7 +41,6 @@ function UserEvents({ openEvent, userUuid, owner }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   if (!data.events) return <p>No events here</p>;
-  console.log(data.events);
   return (
     <div className="Post-page">
       {data.events.lenght != 0 &&

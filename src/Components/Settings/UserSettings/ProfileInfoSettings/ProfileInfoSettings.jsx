@@ -3,7 +3,6 @@ import "./ProfileInfoSettings.css";
 import PhoneInput from "../../../UserLogin/Register/PhoneInput/PhoneInput";
 
 function ProfileInfoSettings({ user, onSave }) {
-  console.log(user.phone);
   const [data, setData] = useState({
     name: "",
     surname: "",
@@ -86,7 +85,6 @@ function ProfileInfoSettings({ user, onSave }) {
       alert("height  or weight cannot be empty");
       return;
     }
-    console.log(data.weight);
 
     if (data.weight < 0 || data.weight > 1000) {
       alert("Wrong weight");

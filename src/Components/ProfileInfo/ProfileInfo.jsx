@@ -16,24 +16,17 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   const [userUuid, setUserUuid] = useState(null);
   const [areUsersFriends, setAreUsersFriends] = useState(null);
   const [isCheckingFollow, setIsCheckingFollow] = useState(true);
-  const [isFollowRequested, setIsFollowRequested] = useState(false); // Nowy stan
+  const [isFollowRequested, setIsFollowRequested] = useState(false);
   const [reload, setReload] = useState(false);
   const location = useLocation();
 
   const reFresh = () => setReload(!reload);
 
-  console.log(myUuid);
-
   useEffect(() => {
-    // Pobierz UUID z bieżącego URL
     let uuid = location.pathname.split("/").pop();
     if (uuid.length < 15) {
       uuid = location.pathname.split("/")[2];
     }
-    console.log(userUuid);
-    console.log(uuid);
-
-    // Ustaw userUuid tylko wtedy, gdy jest inny
     if (userUuid !== uuid) {
       setUserUuid(uuid);
     }
@@ -91,8 +84,6 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
       if (data?.user && myUuid !== data.user.uuid) {
         try {
           setIsCheckingFollow(true);
-
-          // Sprawdzanie statusu "is-following"
           const followStatusEndpoint = `users/is-following?followerUUID=${myUuid}&followedUUID=${data.user.uuid}`;
           const isFollowingResponse = await sendToBackend(
             followStatusEndpoint,
@@ -101,7 +92,6 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
           );
           setAreUsersFriends(isFollowingResponse);
 
-          // Sprawdzanie "is-follow-requested" tylko jeśli nie obserwuje i konto niepubliczne
           if (!isFollowingResponse && !data.user.isPublic) {
             const followRequestEndpoint = `users/is-follow-requested?followerUUID=${myUuid}&followedUUID=${data.user.uuid}`;
             const requestResponse = await sendToBackend(
@@ -115,10 +105,10 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
           console.error("Error fetching follow status:", error);
           setAreUsersFriends(false);
         } finally {
-          setIsCheckingFollow(false); // Ustawienie zakończenia sprawdzania
+          setIsCheckingFollow(false);
         }
       } else {
-        setIsCheckingFollow(false); // Gdy użytkownik to właściciel profilu
+        setIsCheckingFollow(false);
       }
     };
 
@@ -137,10 +127,6 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
   };
 
   const privateAccount = !myAccount && !areUsersFriends && !data.user.isPublic;
-  console.log("request");
-
-  console.log(isFollowRequested);
-
   return (
     <div className="profile-user-info">
       <div className="profile-select">
@@ -153,7 +139,6 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
           followRequsetSend={isFollowRequested}
         />
       </div>
-      {/* Jeżeli to moje konto, zawsze mam dostęp do treści */}
       {myAccount ? (
         <div className="different-profile-info">
           <Routes>
@@ -208,8 +193,7 @@ function ProfileInfo({ myUuid, userIcon, openPost, closePost }) {
             />
           </Routes>
         </div>
-      ) : // Jeżeli konto jest prywatne i nie jestem znajomym, nie pokazuj treści
-      privateAccount ? (
+      ) : privateAccount ? (
         isFollowRequested ? (
           <p>Follow request pending. Please wait for approval.</p>
         ) : (
