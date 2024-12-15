@@ -6,8 +6,8 @@
 
 Celem projektu było opracowanie zaawansowanego portalu społecznościowego, który integruje funkcje organizowania podróży z możliwością dzielenia się relacjami z wyjazdów. Portal łączy funkcjonalności aplikacji typu social media z narzędziami do planowania i realizacji podróży. Projekt obejmował stworzenie dwóch aplikacji:
 
-- [**Aplikacja mobilna**]([https://github.com/Lehito15/SocialTripper_Mobile])
-- - **Aplikacja webowa**
+- [**Aplikacja mobilna**](https://github.com/Lehito15/SocialTripper_Mobile)
+- **Aplikacja webowa**
 
 Obie aplikacje współpracują z bazami danych, które przechowują informacje o użytkownikach, wydarzeniach i materiałach multimedialnych. System wspiera użytkowników w organizowaniu wyjazdów oraz budowaniu społeczności wokół wspólnych pasji. Oferuje także system rekomendacji, który na podstawie preferencji użytkowników sugeruje interesujące wyjazdy oraz osoby o podobnych zainteresowaniach.
 
@@ -64,7 +64,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-  <td align="center"><img src="media/home.png" alt="Widok Home (Ogólny)" width="175"/><br><b>Widok Wydarzenia (Ogólny)</b></td>
+  <td align="center"><img src="media/home.png" alt="Widok Home (Ogólny)" width="175"/><br><b>Widok główny (Ogólny)</b></td>
   </tr>
 </table>
 
@@ -73,7 +73,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-  <td align="center"><img src="media/events.png" alt="Wyprawa w toku" width="175"/><br><b>Widok relacji</b></td> 
+  <td align="center"><img src="media/events.png" alt="Wyprawa w toku" width="175"/><br><b>Widok wydarzenia</b></td> 
   </tr>
 </table>
 
@@ -82,7 +82,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-    <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="175"/><br><b>Tworzenie wydarzenia</b></td> 
+    <td align="center"><img src="media/relations.png" alt="Przeglądanie relacji" width="175"/><br><b>Przeglądanie relacji</b></td> 
   </tr>
 </table>
 
@@ -90,7 +90,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-<!--     <td align="center"><img src="media/relations.png" alt="Tworzenie wydarzenia" width="175"/><br><b>Tworzenie wydarzenia</b></td> -->
+   <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="175"/><br><b>Tworzenie wydarzenia</b></td> 
   </tr>
 </table>
 
