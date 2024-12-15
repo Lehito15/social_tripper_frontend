@@ -181,7 +181,7 @@ function EventButtons({
           onClick={
             groupUuid && groupIsPublic ? handleJoinGroup : handleJoinRequest
           }
-          disabled={isEventRequested}
+          // disabled={isEventRequested}
         >
           <img
             src={`${process.env.PUBLIC_URL}/group.png`}
