@@ -95,4 +95,4 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 ## Instrukcja Użytkowania
 
-Szczegółowe informacje na temat obsługi aplikacji webowej oraz dostępnych funkcjonalności znajdują się w [instrukcji użytkownika](https://github.com/Lehito15/social_tripper_frontend/instrukcja_użytkowania.pdf).
+Szczegółowe informacje na temat obsługi aplikacji webowej oraz dostępnych funkcjonalności znajdują się w [instrukcji użytkownika](https://github.com/Lehito15/social_tripper_frontend/blob/main/Instrukcja_u%C5%BCytkowania.pdf).
