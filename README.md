@@ -47,7 +47,6 @@ npm start
 
 - **AWS Amplify**: Szczegóły konfiguracji dostępne są [tutaj](https://docs.amplify.aws/gen1/flutter/start/project-setup/prerequisites/).
 - **Backend**: Kod dostępny w repozytorium [SocialTripper_Backend](https://github.com/Lehito15/SocialTripper_Backend).
--
 
 ### Modyfikacja Odnośników w Kodzie
 
@@ -96,4 +95,4 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 ## Instrukcja Użytkowania
 
-Szczegółowe informacje na temat obsługi aplikacji mobilnej oraz dostępnych funkcjonalności znajdują się w [instrukcji użytkownika](link_do_instrukcji).
+Szczegółowe informacje na temat obsługi aplikacji webowej oraz dostępnych funkcjonalności znajdują się w [instrukcji użytkownika](https://github.com/Lehito15/social_tripper_frontend/instrukcja_użytkowania.pdf).
