@@ -1,7 +1,3 @@
-# Website link
-
-http://socialtripper-cna3btdnckbpazd8.polandcentral-01.azurewebsites.net/
-
 <p align="center">
    <img src="media/media.svg" alt="Logo" height="150" />
 </p>
@@ -90,8 +86,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
   </tr>
 </table>
 
-4. **Tworzenie wydarzenia**:
-   -
+4. ## **Tworzenie wydarzenia**:
 
 <table>
   <tr>
