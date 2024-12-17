@@ -64,7 +64,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-  <td align="center"><img src="media/home.png" alt="Widok Home (Ogólny)" width="175"/><br><b>Widok główny (Ogólny)</b></td>
+  <td align="center"><img src="media/home.png" alt="Widok Home (Ogólny)" width="375"/><br><b>Widok główny (Ogólny)</b></td>
   </tr>
 </table>
 
@@ -73,7 +73,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-  <td align="center"><img src="media/events.png" alt="Wyprawa w toku" width="175"/><br><b>Widok wydarzenia</b></td> 
+  <td align="center"><img src="media/events.png" alt="Wyprawa w toku" width="375"/><br><b>Widok wydarzenia</b></td> 
   </tr>
 </table>
 
@@ -82,7 +82,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-    <td align="center"><img src="media/relations.png" alt="Przeglądanie relacji" width="175"/><br><b>Przeglądanie relacji</b></td> 
+    <td align="center"><img src="media/relations.png" alt="Przeglądanie relacji" width="375"/><br><b>Przeglądanie relacji</b></td> 
   </tr>
 </table>
 
@@ -90,7 +90,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-   <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="175"/><br><b>Tworzenie wydarzenia</b></td> 
+   <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="375"/><br><b>Tworzenie wydarzenia</b></td> 
   </tr>
 </table>
 
