@@ -90,7 +90,7 @@ Aby podłączyć aplikację do działającego backendu t, należy:
 
 <table>
   <tr>
-   <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="375"/><br><b>Tworzenie wydarzenia</b></td> 
+   <td align="center"><img src="media/create.png" alt="Tworzenie wydarzenia" width="575"/><br><b>Tworzenie wydarzenia</b></td> 
   </tr>
 </table>
 
