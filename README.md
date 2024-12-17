@@ -8,6 +8,7 @@ Celem projektu było opracowanie zaawansowanego portalu społecznościowego, kt�
 
 - [**Aplikacja mobilna**](https://github.com/Lehito15/SocialTripper_Mobile)
 - **Aplikacja webowa**
+- [**Aplikacja backendowa**](https://github.com/Lehito15/SocialTripper_Backend)
 
 Obie aplikacje współpracują z bazami danych, które przechowują informacje o użytkownikach, wydarzeniach i materiałach multimedialnych. System wspiera użytkowników w organizowaniu wyjazdów oraz budowaniu społeczności wokół wspólnych pasji. Oferuje także system rekomendacji, który na podstawie preferencji użytkowników sugeruje interesujące wyjazdy oraz osoby o podobnych zainteresowaniach.
 
